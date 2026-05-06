@@ -10,8 +10,6 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -22,7 +20,7 @@
     </nav>
 
     <!-- TAB 1 -->
-    <div class="tab-content active" id="tab1">
+    <div class="tab-content active" id="tab1" data-print-title="Progress in NDC Transport Targets">
         <div class="tab-header">
             <div class="tab-title-section">
                 <h2>Progress in NDC Transport Targets</h2>
@@ -60,6 +58,18 @@
             </div>
             <!-- Map filters -->
             <div class="filters-section hidden" id="tab1-map-filters">
+                <div class="filter-group">
+                    <label for="tab1-map-region">Region:</label>
+                    <select id="tab1-map-region" class="filter-select">
+                        <option value="all">All Regions</option>
+                        <option value="Africa">Africa</option>
+                        <option value="Asia">Asia</option>
+                        <option value="Europe">Europe</option>
+                        <option value="Latin America and the Caribbean">Latin America & Caribbean</option>
+                        <option value="Northern America">Northern America</option>
+                        <option value="Oceania">Oceania</option>
+                    </select>
+                </div>
                 <div class="view-toggle">
                     <button class="toggle-button" data-view="chart">
                         <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><rect x="2" y="10" width="4" height="8"/><rect x="8" y="5" width="4" height="13"/><rect x="14" y="7" width="4" height="11"/></svg>
@@ -74,10 +84,11 @@
         </div>
 
         <div class="visualization-container" id="tab1-chart-view">
-            <p class="chart-subtitle" id="tab1-chart-subtitle"></p>
+            <p class="currently-showing-label" id="tab1-chart-subtitle"></p>
             <div class="chart-wrapper"><canvas id="tab1-chart"></canvas></div>
         </div>
         <div class="visualization-container hidden" id="tab1-map-view">
+            <p class="currently-showing-label" id="tab1-map-label"></p>
             <div id="tab1-map" class="map-container"></div>
             <div class="map-legend" id="tab1-map-legend">
                 <div class="legend-item"><span class="legend-color" style="background:#9DBE3D"></span><span>Transport target in latest active NDC</span></div>
@@ -95,7 +106,7 @@
     </div>
 
     <!-- TAB 2 -->
-    <div class="tab-content" id="tab2">
+    <div class="tab-content" id="tab2" data-print-title="Leading Measures for Decarbonisation">
         <div class="tab-header">
             <div class="tab-title-section">
                 <h2>Leading Measures for Decarbonisation</h2>
@@ -144,7 +155,7 @@
 
             <!-- MAP FILTERS -->
             <div class="filters-section hidden" id="tab2-map-filters">
-                <!-- Row 1: generation toggles + view toggle -->
+                <!-- Row 1: generation toggles + region + view toggle -->
                 <div class="filter-row-1">
                     <div class="filter-group">
                         <label>Show data from:</label>
@@ -156,7 +167,19 @@
                             <button class="btn-reset" id="tab2-map-reset">&#8635; Reset</button>
                         </div>
                     </div>
-                    <div class="view-toggle" style="margin-left:auto">
+                    <div class="filter-group" style="margin-left:auto">
+                        <label for="tab2-map-region">Region:</label>
+                        <select id="tab2-map-region" class="filter-select">
+                            <option value="all">All Regions</option>
+                            <option value="Africa">Africa</option>
+                            <option value="Asia">Asia</option>
+                            <option value="Europe">Europe</option>
+                            <option value="Latin America and the Caribbean">Latin America & Caribbean</option>
+                            <option value="Northern America">Northern America</option>
+                            <option value="Oceania">Oceania</option>
+                        </select>
+                    </div>
+                    <div class="view-toggle">
                         <button class="toggle-button" data-view="chart">
                             <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><rect x="2" y="10" width="4" height="8"/><rect x="8" y="5" width="4" height="13"/><rect x="14" y="7" width="4" height="11"/></svg>
                             Chart
@@ -184,11 +207,11 @@
         </div>
 
         <div class="visualization-container" id="tab2-chart-view">
-            <p class="chart-subtitle" id="tab2-chart-subtitle"></p>
+            <p class="currently-showing-label" id="tab2-chart-subtitle"></p>
             <div class="chart-wrapper"><canvas id="tab2-chart"></canvas></div>
         </div>
         <div class="visualization-container hidden" id="tab2-map-view">
-            <p class="map-currently-showing" id="tab2-map-label"></p>
+            <p class="currently-showing-label" id="tab2-map-label"></p>
             <div id="tab2-map" class="map-container"></div>
             <div class="map-legend" id="tab2-map-legend">
                 <div class="legend-title">Measure mentions</div>

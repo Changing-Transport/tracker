@@ -26,7 +26,7 @@ git init
 git add .
 git commit -m "Initial commit"
 git branch -M main
-git remote add origin https://github.com/YOUR-USERNAME/ndc-tracker.git
+git remote add origin https://github.com/YOUR-USERNAME/tracker.git
 git push -u origin main
 ```
 
@@ -39,7 +39,7 @@ In your WordPress page/post editor:
 
 ```html
 <iframe 
-  src="https://YOUR-USERNAME.github.io/ndc-tracker" 
+  src="https://belentdc.github.io/tracker/" 
   width="100%" 
   height="900px" 
   frameborder="0"
@@ -47,8 +47,7 @@ In your WordPress page/post editor:
 </iframe>
 ```
 
-3. Replace `YOUR-USERNAME` with your GitHub username
-4. Publish!
+3. Publish!
 
 ---
 

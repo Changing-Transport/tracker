@@ -203,27 +203,25 @@ body {
 .toggle-button:hover { background:rgba(157,190,61,0.08); border-color:var(--color-primary); color:var(--color-text); }
 .toggle-button.active { background:var(--color-primary); border-color:var(--color-primary); color:white; }
 
-/* ── Chart subtitle (dynamic note below title) ────────────────────── */
-.chart-subtitle {
+/* ── Currently showing label (unified for all charts and maps) ───── */
+.currently-showing-label {
     font-size: 0.875rem;
-    color: var(--color-muted);
-    font-style: italic;
-    margin-bottom: var(--sp-sm);
-    min-height: 1.25rem;
-    padding: 0 0.25rem;
-}
-
-/* ── Map "currently showing" label ───────────────────────────────── */
-.map-currently-showing {
-    font-size: 0.875rem;
-    font-weight: 600;
     color: var(--color-secondary);
-    background: rgba(0,61,92,0.05);
+    background: rgba(0,61,92,0.04);
     border-left: 3px solid var(--color-secondary);
-    padding: 0.5rem 0.875rem;
+    padding: 0.625rem 0.875rem;
     border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
     margin-bottom: var(--sp-sm);
-    line-height: 1.5;
+    line-height: 1.7;
+}
+
+.currently-showing-label strong {
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-secondary);
+    display: block;
+    margin-bottom: 0.2rem;
 }
 
 /* ── Visualization containers ─────────────────────────────────────── */
@@ -492,4 +490,106 @@ body {
 /* Tab1 map filters — minimal, just view toggle */
 #tab1-map-filters {
     justify-content: flex-end;
+}
+
+/* ── Clickable country name in popup ─────────────────────────────── */
+.popup-country-link {
+    color: var(--color-secondary);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9375rem;
+    transition: color 0.2s;
+}
+
+.popup-country-link:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+}
+
+.popup-link-icon {
+    font-size: 0.75rem;
+    vertical-align: super;
+    margin-left: 2px;
+    opacity: 0.7;
+}
+
+/* ============================================================================
+   Print styles — native browser print
+   ============================================================================ */
+@media print {
+    /* Hide everything except the active tab content */
+    .tab-navigation,
+    .filters-section,
+    .action-buttons,
+    .loading-overlay,
+    .tooltip-modal,
+    .leaflet-control-zoom,
+    .leaflet-control-attribution {
+        display: none !important;
+    }
+
+    body {
+        background: white;
+        font-family: 'IBM Plex Sans', sans-serif;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    /* Print header */
+    .tab-content.active::before {
+        content: attr(data-print-title);
+        display: block;
+        font-size: 18pt;
+        font-weight: 700;
+        color: #003D5C;
+        margin-bottom: 4pt;
+    }
+
+    .tab-content.active::after {
+        content: attr(data-print-date) " — GIZ-SLOCAT Transport Tracker";
+        display: block;
+        font-size: 9pt;
+        color: #6B7280;
+        margin-bottom: 16pt;
+    }
+
+    /* Show only the active tab */
+    .tab-content { display: none !important; }
+    .tab-content.active { display: block !important; }
+
+    /* Hide non-active views */
+    .visualization-container.hidden { display: none !important; }
+
+    /* Make visualizations fill the page */
+    .visualization-container {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        page-break-inside: avoid;
+    }
+
+    .chart-wrapper { height: 80vh !important; }
+    .map-container { height: 80vh !important; }
+
+    /* Map legend stays visible */
+    .map-legend {
+        position: static !important;
+        margin-top: 12pt;
+        box-shadow: none !important;
+        border: 1px solid #ddd !important;
+        display: inline-block;
+    }
+
+    /* Subtitles */
+    .chart-subtitle,
+    .map-currently-showing {
+        font-size: 10pt;
+        margin-bottom: 8pt;
+    }
+
+    @page {
+        size: A4 landscape;
+        margin: 15mm;
+    }
 }

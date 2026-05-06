@@ -4,12 +4,12 @@ Interactive dashboard for visualizing NDC transport targets and mitigation measu
 
 ## Live Dashboard
 
-**Dashboard URL:** `https://[your-username].github.io/ndc-tracker`
+**Dashboard URL:** `https://belentdc.github.io/tracker/`
 
 Embed in WordPress:
 ```html
 <iframe 
-  src="https://[your-username].github.io/ndc-tracker" 
+  src="https://belentdc.github.io/tracker/" 
   width="100%" 
   height="900px" 
   frameborder="0"
@@ -21,14 +21,12 @@ Embed in WordPress:
 
 ## How to Update Data
 
-### Method 2: GitHub
+### Method: GitHub Repository
 
-1. Install [GitHub Desktop](https://github.com/)
-2. Clone this repository
-3. Replace the Excel file `GIZ-SLOCAT_Transport-Tracker-database.xlsx` in the `data/` folder
-4. Click "Commit to main" 
-5. Click "Push origin"
-6. Done!
+1. Replace the Excel file `GIZ-SLOCAT_Transport-Tracker-database.xlsx` in the `data/` folder
+2. Click "Commit to main" 
+3. Click "Push origin"
+4. Done!
 
 ---
 
@@ -95,19 +93,6 @@ ndc-tracker/
 - GitHub Pages (free)
 - Auto-deploys on every update
 - HTTPS included
-
----
-
-## Requirements
-
-**For updating data (web interface):**
-- ✅ GitHub account (free)
-- ✅ Web browser
-- ✅ That's it!
-
-**For local development:**
-- Python 3.11 or higher
-- pip install openpyxl
 
 ---
 

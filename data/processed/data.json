@@ -20,6 +20,14 @@
         "active": 169,
         "archived": 0
       }
+    },
+    "region_possible_ndcs": {
+      "Asia": 46,
+      "Oceania": 16,
+      "Latin America and the Caribbean": 33,
+      "Africa": 53,
+      "Europe": 19,
+      "Northern America": 2
     }
   },
   "tab1": {

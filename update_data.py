@@ -456,10 +456,19 @@ def process_excel(excel_path):
     # ── Assemble output ────────────────────────────────────────────────
     output = {
         "metadata": {
-            "total_possible_ndcs": 169,
-            "last_updated":        str(date.today()),
-            "data_source":         "GIZ-SLOCAT Transport Tracker Database",
-            "gen_counts":          gen_counts,
+            "total_possible_ndcs":    169,
+            "last_updated":           str(date.today()),
+            "data_source":            "GIZ-SLOCAT Transport Tracker Database",
+            "gen_counts":             gen_counts,
+            "region_possible_ndcs":   {
+                reg: sum(
+                    1 for cd in countries_tab1.values()
+                    if cd.get("region") == reg and not cd.get("covered_by_eu")
+                )
+                for reg in ["Africa","Asia","Europe",
+                            "Latin America and the Caribbean",
+                            "Northern America","Oceania"]
+            },
         },
         "tab1": {
             "generations": tab1_generations,

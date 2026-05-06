@@ -54,6 +54,25 @@ function countryTitle(iso3, name) {
     return name;
 }
 
+
+// Region bounding boxes [south, west, north, east]
+const REGION_BOUNDS = {
+    'Africa':                          [[-35, -20], [38, 52]],
+    'Asia':                            [[0, 25], [55, 145]],
+    'Europe':                          [[34, -25], [72, 45]],
+    'Latin America and the Caribbean': [[-56, -92], [33, -32]],
+    'Northern America':                [[14, -170], [72, -50]],
+    'Oceania':                         [[-50, 110], [22, 180]],
+};
+
+function zoomToRegion(map, region) {
+    if (region === 'all') {
+        map.setView([20, 10], 2);
+    } else if (REGION_BOUNDS[region]) {
+        map.fitBounds(REGION_BOUNDS[region], { padding: [20, 20], maxZoom: 5 });
+    }
+}
+
 // ============================================================================
 // Boot
 // ============================================================================
@@ -65,6 +84,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         initializeTab1();
         initializeTab2();
         document.getElementById('loading').classList.add('hidden');
+
+        // Set print date dynamically
+        window.addEventListener('beforeprint', () => {
+            const dateStr = new Date().toLocaleDateString('en-GB', {
+                day: 'numeric', month: 'long', year: 'numeric'
+            });
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.dataset.printDate = dateStr;
+            });
+        });
     } catch (err) {
         console.error('Init error:', err);
         document.getElementById('loading').innerHTML =
@@ -138,6 +167,12 @@ function initializeTab1() {
 
 
     document.getElementById('tab1-region').addEventListener('change', renderTab1);
+    document.getElementById('tab1-map-region').addEventListener('change', () => {
+        const region = document.getElementById('tab1-map-region').value;
+        renderTab1Map(region);
+        updateTab1MapLabel(region);
+        zoomToRegion(tab1Map, region);
+    });
     document.getElementById('tab1-download').addEventListener('click', () => downloadPDF('tab1'));
 
     renderTab1();
@@ -150,7 +185,17 @@ function switchTab1View(view) {
     document.getElementById('tab1-map-view').classList.toggle('hidden', view !== 'map');
     document.getElementById('tab1-chart-filters').classList.toggle('hidden', view !== 'chart');
     document.getElementById('tab1-map-filters').classList.toggle('hidden', view !== 'map');
-    if (view === 'map') setTimeout(() => tab1Map && tab1Map.invalidateSize(), 120);
+    if (view === 'map') {
+        setTimeout(() => {
+            if (tab1Map) {
+                tab1Map.invalidateSize();
+                const region = document.getElementById('tab1-map-region').value;
+                renderTab1Map(region);
+                updateTab1MapLabel(region);
+                zoomToRegion(tab1Map, region);
+            }
+        }, 120);
+    }
 }
 
 function getTab1GenStats(region) {
@@ -180,32 +225,69 @@ function getTab1GenStats(region) {
 }
 
 function renderTab1() {
-    const region   = document.getElementById('tab1-region').value;
-    const genStats = getTab1GenStats(region);
-    renderTab1Subtitle(region, genStats);
+    const chartRegion = document.getElementById('tab1-region').value;
+    const mapRegion   = document.getElementById('tab1-map-region')?.value || 'all';
+    const genStats    = getTab1GenStats(chartRegion);
+    renderTab1Subtitle(chartRegion, genStats);
     renderTab1Chart(genStats);
-    renderTab1Map(region);
+    renderTab1Map(mapRegion);
+    updateTab1MapLabel(mapRegion);
+}
+
+function updateTab1MapLabel(region) {
+    const el = document.getElementById('tab1-map-label');
+    if (!el) return;
+    const countries = dashboardData.tab1.countries;
+
+    // Count the three categories for the selected region
+    let green = 0, lightblue = 0, grey = 0;
+    Object.values(countries).forEach(cd => {
+        if (cd.covered_by_eu) return;
+        if (region !== 'all' && cd.region !== region) return;
+        if (!cd.latest_active_gen) return; // no NDC
+        if (cd.latest_has_transport) green++;
+        else if (cd.had_transport_previously) lightblue++;
+        else grey++;
+    });
+    // Add EU as 1 for Europe if region is all or Europe
+    if (region === 'all' || region === 'Europe') {
+        const euCd = Object.values(countries).find(cd => cd.iso3 === 'EEU' || (cd.covered_by_eu === undefined && cd.region === 'Europe' && cd.iso3 === 'EEU'));
+        // EU NDC has transport (gen3) - count as green
+        const euEntry = countries['EEU'] || Object.values(countries).find(c => c.latest_active_gen && c.covered_by_eu === undefined && ['AUT','BEL'].includes(c.iso3));
+        // Just add 1 green for EU NDC
+        if (region === 'all' || region === 'Europe') green++; // EU NDC has transport target
+    }
+
+    const regionLine = region === 'all' ? 'Region: All regions' : `Region: ${region}`;
+    el.innerHTML = `<strong>Currently showing</strong><br>${regionLine}<br>Transport target in latest active NDC: ${green}<br>Transport target in a previous NDC: ${lightblue}<br>No transport target in any NDC: ${grey}`;
 }
 
 function renderTab1Subtitle(region, genStats) {
     const el = document.getElementById('tab1-chart-subtitle');
     if (!el) return;
-    if (region === 'all') {
-        el.textContent = 'Showing all regions — each bar represents 100% of NDCs submitted in that generation';
-    } else {
-        const parts = ['gen1','gen2','gen3'].map(g =>
-            `${genStats[g].name}: ${genStats[g].submitted} NDCs`
-        ).join(' · ');
-        el.textContent = `Showing ${region} — ${parts}`;
-    }
+    const possible = region === 'all'
+        ? dashboardData.metadata.total_possible_ndcs
+        : (dashboardData.metadata.region_possible_ndcs?.[region] || '?');
+    const regionLine = region === 'all'
+        ? 'Region: All regions'
+        : `Region: ${region} (${possible} possible NDCs)`;
+    el.innerHTML = `<strong>Currently showing</strong><br>${regionLine}<br>Each bar represents 100% of NDCs submitted in that generation`;
 }
 
 function renderTab1Chart(genStats) {
     const ctx = document.getElementById('tab1-chart').getContext('2d');
     if (tab1Chart) tab1Chart.destroy();
 
-    const gens   = ['gen1', 'gen2', 'gen3'];
-    const labels = gens.map(g => `${genStats[g].name}\n(${genStats[g].period})`);
+    const gens         = ['gen1', 'gen2', 'gen3'];
+    const region       = document.getElementById('tab1-region').value;
+    const regionSuffix = region === 'all' ? '' : ` in ${region}`;
+    const possible     = region === 'all'
+        ? dashboardData.metadata.total_possible_ndcs
+        : (dashboardData.metadata.region_possible_ndcs?.[region] || '?');
+    const labels       = gens.map(g => [
+        `${genStats[g].name} (${genStats[g].period})`,
+        `${genStats[g].submitted} out of ${possible} possible NDCs${regionSuffix}`,
+    ]);
 
     // Percentages for 100% stacked bar
     const pctTransport  = gens.map(g =>
@@ -215,10 +297,7 @@ function renderTab1Chart(genStats) {
         +(100 - pctTransport[i]).toFixed(1)
     );
 
-    // Growth annotations between bars
-    const growth1to2 = (pctTransport[1] - pctTransport[0]).toFixed(1);
-    const growth2to3 = (pctTransport[2] - pctTransport[1]).toFixed(1);
-    const fmt = v => (v >= 0 ? `+${v}pp` : `${v}pp`);
+
 
     tab1Chart = new Chart(ctx, {
         type: 'bar',
@@ -274,15 +353,10 @@ function renderTab1Chart(genStats) {
                             }
                             return `  Without transport: ${gs.submitted - gs.withTransport} NDCs (${ctx.parsed.y}%)`;
                         },
-                        afterBody(items) {
-                            const idx = items[0].dataIndex;
-                            if (idx === 1) return [`  Growth from 1st gen: ${fmt(growth1to2)}`];
-                            if (idx === 2) return [`  Growth from 2nd gen: ${fmt(growth2to3)}`];
-                            return [];
-                        },
+
                     },
                 },
-                // Custom plugin to draw % labels on bars and growth arrows
+                // Custom plugin to draw % labels on bars
                 datalabels: false,
             },
             scales: {
@@ -308,7 +382,7 @@ function renderTab1Chart(genStats) {
                 },
             },
         },
-        // Custom plugin: draw % value inside green bar + growth arrows between bars
+        // Custom plugin: draw % value inside green bar
         plugins: [{
             id: 'tab1Labels',
             afterDatasetsDraw(chart) {
@@ -327,21 +401,7 @@ function renderTab1Chart(genStats) {
                     ctx2.fillText(pct + '%', bar.x, bar.y + (bar.height / 2));
                 });
 
-                // Growth arrows between bars
-                const drawGrowth = (i1, i2, label) => {
-                    const b1 = meta0.data[i1];
-                    const b2 = meta0.data[i2];
-                    if (!b1 || !b2) return;
-                    const x  = (b1.x + b2.x) / 2;
-                    const y  = Math.min(b1.y, b2.y) - 22;
-                    const val = parseFloat(label);
-                    ctx2.fillStyle = val >= 0 ? '#5a7020' : '#c0392b';
-                    ctx2.font = 'bold 12px IBM Plex Sans, sans-serif';
-                    ctx2.fillText(label, x, y);
-                };
 
-                drawGrowth(0, 1, fmt(growth1to2));
-                drawGrowth(1, 2, fmt(growth2to3));
 
                 ctx2.restore();
             },
@@ -359,6 +419,23 @@ function renderTab1Map(region) {
             .filter(c => region === 'all' || c.region === region)
             .map(c => c.iso3)
     );
+
+    // Compute counts for currently showing label
+    const filtered = Object.values(allCountries).filter(c =>
+        (region === 'all' || c.region === region) && !c.covered_by_eu && c.latest_active_gen
+    );
+    // Add EU as one entry if Europe or all
+    const euCd = allCountries['EEU'];
+    const includeEU = euCd && (region === 'all' || region === 'Europe');
+    const greenCount    = filtered.filter(c => c.latest_has_transport).length + (includeEU && euCd.latest_has_transport ? 1 : 0);
+    const lightblueCount = filtered.filter(c => c.had_transport_previously).length;
+    const greyCount     = filtered.filter(c => !c.latest_has_transport && !c.had_transport_previously).length + (includeEU && !euCd.latest_has_transport ? 1 : 0);
+    const regionLine    = region === 'all' ? 'Region: All regions' : `Region: ${region}`;
+
+    const labelEl = document.getElementById('tab1-map-label');
+    if (labelEl) {
+        labelEl.innerHTML = `<strong>Currently showing</strong><br>${regionLine}<br>Transport target in latest active NDC: <strong>${greenCount}</strong><br>Transport target in a previous NDC: <strong>${lightblueCount}</strong><br>No transport target in any NDC: <strong>${greyCount}</strong>`;
+    }
 
     tab1GeoLayer = L.geoJSON(worldGeoJSON, {
         style(feature) {
@@ -491,12 +568,20 @@ function initializeTab2() {
             b.classList.toggle('active', b.dataset.gen === 'latest'));
         document.querySelectorAll('#tab2-map-cat-toggles .cat-toggle').forEach(b =>
             b.classList.toggle('active', b.dataset.cat === 'all'));
+        document.getElementById('tab2-map-region').value = 'all';
         updateMapGradientColor();
         renderTab2Map();
+        zoomToRegion(tab2Map, 'all');
         updateMapLabel();
     });
 
     document.getElementById('tab2-chart-region').addEventListener('change', renderTab2Chart);
+    document.getElementById('tab2-map-region').addEventListener('change', () => {
+        const region = document.getElementById('tab2-map-region').value;
+        renderTab2Map();
+        zoomToRegion(tab2Map, region);
+    });
+
     // Category toggle buttons (multi-select)
     document.querySelectorAll('#tab2-map-cat-toggles .cat-toggle').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -545,7 +630,15 @@ function initializeTab2() {
                 document.querySelectorAll('#tab2-map-gen-toggles .gen-toggle').forEach(b =>
                     b.classList.toggle('active', b.dataset.gen === mapActiveGen));
                 updateMapGradientColor();
-                setTimeout(() => { tab2Map && tab2Map.invalidateSize(); renderTab2Map(); updateMapLabel(); }, 120);
+                setTimeout(() => {
+                    if (tab2Map) {
+                        tab2Map.invalidateSize();
+                        const region = document.getElementById('tab2-map-region')?.value || 'all';
+                        renderTab2Map();
+                        zoomToRegion(tab2Map, region);
+                    }
+                    updateMapLabel();
+                }, 120);
             }
         });
     });
@@ -592,21 +685,37 @@ function getTab2ChartData(selectedGens, region) {
 
 function buildChartSubtitle(selectedGens) {
     const genCounts = dashboardData.metadata.gen_counts;
-    const parts     = selectedGens.map(gen => {
+    const region    = document.getElementById('tab2-chart-region').value;
+    const possible  = region === 'all'
+        ? dashboardData.metadata.total_possible_ndcs
+        : (dashboardData.metadata.region_possible_ndcs?.[region] || '?');
+
+    const regionLine = region === 'all'
+        ? 'Region: All regions'
+        : `Region: ${region} (${possible} possible NDCs)`;
+
+    // Fixed order for display: gen1 → gen2 → gen3 → latest
+    const GEN_ORDER   = ['gen1','gen2','gen3','latest'];
+    const orderedSel  = GEN_ORDER.filter(g => selectedGens.includes(g));
+
+    const genParts = orderedSel.map(gen => {
         const c = genCounts[gen];
-        if (gen === 'latest') return `Latest Active: 169 NDCs`;
-        return `${GEN_LABELS[gen]}: ${c.active + c.archived} NDCs (${c.active} active, ${c.archived} archived)`;
-    });
-    const suffix = selectedGens.some(g => g !== 'latest')
-        ? ' — includes active and archived NDCs from each round' : '';
-    return parts.join(' · ') + suffix;
+        if (gen === 'latest') return `Latest Active (${c.active} NDCs)`;
+        return `${GEN_LABELS[gen]} (${c.active + c.archived} NDCs)`;
+    }).join(', ');
+
+    const archiveNote = selectedGens.some(g => g !== 'latest')
+        ? '<br>Includes active and archived NDCs from each generation round'
+        : '';
+
+    return `<strong>Currently showing</strong><br>${regionLine}<br>Generation: ${genParts}${archiveNote}`;
 }
 
 function renderTab2Chart() {
     const region = document.getElementById('tab2-chart-region').value;
     const data   = getTab2ChartData(chartActiveGens, region);
 
-    document.getElementById('tab2-chart-subtitle').textContent = buildChartSubtitle(chartActiveGens);
+    document.getElementById('tab2-chart-subtitle').innerHTML = buildChartSubtitle(chartActiveGens);
 
     const ctx = document.getElementById('tab2-chart').getContext('2d');
     if (tab2Chart) tab2Chart.destroy();
@@ -618,7 +727,11 @@ function renderTab2Chart() {
     const catLgb   = dashboardData.tab2.cat_latest_gen_breakdown;
     const catGenAA = dashboardData.tab2.cat_gen_active_archived;
 
-    const datasets = chartActiveGens.map(gen => {
+    // Fixed display order: gen1 → gen2 → gen3 → latest
+    const GEN_ORDER    = ['gen1', 'gen2', 'gen3', 'latest'];
+    const orderedGens  = GEN_ORDER.filter(g => chartActiveGens.includes(g));
+
+    const datasets = orderedGens.map(gen => {
         const cfg = GEN_CONFIG[gen];
         return {
             label: cfg.label,
@@ -627,7 +740,7 @@ function renderTab2Chart() {
             borderColor: cfg.border,
             borderWidth: 1.5,
             borderRadius: 4,
-            barPercentage: chartActiveGens.length === 1 ? 0.5 : 0.85,
+            barPercentage: orderedGens.length === 1 ? 0.5 : 0.85,
         };
     });
 
@@ -635,11 +748,10 @@ function renderTab2Chart() {
         type: 'bar',
         data: { labels: activeCats, datasets },
         options: {
-            indexAxis: 'y',
             responsive: true, maintainAspectRatio: false,
             plugins: {
                 legend: {
-                    display: chartActiveGens.length > 1,
+                    display: true,
                     position: 'top',
                     labels: { font: { family: 'IBM Plex Sans', size: 13, weight: 600 }, padding: 20, usePointStyle: true, pointStyle: 'rectRounded' },
                 },
@@ -651,7 +763,7 @@ function renderTab2Chart() {
                     callbacks: {
                         title(items) { return items[0].label; },
                         label(ctx) {
-                            const gen   = chartActiveGens[ctx.datasetIndex];
+                            const gen   = orderedGens[ctx.datasetIndex];
                             const cat   = activeCats[ctx.dataIndex];
                             const entry = data[gen]?.[cat];
                             const ndcs  = entry?.countries?.size || 0;
@@ -673,7 +785,7 @@ function renderTab2Chart() {
                                     lines.push(`    · ${aa.archived_countries} from archived NDCs`);
                                 }
                             }
-                            lines.push(`  Total mentions: ${ment}`);
+                            lines.push(`  Total measures count: ${ment}`);
                             return lines;
                         },
                     },
@@ -681,13 +793,13 @@ function renderTab2Chart() {
             },
             scales: {
                 x: {
-                    beginAtZero: true, grid: { color: '#E8ECF0' },
-                    ticks: { font: { family: 'IBM Plex Sans', size: 12 } },
-                    title: { display: true, text: 'Number of NDCs', font: { family: 'IBM Plex Sans', size: 12, weight: 600 }, color: '#6B7280' },
+                    grid: { display: false },
+                    ticks: { font: { family: 'IBM Plex Sans', size: 11 }, maxRotation: 25, minRotation: 0 },
                 },
                 y: {
-                    grid: { display: false },
-                    ticks: { font: { family: 'IBM Plex Sans', size: 13 } },
+                    beginAtZero: true, grid: { color: '#E8ECF0' },
+                    ticks: { font: { family: 'IBM Plex Sans', size: 12 } },
+                    title: { display: true, text: 'Total measures count', font: { family: 'IBM Plex Sans', size: 12, weight: 600 }, color: '#6B7280' },
                 },
             },
         },
@@ -696,15 +808,17 @@ function renderTab2Chart() {
 
 // ── Map ────────────────────────────────────────────────────────────────────
 function updateMapLabel() {
-    const genLabel = GEN_LABELS[mapActiveGen];
-    let catLabel;
+    const region   = document.getElementById('tab2-map-region')?.value || 'all';
+    const regionLine = region === 'all' ? 'Region: All regions' : `Region: ${region}`;
+    const genLine  = `Generation: ${GEN_LABELS[mapActiveGen]}`;
+    let catLine;
     if (mapActiveCats.has('all')) {
-        catLabel = `All categories (${ALL_CATEGORIES_TEXT})`;
+        catLine = `Categories: All (${ALL_CATEGORIES_TEXT})`;
     } else {
-        catLabel = [...mapActiveCats].join(', ');
+        catLine = `Categories: ${[...mapActiveCats].join(', ')}`;
     }
-    document.getElementById('tab2-map-label').textContent =
-        `Currently showing: ${genLabel} — ${catLabel}`;
+    document.getElementById('tab2-map-label').innerHTML =
+        `<strong>Currently showing</strong><br>${regionLine}<br>${genLine}<br>${catLine}`;
 }
 
 function updateMapGradientColor() {
@@ -721,7 +835,7 @@ function renderTab2Map() {
     const countryGenCats = dashboardData.tab2.country_gen_cats;
     const clc            = dashboardData.tab2.country_latest_cats;
     const cfg            = GEN_CONFIG[mapActiveGen];
-    const region         = 'all';  // region filter not shown on map
+    const region         = document.getElementById('tab2-map-region')?.value || 'all';
     const showAll        = mapActiveCats.has('all');
     const selectedCats   = showAll ? CATEGORIES_ORDER : [...mapActiveCats];
 
@@ -737,7 +851,11 @@ function renderTab2Map() {
     });
 
     const maxVal = Math.max(...Object.values(countryTotals), 1);
-    const regionCodes = new Set(Object.keys(allCountries));  // no region filter on map
+    const regionCodes = new Set(
+        Object.values(allCountries)
+            .filter(c => region === 'all' || c.region === region)
+            .map(c => c.iso3)
+    );
 
     function hexToRgb(hex) {
         return [parseInt(hex.slice(1,3),16), parseInt(hex.slice(3,5),16), parseInt(hex.slice(5,7),16)];
@@ -868,35 +986,17 @@ function renderTab2Map() {
 }
 
 // ============================================================================
-// PDF Export
+// Print / Export
 // ============================================================================
-async function downloadPDF(tabId) {
-    const btn      = document.getElementById(`${tabId}-download`);
-    const origHTML = btn.innerHTML;
-    btn.disabled   = true;
-    btn.textContent = 'Generating…';
-    try {
-        const { jsPDF } = window.jspdf;
-        const pdf   = new jsPDF('l', 'mm', 'a4');
-        const title = tabId === 'tab1'
-            ? 'Progress in NDC Transport Targets'
-            : 'Leading Measures for Decarbonisation';
-        pdf.setFont('helvetica','bold'); pdf.setFontSize(16); pdf.setTextColor(0,61,92);
-        pdf.text(title, 14, 16);
-        pdf.setFont('helvetica','normal'); pdf.setFontSize(9); pdf.setTextColor(110,110,110);
-        pdf.text(`${new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})} — GIZ-SLOCAT Transport Tracker`, 14, 23);
-        const el      = document.querySelector(`#${tabId} .visualization-container:not(.hidden)`);
-        const canvas  = await html2canvas(el, { scale:1.5, useCORS:true, logging:false });
-        const imgData = canvas.toDataURL('image/png');
-        const pageW   = 297 - 28;
-        const imgH    = (canvas.height * pageW) / canvas.width;
-        pdf.addImage(imgData, 'PNG', 14, 28, pageW, imgH);
-        pdf.save(`ndc-tracker-${tabId}-${new Date().toISOString().slice(0,10)}.pdf`);
-    } catch (err) {
-        console.error('PDF error:', err);
-        alert('Could not generate PDF. Please try again.');
-    } finally {
-        btn.disabled  = false;
-        btn.innerHTML = origHTML;
-    }
+function downloadPDF(tabId) {
+    // Set date on tab content for CSS ::after
+    const dateStr = new Date().toLocaleDateString('en-GB', {
+        day: 'numeric', month: 'long', year: 'numeric'
+    });
+    document.querySelectorAll('.tab-content').forEach(el => {
+        el.dataset.printDate = dateStr;
+    });
+
+    // Trigger browser native print dialog
+    window.print();
 }
