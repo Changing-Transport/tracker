@@ -265,12 +265,7 @@ function updateTab1MapLabel(region) {
 function renderTab1Subtitle(region, genStats) {
     const el = document.getElementById('tab1-chart-subtitle');
     if (!el) return;
-    const possible = region === 'all'
-        ? dashboardData.metadata.total_possible_ndcs
-        : (dashboardData.metadata.region_possible_ndcs?.[region] || '?');
-    const regionLine = region === 'all'
-        ? 'Region: All regions'
-        : `Region: ${region} (${possible} possible NDCs)`;
+    const regionLine = region === 'all' ? 'Region: All regions' : `Region: ${region}`;
     el.innerHTML = `<strong>Currently showing</strong><br>${regionLine}<br>Each bar represents 100% of NDCs submitted in that generation`;
 }
 
@@ -434,7 +429,7 @@ function renderTab1Map(region) {
 
     const labelEl = document.getElementById('tab1-map-label');
     if (labelEl) {
-        labelEl.innerHTML = `<strong>Currently showing</strong><br>${regionLine}<br>Transport target in latest active NDC: <strong>${greenCount}</strong><br>Transport target in a previous NDC: <strong>${lightblueCount}</strong><br>No transport target in any NDC: <strong>${greyCount}</strong>`;
+        labelEl.innerHTML = `<strong>Currently showing</strong><br>${regionLine}<br>Transport target in latest active NDC: <strong>${greenCount} NDCs</strong><br>Transport target in a previous NDC: <strong>${lightblueCount} NDCs</strong><br>No transport target in any NDC: <strong>${greyCount} NDCs</strong>`;
     }
 
     tab1GeoLayer = L.geoJSON(worldGeoJSON, {
@@ -684,31 +679,19 @@ function getTab2ChartData(selectedGens, region) {
 }
 
 function buildChartSubtitle(selectedGens) {
-    const genCounts = dashboardData.metadata.gen_counts;
-    const region    = document.getElementById('tab2-chart-region').value;
-    const possible  = region === 'all'
-        ? dashboardData.metadata.total_possible_ndcs
-        : (dashboardData.metadata.region_possible_ndcs?.[region] || '?');
+    const region     = document.getElementById('tab2-chart-region').value;
+    const regionLine = region === 'all' ? 'Region: All regions' : `Region: ${region}`;
 
-    const regionLine = region === 'all'
-        ? 'Region: All regions'
-        : `Region: ${region} (${possible} possible NDCs)`;
-
-    // Fixed order for display: gen1 → gen2 → gen3 → latest
-    const GEN_ORDER   = ['gen1','gen2','gen3','latest'];
-    const orderedSel  = GEN_ORDER.filter(g => selectedGens.includes(g));
-
-    const genParts = orderedSel.map(gen => {
-        const c = genCounts[gen];
-        if (gen === 'latest') return `Latest Active (${c.active} NDCs)`;
-        return `${GEN_LABELS[gen]} (${c.active + c.archived} NDCs)`;
-    }).join(', ');
+    // Fixed order: gen1 → gen2 → gen3 → latest
+    const GEN_ORDER  = ['gen1', 'gen2', 'gen3', 'latest'];
+    const orderedSel = GEN_ORDER.filter(g => selectedGens.includes(g));
+    const genLine    = `Generation: ${orderedSel.map(g => GEN_LABELS[g]).join(', ')}`;
 
     const archiveNote = selectedGens.some(g => g !== 'latest')
         ? '<br>Includes active and archived NDCs from each generation round'
         : '';
 
-    return `<strong>Currently showing</strong><br>${regionLine}<br>Generation: ${genParts}${archiveNote}`;
+    return `<strong>Currently showing</strong><br>${regionLine}<br>${genLine}${archiveNote}`;
 }
 
 function renderTab2Chart() {
@@ -769,21 +752,43 @@ function renderTab2Chart() {
                             const ndcs  = entry?.countries?.size || 0;
                             const ment  = entry?.mentions || 0;
                             const lines = [];
+
                             if (gen === 'latest') {
-                                const lgb = catLgb[cat];
+                                // For Latest Active: breakdown by generation, region-filtered
                                 lines.push(`  ${GEN_CONFIG[gen].label}: ${ndcs} NDCs`);
-                                if (lgb) {
-                                    lines.push(`    · ${lgb.gen1_count} from 1st generation`);
-                                    lines.push(`    · ${lgb.gen2_count} from 2nd generation`);
-                                    lines.push(`    · ${lgb.gen3_count} from 3rd generation`);
+                                // Count from region-filtered data by latest_active_gen
+                                const allC = dashboardData.tab1.countries;
+                                const reg  = document.getElementById('tab2-chart-region').value;
+                                let g1=0,g2=0,g3=0;
+                                for (const [code, cd] of Object.entries(allC)) {
+                                    if (reg !== 'all' && cd.region !== reg) continue;
+                                    if (!entry?.countries?.has(code)) continue;
+                                    if (cd.latest_active_gen === 'gen1') g1++;
+                                    else if (cd.latest_active_gen === 'gen2') g2++;
+                                    else if (cd.latest_active_gen === 'gen3') g3++;
                                 }
+                                if (g1) lines.push(`    · ${g1} from 1st generation`);
+                                if (g2) lines.push(`    · ${g2} from 2nd generation`);
+                                if (g3) lines.push(`    · ${g3} from 3rd generation`);
                             } else {
-                                const aa = catGenAA?.[gen]?.[cat];
+                                // For specific gen: active/archived, region-filtered
                                 lines.push(`  ${GEN_CONFIG[gen].label}: ${ndcs} NDCs`);
-                                if (aa) {
-                                    lines.push(`    · ${aa.active_countries} from active NDCs`);
-                                    lines.push(`    · ${aa.archived_countries} from archived NDCs`);
+                                const allC = dashboardData.tab1.countries;
+                                const reg  = document.getElementById('tab2-chart-region').value;
+                                const countryGenCats = dashboardData.tab2.country_gen_cats;
+                                let activeCount=0, archivedCount=0;
+                                for (const [code, cd] of Object.entries(allC)) {
+                                    if (reg !== 'all' && cd.region !== reg) continue;
+                                    if (!entry?.countries?.has(code)) continue;
+                                    // Check if this country's gen NDC is active or archived
+                                    const genData = cd.generations?.[gen];
+                                    if (!genData) continue;
+                                    // A gen NDC is active if it's their latest_active_gen
+                                    if (cd.latest_active_gen === gen) activeCount++;
+                                    else archivedCount++;
                                 }
+                                if (activeCount)   lines.push(`    · ${activeCount} from active NDCs`);
+                                if (archivedCount) lines.push(`    · ${archivedCount} from archived NDCs`);
                             }
                             lines.push(`  Total measures count: ${ment}`);
                             return lines;
@@ -808,17 +813,17 @@ function renderTab2Chart() {
 
 // ── Map ────────────────────────────────────────────────────────────────────
 function updateMapLabel() {
-    const region   = document.getElementById('tab2-map-region')?.value || 'all';
+    const region     = document.getElementById('tab2-map-region')?.value || 'all';
     const regionLine = region === 'all' ? 'Region: All regions' : `Region: ${region}`;
-    const genLine  = `Generation: ${GEN_LABELS[mapActiveGen]}`;
+    const genLine    = `Generation: ${GEN_LABELS[mapActiveGen]}`;
     let catLine;
     if (mapActiveCats.has('all')) {
-        catLine = `Categories: All (${ALL_CATEGORIES_TEXT})`;
+        catLine = `Categories: All categories`;
     } else {
         catLine = `Categories: ${[...mapActiveCats].join(', ')}`;
     }
     document.getElementById('tab2-map-label').innerHTML =
-        `<strong>Currently showing</strong><br>${regionLine}<br>${genLine}<br>${catLine}`;
+        `<strong>Currently showing</strong><br>${regionLine}<br>${genLine}<br><br>${catLine}`;
 }
 
 function updateMapGradientColor() {
