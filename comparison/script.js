@@ -1,5 +1,5 @@
 // ============================================================================
-// NDC Comparison Dashboard — Updated with all requested features
+// NDC Comparison Dashboard — Sectioned Layout
 // ============================================================================
 
 let comparisonData = null;
@@ -77,40 +77,7 @@ function handleCountryChange(e) {
 }
 
 // ============================================================================
-// Synchronized Scrolling
-// ============================================================================
-function setupSynchronizedScrolling() {
-    const columns = document.querySelectorAll('.gen-content');
-    let isSyncing = false;
-    
-    columns.forEach(column => {
-        // Remove existing listeners to avoid duplicates
-        column.replaceWith(column.cloneNode(true));
-    });
-    
-    // Re-query after replacing
-    const freshColumns = document.querySelectorAll('.gen-content');
-    
-    freshColumns.forEach(column => {
-        column.addEventListener('scroll', function() {
-            if (isSyncing) return;
-            
-            isSyncing = true;
-            const scrollTop = this.scrollTop;
-            
-            freshColumns.forEach(otherColumn => {
-                if (otherColumn !== this) {
-                    otherColumn.scrollTop = scrollTop;
-                }
-            });
-            
-            setTimeout(() => { isSyncing = false; }, 10);
-        });
-    });
-}
-
-// ============================================================================
-// Main Render
+// Main Render — SECTIONED LAYOUT
 // ============================================================================
 function renderComparison() {
     const grid = document.getElementById('comparison-grid');
@@ -121,68 +88,79 @@ function renderComparison() {
     const countryData = comparisonData.countries[selectedCountry];
     if (!countryData) return;
     
+    // SECTION 1: Headers (in grid, variable height)
+    const headersRow = document.createElement('div');
+    headersRow.className = 'section-row headers-row';
+    
     ['gen1', 'gen2', 'gen3'].forEach(gen => {
-        const column = createGenerationColumn(gen, countryData.generations[gen]);
-        grid.appendChild(column);
+        const headerCell = createHeaderCell(gen, countryData.generations[gen]);
+        headersRow.appendChild(headerCell);
     });
+    grid.appendChild(headersRow);
     
-    equalizeColumnHeights();
-}
-
-// ============================================================================
-// Equalize Column Heights
-// ============================================================================
-function equalizeColumnHeights() {
-    requestAnimationFrame(() => {
-        const contents = document.querySelectorAll('.gen-content');
-        let maxHeight = 0;
-        
-        // Reset heights first
-        contents.forEach(content => {
-            content.style.minHeight = '';
-        });
-        
-        // Find max height
-        contents.forEach(content => {
-            const height = content.scrollHeight;
-            if (height > maxHeight) maxHeight = height;
-        });
-        
-        // Apply max height to all
-        contents.forEach(content => {
-            content.style.minHeight = `${maxHeight}px`;
-        });
+    // SECTION 2: Summary boxes (in grid, fixed height, aligned)
+    const summaryRow = document.createElement('div');
+    summaryRow.className = 'section-row summary-row';
+    
+    ['gen1', 'gen2', 'gen3'].forEach(gen => {
+        const summaryCell = createSummaryCell(gen, countryData.generations[gen]);
+        summaryRow.appendChild(summaryCell);
     });
+    grid.appendChild(summaryRow);
+    
+    // SECTION 3: Tab navigation (OUTSIDE grid, full width)
+    const tabSection = document.createElement('div');
+    tabSection.className = 'tab-section';
+    
+    const mitigationTab = document.createElement('button');
+    mitigationTab.className = 'tab-button' + (activeTab === 'mitigation' ? ' active' : '');
+    mitigationTab.textContent = 'Mitigation';
+    mitigationTab.addEventListener('click', () => switchTab('mitigation'));
+    
+    const adaptationTab = document.createElement('button');
+    adaptationTab.className = 'tab-button' + (activeTab === 'adaptation' ? ' active' : '');
+    adaptationTab.textContent = 'Adaptation';
+    adaptationTab.addEventListener('click', () => switchTab('adaptation'));
+    
+    tabSection.appendChild(mitigationTab);
+    tabSection.appendChild(adaptationTab);
+    grid.appendChild(tabSection);
+    
+    // SECTION 4: Content (in grid, scrollable, synchronized)
+    const contentRow = document.createElement('div');
+    contentRow.className = 'section-row content-row';
+    
+    ['gen1', 'gen2', 'gen3'].forEach(gen => {
+        const contentCell = createContentCell(gen, countryData.generations[gen]);
+        contentRow.appendChild(contentCell);
+    });
+    grid.appendChild(contentRow);
 }
 
 // ============================================================================
-// Generation Column
+// SECTION 1: Header Cell
 // ============================================================================
-function createGenerationColumn(gen, documents) {
+function createHeaderCell(gen, documents) {
     const config = GEN_CONFIG[gen];
-    const column = document.createElement('div');
-    column.className = 'gen-column';
-    column.style.setProperty('--gen-color', config.color);
-    
-    // Header
-    const header = document.createElement('div');
-    header.className = 'gen-header';
+    const cell = document.createElement('div');
+    cell.className = 'header-cell';
+    cell.style.setProperty('--gen-color', config.color);
     
     const title = document.createElement('h2');
     title.textContent = config.label;
-    header.appendChild(title);
+    cell.appendChild(title);
     
     const period = document.createElement('div');
     period.className = 'gen-period';
     period.textContent = config.period;
-    header.appendChild(period);
+    cell.appendChild(period);
     
     // Version selector if multiple versions
     if (documents.length > 1) {
         const versionNote = document.createElement('div');
         versionNote.className = 'version-note';
         versionNote.textContent = `${documents.length} versions submitted`;
-        header.appendChild(versionNote);
+        cell.appendChild(versionNote);
         
         const versionSelect = document.createElement('select');
         versionSelect.className = 'version-selector';
@@ -198,115 +176,36 @@ function createGenerationColumn(gen, documents) {
             renderComparison();
             setupSynchronizedScrolling();
         });
-        header.appendChild(versionSelect);
+        cell.appendChild(versionSelect);
     }
-    
-    column.appendChild(header);
-    
-    // Content
-    const content = document.createElement('div');
-    content.className = 'gen-content';
-    
-    if (documents.length === 0) {
-        content.innerHTML = '<div class="no-data">No NDC submitted</div>';
-    } else {
-        const doc = documents[selectedVersions[gen]];
-        content.appendChild(createDocumentContent(gen, doc));
-    }
-    
-    column.appendChild(content);
-    return column;
-}
-
-// ============================================================================
-// Document Content
-// ============================================================================
-function createDocumentContent(gen, doc) {
-    const container = document.createElement('div');
-    container.className = 'doc-container';
-    
-    // Summary Box (fixed height)
-    const summarySection = document.createElement('div');
-    summarySection.className = 'aligned-section summary-section';
-    summarySection.appendChild(createSummaryBox(doc));
     
     // Date
-    if (doc.date) {
-        const dateDiv = document.createElement('div');
-        dateDiv.className = 'doc-date';
-        dateDiv.innerHTML = `<strong>Submitted:</strong> ${doc.date}`;
-        summarySection.appendChild(dateDiv);
-    }
-    container.appendChild(summarySection);
-    
-    // TAB NAVIGATION (only in first column, but controls all 3)
-    if (gen === 'gen1') {
-        const tabNav = document.createElement('div');
-        tabNav.className = 'tab-navigation';
-        
-        const mitigationTab = document.createElement('button');
-        mitigationTab.className = 'tab-button' + (activeTab === 'mitigation' ? ' active' : '');
-        mitigationTab.textContent = 'Mitigation';
-        mitigationTab.addEventListener('click', () => switchTab('mitigation'));
-        
-        const adaptationTab = document.createElement('button');
-        adaptationTab.className = 'tab-button' + (activeTab === 'adaptation' ? ' active' : '');
-        adaptationTab.textContent = 'Adaptation';
-        adaptationTab.addEventListener('click', () => switchTab('adaptation'));
-        
-        tabNav.appendChild(mitigationTab);
-        tabNav.appendChild(adaptationTab);
-        container.appendChild(tabNav);
-    } else {
-        // Placeholder for alignment in other columns
-        const spacer = document.createElement('div');
-        spacer.className = 'tab-spacer';
-        container.appendChild(spacer);
+    if (documents.length > 0) {
+        const doc = documents[selectedVersions[gen]];
+        if (doc.date) {
+            const dateDiv = document.createElement('div');
+            dateDiv.className = 'header-date';
+            dateDiv.innerHTML = `<strong>Submitted:</strong> ${doc.date}`;
+            cell.appendChild(dateDiv);
+        }
     }
     
-    // CONTENT (based on active tab)
-    const contentWrapper = document.createElement('div');
-    contentWrapper.className = 'aligned-section content-section';
-    
-    if (activeTab === 'mitigation') {
-        contentWrapper.appendChild(createMitigationContent(doc));
-    } else {
-        contentWrapper.appendChild(createAdaptationContent(doc));
-    }
-    
-    container.appendChild(contentWrapper);
-    
-    return container;
+    return cell;
 }
 
 // ============================================================================
-// Tab Switching (affects all 3 columns)
+// SECTION 2: Summary Cell
 // ============================================================================
-function switchTab(tab) {
-    // Store current scroll position
-    const columns = document.querySelectorAll('.gen-content');
-    const scrollPos = columns[0] ? columns[0].scrollTop : 0;
+function createSummaryCell(gen, documents) {
+    const cell = document.createElement('div');
+    cell.className = 'summary-cell';
     
-    activeTab = tab;
-    renderComparison();
+    if (documents.length === 0) {
+        cell.innerHTML = '<div class="no-data-summary">No NDC submitted</div>';
+        return cell;
+    }
     
-    // Restore scroll position
-    requestAnimationFrame(() => {
-        const newColumns = document.querySelectorAll('.gen-content');
-        newColumns.forEach(col => {
-            col.scrollTop = scrollPos;
-        });
-        setupSynchronizedScrolling();
-        equalizeColumnHeights();
-    });
-}
-
-// ============================================================================
-// Summary Box
-// ============================================================================
-function createSummaryBox(doc) {
-    const box = document.createElement('div');
-    box.className = 'summary-box';
+    const doc = documents[selectedVersions[gen]];
     
     const mitCount = doc.targets.filter(t => t.target_area === 'Transport sector mitigation target').length;
     const adaptCount = doc.targets.filter(t => t.target_area === 'Transport sector adaptation target').length;
@@ -315,20 +214,102 @@ function createSummaryBox(doc) {
     const mitMeasuresCount = Object.values(doc.mitigation_measures).reduce((sum, arr) => sum + arr.length, 0);
     const adaptMeasuresCount = Object.values(doc.adaptation_measures).reduce((sum, arr) => sum + arr.length, 0);
     
-    box.innerHTML = `
-        <div class="summary-row">
-            <strong>Targets:</strong> ${mitCount} mitigation • ${adaptCount} adaptation • ${netzeroCount} net zero
-        </div>
-        <div class="summary-row">
-            <strong>Measures:</strong> ${mitMeasuresCount} mitigation • ${adaptMeasuresCount} adaptation
+    cell.innerHTML = `
+        <div class="summary-box">
+            <div class="summary-row-text">
+                <strong>Targets:</strong> ${mitCount} mitigation • ${adaptCount} adaptation • ${netzeroCount} net zero
+            </div>
+            <div class="summary-row-text">
+                <strong>Measures:</strong> ${mitMeasuresCount} mitigation • ${adaptMeasuresCount} adaptation
+            </div>
         </div>
     `;
     
-    return box;
+    return cell;
 }
 
 // ============================================================================
-// MITIGATION CONTENT (Mitigation Targets + Net Zero + Mitigation Measures)
+// SECTION 4: Content Cell
+// ============================================================================
+function createContentCell(gen, documents) {
+    const cell = document.createElement('div');
+    cell.className = 'content-cell';
+    
+    if (documents.length === 0) {
+        cell.innerHTML = '<div class="no-data">No NDC submitted</div>';
+        return cell;
+    }
+    
+    const doc = documents[selectedVersions[gen]];
+    
+    if (activeTab === 'mitigation') {
+        cell.appendChild(createMitigationContent(doc));
+    } else {
+        cell.appendChild(createAdaptationContent(doc));
+    }
+    
+    return cell;
+}
+
+// ============================================================================
+// Synchronized Scrolling
+// ============================================================================
+function setupSynchronizedScrolling() {
+    const cells = document.querySelectorAll('.content-cell');
+    let isSyncing = false;
+    
+    cells.forEach(cell => {
+        cell.replaceWith(cell.cloneNode(true));
+    });
+    
+    const freshCells = document.querySelectorAll('.content-cell');
+    
+    freshCells.forEach(cell => {
+        cell.addEventListener('scroll', function() {
+            if (isSyncing) return;
+            
+            isSyncing = true;
+            const scrollTop = this.scrollTop;
+            
+            freshCells.forEach(otherCell => {
+                if (otherCell !== this) {
+                    otherCell.scrollTop = scrollTop;
+                }
+            });
+            
+            setTimeout(() => { isSyncing = false; }, 10);
+        });
+    });
+}
+
+// ============================================================================
+// Equalize Column Heights (not needed anymore, but keeping for compatibility)
+// ============================================================================
+function equalizeColumnHeights() {
+    // Not needed with new layout, but kept to avoid errors
+}
+
+// ============================================================================
+// Tab Switching
+// ============================================================================
+function switchTab(tab) {
+    const cells = document.querySelectorAll('.content-cell');
+    const scrollPos = cells[0] ? cells[0].scrollTop : 0;
+    
+    activeTab = tab;
+    renderComparison();
+    
+    requestAnimationFrame(() => {
+        const newCells = document.querySelectorAll('.content-cell');
+        newCells.forEach(cell => {
+            cell.scrollTop = scrollPos;
+        });
+        setupSynchronizedScrolling();
+    });
+}
+
+// ============================================================================
+// MITIGATION CONTENT
 // ============================================================================
 function createMitigationContent(doc) {
     const container = document.createElement('div');
@@ -407,7 +388,7 @@ function createMitigationContent(doc) {
 }
 
 // ============================================================================
-// ADAPTATION CONTENT (Adaptation Targets + Adaptation Measures)
+// ADAPTATION CONTENT
 // ============================================================================
 function createAdaptationContent(doc) {
     const container = document.createElement('div');
@@ -474,14 +455,12 @@ function createTargetItem(target, docUrl) {
     const item = document.createElement('div');
     item.className = 'target-item';
     
-    // Content/quote in italic
     const content = document.createElement('div');
     content.className = 'target-content';
     const em = document.createElement('em');
     em.textContent = target.content;
     content.appendChild(em);
     
-    // Add page link if available
     if (target.page && target.page !== '' && docUrl) {
         const pageLink = document.createElement('a');
         pageLink.href = docUrl;
@@ -493,7 +472,6 @@ function createTargetItem(target, docUrl) {
     
     item.appendChild(content);
     
-    // Meta information
     const meta = document.createElement('div');
     meta.className = 'target-meta';
     
@@ -522,14 +500,12 @@ function createMeasureItem(measure, docUrl) {
     const item = document.createElement('div');
     item.className = 'measure-item';
     
-    // Quote in italic
     const quote = document.createElement('div');
     quote.className = 'measure-quote';
     const em = document.createElement('em');
     em.textContent = measure.quote;
     quote.appendChild(em);
     
-    // Add page link if available
     if (measure.page && measure.page !== '' && docUrl) {
         const pageLink = document.createElement('a');
         pageLink.href = docUrl;
@@ -569,14 +545,12 @@ function createAdaptationMeasureItem(measure, docUrl) {
     const item = document.createElement('div');
     item.className = 'measure-item';
     
-    // Quote in italic
     const quote = document.createElement('div');
     quote.className = 'measure-quote';
     const em = document.createElement('em');
     em.textContent = measure.quote;
     quote.appendChild(em);
     
-    // Add page link if available
     if (measure.page && measure.page !== '' && docUrl) {
         const pageLink = document.createElement('a');
         pageLink.href = docUrl;
@@ -600,6 +574,3 @@ function createAdaptationMeasureItem(measure, docUrl) {
     
     return item;
 }
-
-// ============================================================================
-// OLD FUNCTIONS (REMOVED - keeping for reference if needed)
