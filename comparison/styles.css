@@ -203,6 +203,62 @@ body {
     font-style: italic;
 }
 
+/* ── Summary Section (fixed height) ────────────────────────────────── */
+.summary-section {
+    min-height: 100px;
+}
+
+/* ── Tab Navigation ────────────────────────────────────────────────── */
+.tab-navigation {
+    display: flex;
+    gap: 0.5rem;
+    padding: var(--sp-md) 0;
+    border-bottom: 2px solid var(--color-border);
+    margin-bottom: var(--sp-md);
+}
+
+.tab-spacer {
+    height: 58px; /* Same height as tab-navigation to keep alignment */
+    border-bottom: 2px solid var(--color-border);
+    margin-bottom: var(--sp-md);
+}
+
+.tab-button {
+    padding: 0.625rem 1.25rem;
+    background: transparent;
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: var(--color-muted);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex: 1;
+}
+
+.tab-button:hover {
+    border-color: var(--color-accent);
+    color: var(--color-text);
+    background: rgba(0,164,189,0.05);
+}
+
+.tab-button.active {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: white;
+    box-shadow: 0 2px 8px rgba(0,164,189,0.25);
+}
+
+/* ── Content Section ───────────────────────────────────────────────── */
+.content-section {
+    flex: 1;
+}
+
+.content-section-block {
+    margin-bottom: var(--sp-lg);
+}
+
 /* ── Summary Box (NEW) ─────────────────────────────────────────────── */
 .summary-box {
     background: linear-gradient(135deg, rgba(157,190,61,0.08) 0%, rgba(0,164,189,0.08) 100%);

@@ -10,6 +10,9 @@ let selectedVersions = {
     gen3: 0
 };
 
+// Global tab selection (synchronized across all 3 columns)
+let activeTab = 'mitigation';  // 'mitigation' or 'adaptation'
+
 const GEN_CONFIG = {
     gen1: { label: '1st Generation', period: '2015–2019', color: '#003D5C' },
     gen2: { label: '2nd Generation', period: '2020–2024', color: '#00A4BD' },
@@ -65,8 +68,9 @@ function handleCountryChange(e) {
         return;
     }
     
-    // Reset version selections
+    // Reset version selections and tab
     selectedVersions = { gen1: 0, gen2: 0, gen3: 0 };
+    activeTab = 'mitigation';
     
     renderComparison();
     setupSynchronizedScrolling();
@@ -221,7 +225,7 @@ function createDocumentContent(gen, doc) {
     const container = document.createElement('div');
     container.className = 'doc-container';
     
-    // Summary Box
+    // Summary Box (fixed height)
     const summarySection = document.createElement('div');
     summarySection.className = 'aligned-section summary-section';
     summarySection.appendChild(createSummaryBox(doc));
@@ -235,19 +239,66 @@ function createDocumentContent(gen, doc) {
     }
     container.appendChild(summarySection);
     
-    // SECTION 1: TARGETS (aligned)
-    const targetsWrapper = document.createElement('div');
-    targetsWrapper.className = 'aligned-section targets-section';
-    targetsWrapper.appendChild(createTargetsSection(doc));
-    container.appendChild(targetsWrapper);
+    // TAB NAVIGATION (only in first column, but controls all 3)
+    if (gen === 'gen1') {
+        const tabNav = document.createElement('div');
+        tabNav.className = 'tab-navigation';
+        
+        const mitigationTab = document.createElement('button');
+        mitigationTab.className = 'tab-button' + (activeTab === 'mitigation' ? ' active' : '');
+        mitigationTab.textContent = 'Mitigation';
+        mitigationTab.addEventListener('click', () => switchTab('mitigation'));
+        
+        const adaptationTab = document.createElement('button');
+        adaptationTab.className = 'tab-button' + (activeTab === 'adaptation' ? ' active' : '');
+        adaptationTab.textContent = 'Adaptation';
+        adaptationTab.addEventListener('click', () => switchTab('adaptation'));
+        
+        tabNav.appendChild(mitigationTab);
+        tabNav.appendChild(adaptationTab);
+        container.appendChild(tabNav);
+    } else {
+        // Placeholder for alignment in other columns
+        const spacer = document.createElement('div');
+        spacer.className = 'tab-spacer';
+        container.appendChild(spacer);
+    }
     
-    // SECTION 2: MEASURES (aligned)
-    const measuresWrapper = document.createElement('div');
-    measuresWrapper.className = 'aligned-section measures-section';
-    measuresWrapper.appendChild(createMeasuresSection(gen, doc));
-    container.appendChild(measuresWrapper);
+    // CONTENT (based on active tab)
+    const contentWrapper = document.createElement('div');
+    contentWrapper.className = 'aligned-section content-section';
+    
+    if (activeTab === 'mitigation') {
+        contentWrapper.appendChild(createMitigationContent(doc));
+    } else {
+        contentWrapper.appendChild(createAdaptationContent(doc));
+    }
+    
+    container.appendChild(contentWrapper);
     
     return container;
+}
+
+// ============================================================================
+// Tab Switching (affects all 3 columns)
+// ============================================================================
+function switchTab(tab) {
+    // Store current scroll position
+    const columns = document.querySelectorAll('.gen-content');
+    const scrollPos = columns[0] ? columns[0].scrollTop : 0;
+    
+    activeTab = tab;
+    renderComparison();
+    
+    // Restore scroll position
+    requestAnimationFrame(() => {
+        const newColumns = document.querySelectorAll('.gen-content');
+        newColumns.forEach(col => {
+            col.scrollTop = scrollPos;
+        });
+        setupSynchronizedScrolling();
+        equalizeColumnHeights();
+    });
 }
 
 // ============================================================================
@@ -277,252 +328,278 @@ function createSummaryBox(doc) {
 }
 
 // ============================================================================
-// TARGETS SECTION
+// MITIGATION CONTENT (Mitigation Targets + Net Zero + Mitigation Measures)
 // ============================================================================
-function createTargetsSection(doc) {
-    const section = document.createElement('div');
-    section.className = 'section';
+function createMitigationContent(doc) {
+    const container = document.createElement('div');
     
-    const title = document.createElement('div');
-    title.className = 'section-title';
-    title.textContent = 'Targets';
-    section.appendChild(title);
-    
+    // MITIGATION TARGETS
     const mitigationTargets = doc.targets.filter(t => t.target_area === 'Transport sector mitigation target');
-    const adaptationTargets = doc.targets.filter(t => t.target_area === 'Transport sector adaptation target');
+    if (mitigationTargets.length > 0) {
+        const section = document.createElement('div');
+        section.className = 'content-section-block';
+        
+        const title = document.createElement('div');
+        title.className = 'section-title';
+        title.textContent = 'Transport Mitigation Targets';
+        section.appendChild(title);
+        
+        mitigationTargets.forEach(target => {
+            section.appendChild(createTargetItem(target, doc.url));
+        });
+        
+        container.appendChild(section);
+    }
+    
+    // NET ZERO TARGETS
     const netZeroTargets = doc.targets.filter(t => t.target_area === 'Net zero target');
-    
-    section.appendChild(createTargetSubsection('Transport Mitigation Targets', mitigationTargets, doc.url));
-    section.appendChild(createTargetSubsection('Transport Adaptation Targets', adaptationTargets, doc.url));
-    section.appendChild(createTargetSubsection('Net Zero Targets', netZeroTargets, doc.url));
-    
-    return section;
-}
-
-function createTargetSubsection(title, targets, docUrl) {
-    const subsection = document.createElement('div');
-    subsection.className = 'subsection';
-    
-    const subsectionTitle = document.createElement('div');
-    subsectionTitle.className = 'subsection-title';
-    subsectionTitle.textContent = title;
-    subsection.appendChild(subsectionTitle);
-    
-    if (targets.length === 0) {
-        const empty = document.createElement('div');
-        empty.className = 'empty-indicator';
-        empty.textContent = '—';
-        subsection.appendChild(empty);
-    } else {
-        targets.forEach(target => {
-            const item = document.createElement('div');
-            item.className = 'target-item';
-            
-            // Content/quote in italic
-            const content = document.createElement('div');
-            content.className = 'target-content';
-            const em = document.createElement('em');
-            em.textContent = target.content;
-            content.appendChild(em);
-            
-            // Add page link if available
-            if (target.page && target.page !== '' && docUrl) {
-                const pageLink = document.createElement('a');
-                pageLink.href = docUrl;
-                pageLink.target = '_blank';
-                pageLink.className = 'page-link';
-                pageLink.textContent = ` (p. ${target.page})`;
-                content.appendChild(pageLink);
-            }
-            
-            item.appendChild(content);
-            
-            // Meta information
-            const meta = document.createElement('div');
-            meta.className = 'target-meta';
-            
-            const addMetaRow = (label, value) => {
-                if (value && value !== '—') {
-                    const row = document.createElement('div');
-                    row.className = 'target-meta-row';
-                    row.innerHTML = `<span class="target-meta-label">${label}:</span><span>${value}</span>`;
-                    meta.appendChild(row);
-                }
-            };
-            
-            addMetaRow('GHG Target', target.ghg_target);
-            addMetaRow('Target Type', target.target_type);
-            addMetaRow('Conditionality', target.conditionality);
-            addMetaRow('Target Year', target.target_year);
-            
-            item.appendChild(meta);
-            subsection.appendChild(item);
+    if (netZeroTargets.length > 0) {
+        const section = document.createElement('div');
+        section.className = 'content-section-block';
+        
+        const title = document.createElement('div');
+        title.className = 'section-title';
+        title.textContent = 'Net Zero Targets';
+        section.appendChild(title);
+        
+        netZeroTargets.forEach(target => {
+            section.appendChild(createTargetItem(target, doc.url));
         });
+        
+        container.appendChild(section);
     }
     
-    return subsection;
-}
-
-// ============================================================================
-// MEASURES SECTION
-// ============================================================================
-function createMeasuresSection(gen, doc) {
-    const section = document.createElement('div');
-    section.className = 'section';
-    
-    const title = document.createElement('div');
-    title.className = 'section-title';
-    title.textContent = 'Measures';
-    section.appendChild(title);
-    
-    section.appendChild(createMitigationSubsection(gen, doc));
-    section.appendChild(createAdaptationSubsection(gen, doc));
-    
-    return section;
-}
-
-function createMitigationSubsection(gen, doc) {
-    const subsection = document.createElement('div');
-    subsection.className = 'subsection';
-    
-    const subsectionTitle = document.createElement('div');
-    subsectionTitle.className = 'subsection-title';
-    subsectionTitle.textContent = 'Mitigation Measures';
-    subsection.appendChild(subsectionTitle);
-    
+    // MITIGATION MEASURES
     const categories = Object.keys(doc.mitigation_measures).sort();
-    
-    if (categories.length === 0) {
-        const empty = document.createElement('div');
-        empty.className = 'empty-indicator';
-        empty.textContent = '—';
-        subsection.appendChild(empty);
-        return subsection;
+    if (categories.length > 0) {
+        const section = document.createElement('div');
+        section.className = 'content-section-block';
+        
+        const title = document.createElement('div');
+        title.className = 'section-title';
+        title.textContent = 'Mitigation Measures';
+        section.appendChild(title);
+        
+        categories.forEach(category => {
+            const catHeader = document.createElement('div');
+            catHeader.className = 'category-header';
+            catHeader.textContent = category;
+            section.appendChild(catHeader);
+            
+            const measures = doc.mitigation_measures[category] || [];
+            measures.forEach(measure => {
+                section.appendChild(createMeasureItem(measure, doc.url));
+            });
+        });
+        
+        container.appendChild(section);
     }
     
-    // Show ALL categories (no navigation)
-    categories.forEach(category => {
-        // Category header
-        const catHeader = document.createElement('div');
-        catHeader.className = 'category-header';
-        catHeader.textContent = category;
-        subsection.appendChild(catHeader);
-        
-        // Measures for this category
-        const measures = doc.mitigation_measures[category] || [];
-        measures.forEach(measure => {
-            const item = document.createElement('div');
-            item.className = 'measure-item';
-            
-            // Quote in italic
-            const quote = document.createElement('div');
-            quote.className = 'measure-quote';
-            const em = document.createElement('em');
-            em.textContent = measure.quote;
-            quote.appendChild(em);
-            
-            // Add page link if available
-            if (measure.page && measure.page !== '' && doc.url) {
-                const pageLink = document.createElement('a');
-                pageLink.href = doc.url;
-                pageLink.target = '_blank';
-                pageLink.className = 'page-link';
-                pageLink.textContent = ` (p. ${measure.page})`;
-                quote.appendChild(pageLink);
-            }
-            
-            item.appendChild(quote);
-            
-            const meta = document.createElement('div');
-            meta.className = 'measure-meta';
-            
-            if (measure.asi && measure.asi !== '—') {
-                const asiRow = document.createElement('div');
-                asiRow.className = 'measure-meta-row';
-                asiRow.innerHTML = `<span class="measure-meta-label">A-S-I:</span><span>${measure.asi}</span>`;
-                meta.appendChild(asiRow);
-            }
-            
-            if (measure.modes && measure.modes !== '—') {
-                const modesRow = document.createElement('div');
-                modesRow.className = 'measure-meta-row';
-                modesRow.innerHTML = `<span class="measure-meta-label">Modes:</span><span>${measure.modes}</span>`;
-                meta.appendChild(modesRow);
-            }
-            
-            item.appendChild(meta);
-            subsection.appendChild(item);
-        });
-    });
+    // If no mitigation content at all
+    if (mitigationTargets.length === 0 && netZeroTargets.length === 0 && categories.length === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'no-data';
+        empty.textContent = 'No mitigation targets or measures';
+        container.appendChild(empty);
+    }
     
-    return subsection;
+    return container;
 }
 
-function createAdaptationSubsection(gen, doc) {
-    const subsection = document.createElement('div');
-    subsection.className = 'subsection';
+// ============================================================================
+// ADAPTATION CONTENT (Adaptation Targets + Adaptation Measures)
+// ============================================================================
+function createAdaptationContent(doc) {
+    const container = document.createElement('div');
     
-    const subsectionTitle = document.createElement('div');
-    subsectionTitle.className = 'subsection-title';
-    subsectionTitle.textContent = 'Adaptation Measures';
-    subsection.appendChild(subsectionTitle);
-    
-    const categories = Object.keys(doc.adaptation_measures).sort();
-    
-    if (categories.length === 0) {
-        const empty = document.createElement('div');
-        empty.className = 'empty-indicator';
-        empty.textContent = '—';
-        subsection.appendChild(empty);
-        return subsection;
+    // ADAPTATION TARGETS
+    const adaptationTargets = doc.targets.filter(t => t.target_area === 'Transport sector adaptation target');
+    if (adaptationTargets.length > 0) {
+        const section = document.createElement('div');
+        section.className = 'content-section-block';
+        
+        const title = document.createElement('div');
+        title.className = 'section-title';
+        title.textContent = 'Transport Adaptation Targets';
+        section.appendChild(title);
+        
+        adaptationTargets.forEach(target => {
+            section.appendChild(createTargetItem(target, doc.url));
+        });
+        
+        container.appendChild(section);
     }
     
-    // Show ALL categories (no navigation)
-    categories.forEach(category => {
-        // Category header
-        const catHeader = document.createElement('div');
-        catHeader.className = 'category-header';
-        catHeader.textContent = category;
-        subsection.appendChild(catHeader);
+    // ADAPTATION MEASURES
+    const categories = Object.keys(doc.adaptation_measures).sort();
+    if (categories.length > 0) {
+        const section = document.createElement('div');
+        section.className = 'content-section-block';
         
-        // Measures for this category
-        const measures = doc.adaptation_measures[category] || [];
-        measures.forEach(measure => {
-            const item = document.createElement('div');
-            item.className = 'measure-item';
+        const title = document.createElement('div');
+        title.className = 'section-title';
+        title.textContent = 'Adaptation Measures';
+        section.appendChild(title);
+        
+        categories.forEach(category => {
+            const catHeader = document.createElement('div');
+            catHeader.className = 'category-header';
+            catHeader.textContent = category;
+            section.appendChild(catHeader);
             
-            // Quote in italic
-            const quote = document.createElement('div');
-            quote.className = 'measure-quote';
-            const em = document.createElement('em');
-            em.textContent = measure.quote;
-            quote.appendChild(em);
-            
-            // Add page link if available
-            if (measure.page && measure.page !== '' && doc.url) {
-                const pageLink = document.createElement('a');
-                pageLink.href = doc.url;
-                pageLink.target = '_blank';
-                pageLink.className = 'page-link';
-                pageLink.textContent = ` (p. ${measure.page})`;
-                quote.appendChild(pageLink);
-            }
-            
-            item.appendChild(quote);
-            
-            if (measure.modes && measure.modes !== '—') {
-                const meta = document.createElement('div');
-                meta.className = 'measure-meta';
-                const modesRow = document.createElement('div');
-                modesRow.className = 'measure-meta-row';
-                modesRow.innerHTML = `<span class="measure-meta-label">Modes:</span><span>${measure.modes}</span>`;
-                meta.appendChild(modesRow);
-                item.appendChild(meta);
-            }
-            
-            subsection.appendChild(item);
+            const measures = doc.adaptation_measures[category] || [];
+            measures.forEach(measure => {
+                section.appendChild(createAdaptationMeasureItem(measure, doc.url));
+            });
         });
-    });
+        
+        container.appendChild(section);
+    }
     
-    return subsection;
+    // If no adaptation content at all
+    if (adaptationTargets.length === 0 && categories.length === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'no-data';
+        empty.textContent = 'No adaptation targets or measures';
+        container.appendChild(empty);
+    }
+    
+    return container;
 }
+
+// ============================================================================
+// HELPER: Create Target Item
+// ============================================================================
+function createTargetItem(target, docUrl) {
+    const item = document.createElement('div');
+    item.className = 'target-item';
+    
+    // Content/quote in italic
+    const content = document.createElement('div');
+    content.className = 'target-content';
+    const em = document.createElement('em');
+    em.textContent = target.content;
+    content.appendChild(em);
+    
+    // Add page link if available
+    if (target.page && target.page !== '' && docUrl) {
+        const pageLink = document.createElement('a');
+        pageLink.href = docUrl;
+        pageLink.target = '_blank';
+        pageLink.className = 'page-link';
+        pageLink.textContent = ` (p. ${target.page})`;
+        content.appendChild(pageLink);
+    }
+    
+    item.appendChild(content);
+    
+    // Meta information
+    const meta = document.createElement('div');
+    meta.className = 'target-meta';
+    
+    const addMetaRow = (label, value) => {
+        if (value && value !== '—') {
+            const row = document.createElement('div');
+            row.className = 'target-meta-row';
+            row.innerHTML = `<span class="target-meta-label">${label}:</span><span>${value}</span>`;
+            meta.appendChild(row);
+        }
+    };
+    
+    addMetaRow('GHG Target', target.ghg_target);
+    addMetaRow('Target Type', target.target_type);
+    addMetaRow('Conditionality', target.conditionality);
+    addMetaRow('Target Year', target.target_year);
+    
+    item.appendChild(meta);
+    return item;
+}
+
+// ============================================================================
+// HELPER: Create Measure Item (Mitigation)
+// ============================================================================
+function createMeasureItem(measure, docUrl) {
+    const item = document.createElement('div');
+    item.className = 'measure-item';
+    
+    // Quote in italic
+    const quote = document.createElement('div');
+    quote.className = 'measure-quote';
+    const em = document.createElement('em');
+    em.textContent = measure.quote;
+    quote.appendChild(em);
+    
+    // Add page link if available
+    if (measure.page && measure.page !== '' && docUrl) {
+        const pageLink = document.createElement('a');
+        pageLink.href = docUrl;
+        pageLink.target = '_blank';
+        pageLink.className = 'page-link';
+        pageLink.textContent = ` (p. ${measure.page})`;
+        quote.appendChild(pageLink);
+    }
+    
+    item.appendChild(quote);
+    
+    const meta = document.createElement('div');
+    meta.className = 'measure-meta';
+    
+    if (measure.asi && measure.asi !== '—') {
+        const asiRow = document.createElement('div');
+        asiRow.className = 'measure-meta-row';
+        asiRow.innerHTML = `<span class="measure-meta-label">A-S-I:</span><span>${measure.asi}</span>`;
+        meta.appendChild(asiRow);
+    }
+    
+    if (measure.modes && measure.modes !== '—') {
+        const modesRow = document.createElement('div');
+        modesRow.className = 'measure-meta-row';
+        modesRow.innerHTML = `<span class="measure-meta-label">Modes:</span><span>${measure.modes}</span>`;
+        meta.appendChild(modesRow);
+    }
+    
+    item.appendChild(meta);
+    return item;
+}
+
+// ============================================================================
+// HELPER: Create Measure Item (Adaptation)
+// ============================================================================
+function createAdaptationMeasureItem(measure, docUrl) {
+    const item = document.createElement('div');
+    item.className = 'measure-item';
+    
+    // Quote in italic
+    const quote = document.createElement('div');
+    quote.className = 'measure-quote';
+    const em = document.createElement('em');
+    em.textContent = measure.quote;
+    quote.appendChild(em);
+    
+    // Add page link if available
+    if (measure.page && measure.page !== '' && docUrl) {
+        const pageLink = document.createElement('a');
+        pageLink.href = docUrl;
+        pageLink.target = '_blank';
+        pageLink.className = 'page-link';
+        pageLink.textContent = ` (p. ${measure.page})`;
+        quote.appendChild(pageLink);
+    }
+    
+    item.appendChild(quote);
+    
+    if (measure.modes && measure.modes !== '—') {
+        const meta = document.createElement('div');
+        meta.className = 'measure-meta';
+        const modesRow = document.createElement('div');
+        modesRow.className = 'measure-meta-row';
+        modesRow.innerHTML = `<span class="measure-meta-label">Modes:</span><span>${measure.modes}</span>`;
+        meta.appendChild(modesRow);
+        item.appendChild(meta);
+    }
+    
+    return item;
+}
+
+// ============================================================================
+// OLD FUNCTIONS (REMOVED - keeping for reference if needed)
