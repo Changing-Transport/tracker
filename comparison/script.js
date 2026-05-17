@@ -241,23 +241,33 @@ function createGenerationColumn(gen, documents) {
 // ============================================================================
 function createDocumentContent(gen, doc) {
     const container = document.createElement('div');
+    container.className = 'doc-container';
     
     // Summary Box
-    container.appendChild(createSummaryBox(doc));
+    const summarySection = document.createElement('div');
+    summarySection.className = 'aligned-section summary-section';
+    summarySection.appendChild(createSummaryBox(doc));
     
     // Date
     if (doc.date) {
         const dateDiv = document.createElement('div');
         dateDiv.className = 'doc-date';
         dateDiv.innerHTML = `<strong>Submitted:</strong> ${doc.date}`;
-        container.appendChild(dateDiv);
+        summarySection.appendChild(dateDiv);
     }
+    container.appendChild(summarySection);
     
-    // SECTION 1: TARGETS
-    container.appendChild(createTargetsSection(doc));
+    // SECTION 1: TARGETS (aligned)
+    const targetsWrapper = document.createElement('div');
+    targetsWrapper.className = 'aligned-section targets-section';
+    targetsWrapper.appendChild(createTargetsSection(doc));
+    container.appendChild(targetsWrapper);
     
-    // SECTION 2: MEASURES
-    container.appendChild(createMeasuresSection(gen, doc));
+    // SECTION 2: MEASURES (aligned)
+    const measuresWrapper = document.createElement('div');
+    measuresWrapper.className = 'aligned-section measures-section';
+    measuresWrapper.appendChild(createMeasuresSection(gen, doc));
+    container.appendChild(measuresWrapper);
     
     return container;
 }

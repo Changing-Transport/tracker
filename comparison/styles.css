@@ -172,6 +172,30 @@ body {
     max-height: 80vh;
 }
 
+/* Aligned sections across columns for proper visual sync */
+.doc-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.aligned-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.summary-section {
+    min-height: 120px;
+}
+
+.targets-section {
+    min-height: auto;
+}
+
+.measures-section {
+    min-height: auto;
+    flex: 1;
+}
+
 .no-data {
     text-align: center;
     color: var(--color-muted);
