@@ -10,10 +10,6 @@ let selectedVersions = {
     gen3: 0
 };
 
-// Global category selection (synchronized across all columns)
-let activeCategoryMitigation = 'Electrification';  // Global for all generations
-let activeCategoryAdaptation = null;  // Global for all generations
-
 const GEN_CONFIG = {
     gen1: { label: '1st Generation', period: '2015–2019', color: '#003D5C' },
     gen2: { label: '2nd Generation', period: '2020–2024', color: '#00A4BD' },
@@ -71,24 +67,6 @@ function handleCountryChange(e) {
     
     // Reset version selections
     selectedVersions = { gen1: 0, gen2: 0, gen3: 0 };
-    
-    // Reset to first available category
-    const countryData = comparisonData.countries[selectedCountry];
-    let firstCategory = null;
-    
-    for (const gen of ['gen1', 'gen2', 'gen3']) {
-        const docs = countryData.generations[gen];
-        if (docs.length > 0 && docs[0].mitigation_measures) {
-            const cats = Object.keys(docs[0].mitigation_measures);
-            if (cats.length > 0) {
-                firstCategory = cats[0];
-                break;
-            }
-        }
-    }
-    
-    activeCategoryMitigation = firstCategory || 'Electrification';
-    activeCategoryAdaptation = null;
     
     renderComparison();
     setupSynchronizedScrolling();
@@ -412,7 +390,7 @@ function createMitigationSubsection(gen, doc) {
     subsectionTitle.textContent = 'Mitigation Measures';
     subsection.appendChild(subsectionTitle);
     
-    const categories = Object.keys(doc.mitigation_measures);
+    const categories = Object.keys(doc.mitigation_measures).sort();
     
     if (categories.length === 0) {
         const empty = document.createElement('div');
@@ -422,71 +400,59 @@ function createMitigationSubsection(gen, doc) {
         return subsection;
     }
     
-    // Initialize global category if not set or not available
-    if (!activeCategoryMitigation || !categories.includes(activeCategoryMitigation)) {
-        activeCategoryMitigation = categories[0];
-    }
-    
-    // Category tabs (global - changes all columns)
-    const tabs = document.createElement('div');
-    tabs.className = 'category-tabs';
-    categories.forEach(cat => {
-        const tab = document.createElement('button');
-        tab.className = 'category-tab';
-        if (cat === activeCategoryMitigation) tab.classList.add('active');
-        tab.textContent = cat;
-        tab.addEventListener('click', (e) => {
-            e.preventDefault();
-            switchCategoryGlobal(cat, 'mitigation');
+    // Show ALL categories (no navigation)
+    categories.forEach(category => {
+        // Category header
+        const catHeader = document.createElement('div');
+        catHeader.className = 'category-header';
+        catHeader.textContent = category;
+        subsection.appendChild(catHeader);
+        
+        // Measures for this category
+        const measures = doc.mitigation_measures[category] || [];
+        measures.forEach(measure => {
+            const item = document.createElement('div');
+            item.className = 'measure-item';
+            
+            // Quote in italic
+            const quote = document.createElement('div');
+            quote.className = 'measure-quote';
+            const em = document.createElement('em');
+            em.textContent = measure.quote;
+            quote.appendChild(em);
+            
+            // Add page link if available
+            if (measure.page && measure.page !== '' && doc.url) {
+                const pageLink = document.createElement('a');
+                pageLink.href = doc.url;
+                pageLink.target = '_blank';
+                pageLink.className = 'page-link';
+                pageLink.textContent = ` (p. ${measure.page})`;
+                quote.appendChild(pageLink);
+            }
+            
+            item.appendChild(quote);
+            
+            const meta = document.createElement('div');
+            meta.className = 'measure-meta';
+            
+            if (measure.asi && measure.asi !== '—') {
+                const asiRow = document.createElement('div');
+                asiRow.className = 'measure-meta-row';
+                asiRow.innerHTML = `<span class="measure-meta-label">A-S-I:</span><span>${measure.asi}</span>`;
+                meta.appendChild(asiRow);
+            }
+            
+            if (measure.modes && measure.modes !== '—') {
+                const modesRow = document.createElement('div');
+                modesRow.className = 'measure-meta-row';
+                modesRow.innerHTML = `<span class="measure-meta-label">Modes:</span><span>${measure.modes}</span>`;
+                meta.appendChild(modesRow);
+            }
+            
+            item.appendChild(meta);
+            subsection.appendChild(item);
         });
-        tabs.appendChild(tab);
-    });
-    subsection.appendChild(tabs);
-    
-    // Measures for active category
-    const activeMeasures = doc.mitigation_measures[activeCategoryMitigation] || [];
-    activeMeasures.forEach(measure => {
-        const item = document.createElement('div');
-        item.className = 'measure-item';
-        
-        // Quote in italic
-        const quote = document.createElement('div');
-        quote.className = 'measure-quote';
-        const em = document.createElement('em');
-        em.textContent = measure.quote;
-        quote.appendChild(em);
-        
-        // Add page link if available
-        if (measure.page && measure.page !== '' && doc.url) {
-            const pageLink = document.createElement('a');
-            pageLink.href = doc.url;
-            pageLink.target = '_blank';
-            pageLink.className = 'page-link';
-            pageLink.textContent = ` (p. ${measure.page})`;
-            quote.appendChild(pageLink);
-        }
-        
-        item.appendChild(quote);
-        
-        const meta = document.createElement('div');
-        meta.className = 'measure-meta';
-        
-        if (measure.asi && measure.asi !== '—') {
-            const asiRow = document.createElement('div');
-            asiRow.className = 'measure-meta-row';
-            asiRow.innerHTML = `<span class="measure-meta-label">A-S-I:</span><span>${measure.asi}</span>`;
-            meta.appendChild(asiRow);
-        }
-        
-        if (measure.modes && measure.modes !== '—') {
-            const modesRow = document.createElement('div');
-            modesRow.className = 'measure-meta-row';
-            modesRow.innerHTML = `<span class="measure-meta-label">Modes:</span><span>${measure.modes}</span>`;
-            meta.appendChild(modesRow);
-        }
-        
-        item.appendChild(meta);
-        subsection.appendChild(item);
     });
     
     return subsection;
@@ -501,7 +467,7 @@ function createAdaptationSubsection(gen, doc) {
     subsectionTitle.textContent = 'Adaptation Measures';
     subsection.appendChild(subsectionTitle);
     
-    const categories = Object.keys(doc.adaptation_measures);
+    const categories = Object.keys(doc.adaptation_measures).sort();
     
     if (categories.length === 0) {
         const empty = document.createElement('div');
@@ -511,94 +477,52 @@ function createAdaptationSubsection(gen, doc) {
         return subsection;
     }
     
-    // Initialize global category if needed
-    if (!activeCategoryAdaptation || !categories.includes(activeCategoryAdaptation)) {
-        activeCategoryAdaptation = categories[0];
-    }
-    
-    // Category tabs (global - changes all columns)
-    const tabs = document.createElement('div');
-    tabs.className = 'category-tabs';
-    categories.forEach(cat => {
-        const tab = document.createElement('button');
-        tab.className = 'category-tab';
-        if (cat === activeCategoryAdaptation) tab.classList.add('active');
-        tab.textContent = cat;
-        tab.addEventListener('click', (e) => {
-            e.preventDefault();
-            switchCategoryGlobal(cat, 'adaptation');
+    // Show ALL categories (no navigation)
+    categories.forEach(category => {
+        // Category header
+        const catHeader = document.createElement('div');
+        catHeader.className = 'category-header';
+        catHeader.textContent = category;
+        subsection.appendChild(catHeader);
+        
+        // Measures for this category
+        const measures = doc.adaptation_measures[category] || [];
+        measures.forEach(measure => {
+            const item = document.createElement('div');
+            item.className = 'measure-item';
+            
+            // Quote in italic
+            const quote = document.createElement('div');
+            quote.className = 'measure-quote';
+            const em = document.createElement('em');
+            em.textContent = measure.quote;
+            quote.appendChild(em);
+            
+            // Add page link if available
+            if (measure.page && measure.page !== '' && doc.url) {
+                const pageLink = document.createElement('a');
+                pageLink.href = doc.url;
+                pageLink.target = '_blank';
+                pageLink.className = 'page-link';
+                pageLink.textContent = ` (p. ${measure.page})`;
+                quote.appendChild(pageLink);
+            }
+            
+            item.appendChild(quote);
+            
+            if (measure.modes && measure.modes !== '—') {
+                const meta = document.createElement('div');
+                meta.className = 'measure-meta';
+                const modesRow = document.createElement('div');
+                modesRow.className = 'measure-meta-row';
+                modesRow.innerHTML = `<span class="measure-meta-label">Modes:</span><span>${measure.modes}</span>`;
+                meta.appendChild(modesRow);
+                item.appendChild(meta);
+            }
+            
+            subsection.appendChild(item);
         });
-        tabs.appendChild(tab);
-    });
-    subsection.appendChild(tabs);
-    
-    // Measures for active category
-    const activeMeasures = doc.adaptation_measures[activeCategoryAdaptation] || [];
-    activeMeasures.forEach(measure => {
-        const item = document.createElement('div');
-        item.className = 'measure-item';
-        
-        // Quote in italic
-        const quote = document.createElement('div');
-        quote.className = 'measure-quote';
-        const em = document.createElement('em');
-        em.textContent = measure.quote;
-        quote.appendChild(em);
-        
-        // Add page link if available
-        if (measure.page && measure.page !== '' && doc.url) {
-            const pageLink = document.createElement('a');
-            pageLink.href = doc.url;
-            pageLink.target = '_blank';
-            pageLink.className = 'page-link';
-            pageLink.textContent = ` (p. ${measure.page})`;
-            quote.appendChild(pageLink);
-        }
-        
-        item.appendChild(quote);
-        
-        if (measure.modes && measure.modes !== '—') {
-            const meta = document.createElement('div');
-            meta.className = 'measure-meta';
-            const modesRow = document.createElement('div');
-            modesRow.className = 'measure-meta-row';
-            modesRow.innerHTML = `<span class="measure-meta-label">Modes:</span><span>${measure.modes}</span>`;
-            meta.appendChild(modesRow);
-            item.appendChild(meta);
-        }
-        
-        subsection.appendChild(item);
     });
     
     return subsection;
-}
-
-// ============================================================================
-// Global Category Switching (affects all columns simultaneously)
-// ============================================================================
-function switchCategoryGlobal(category, type) {
-    // Store current scroll position
-    const columns = document.querySelectorAll('.gen-content');
-    const scrollPos = columns[0] ? columns[0].scrollTop : 0;
-    
-    // Update global category
-    if (type === 'mitigation') {
-        activeCategoryMitigation = category;
-    } else {
-        activeCategoryAdaptation = category;
-    }
-    
-    // Re-render to update all columns
-    renderComparison();
-    
-    // Restore scroll position after render
-    requestAnimationFrame(() => {
-        const newColumns = document.querySelectorAll('.gen-content');
-        newColumns.forEach(col => {
-            col.scrollTop = scrollPos;
-        });
-        
-        setupSynchronizedScrolling();
-        equalizeColumnHeights();
-    });
 }

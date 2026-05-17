@@ -688,13 +688,12 @@ def process_comparison_data(excel_path):
             if col_idx < len(row) and str(row[col_idx]).strip().upper() == "X":
                 modes.append(mode_name)
         
-        # Format ASI as A-S-I
+        # Keep ASI value as-is (e.g., "Improve", "Avoid-Shift", etc.)
         asi_str = "—"
         if asi:
             asi_val = str(asi).strip()
             if asi_val and asi_val != "—":
-                # Replace ASI with A-S-I format
-                asi_str = "-".join(list(asi_val.upper()))
+                asi_str = asi_val
         
         if doc_id not in mitigation_by_doc:
             mitigation_by_doc[doc_id] = {}
