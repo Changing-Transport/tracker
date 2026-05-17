@@ -2,7 +2,8 @@
 """
 NDC Transport Tracker - Data Processing Script
 Processes the GIZ-SLOCAT Excel database and generates:
-  - data/processed/data.json
+  - data/processed/data.json (for main tracker dashboard)
+  - data/processed/comparison-data.json (for comparison dashboard)
 """
 
 import json
@@ -28,7 +29,7 @@ def get_gen(version):
 
 
 # ============================================================================
-# Main processing
+# Main tracker processing (EXISTING - UNCHANGED)
 # ============================================================================
 
 def process_excel(excel_path):
@@ -489,6 +490,279 @@ def process_excel(excel_path):
 
 
 # ============================================================================
+# Comparison dashboard processing (NEW)
+# ============================================================================
+
+def process_comparison_data(excel_path):
+    """
+    Process Excel data for the comparison dashboard.
+    Extracts NDC documents grouped by country and generation with all relevant details.
+    """
+    print("🔄  Processing comparison data…")
+    
+    wb = openpyxl.load_workbook(excel_path, data_only=True, read_only=True)
+    
+    doc_sheet = wb["Document"]
+    targets_sheet = wb["Targets"]
+    mitigation_sheet = wb["Mitigation"]
+    adaptation_sheet = wb["Adaptation"]
+    
+    # Get all mode column headers from Mitigation sheet (columns P to AL)
+    mit_headers = [cell.value for cell in mitigation_sheet[1]]
+    mit_mode_cols = {}
+    for idx, header in enumerate(mit_headers):
+        if idx >= 15 and idx <= 37:  # P to AL (0-indexed: 15-37)
+            if header:
+                mit_mode_cols[idx] = str(header).strip()
+    
+    # Get all mode column headers from Adaptation sheet (columns M to AI)
+    adapt_headers = [cell.value for cell in adaptation_sheet[1]]
+    adapt_mode_cols = {}
+    for idx, header in enumerate(adapt_headers):
+        if idx >= 12 and idx <= 34:  # M to AI (0-indexed: 12-34)
+            if header:
+                adapt_mode_cols[idx] = str(header).strip()
+    
+    # Column indices (0-indexed)
+    D_DOCID = 0
+    D_CODE = 1
+    D_NAME = 2
+    D_TYPE = 4
+    D_VERSION = 7
+    D_DATE = 8
+    D_STATUS = 9
+    D_TRANSPORT = 10
+    D_NETZERO = 11
+    
+    T_DOCID = 0
+    T_AREA = 8
+    T_GHG = 9
+    T_TYPE = 10
+    T_COND = 11
+    T_YEAR = 12
+    T_CONTENT = 14
+    
+    M_DOCID = 0
+    M_CAT = 9
+    M_QUOTE = 12
+    M_ASI = 13
+    
+    A_DOCID = 0
+    A_CAT = 8
+    A_QUOTE = 10
+    
+    # Process documents
+    documents = {}
+    
+    for row in doc_sheet.iter_rows(min_row=2, values_only=True):
+        if not row[D_DOCID]:
+            break
+        
+        doc_id = row[D_DOCID]
+        code = row[D_CODE]
+        name = row[D_NAME]
+        dtype = row[D_TYPE]
+        version = row[D_VERSION]
+        date_val = row[D_DATE]
+        status = row[D_STATUS]
+        has_transport = row[D_TRANSPORT]
+        has_netzero = row[D_NETZERO]
+        
+        if dtype != "NDC" or not code or not version:
+            continue
+        
+        code = str(code).strip()
+        version_str = str(version).strip()
+        
+        # Determine generation
+        gen = get_gen(version_str)
+        if not gen:
+            continue
+        
+        # Format date
+        date_str = ""
+        if date_val:
+            if hasattr(date_val, 'strftime'):
+                date_str = date_val.strftime('%Y-%m-%d')
+            else:
+                date_str = str(date_val)
+        
+        documents[doc_id] = {
+            "doc_id": doc_id,
+            "country_code": code,
+            "country_name": str(name).strip() if name else code,
+            "doc_type": str(dtype).strip(),
+            "version": version_str,
+            "generation": gen,
+            "date": date_str,
+            "status": str(status).strip() if status else "",
+            "has_transport_target": str(has_transport).strip().lower() == "yes",
+            "has_netzero_target": str(has_netzero).strip().lower() == "yes",
+        }
+    
+    # Process targets
+    targets_by_doc = {}
+    
+    for row in targets_sheet.iter_rows(min_row=2, values_only=True):
+        if not row[T_DOCID]:
+            break
+        
+        doc_id = row[T_DOCID]
+        target_area = row[T_AREA]
+        ghg = row[T_GHG]
+        target_type = row[T_TYPE]
+        cond = row[T_COND]
+        year = row[T_YEAR]
+        content = row[T_CONTENT]
+        
+        if doc_id not in documents:
+            continue
+        
+        if not target_area:
+            continue
+        
+        target_area_str = str(target_area).strip()
+        
+        # Only include these three target types
+        if target_area_str not in [
+            "Transport sector mitigation target",
+            "Transport sector adaptation target",
+            "Net zero target"
+        ]:
+            continue
+        
+        if doc_id not in targets_by_doc:
+            targets_by_doc[doc_id] = []
+        
+        targets_by_doc[doc_id].append({
+            "target_area": target_area_str,
+            "ghg_target": str(ghg).strip() if ghg else "—",
+            "target_type": str(target_type).strip() if target_type else "—",
+            "conditionality": str(cond).strip() if cond else "—",
+            "target_year": str(year).strip() if year else "—",
+            "content": str(content).strip() if content else "—",
+        })
+    
+    # Process mitigation measures
+    mitigation_by_doc = {}
+    
+    for row in mitigation_sheet.iter_rows(min_row=2, values_only=True):
+        if not row[M_DOCID]:
+            break
+        
+        doc_id = row[M_DOCID]
+        category = row[M_CAT]
+        quote = row[M_QUOTE]
+        asi = row[M_ASI]
+        
+        if doc_id not in documents:
+            continue
+        
+        if not category:
+            continue
+        
+        category_str = str(category).strip()
+        
+        # Get modes marked with X
+        modes = []
+        for col_idx, mode_name in mit_mode_cols.items():
+            if col_idx < len(row) and str(row[col_idx]).strip().upper() == "X":
+                modes.append(mode_name)
+        
+        if doc_id not in mitigation_by_doc:
+            mitigation_by_doc[doc_id] = {}
+        
+        if category_str not in mitigation_by_doc[doc_id]:
+            mitigation_by_doc[doc_id][category_str] = []
+        
+        mitigation_by_doc[doc_id][category_str].append({
+            "quote": str(quote).strip() if quote else "—",
+            "asi": str(asi).strip() if asi else "—",
+            "modes": ", ".join(modes) if modes else "—",
+        })
+    
+    # Process adaptation measures
+    adaptation_by_doc = {}
+    
+    for row in adaptation_sheet.iter_rows(min_row=2, values_only=True):
+        if not row[A_DOCID]:
+            break
+        
+        doc_id = row[A_DOCID]
+        category = row[A_CAT]
+        quote = row[A_QUOTE]
+        
+        if doc_id not in documents:
+            continue
+        
+        if not category:
+            continue
+        
+        category_str = str(category).strip()
+        
+        # Get modes marked with X
+        modes = []
+        for col_idx, mode_name in adapt_mode_cols.items():
+            if col_idx < len(row) and str(row[col_idx]).strip().upper() == "X":
+                modes.append(mode_name)
+        
+        if doc_id not in adaptation_by_doc:
+            adaptation_by_doc[doc_id] = {}
+        
+        if category_str not in adaptation_by_doc[doc_id]:
+            adaptation_by_doc[doc_id][category_str] = []
+        
+        adaptation_by_doc[doc_id][category_str].append({
+            "quote": str(quote).strip() if quote else "—",
+            "modes": ", ".join(modes) if modes else "—",
+        })
+    
+    # Group by country
+    countries_data = {}
+    
+    for doc_id, doc in documents.items():
+        code = doc["country_code"]
+        gen = doc["generation"]
+        
+        if code not in countries_data:
+            countries_data[code] = {
+                "country_name": doc["country_name"],
+                "generations": {
+                    "gen1": [],
+                    "gen2": [],
+                    "gen3": []
+                }
+            }
+        
+        # Add all data for this document
+        doc_full = {
+            **doc,
+            "targets": targets_by_doc.get(doc_id, []),
+            "mitigation_measures": mitigation_by_doc.get(doc_id, {}),
+            "adaptation_measures": adaptation_by_doc.get(doc_id, {}),
+        }
+        
+        countries_data[code]["generations"][gen].append(doc_full)
+    
+    # Sort versions within each generation (latest first)
+    for country in countries_data.values():
+        for gen in ["gen1", "gen2", "gen3"]:
+            country["generations"][gen].sort(
+                key=lambda x: x["version"],
+                reverse=True
+            )
+    
+    wb.close()
+    
+    print(f"   ✓ Processed {len(countries_data)} countries for comparison")
+    
+    return {
+        "countries": countries_data,
+        "last_updated": str(date.today()),
+    }
+
+
+# ============================================================================
 # Entry point
 # ============================================================================
 
@@ -508,7 +782,12 @@ def main():
     print(f"\n📂  Excel file: {excel_path.name}")
 
     try:
+        # Process main tracker data
         data = process_excel(excel_path)
+        
+        # Process comparison data
+        comparison_data = process_comparison_data(excel_path)
+        
     except Exception as exc:
         print(f"\n❌  Processing error: {exc}")
         raise
@@ -516,15 +795,23 @@ def main():
     output_dir = data_dir / "processed"
     output_dir.mkdir(exist_ok=True)
 
+    # Save main tracker data
     json_path = output_dir / "data.json"
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
-
     print(f"\n💾  data.json saved ({json_path.stat().st_size:,} bytes)")
+    
+    # Save comparison data
+    comparison_path = output_dir / "comparison-data.json"
+    with open(comparison_path, "w", encoding="utf-8") as f:
+        json.dump(comparison_data, f, indent=2, ensure_ascii=False)
+    print(f"💾  comparison-data.json saved ({comparison_path.stat().st_size:,} bytes)")
+
     print("\n" + "=" * 70)
     print("✅  Done!")
     print(f"   Countries:  {len(data['tab1']['countries'])}")
     print(f"   Categories: {len(data['tab2']['categories_latest'])}")
+    print(f"   Comparison countries: {len(comparison_data['countries'])}")
     gen = data['tab1']['generations']
     for g in ['gen1','gen2','gen3']:
         print(f"   {g}: {gen[g]['total_submitted']} submitted, "
