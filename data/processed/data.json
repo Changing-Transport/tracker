@@ -1,7 +1,7 @@
 {
   "metadata": {
     "total_possible_ndcs": 169,
-    "last_updated": "2026-05-17",
+    "last_updated": "2026-05-18",
     "data_source": "GIZ-SLOCAT Transport Tracker Database",
     "gen_counts": {
       "gen1": {
@@ -167,7 +167,8 @@
             "has_transport": false,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "YEM": {
         "iso3": "YEM",
@@ -185,7 +186,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "BRN": {
         "iso3": "BRN",
@@ -207,7 +209,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": true
       },
       "PNG": {
         "iso3": "PNG",
@@ -225,7 +228,8 @@
             "has_transport": false,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "NRU": {
         "iso3": "NRU",
@@ -247,7 +251,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "PAN": {
         "iso3": "PAN",
@@ -269,7 +274,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "BLZ": {
         "iso3": "BLZ",
@@ -291,7 +297,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "BRB": {
         "iso3": "BRB",
@@ -313,7 +320,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "FJI": {
         "iso3": "FJI",
@@ -335,7 +343,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "GRD": {
         "iso3": "GRD",
@@ -353,7 +362,8 @@
             "has_transport": true,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "MDV": {
         "iso3": "MDV",
@@ -375,7 +385,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "MHL": {
         "iso3": "MHL",
@@ -397,7 +408,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "MUS": {
         "iso3": "MUS",
@@ -419,7 +431,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "PLW": {
         "iso3": "PLW",
@@ -437,7 +450,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "KNA": {
         "iso3": "KNA",
@@ -455,7 +469,8 @@
             "has_transport": true,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "LCA": {
         "iso3": "LCA",
@@ -477,7 +492,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "WSM": {
         "iso3": "WSM",
@@ -499,7 +515,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "SOM": {
         "iso3": "SOM",
@@ -521,7 +538,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "TUV": {
         "iso3": "TUV",
@@ -543,7 +561,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "SYC": {
         "iso3": "SYC",
@@ -565,7 +584,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "GUY": {
         "iso3": "GUY",
@@ -579,7 +599,8 @@
             "has_transport": false,
             "version": "NDC 1.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "NOR": {
         "iso3": "NOR",
@@ -601,7 +622,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "VCT": {
         "iso3": "VCT",
@@ -619,7 +641,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "PER": {
         "iso3": "PER",
@@ -641,7 +664,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "CMR": {
         "iso3": "CMR",
@@ -659,7 +683,8 @@
             "has_transport": false,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "COK": {
         "iso3": "COK",
@@ -673,7 +698,8 @@
             "has_transport": false,
             "version": "NDC 1.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "CHN": {
         "iso3": "CHN",
@@ -695,7 +721,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "USA": {
         "iso3": "USA",
@@ -717,7 +744,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "LAO": {
         "iso3": "LAO",
@@ -735,7 +763,8 @@
             "has_transport": true,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "FSM": {
         "iso3": "FSM",
@@ -757,7 +786,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "MAR": {
         "iso3": "MAR",
@@ -779,7 +809,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "UKR": {
         "iso3": "UKR",
@@ -801,7 +832,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "ALB": {
         "iso3": "ALB",
@@ -819,7 +851,8 @@
             "has_transport": true,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "ATG": {
         "iso3": "ATG",
@@ -837,7 +870,8 @@
             "has_transport": true,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "BGD": {
         "iso3": "BGD",
@@ -859,7 +893,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "BLR": {
         "iso3": "BLR",
@@ -881,7 +916,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "BRA": {
         "iso3": "BRA",
@@ -903,7 +939,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "DMA": {
         "iso3": "DMA",
@@ -921,7 +958,8 @@
             "has_transport": true,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "SWZ": {
         "iso3": "SWZ",
@@ -943,7 +981,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "GHA": {
         "iso3": "GHA",
@@ -961,7 +1000,8 @@
             "has_transport": false,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "GIN": {
         "iso3": "GIN",
@@ -983,7 +1023,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "HND": {
         "iso3": "HND",
@@ -1005,7 +1046,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "ISL": {
         "iso3": "ISL",
@@ -1027,7 +1069,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "KIR": {
         "iso3": "KIR",
@@ -1045,7 +1088,8 @@
             "has_transport": false,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "MDG": {
         "iso3": "MDG",
@@ -1063,7 +1107,8 @@
             "has_transport": false,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "MEX": {
         "iso3": "MEX",
@@ -1085,7 +1130,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "MNG": {
         "iso3": "MNG",
@@ -1107,7 +1153,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": true
       },
       "NAM": {
         "iso3": "NAM",
@@ -1125,7 +1172,8 @@
             "has_transport": true,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "NER": {
         "iso3": "NER",
@@ -1143,7 +1191,8 @@
             "has_transport": true,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "SGP": {
         "iso3": "SGP",
@@ -1165,7 +1214,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": true
       },
       "SLB": {
         "iso3": "SLB",
@@ -1187,7 +1237,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "THA": {
         "iso3": "THA",
@@ -1209,7 +1260,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "TON": {
         "iso3": "TON",
@@ -1231,7 +1283,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "UGA": {
         "iso3": "UGA",
@@ -1249,7 +1302,8 @@
             "has_transport": true,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "ARE": {
         "iso3": "ARE",
@@ -1271,7 +1325,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "VUT": {
         "iso3": "VUT",
@@ -1293,7 +1348,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "MLI": {
         "iso3": "MLI",
@@ -1311,7 +1367,8 @@
             "has_transport": true,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "IND": {
         "iso3": "IND",
@@ -1333,7 +1390,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": true
       },
       "PRK": {
         "iso3": "PRK",
@@ -1351,7 +1409,8 @@
             "has_transport": false,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "BOL": {
         "iso3": "BOL",
@@ -1373,7 +1432,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "EEU": {
         "iso3": "EEU",
@@ -1395,7 +1455,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "NPL": {
         "iso3": "NPL",
@@ -1417,7 +1478,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "NZL": {
         "iso3": "NZL",
@@ -1439,7 +1501,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "RWA": {
         "iso3": "RWA",
@@ -1461,7 +1524,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "CAF": {
         "iso3": "CAF",
@@ -1483,7 +1547,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "CRI": {
         "iso3": "CRI",
@@ -1505,7 +1570,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "PRY": {
         "iso3": "PRY",
@@ -1527,7 +1593,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "DZA": {
         "iso3": "DZA",
@@ -1541,7 +1608,8 @@
             "has_transport": false,
             "version": "NDC 1.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "TKM": {
         "iso3": "TKM",
@@ -1559,7 +1627,8 @@
             "has_transport": false,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "CIV": {
         "iso3": "CIV",
@@ -1581,7 +1650,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "MCO": {
         "iso3": "MCO",
@@ -1603,7 +1673,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "NIU": {
         "iso3": "NIU",
@@ -1621,7 +1692,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "BHS": {
         "iso3": "BHS",
@@ -1643,7 +1715,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "SLE": {
         "iso3": "SLE",
@@ -1665,7 +1738,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "ZAF": {
         "iso3": "ZAF",
@@ -1687,7 +1761,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": true
       },
       "GAB": {
         "iso3": "GAB",
@@ -1709,7 +1784,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": true
       },
       "STP": {
         "iso3": "STP",
@@ -1731,7 +1807,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "KOR": {
         "iso3": "KOR",
@@ -1753,7 +1830,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "SAU": {
         "iso3": "SAU",
@@ -1775,7 +1853,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "VNM": {
         "iso3": "VNM",
@@ -1793,7 +1872,8 @@
             "has_transport": false,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "JOR": {
         "iso3": "JOR",
@@ -1815,7 +1895,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": true
       },
       "IDN": {
         "iso3": "IDN",
@@ -1837,7 +1918,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "LKA": {
         "iso3": "LKA",
@@ -1859,7 +1941,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "GMB": {
         "iso3": "GMB",
@@ -1877,7 +1960,8 @@
             "has_transport": true,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "JPN": {
         "iso3": "JPN",
@@ -1899,7 +1983,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": true
       },
       "AUS": {
         "iso3": "AUS",
@@ -1921,7 +2006,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "PAK": {
         "iso3": "PAK",
@@ -1943,7 +2029,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "BWA": {
         "iso3": "BWA",
@@ -1961,7 +2048,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "BFA": {
         "iso3": "BFA",
@@ -1983,7 +2071,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "DJI": {
         "iso3": "DJI",
@@ -2001,7 +2090,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "MYS": {
         "iso3": "MYS",
@@ -2023,7 +2113,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "ARG": {
         "iso3": "ARG",
@@ -2041,7 +2132,8 @@
             "has_transport": false,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "ISR": {
         "iso3": "ISR",
@@ -2059,7 +2151,8 @@
             "has_transport": true,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "AFG": {
         "iso3": "AFG",
@@ -2073,7 +2166,8 @@
             "has_transport": false,
             "version": "NDC 1.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "COM": {
         "iso3": "COM",
@@ -2095,7 +2189,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "KAZ": {
         "iso3": "KAZ",
@@ -2117,7 +2212,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "ZMB": {
         "iso3": "ZMB",
@@ -2139,7 +2235,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "KEN": {
         "iso3": "KEN",
@@ -2161,7 +2258,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "BHR": {
         "iso3": "BHR",
@@ -2183,7 +2281,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "CUB": {
         "iso3": "CUB",
@@ -2205,7 +2304,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "AZE": {
         "iso3": "AZE",
@@ -2227,7 +2327,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "TCD": {
         "iso3": "TCD",
@@ -2245,7 +2346,8 @@
             "has_transport": false,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "LSO": {
         "iso3": "LSO",
@@ -2263,7 +2365,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "GTM": {
         "iso3": "GTM",
@@ -2281,7 +2384,8 @@
             "has_transport": true,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "KHM": {
         "iso3": "KHM",
@@ -2303,7 +2407,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "CHL": {
         "iso3": "CHL",
@@ -2325,7 +2430,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "TUN": {
         "iso3": "TUN",
@@ -2347,7 +2453,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "MRT": {
         "iso3": "MRT",
@@ -2369,7 +2476,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "ETH": {
         "iso3": "ETH",
@@ -2391,7 +2499,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "BIH": {
         "iso3": "BIH",
@@ -2409,7 +2518,8 @@
             "has_transport": false,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "TJK": {
         "iso3": "TJK",
@@ -2427,7 +2537,8 @@
             "has_transport": false,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "ARM": {
         "iso3": "ARM",
@@ -2449,7 +2560,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "AND": {
         "iso3": "AND",
@@ -2471,7 +2583,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "SLV": {
         "iso3": "SLV",
@@ -2493,7 +2606,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "JAM": {
         "iso3": "JAM",
@@ -2515,7 +2629,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "COG": {
         "iso3": "COG",
@@ -2537,7 +2652,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "GEO": {
         "iso3": "GEO",
@@ -2559,7 +2675,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "CAN": {
         "iso3": "CAN",
@@ -2581,7 +2698,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "NGA": {
         "iso3": "NGA",
@@ -2603,7 +2721,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "MDA": {
         "iso3": "MDA",
@@ -2625,7 +2744,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "QAT": {
         "iso3": "QAT",
@@ -2647,7 +2767,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "TGO": {
         "iso3": "TGO",
@@ -2665,7 +2786,8 @@
             "has_transport": true,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "EGY": {
         "iso3": "EGY",
@@ -2683,7 +2805,8 @@
             "has_transport": true,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "MWI": {
         "iso3": "MWI",
@@ -2701,7 +2824,8 @@
             "has_transport": true,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "SRB": {
         "iso3": "SRB",
@@ -2723,7 +2847,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "HTI": {
         "iso3": "HTI",
@@ -2741,7 +2866,8 @@
             "has_transport": true,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "SDN": {
         "iso3": "SDN",
@@ -2759,7 +2885,8 @@
             "has_transport": true,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "ZWE": {
         "iso3": "ZWE",
@@ -2781,7 +2908,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": true
       },
       "TLS": {
         "iso3": "TLS",
@@ -2799,7 +2927,8 @@
             "has_transport": false,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "PSE": {
         "iso3": "PSE",
@@ -2817,7 +2946,8 @@
             "has_transport": true,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "BTN": {
         "iso3": "BTN",
@@ -2839,7 +2969,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "MMR": {
         "iso3": "MMR",
@@ -2857,7 +2988,8 @@
             "has_transport": false,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "LIE": {
         "iso3": "LIE",
@@ -2875,7 +3007,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "CPV": {
         "iso3": "CPV",
@@ -2897,7 +3030,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "DOM": {
         "iso3": "DOM",
@@ -2915,7 +3049,8 @@
             "has_transport": false,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "CHE": {
         "iso3": "CHE",
@@ -2937,7 +3072,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "BEN": {
         "iso3": "BEN",
@@ -2955,7 +3091,8 @@
             "has_transport": false,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "URY": {
         "iso3": "URY",
@@ -2977,7 +3114,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": true
       },
       "COD": {
         "iso3": "COD",
@@ -2995,7 +3133,8 @@
             "has_transport": false,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "MNE": {
         "iso3": "MNE",
@@ -3017,7 +3156,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "MKD": {
         "iso3": "MKD",
@@ -3035,7 +3175,8 @@
             "has_transport": true,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "BDI": {
         "iso3": "BDI",
@@ -3057,7 +3198,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "TTO": {
         "iso3": "TTO",
@@ -3075,7 +3217,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "VEN": {
         "iso3": "VEN",
@@ -3097,7 +3240,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "KWT": {
         "iso3": "KWT",
@@ -3115,7 +3259,8 @@
             "has_transport": false,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "TZA": {
         "iso3": "TZA",
@@ -3133,7 +3278,8 @@
             "has_transport": false,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "MOZ": {
         "iso3": "MOZ",
@@ -3155,7 +3301,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": true
       },
       "ERI": {
         "iso3": "ERI",
@@ -3173,7 +3320,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "COL": {
         "iso3": "COL",
@@ -3195,7 +3343,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "LBR": {
         "iso3": "LBR",
@@ -3217,7 +3366,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "NIC": {
         "iso3": "NIC",
@@ -3239,7 +3389,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "SMR": {
         "iso3": "SMR",
@@ -3253,7 +3404,8 @@
             "has_transport": false,
             "version": "NDC 1.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "GNB": {
         "iso3": "GNB",
@@ -3271,7 +3423,8 @@
             "has_transport": false,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "GNQ": {
         "iso3": "GNQ",
@@ -3289,7 +3442,8 @@
             "has_transport": false,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "UZB": {
         "iso3": "UZB",
@@ -3311,7 +3465,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "SYR": {
         "iso3": "SYR",
@@ -3325,7 +3480,8 @@
             "has_transport": false,
             "version": "NDC 1.1"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "SUR": {
         "iso3": "SUR",
@@ -3347,7 +3503,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "ECU": {
         "iso3": "ECU",
@@ -3365,7 +3522,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "OMN": {
         "iso3": "OMN",
@@ -3383,7 +3541,8 @@
             "has_transport": true,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "LBN": {
         "iso3": "LBN",
@@ -3405,7 +3564,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "KGZ": {
         "iso3": "KGZ",
@@ -3427,7 +3587,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "AGO": {
         "iso3": "AGO",
@@ -3449,7 +3610,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "RUS": {
         "iso3": "RUS",
@@ -3467,7 +3629,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "GBR": {
         "iso3": "GBR",
@@ -3485,7 +3648,8 @@
             "has_transport": true,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "SEN": {
         "iso3": "SEN",
@@ -3499,7 +3663,8 @@
             "has_transport": false,
             "version": "NDC 1.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "SSD": {
         "iso3": "SSD",
@@ -3517,7 +3682,8 @@
             "has_transport": true,
             "version": "NDC 2.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "TUR": {
         "iso3": "TUR",
@@ -3539,7 +3705,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": true
       },
       "IRQ": {
         "iso3": "IRQ",
@@ -3557,7 +3724,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "VAT": {
         "iso3": "VAT",
@@ -3575,7 +3743,8 @@
             "has_transport": false,
             "version": "NDC 3.0"
           }
-        }
+        },
+        "had_transport_previously": false
       },
       "AUT": {
         "iso3": "AUT",
@@ -3584,6 +3753,7 @@
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
         "latest_has_ghg_transport": true,
+        "had_transport_previously": false,
         "generations": {
           "gen1": {
             "has_transport": false,
@@ -3607,6 +3777,7 @@
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
         "latest_has_ghg_transport": true,
+        "had_transport_previously": false,
         "generations": {
           "gen1": {
             "has_transport": false,
@@ -3630,6 +3801,7 @@
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
         "latest_has_ghg_transport": true,
+        "had_transport_previously": false,
         "generations": {
           "gen1": {
             "has_transport": false,
@@ -3653,6 +3825,7 @@
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
         "latest_has_ghg_transport": true,
+        "had_transport_previously": false,
         "generations": {
           "gen1": {
             "has_transport": false,
@@ -3676,6 +3849,7 @@
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
         "latest_has_ghg_transport": true,
+        "had_transport_previously": false,
         "generations": {
           "gen1": {
             "has_transport": false,
@@ -3699,6 +3873,7 @@
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
         "latest_has_ghg_transport": true,
+        "had_transport_previously": false,
         "generations": {
           "gen1": {
             "has_transport": false,
@@ -3722,6 +3897,7 @@
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
         "latest_has_ghg_transport": true,
+        "had_transport_previously": false,
         "generations": {
           "gen1": {
             "has_transport": false,
@@ -3745,6 +3921,7 @@
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
         "latest_has_ghg_transport": true,
+        "had_transport_previously": false,
         "generations": {
           "gen1": {
             "has_transport": false,
@@ -3768,6 +3945,7 @@
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
         "latest_has_ghg_transport": true,
+        "had_transport_previously": false,
         "generations": {
           "gen1": {
             "has_transport": false,
@@ -3791,6 +3969,7 @@
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
         "latest_has_ghg_transport": true,
+        "had_transport_previously": false,
         "generations": {
           "gen1": {
             "has_transport": false,
@@ -3814,6 +3993,7 @@
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
         "latest_has_ghg_transport": true,
+        "had_transport_previously": false,
         "generations": {
           "gen1": {
             "has_transport": false,
@@ -3837,6 +4017,7 @@
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
         "latest_has_ghg_transport": true,
+        "had_transport_previously": false,
         "generations": {
           "gen1": {
             "has_transport": false,
@@ -3860,6 +4041,7 @@
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
         "latest_has_ghg_transport": true,
+        "had_transport_previously": false,
         "generations": {
           "gen1": {
             "has_transport": false,
@@ -3883,6 +4065,7 @@
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
         "latest_has_ghg_transport": true,
+        "had_transport_previously": false,
         "generations": {
           "gen1": {
             "has_transport": false,
@@ -3906,6 +4089,7 @@
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
         "latest_has_ghg_transport": true,
+        "had_transport_previously": false,
         "generations": {
           "gen1": {
             "has_transport": false,
@@ -3929,6 +4113,7 @@
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
         "latest_has_ghg_transport": true,
+        "had_transport_previously": false,
         "generations": {
           "gen1": {
             "has_transport": false,
@@ -3952,6 +4137,7 @@
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
         "latest_has_ghg_transport": true,
+        "had_transport_previously": false,
         "generations": {
           "gen1": {
             "has_transport": false,
@@ -3975,6 +4161,7 @@
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
         "latest_has_ghg_transport": true,
+        "had_transport_previously": false,
         "generations": {
           "gen1": {
             "has_transport": false,
@@ -3998,6 +4185,7 @@
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
         "latest_has_ghg_transport": true,
+        "had_transport_previously": false,
         "generations": {
           "gen1": {
             "has_transport": false,
@@ -4021,6 +4209,7 @@
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
         "latest_has_ghg_transport": true,
+        "had_transport_previously": false,
         "generations": {
           "gen1": {
             "has_transport": false,
@@ -4044,6 +4233,7 @@
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
         "latest_has_ghg_transport": true,
+        "had_transport_previously": false,
         "generations": {
           "gen1": {
             "has_transport": false,
@@ -4067,6 +4257,7 @@
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
         "latest_has_ghg_transport": true,
+        "had_transport_previously": false,
         "generations": {
           "gen1": {
             "has_transport": false,
@@ -4090,6 +4281,7 @@
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
         "latest_has_ghg_transport": true,
+        "had_transport_previously": false,
         "generations": {
           "gen1": {
             "has_transport": false,
@@ -4113,6 +4305,7 @@
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
         "latest_has_ghg_transport": true,
+        "had_transport_previously": false,
         "generations": {
           "gen1": {
             "has_transport": false,
@@ -4136,6 +4329,7 @@
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
         "latest_has_ghg_transport": true,
+        "had_transport_previously": false,
         "generations": {
           "gen1": {
             "has_transport": false,
@@ -4159,6 +4353,7 @@
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
         "latest_has_ghg_transport": true,
+        "had_transport_previously": false,
         "generations": {
           "gen1": {
             "has_transport": false,
@@ -4182,6 +4377,7 @@
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
         "latest_has_ghg_transport": true,
+        "had_transport_previously": false,
         "generations": {
           "gen1": {
             "has_transport": false,
