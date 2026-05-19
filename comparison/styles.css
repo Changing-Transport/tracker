@@ -59,7 +59,13 @@ body {
 .dashboard-header h1 {
     font-size: 1.5rem;
     font-weight: 700;
-    margin-bottom: var(--sp-md);
+    margin-bottom: 0.5rem;
+}
+
+.header-description {
+    font-size: 0.9375rem;
+    opacity: 0.9;
+    margin: 0;
 }
 
 .filters-bar {
@@ -123,41 +129,50 @@ body {
     gap: var(--sp-md);
 }
 
-/* ── SECTION 1: Headers ────────────────────────────────────────────── */
+/* ── SECTION 1: Headers with Selectors ─────────────────────────────── */
 .headers-row {
-    /* Variable height — adjusts to content */
+    /* Variable height */
 }
 
 .header-cell {
-    background: var(--gen-color);
+    background: var(--gen-color, var(--color-secondary));
     color: white;
     padding: var(--sp-md) var(--sp-lg);
     border-radius: var(--radius-lg) var(--radius-lg) 0 0;
     box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
-.header-cell h2 {
-    font-size: 1.125rem;
-    font-weight: 700;
-    margin-bottom: 0.25rem;
+.country-selector,
+.generation-selector {
+    padding: 0.5rem 0.75rem;
+    background: rgba(255,255,255,0.95);
+    color: var(--color-text);
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.2s;
 }
 
-.header-cell .gen-period {
-    font-size: 0.875rem;
-    opacity: 0.9;
-    margin-bottom: var(--sp-sm);
+.country-selector:hover,
+.generation-selector:hover {
+    border-color: var(--color-primary);
 }
 
-.version-note {
-    font-size: 0.75rem;
-    margin-top: 0.5rem;
-    margin-bottom: 0.25rem;
-    opacity: 0.85;
-    font-style: italic;
+.country-selector:focus,
+.generation-selector:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(157,190,61,0.2);
 }
 
 .version-selector {
-    margin-top: var(--sp-sm);
     padding: 0.4rem 0.625rem;
     background: rgba(255,255,255,0.95);
     color: var(--color-text);
@@ -171,10 +186,15 @@ body {
 
 .header-date {
     font-size: 0.875rem;
-    margin-top: var(--sp-sm);
-    padding-top: var(--sp-sm);
+    padding-top: var(--sp-xs);
     border-top: 1px solid rgba(255,255,255,0.2);
     opacity: 0.95;
+}
+
+.no-selection {
+    text-align: center;
+    padding: var(--sp-lg);
+    opacity: 0.7;
 }
 
 /* ── SECTION 2: Summary ────────────────────────────────────────────── */
@@ -222,27 +242,27 @@ body {
     text-align: center;
 }
 
-/* ── SECTION 3: Tab Navigation (OUTSIDE GRID) ──────────────────────── */
+/* ── SECTION 3: Tab Navigation (4 TABS) ────────────────────────────── */
 .tab-section {
-    display: flex;
-    gap: 0.75rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
     padding: var(--sp-md) 0;
     border-bottom: 2px solid var(--color-border);
-    justify-content: center;
 }
 
 .tab-button {
-    padding: 0.75rem 2.5rem;
+    padding: 0.75rem 1rem;
     background: transparent;
     border: 2px solid var(--color-border);
     border-radius: var(--radius-sm);
     color: var(--color-muted);
     font-family: var(--font-sans);
-    font-size: 1rem;
+    font-size: 0.9375rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s;
-    min-width: 180px;
+    text-align: center;
 }
 
 .tab-button:hover {
@@ -444,10 +464,12 @@ body {
     }
     
     .tab-section {
-        flex-direction: column;
+        grid-template-columns: repeat(2, 1fr);
     }
-    
-    .tab-button {
-        width: 100%;
+}
+
+@media (max-width: 600px) {
+    .tab-section {
+        grid-template-columns: 1fr;
     }
 }

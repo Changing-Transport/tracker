@@ -4,7 +4,9 @@ Interactive dashboard for visualizing NDC transport targets and mitigation measu
 
 ## Live Dashboard
 
-**Dashboard URL:** `https://belentdc.github.io/tracker/`
+**Main Dashboard:** `https://belentdc.github.io/tracker/`
+
+**Comparison Dashboard:** `https://belentdc.github.io/tracker/comparison/`
 
 Embed in WordPress:
 ```html
@@ -30,22 +32,28 @@ Embed in WordPress:
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```
 ndc-tracker/
 ├── data/
 │   ├── GIZ-SLOCAT_Transport-Tracker-database.xlsx  ← UPDATE THIS
 │   └── processed/
-│       └── data.json                               ← Auto-generated
+│       ├── data.json                               ← Auto-generated (main dashboard)
+│       └── comparison-data.json                    ← Auto-generated (comparison dashboard)
+│
+├── comparison/
+│   ├── index.html                                  ← Comparison dashboard HTML
+│   ├── script.js                                   ← Comparison dashboard JavaScript
+│   └── styles.css                                  ← Comparison dashboard styles
 │
 ├── .github/
 │   └── workflows/
 │       └── update-data.yml                         ← GitHub Actions config
 │
-├── index.html                                      ← Dashboard HTML
-├── styles.css                                      ← Styles
-├── script.js                                       ← JavaScript
+├── index.html                                      ← Main dashboard HTML
+├── styles.css                                      ← Main dashboard styles
+├── script.js                                       ← Main dashboard JavaScript
 ├── update_data.py                                  ← Data processing script
 └── README.md                                       ← This file
 ```
@@ -64,19 +72,43 @@ ndc-tracker/
 
 ## Dashboard Features
 
-### Tab 1: Progress in NDC Transport Targets
-- Bar chart showing % of NDCs with transport targets across 3 generations
-- Interactive map with country-level data
-- Filters: Generation, Region
+### Main Dashboard (`/`)
 
-### Tab 2: Leading Measures for Decarbonisation
-- Bar chart of top mitigation measure categories
+**Tab 1: Progress in NDC Transport Targets**
+- Bar chart showing % of NDCs with transport targets across 3 generations
+- Interactive map with country-level data (color-coded by target status)
+- Filters: Region
+- Toggle between chart and map views
+- Download PDF
+
+**Tab 2: Leading Measures for Decarbonisation**
+- Bar chart of top mitigation measure categories by number of NDCs
 - Heat map showing measure mentions by country
-- Filters: Generation, Region
+- Filters: Generation (Latest Active / 1st / 2nd / 3rd), Region, Category
+- Toggle between chart and map views
+- Download PDF
+
+### Comparison Dashboard (`/comparison/`)
+
+Side-by-side view of a country's NDC commitments across all three generations.
+
+- **Country selector** — choose any country to load its full NDC history
+- **Three columns** — one per generation (1st: 2015–2019, 2nd: 2020–2024, 3rd: 2024–ongoing)
+- **Version selector** — shown when a country submitted multiple NDCs in the same generation
+- **Summary bar** — counts of mitigation targets, adaptation targets, net zero targets, and measures per NDC
+- **Mitigation tab**:
+  - Transport mitigation targets (with GHG target, type, conditionality, target year)
+  - Net zero targets
+  - Mitigation measures grouped by category (with A-S-I label and transport modes)
+- **Adaptation tab**:
+  - Transport adaptation targets
+  - Adaptation measures grouped by category (with transport modes)
+- **Synchronized scrolling** — scrolling one column scrolls all three simultaneously
+- Page references link directly to the source NDC document
 
 ---
 
-## 🔧 Technical Details
+## Technical Details
 
 **Frontend:**
 - Pure HTML/CSS/JavaScript
@@ -87,6 +119,7 @@ ndc-tracker/
 **Data Processing:**
 - Python 3.11+
 - openpyxl library
+- Generates `data.json` (main dashboard) and `comparison-data.json` (comparison dashboard)
 - Runs automatically in GitHub Actions
 
 **Hosting:**
@@ -128,7 +161,7 @@ Dashboard: Custom implementation for GIZ/SLOCAT
 
 ---
 
-## 🎉 Credits
+## Credits
 
 **Data Source:** GIZ-SLOCAT Partnership
 **Dashboard:** Interactive visualization platform for NDC tracking

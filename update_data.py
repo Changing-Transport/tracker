@@ -842,7 +842,7 @@ def process_comparison_data(excel_path):
 
 def main():
     print("=" * 70)
-    print("🚀  NDC Transport Tracker — Data Update")
+    print("NDC Transport Tracker — Data Update")
     print("=" * 70)
 
     data_dir    = Path("data")

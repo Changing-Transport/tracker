@@ -3,31 +3,12 @@
 ## Quick Start
 ### Step 1: Upload Files
 
-**Option A: Drag & Drop (Easiest)**
-
 1. Download all files from this folder
 2. Go to your new repository on GitHub
 3. Click "uploading an existing file"
 4. Drag ALL files and folders into the upload area
 5. Click "Commit changes"
 
-**Option B: GitHub Desktop**
-
-1. Install GitHub Desktop (desktop.github.com)
-2. Clone your repository
-3. Copy all files from this folder into the cloned folder
-4. In GitHub Desktop: Commit and Push
-
-**Option C: Command Line**
-
-```bash
-cd path/to/this/folder
-git init
-git add .
-git commit -m "Initial commit"
-git branch -M main
-git remote add origin https://github.com/YOUR-USERNAME/tracker.git
-git push -u origin main
 ```
 
 ### Step 2: Embed in WordPress

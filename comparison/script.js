@@ -1,17 +1,18 @@
 // ============================================================================
-// NDC Comparison Dashboard — Sectioned Layout
+// NDC Comparison Dashboard — Flexible Column Layout
 // ============================================================================
 
 let comparisonData = null;
-let selectedCountry = null;
-let selectedVersions = {
-    gen1: 0,
-    gen2: 0,
-    gen3: 0
-};
 
-// Global tab selection (synchronized across all 3 columns)
-let activeTab = 'mitigation';  // 'mitigation' or 'adaptation'
+// Column configurations (independent)
+let columns = [
+    { country: null, generation: 'gen1', versionIndex: 0 },
+    { country: null, generation: 'gen2', versionIndex: 0 },
+    { country: null, generation: 'gen3', versionIndex: 0 }
+];
+
+// Global tab selection
+let activeTab = 'mitigation-targets';  // 4 options: mitigation-targets, mitigation-measures, adaptation-targets, adaptation-measures
 
 const GEN_CONFIG = {
     gen1: { label: '1st Generation', period: '2015–2019', color: '#003D5C' },
@@ -25,8 +26,9 @@ const GEN_CONFIG = {
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         await loadComparisonData();
-        initializeCountrySelector();
-        document.getElementById('country-select').addEventListener('change', handleCountryChange);
+        initializeDefaultSelection();
+        renderComparison();
+        setupSynchronizedScrolling();
         document.getElementById('loading').classList.add('hidden');
     } catch (err) {
         console.error('Init error:', err);
@@ -45,143 +47,170 @@ async function loadComparisonData() {
 }
 
 // ============================================================================
-// Country Selector
+// Initialize Default Selection (random country, 3 generations)
 // ============================================================================
-function initializeCountrySelector() {
-    const select = document.getElementById('country-select');
-    const countries = Object.entries(comparisonData.countries)
-        .map(([code, data]) => ({ code, name: data.country_name }))
-        .sort((a, b) => a.name.localeCompare(b.name));
+function initializeDefaultSelection() {
+    const countries = Object.keys(comparisonData.countries);
+    if (countries.length === 0) return;
     
-    countries.forEach(({ code, name }) => {
-        const option = document.createElement('option');
-        option.value = code;
-        option.textContent = name;
-        select.appendChild(option);
-    });
-}
-
-function handleCountryChange(e) {
-    selectedCountry = e.target.value;
-    if (!selectedCountry) {
-        document.getElementById('comparison-grid').innerHTML = '';
-        return;
-    }
+    // Pick a random country
+    const randomCountry = countries[Math.floor(Math.random() * countries.length)];
     
-    // Reset version selections and tab
-    selectedVersions = { gen1: 0, gen2: 0, gen3: 0 };
-    activeTab = 'mitigation';
-    
-    renderComparison();
-    setupSynchronizedScrolling();
+    // Set all 3 columns to same country, different generations
+    columns[0] = { country: randomCountry, generation: 'gen1', versionIndex: 0 };
+    columns[1] = { country: randomCountry, generation: 'gen2', versionIndex: 0 };
+    columns[2] = { country: randomCountry, generation: 'gen3', versionIndex: 0 };
 }
 
 // ============================================================================
-// Main Render — SECTIONED LAYOUT
+// Main Render — FLEXIBLE COLUMN LAYOUT
 // ============================================================================
 function renderComparison() {
     const grid = document.getElementById('comparison-grid');
     grid.innerHTML = '';
     
-    if (!selectedCountry) return;
-    
-    const countryData = comparisonData.countries[selectedCountry];
-    if (!countryData) return;
-    
-    // SECTION 1: Headers (in grid, variable height)
+    // SECTION 1: Column Headers with Selectors
     const headersRow = document.createElement('div');
     headersRow.className = 'section-row headers-row';
     
-    ['gen1', 'gen2', 'gen3'].forEach(gen => {
-        const headerCell = createHeaderCell(gen, countryData.generations[gen]);
+    columns.forEach((col, index) => {
+        const headerCell = createHeaderCell(col, index);
         headersRow.appendChild(headerCell);
     });
     grid.appendChild(headersRow);
     
-    // SECTION 2: Summary boxes (in grid, fixed height, aligned)
+    // SECTION 2: Summary boxes
     const summaryRow = document.createElement('div');
     summaryRow.className = 'section-row summary-row';
     
-    ['gen1', 'gen2', 'gen3'].forEach(gen => {
-        const summaryCell = createSummaryCell(gen, countryData.generations[gen]);
+    columns.forEach((col, index) => {
+        const summaryCell = createSummaryCell(col, index);
         summaryRow.appendChild(summaryCell);
     });
     grid.appendChild(summaryRow);
     
-    // SECTION 3: Tab navigation (OUTSIDE grid, full width)
+    // SECTION 3: Tab navigation (4 tabs)
     const tabSection = document.createElement('div');
     tabSection.className = 'tab-section';
     
-    const mitigationTab = document.createElement('button');
-    mitigationTab.className = 'tab-button' + (activeTab === 'mitigation' ? ' active' : '');
-    mitigationTab.textContent = 'Mitigation';
-    mitigationTab.addEventListener('click', () => switchTab('mitigation'));
+    const tabs = [
+        { id: 'mitigation-targets', label: 'Mitigation Targets' },
+        { id: 'mitigation-measures', label: 'Mitigation Measures' },
+        { id: 'adaptation-targets', label: 'Adaptation Targets' },
+        { id: 'adaptation-measures', label: 'Adaptation Measures' }
+    ];
     
-    const adaptationTab = document.createElement('button');
-    adaptationTab.className = 'tab-button' + (activeTab === 'adaptation' ? ' active' : '');
-    adaptationTab.textContent = 'Adaptation';
-    adaptationTab.addEventListener('click', () => switchTab('adaptation'));
+    tabs.forEach(tab => {
+        const button = document.createElement('button');
+        button.className = 'tab-button' + (activeTab === tab.id ? ' active' : '');
+        button.textContent = tab.label;
+        button.addEventListener('click', () => switchTab(tab.id));
+        tabSection.appendChild(button);
+    });
     
-    tabSection.appendChild(mitigationTab);
-    tabSection.appendChild(adaptationTab);
     grid.appendChild(tabSection);
     
-    // SECTION 4: Content (in grid, scrollable, synchronized)
+    // SECTION 4: Content
     const contentRow = document.createElement('div');
     contentRow.className = 'section-row content-row';
     
-    ['gen1', 'gen2', 'gen3'].forEach(gen => {
-        const contentCell = createContentCell(gen, countryData.generations[gen]);
+    columns.forEach((col, index) => {
+        const contentCell = createContentCell(col, index);
         contentRow.appendChild(contentCell);
     });
     grid.appendChild(contentRow);
 }
 
 // ============================================================================
-// SECTION 1: Header Cell
+// SECTION 1: Header Cell with Selectors
 // ============================================================================
-function createHeaderCell(gen, documents) {
-    const config = GEN_CONFIG[gen];
+function createHeaderCell(col, colIndex) {
     const cell = document.createElement('div');
     cell.className = 'header-cell';
+    
+    if (!col.country) {
+        cell.innerHTML = '<div class="no-selection">No country selected</div>';
+        return cell;
+    }
+    
+    const countryData = comparisonData.countries[col.country];
+    const config = GEN_CONFIG[col.generation];
+    
     cell.style.setProperty('--gen-color', config.color);
     
-    const title = document.createElement('h2');
-    title.textContent = config.label;
-    cell.appendChild(title);
+    // Country Selector
+    const countrySelect = document.createElement('select');
+    countrySelect.className = 'country-selector';
     
-    const period = document.createElement('div');
-    period.className = 'gen-period';
-    period.textContent = config.period;
-    cell.appendChild(period);
+    const countriesSorted = Object.entries(comparisonData.countries)
+        .map(([code, data]) => ({ code, name: data.country_name }))
+        .sort((a, b) => a.name.localeCompare(b.name));
     
-    // Version selector if multiple versions
+    countriesSorted.forEach(({ code, name }) => {
+        const option = document.createElement('option');
+        option.value = code;
+        option.textContent = name;
+        if (code === col.country) option.selected = true;
+        countrySelect.appendChild(option);
+    });
+    
+    countrySelect.addEventListener('change', (e) => {
+        columns[colIndex].country = e.target.value;
+        columns[colIndex].versionIndex = 0;
+        renderComparison();
+        setupSynchronizedScrolling();
+    });
+    
+    cell.appendChild(countrySelect);
+    
+    // Generation Selector
+    const genSelect = document.createElement('select');
+    genSelect.className = 'generation-selector';
+    
+    ['gen1', 'gen2', 'gen3'].forEach(gen => {
+        const option = document.createElement('option');
+        option.value = gen;
+        option.textContent = GEN_CONFIG[gen].label;
+        if (gen === col.generation) option.selected = true;
+        genSelect.appendChild(option);
+    });
+    
+    genSelect.addEventListener('change', (e) => {
+        columns[colIndex].generation = e.target.value;
+        columns[colIndex].versionIndex = 0;
+        renderComparison();
+        setupSynchronizedScrolling();
+    });
+    
+    cell.appendChild(genSelect);
+    
+    // Version Selector (if multiple versions)
+    const documents = countryData.generations[col.generation];
+    
     if (documents.length > 1) {
-        const versionNote = document.createElement('div');
-        versionNote.className = 'version-note';
-        versionNote.textContent = `${documents.length} versions submitted`;
-        cell.appendChild(versionNote);
-        
         const versionSelect = document.createElement('select');
         versionSelect.className = 'version-selector';
+        
         documents.forEach((doc, idx) => {
             const option = document.createElement('option');
             option.value = idx;
             option.textContent = doc.version;
-            if (idx === selectedVersions[gen]) option.selected = true;
+            if (idx === col.versionIndex) option.selected = true;
             versionSelect.appendChild(option);
         });
+        
         versionSelect.addEventListener('change', (e) => {
-            selectedVersions[gen] = parseInt(e.target.value);
+            columns[colIndex].versionIndex = parseInt(e.target.value);
             renderComparison();
             setupSynchronizedScrolling();
         });
+        
         cell.appendChild(versionSelect);
     }
     
     // Date
     if (documents.length > 0) {
-        const doc = documents[selectedVersions[gen]];
+        const doc = documents[col.versionIndex];
         if (doc.date) {
             const dateDiv = document.createElement('div');
             dateDiv.className = 'header-date';
@@ -196,16 +225,24 @@ function createHeaderCell(gen, documents) {
 // ============================================================================
 // SECTION 2: Summary Cell
 // ============================================================================
-function createSummaryCell(gen, documents) {
+function createSummaryCell(col, colIndex) {
     const cell = document.createElement('div');
     cell.className = 'summary-cell';
+    
+    if (!col.country) {
+        cell.innerHTML = '<div class="no-data-summary">—</div>';
+        return cell;
+    }
+    
+    const countryData = comparisonData.countries[col.country];
+    const documents = countryData.generations[col.generation];
     
     if (documents.length === 0) {
         cell.innerHTML = '<div class="no-data-summary">No NDC submitted</div>';
         return cell;
     }
     
-    const doc = documents[selectedVersions[gen]];
+    const doc = documents[col.versionIndex];
     
     const mitCount = doc.targets.filter(t => t.target_area === 'Transport sector mitigation target').length;
     const adaptCount = doc.targets.filter(t => t.target_area === 'Transport sector adaptation target').length;
@@ -231,24 +268,56 @@ function createSummaryCell(gen, documents) {
 // ============================================================================
 // SECTION 4: Content Cell
 // ============================================================================
-function createContentCell(gen, documents) {
+function createContentCell(col, colIndex) {
     const cell = document.createElement('div');
     cell.className = 'content-cell';
+    
+    if (!col.country) {
+        cell.innerHTML = '<div class="no-data">No country selected</div>';
+        return cell;
+    }
+    
+    const countryData = comparisonData.countries[col.country];
+    const documents = countryData.generations[col.generation];
     
     if (documents.length === 0) {
         cell.innerHTML = '<div class="no-data">No NDC submitted</div>';
         return cell;
     }
     
-    const doc = documents[selectedVersions[gen]];
+    const doc = documents[col.versionIndex];
     
-    if (activeTab === 'mitigation') {
-        cell.appendChild(createMitigationContent(doc));
-    } else {
-        cell.appendChild(createAdaptationContent(doc));
+    // Render based on active tab
+    if (activeTab === 'mitigation-targets') {
+        cell.appendChild(createMitigationTargetsContent(doc));
+    } else if (activeTab === 'mitigation-measures') {
+        cell.appendChild(createMitigationMeasuresContent(doc));
+    } else if (activeTab === 'adaptation-targets') {
+        cell.appendChild(createAdaptationTargetsContent(doc));
+    } else if (activeTab === 'adaptation-measures') {
+        cell.appendChild(createAdaptationMeasuresContent(doc));
     }
     
     return cell;
+}
+
+// ============================================================================
+// Tab Switching
+// ============================================================================
+function switchTab(tab) {
+    const cells = document.querySelectorAll('.content-cell');
+    const scrollPos = cells[0] ? cells[0].scrollTop : 0;
+    
+    activeTab = tab;
+    renderComparison();
+    
+    requestAnimationFrame(() => {
+        const newCells = document.querySelectorAll('.content-cell');
+        newCells.forEach(cell => {
+            cell.scrollTop = scrollPos;
+        });
+        setupSynchronizedScrolling();
+    });
 }
 
 // ============================================================================
@@ -283,39 +352,16 @@ function setupSynchronizedScrolling() {
 }
 
 // ============================================================================
-// Equalize Column Heights (not needed anymore, but keeping for compatibility)
+// CONTENT CREATORS (4 types)
 // ============================================================================
-function equalizeColumnHeights() {
-    // Not needed with new layout, but kept to avoid errors
-}
 
-// ============================================================================
-// Tab Switching
-// ============================================================================
-function switchTab(tab) {
-    const cells = document.querySelectorAll('.content-cell');
-    const scrollPos = cells[0] ? cells[0].scrollTop : 0;
-    
-    activeTab = tab;
-    renderComparison();
-    
-    requestAnimationFrame(() => {
-        const newCells = document.querySelectorAll('.content-cell');
-        newCells.forEach(cell => {
-            cell.scrollTop = scrollPos;
-        });
-        setupSynchronizedScrolling();
-    });
-}
-
-// ============================================================================
-// MITIGATION CONTENT
-// ============================================================================
-function createMitigationContent(doc) {
+// 1. MITIGATION TARGETS
+function createMitigationTargetsContent(doc) {
     const container = document.createElement('div');
     
-    // MITIGATION TARGETS
     const mitigationTargets = doc.targets.filter(t => t.target_area === 'Transport sector mitigation target');
+    const netZeroTargets = doc.targets.filter(t => t.target_area === 'Net zero target');
+    
     if (mitigationTargets.length > 0) {
         const section = document.createElement('div');
         section.className = 'content-section-block';
@@ -332,8 +378,6 @@ function createMitigationContent(doc) {
         container.appendChild(section);
     }
     
-    // NET ZERO TARGETS
-    const netZeroTargets = doc.targets.filter(t => t.target_area === 'Net zero target');
     if (netZeroTargets.length > 0) {
         const section = document.createElement('div');
         section.className = 'content-section-block';
@@ -350,101 +394,94 @@ function createMitigationContent(doc) {
         container.appendChild(section);
     }
     
-    // MITIGATION MEASURES
-    const categories = Object.keys(doc.mitigation_measures).sort();
-    if (categories.length > 0) {
-        const section = document.createElement('div');
-        section.className = 'content-section-block';
-        
-        const title = document.createElement('div');
-        title.className = 'section-title';
-        title.textContent = 'Mitigation Measures';
-        section.appendChild(title);
-        
-        categories.forEach(category => {
-            const catHeader = document.createElement('div');
-            catHeader.className = 'category-header';
-            catHeader.textContent = category;
-            section.appendChild(catHeader);
-            
-            const measures = doc.mitigation_measures[category] || [];
-            measures.forEach(measure => {
-                section.appendChild(createMeasureItem(measure, doc.url));
-            });
-        });
-        
-        container.appendChild(section);
-    }
-    
-    // If no mitigation content at all
-    if (mitigationTargets.length === 0 && netZeroTargets.length === 0 && categories.length === 0) {
-        const empty = document.createElement('div');
-        empty.className = 'no-data';
-        empty.textContent = 'No mitigation targets or measures';
-        container.appendChild(empty);
+    if (mitigationTargets.length === 0 && netZeroTargets.length === 0) {
+        container.innerHTML = '<div class="no-data">No mitigation targets</div>';
     }
     
     return container;
 }
 
-// ============================================================================
-// ADAPTATION CONTENT
-// ============================================================================
-function createAdaptationContent(doc) {
+// 2. MITIGATION MEASURES
+function createMitigationMeasuresContent(doc) {
     const container = document.createElement('div');
+    const categories = Object.keys(doc.mitigation_measures).sort();
     
-    // ADAPTATION TARGETS
+    if (categories.length === 0) {
+        container.innerHTML = '<div class="no-data">No mitigation measures</div>';
+        return container;
+    }
+    
+    const section = document.createElement('div');
+    section.className = 'content-section-block';
+    
+    categories.forEach(category => {
+        const catHeader = document.createElement('div');
+        catHeader.className = 'category-header';
+        catHeader.textContent = category;
+        section.appendChild(catHeader);
+        
+        const measures = doc.mitigation_measures[category] || [];
+        measures.forEach(measure => {
+            section.appendChild(createMeasureItem(measure, doc.url));
+        });
+    });
+    
+    container.appendChild(section);
+    return container;
+}
+
+// 3. ADAPTATION TARGETS
+function createAdaptationTargetsContent(doc) {
+    const container = document.createElement('div');
     const adaptationTargets = doc.targets.filter(t => t.target_area === 'Transport sector adaptation target');
-    if (adaptationTargets.length > 0) {
-        const section = document.createElement('div');
-        section.className = 'content-section-block';
-        
-        const title = document.createElement('div');
-        title.className = 'section-title';
-        title.textContent = 'Transport Adaptation Targets';
-        section.appendChild(title);
-        
-        adaptationTargets.forEach(target => {
-            section.appendChild(createTargetItem(target, doc.url));
-        });
-        
-        container.appendChild(section);
+    
+    if (adaptationTargets.length === 0) {
+        container.innerHTML = '<div class="no-data">No adaptation targets</div>';
+        return container;
     }
     
-    // ADAPTATION MEASURES
+    const section = document.createElement('div');
+    section.className = 'content-section-block';
+    
+    const title = document.createElement('div');
+    title.className = 'section-title';
+    title.textContent = 'Transport Adaptation Targets';
+    section.appendChild(title);
+    
+    adaptationTargets.forEach(target => {
+        section.appendChild(createTargetItem(target, doc.url));
+    });
+    
+    container.appendChild(section);
+    return container;
+}
+
+// 4. ADAPTATION MEASURES
+function createAdaptationMeasuresContent(doc) {
+    const container = document.createElement('div');
     const categories = Object.keys(doc.adaptation_measures).sort();
-    if (categories.length > 0) {
-        const section = document.createElement('div');
-        section.className = 'content-section-block';
+    
+    if (categories.length === 0) {
+        container.innerHTML = '<div class="no-data">No adaptation measures</div>';
+        return container;
+    }
+    
+    const section = document.createElement('div');
+    section.className = 'content-section-block';
+    
+    categories.forEach(category => {
+        const catHeader = document.createElement('div');
+        catHeader.className = 'category-header';
+        catHeader.textContent = category;
+        section.appendChild(catHeader);
         
-        const title = document.createElement('div');
-        title.className = 'section-title';
-        title.textContent = 'Adaptation Measures';
-        section.appendChild(title);
-        
-        categories.forEach(category => {
-            const catHeader = document.createElement('div');
-            catHeader.className = 'category-header';
-            catHeader.textContent = category;
-            section.appendChild(catHeader);
-            
-            const measures = doc.adaptation_measures[category] || [];
-            measures.forEach(measure => {
-                section.appendChild(createAdaptationMeasureItem(measure, doc.url));
-            });
+        const measures = doc.adaptation_measures[category] || [];
+        measures.forEach(measure => {
+            section.appendChild(createAdaptationMeasureItem(measure, doc.url));
         });
-        
-        container.appendChild(section);
-    }
+    });
     
-    // If no adaptation content at all
-    if (adaptationTargets.length === 0 && categories.length === 0) {
-        const empty = document.createElement('div');
-        empty.className = 'no-data';
-        empty.textContent = 'No adaptation targets or measures';
-        container.appendChild(empty);
-    }
-    
+    container.appendChild(section);
     return container;
 }
 
