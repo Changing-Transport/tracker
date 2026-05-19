@@ -289,8 +289,7 @@ body {
     border: 2px solid var(--color-border);
     border-radius: 0 0 var(--radius-lg) var(--radius-lg);
     box-shadow: var(--shadow-md);
-    overflow-y: auto;
-    max-height: 70vh;
+    /* Removed overflow-y and max-height - now flows naturally */
 }
 
 .content-section-block {

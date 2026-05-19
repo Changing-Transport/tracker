@@ -28,7 +28,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         await loadComparisonData();
         initializeDefaultSelection();
         renderComparison();
-        setupSynchronizedScrolling();
         document.getElementById('loading').classList.add('hidden');
     } catch (err) {
         console.error('Init error:', err);
@@ -158,7 +157,6 @@ function createHeaderCell(col, colIndex) {
         columns[colIndex].country = e.target.value;
         columns[colIndex].versionIndex = 0;
         renderComparison();
-        setupSynchronizedScrolling();
     });
     
     cell.appendChild(countrySelect);
@@ -179,7 +177,6 @@ function createHeaderCell(col, colIndex) {
         columns[colIndex].generation = e.target.value;
         columns[colIndex].versionIndex = 0;
         renderComparison();
-        setupSynchronizedScrolling();
     });
     
     cell.appendChild(genSelect);
@@ -202,7 +199,6 @@ function createHeaderCell(col, colIndex) {
         versionSelect.addEventListener('change', (e) => {
             columns[colIndex].versionIndex = parseInt(e.target.value);
             renderComparison();
-            setupSynchronizedScrolling();
         });
         
         cell.appendChild(versionSelect);
@@ -305,50 +301,8 @@ function createContentCell(col, colIndex) {
 // Tab Switching
 // ============================================================================
 function switchTab(tab) {
-    const cells = document.querySelectorAll('.content-cell');
-    const scrollPos = cells[0] ? cells[0].scrollTop : 0;
-    
     activeTab = tab;
     renderComparison();
-    
-    requestAnimationFrame(() => {
-        const newCells = document.querySelectorAll('.content-cell');
-        newCells.forEach(cell => {
-            cell.scrollTop = scrollPos;
-        });
-        setupSynchronizedScrolling();
-    });
-}
-
-// ============================================================================
-// Synchronized Scrolling
-// ============================================================================
-function setupSynchronizedScrolling() {
-    const cells = document.querySelectorAll('.content-cell');
-    let isSyncing = false;
-    
-    cells.forEach(cell => {
-        cell.replaceWith(cell.cloneNode(true));
-    });
-    
-    const freshCells = document.querySelectorAll('.content-cell');
-    
-    freshCells.forEach(cell => {
-        cell.addEventListener('scroll', function() {
-            if (isSyncing) return;
-            
-            isSyncing = true;
-            const scrollTop = this.scrollTop;
-            
-            freshCells.forEach(otherCell => {
-                if (otherCell !== this) {
-                    otherCell.scrollTop = scrollTop;
-                }
-            });
-            
-            setTimeout(() => { isSyncing = false; }, 10);
-        });
-    });
 }
 
 // ============================================================================
