@@ -48,6 +48,17 @@
         <p>Loading comparison data...</p>
     </div>
 
-    <script src="script_c.js"></script>
+<script src="script_c.js"></script>
+
+    <!-- postMessage height to parent iframe -->
+    <script>
+      function sendHeight() {
+        var h = document.documentElement.scrollHeight;
+        window.parent.postMessage({ iframeHeight: h }, '*');
+      }
+      window.addEventListener('load', sendHeight);
+      new ResizeObserver(sendHeight).observe(document.body);
+    </script>
+
 </body>
 </html>

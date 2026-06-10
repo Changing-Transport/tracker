@@ -289,5 +289,16 @@
     </div>
 
     <script src="script.js"></script>
+    
+    <!-- postMessage height to parent iframe -->
+    <script>
+      function sendHeight() {
+        var h = document.documentElement.scrollHeight;
+        window.parent.postMessage({ iframeHeight: h }, '*');
+      }
+      window.addEventListener('load', sendHeight);
+      new ResizeObserver(sendHeight).observe(document.body);
+    </script>
+
 </body>
 </html>
