@@ -4,6 +4,16 @@
 
 let comparisonData = null;
 
+// iframe auto-resize — sends height to WordPress parent
+function sendHeight() {
+    const height = document.body.scrollHeight;
+    window.parent.postMessage({ type: 'ndcTrackerHeight', height }, '*');
+}
+function sendHeightDebounced() {
+    clearTimeout(window._sendHeightTimer);
+    window._sendHeightTimer = setTimeout(sendHeight, 150);
+}
+
 // Column configurations (independent)
 let columns = [
     { country: null, generation: 'gen1', versionIndex: 0 },
@@ -59,6 +69,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         renderComparison();
         setupInfoModal();
         document.getElementById('loading').classList.add('hidden');
+
+        // Auto-resize iframe in WordPress parent
+        sendHeight();
+        window.addEventListener('resize', sendHeightDebounced);
+        new ResizeObserver(sendHeightDebounced).observe(document.body);
     } catch (err) {
         console.error('Init error:', err);
         document.getElementById('loading').innerHTML =
@@ -119,12 +134,59 @@ function initializeDefaultSelection() {
 }
 
 // ============================================================================
+// Helpers: country list, status, latest-active generation
+// ============================================================================
+
+// Sorted list of selectable countries (mirrors the per-column dropdown)
+function getCountryList() {
+    return Object.entries(comparisonData.countries)
+        .map(([code, data]) => ({ code, name: data.country_name }))
+        .sort((a, b) => a.name.localeCompare(b.name));
+}
+
+// Reads the Status field from a document and normalises it.
+// The Excel uses four values: Active, Archived, "Covered by EU"
+// (active, EU members) and "Covered by EU archived" (archived, EU members).
+function getDocStatus(doc) {
+    if (!doc) return null;
+    const s = (doc.status || '').toString().trim().toLowerCase();
+    if (s === 'active' || s === 'covered by eu') return 'active';
+    if (s === 'archived' || s === 'covered by eu archived') return 'archived';
+    return null;
+}
+
+// Returns the latest "active" generation for a country.
+// Prefers a document whose Status = Active; otherwise falls back to the
+// highest generation that has any NDC submitted.
+function getLatestActiveGen(countryCode) {
+    const dataCode = resolveCountryCode(countryCode);
+    const countryData = comparisonData.countries[dataCode];
+    if (!countryData) return 'gen1';
+
+    const order = ['gen3', 'gen2', 'gen1'];
+
+    // 1. Prefer an explicitly Active document (highest gen first)
+    for (const gen of order) {
+        const docs = countryData.generations[gen] || [];
+        if (docs.some(d => getDocStatus(d) === 'active')) return gen;
+    }
+    // 2. Fallback: highest generation that has any document
+    for (const gen of order) {
+        if ((countryData.generations[gen] || []).length > 0) return gen;
+    }
+    return 'gen1';
+}
+
+// ============================================================================
 // Main Render — FLEXIBLE COLUMN LAYOUT
 // ============================================================================
 function renderComparison() {
     const grid = document.getElementById('comparison-grid');
     grid.innerHTML = '';
-    
+
+    // SECTION 0: Quick-start bar (convenience — fills columns, stays editable)
+    grid.appendChild(createQuickStartBar());
+
     // SECTION 1: Column Headers with Selectors
     const headersRow = document.createElement('div');
     headersRow.className = 'section-row headers-row';
@@ -182,6 +244,79 @@ function renderComparison() {
         contentRow.appendChild(contentCell);
     });
     grid.appendChild(contentRow);
+}
+
+// ============================================================================
+// SECTION 0: Quick-Start Bar
+// Convenience shortcuts that fill the 3 columns. Columns stay fully editable
+// afterwards via their own dropdowns — nothing is locked.
+// ============================================================================
+function createQuickStartBar() {
+    const bar = document.createElement('div');
+    bar.className = 'quick-start';
+
+    const countryOptions = getCountryList()
+        .map(c => `<option value="${c.code}">${c.name}</option>`)
+        .join('');
+
+    bar.innerHTML = `
+        <span class="quick-start-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            Quick start
+        </span>
+
+        <div class="qs-group">
+            <span class="qs-group-title">Track one country</span>
+            <select class="qs-select" id="qs-track-country">
+                <option value="">Select country…</option>
+                ${countryOptions}
+            </select>
+            <button class="qs-apply" id="qs-track-apply">Show evolution</button>
+        </div>
+
+        <div class="qs-group">
+            <span class="qs-group-title">Compare countries</span>
+            <select class="qs-select" id="qs-cmp-gen">
+                <option value="latest">Latest active</option>
+                <option value="gen1">1st Generation</option>
+                <option value="gen2">2nd Generation</option>
+                <option value="gen3">3rd Generation</option>
+            </select>
+            <select class="qs-select" id="qs-cmp-c1"><option value="">Country 1…</option>${countryOptions}</select>
+            <select class="qs-select" id="qs-cmp-c2"><option value="">Country 2…</option>${countryOptions}</select>
+            <select class="qs-select" id="qs-cmp-c3"><option value="">Country 3…</option>${countryOptions}</select>
+            <button class="qs-apply" id="qs-cmp-apply">Compare</button>
+        </div>
+    `;
+
+    // — Track one country: same country across gen1 / gen2 / gen3 —
+    bar.querySelector('#qs-track-apply').addEventListener('click', () => {
+        const country = bar.querySelector('#qs-track-country').value;
+        if (!country) return;
+        columns[0] = { country, generation: 'gen1', versionIndex: 0 };
+        columns[1] = { country, generation: 'gen2', versionIndex: 0 };
+        columns[2] = { country, generation: 'gen3', versionIndex: 0 };
+        renderComparison();
+    });
+
+    // — Compare countries: chosen generation (or latest active) across columns —
+    bar.querySelector('#qs-cmp-apply').addEventListener('click', () => {
+        const gen = bar.querySelector('#qs-cmp-gen').value;
+        const picks = [
+            bar.querySelector('#qs-cmp-c1').value,
+            bar.querySelector('#qs-cmp-c2').value,
+            bar.querySelector('#qs-cmp-c3').value
+        ];
+        picks.forEach((country, i) => {
+            if (!country) return; // leave that column untouched if empty
+            // "latest" resolves to each country's own active generation
+            const resolvedGen = gen === 'latest' ? getLatestActiveGen(country) : gen;
+            columns[i] = { country, generation: resolvedGen, versionIndex: 0 };
+        });
+        renderComparison();
+    });
+
+    return bar;
 }
 
 // ============================================================================
@@ -279,6 +414,14 @@ function createHeaderCell(col, colIndex) {
             dateDiv.className = 'header-date';
             dateDiv.innerHTML = `<strong>Submitted:</strong> ${doc.date}`;
             cell.appendChild(dateDiv);
+        }
+        // Status badge (Active / Archived) — reads doc.status from the data
+        const status = getDocStatus(doc);
+        if (status) {
+            const badge = document.createElement('span');
+            badge.className = 'status-badge status-' + status;
+            badge.textContent = status === 'active' ? 'Currently active' : 'Archived';
+            cell.appendChild(badge);
         }
     }
 
@@ -383,7 +526,25 @@ function createContentCell(col, colIndex) {
     }
     
     const doc = documents[col.versionIndex];
-    
+
+    // Context label — repeats country + generation + status so you always
+    // know which column you're reading as you scroll down (replaces sticky)
+    const config = GEN_CONFIG[col.generation];
+    const countryName = countryData.country_name || col.country;
+    const status = getDocStatus(doc);
+    const labelBadge = status
+        ? `<span class="content-label-badge content-label-${status}">${status === 'active' ? 'Active' : 'Archived'}</span>`
+        : '';
+    const labelEl = document.createElement('div');
+    labelEl.className = 'content-cell-label';
+    if (config) labelEl.style.setProperty('--gen-color', config.color);
+    labelEl.innerHTML = `
+        <span class="content-label-country">${countryName}</span>
+        <span class="content-label-gen">${config ? config.label : ''}</span>
+        ${labelBadge}
+    `;
+    cell.appendChild(labelEl);
+
     // Render based on active tab
     if (activeTab === 'mitigation-targets') {
         cell.appendChild(createMitigationTargetsContent(doc));
