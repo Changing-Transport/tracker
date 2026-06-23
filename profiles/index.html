@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Country Profiles — GIZ-SLOCAT Transport Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/design-tokens.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="cp-dir-hero">
+  <div class="cp-container">
+    <p class="cp-kicker" style="color:var(--cp-green);">GIZ-SLOCAT Transport Tracker</p>
+    <h1>Transport in climate policy, country by country</h1>
+    <p>
+      Each profile tells one country's full transport story across its
+      climate documents — Nationally Determined Contributions, Long-Term
+      Strategies and, soon, Biennial Transparency Reports — built directly
+      from the GIZ-SLOCAT Transport Tracker database.
+    </p>
+  </div>
+</header>
+
+<main class="cp-container">
+  <div class="cp-dir-tools">
+    <input class="cp-search" id="dir-search" type="search"
+           placeholder="Search a country…" aria-label="Search a country">
+    <select class="cp-select" id="dir-region" aria-label="Filter by region">
+      <option value="">All regions</option>
+    </select>
+    <select class="cp-select" id="dir-transport" aria-label="Filter by transport content">
+      <option value="">All countries</option>
+      <option value="yes">With transport content in active documents</option>
+      <option value="lts">With a long-term strategy</option>
+    </select>
+  </div>
+  <p class="cp-count" id="dir-count"></p>
+  <div class="cp-dir-grid" id="dir-grid"></div>
+</main>
+
+<footer class="cp-footer">
+  <div class="cp-container">
+    <p>
+      Source: GIZ-SLOCAT <a href="https://changing-transport.org/tracker/" target="_blank" rel="noopener">NDC Transport Tracker</a>
+      database · Part of the <a href="https://changing-transport.org/" target="_blank" rel="noopener">Changing Transport</a> initiative.
+    </p>
+  </div>
+</footer>
+
+<script src="js/directory.js"></script>
+</body>
+</html>
