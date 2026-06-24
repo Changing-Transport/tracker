@@ -3,53 +3,449 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Country Profiles — GIZ-SLOCAT Transport Tracker</title>
+<title>Country Explorer — GIZ-SLOCAT Transport Tracker</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/design-tokens.css">
-<link rel="stylesheet" href="styles.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--ct-font);
+  background: var(--ct-bg);
+  color: var(--ct-text);
+}
+
+.explorer {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 2.5rem;
+}
+
+/* ── Search zone ─────────────────────────────────────────────────── */
+.search-zone {
+  background: var(--ct-green);
+  border-radius: var(--ct-radius-lg);
+  padding: 2rem 1.75rem 1.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.search-zone h2 {
+  color: var(--ct-navy);
+  font-size: 1.25rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 1.1rem;
+  line-height: 1.3;
+}
+
+.search-wrap {
+  position: relative;
+  max-width: 480px;
+  margin: 0 auto 1rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem 2.5rem 0.75rem 1rem;
+  font-family: var(--ct-font);
+  font-size: 1rem;
+  border: 2px solid transparent;
+  border-radius: var(--ct-radius-md);
+  background: #fff;
+  color: var(--ct-text);
+  transition: border-color 0.15s;
+}
+.search-input:focus { outline: none; border-color: var(--ct-navy); }
+.search-input::placeholder { color: var(--ct-muted); }
+
+.search-clear {
+  position: absolute;
+  right: 0.6rem; top: 50%; transform: translateY(-50%);
+  background: none; border: none; cursor: pointer;
+  color: var(--ct-muted); font-size: 1.2rem;
+  line-height: 1; padding: 0.2rem 0.4rem;
+  border-radius: 50%; display: none;
+}
+.search-clear:hover { color: var(--ct-navy); }
+.search-clear.visible { display: block; }
+
+.autocomplete-list {
+  position: absolute;
+  top: calc(100% + 4px); left: 0; right: 0;
+  background: #fff;
+  border: 1px solid var(--ct-border);
+  border-radius: var(--ct-radius-md);
+  box-shadow: var(--ct-shadow-md);
+  max-height: 260px; overflow-y: auto;
+  z-index: 100; display: none; list-style: none;
+}
+.autocomplete-list.open { display: block; }
+
+.autocomplete-list li {
+  display: flex; align-items: center; gap: 0.65rem;
+  padding: 0.6rem 0.9rem; cursor: pointer;
+  font-size: 0.95rem; border-bottom: 1px solid var(--ct-border);
+  transition: background 0.1s;
+}
+.autocomplete-list li:last-child { border-bottom: none; }
+.autocomplete-list li:hover,
+.autocomplete-list li[aria-selected="true"] { background: var(--ct-bg); }
+.autocomplete-list li.no-result {
+  color: var(--ct-muted); font-style: italic;
+  cursor: default; justify-content: center;
+}
+.autocomplete-list mark {
+  background: rgba(157,190,61,0.35);
+  border-radius: 2px; padding: 0 1px;
+}
+.autocomplete-list img {
+  width: 24px; height: 16px; object-fit: cover;
+  border-radius: 2px; border: 1px solid var(--ct-border); flex-shrink: 0;
+}
+
+.suggestions-label {
+  text-align: center; font-size: 0.78rem; font-weight: 700;
+  color: var(--ct-navy); text-transform: uppercase;
+  letter-spacing: 0.06em; margin-bottom: 0.6rem; opacity: 0.75;
+}
+
+.suggestion-pills {
+  display: flex; flex-wrap: wrap;
+  justify-content: center; gap: 0.5rem;
+}
+
+.suggestion-pill {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  background: rgba(255,255,255,0.5);
+  border: 1px solid rgba(255,255,255,0.7);
+  border-radius: 999px; color: var(--ct-navy);
+  font-family: var(--ct-font); font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; transition: background 0.15s, border-color 0.15s;
+}
+.suggestion-pill:hover,
+.suggestion-pill:focus-visible {
+  background: var(--ct-navy); border-color: var(--ct-navy);
+  color: #fff; outline: none;
+}
+.suggestion-pill img {
+  width: 18px; height: 12px; object-fit: cover;
+  border-radius: 2px; border: 1px solid rgba(0,0,0,0.1);
+}
+
+/* ── Featured zone ───────────────────────────────────────────────── */
+.featured-zone { margin-bottom: 0.5rem; }
+
+.zone-label {
+  font-size: 0.78rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.07em;
+  color: var(--ct-muted); margin-bottom: 0.75rem;
+}
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+@media (max-width: 600px) { .featured-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 380px) { .featured-grid { grid-template-columns: 1fr; } }
+
+.featured-card {
+  display: block; text-decoration: none;
+  background: var(--ct-surface); border: 1px solid var(--ct-border);
+  border-radius: var(--ct-radius-md); padding: 1rem;
+  box-shadow: var(--ct-shadow-sm);
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+  position: relative; overflow: hidden;
+}
+.featured-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: var(--ct-green);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.2s;
+}
+.featured-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--ct-shadow-md);
+  border-color: var(--ct-green);
+}
+.featured-card:hover::before { transform: scaleX(1); }
+
+.featured-card-top {
+  display: flex; align-items: center;
+  gap: 0.6rem; margin-bottom: 0.5rem;
+}
+
+.featured-flag {
+  width: 32px; height: 22px; object-fit: cover;
+  border-radius: 3px; border: 1px solid var(--ct-border); flex-shrink: 0;
+}
+
+.featured-name {
+  font-weight: 700; font-size: 0.95rem;
+  color: var(--ct-navy); line-height: 1.2;
+}
+
+.featured-region {
+  font-size: 0.75rem; color: var(--ct-muted); margin-bottom: 0.6rem;
+}
+
+.featured-stats { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+
+.f-badge {
+  font-size: 0.71rem; border-radius: 999px;
+  padding: 0.15rem 0.55rem; white-space: nowrap; border: 1px solid;
+}
+.f-badge-measures {
+  background: rgba(157,190,61,0.15); border-color: rgba(157,190,61,0.5);
+  color: var(--ct-navy); font-weight: 700;
+}
+.f-badge-target {
+  background: rgba(0,164,189,0.1); border-color: rgba(0,164,189,0.4);
+  color: var(--ct-navy);
+}
+.f-badge-lts {
+  background: rgba(157,190,61,0.08); border-color: rgba(157,190,61,0.3);
+  color: var(--ct-green-dark);
+}
+.f-badge-btr {
+  background: rgba(232,130,26,0.1); border-color: rgba(232,130,26,0.4);
+  color: var(--ct-orange);
+}
+.f-badge-neutral {
+  background: var(--ct-bg); border-color: var(--ct-border); color: var(--ct-text);
+}
+
+.skeleton {
+  background: linear-gradient(90deg, var(--ct-border) 25%, var(--ct-bg) 50%, var(--ct-border) 75%);
+  background-size: 200% 100%; animation: shimmer 1.4s infinite;
+  border-radius: var(--ct-radius-md);
+}
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+</style>
 </head>
 <body>
 
-<header class="cp-dir-hero">
-  <div class="cp-container">
-    <p class="cp-kicker" style="color:var(--cp-green);">GIZ-SLOCAT Transport Tracker</p>
-    <h1>Transport in climate policy, country by country</h1>
-    <p>
-      Each profile tells one country's full transport story across its
-      climate documents — Nationally Determined Contributions, Long-Term
-      Strategies and, soon, Biennial Transparency Reports — built directly
-      from the GIZ-SLOCAT Transport Tracker database.
-    </p>
-  </div>
-</header>
+<div class="explorer">
 
-<main class="cp-container">
-  <div class="cp-dir-tools">
-    <input class="cp-search" id="dir-search" type="search"
-           placeholder="Search a country…" aria-label="Search a country">
-    <select class="cp-select" id="dir-region" aria-label="Filter by region">
-      <option value="">All regions</option>
-    </select>
-    <select class="cp-select" id="dir-transport" aria-label="Filter by transport content">
-      <option value="">All countries</option>
-      <option value="yes">With transport content in active documents</option>
-      <option value="lts">With a long-term strategy</option>
-    </select>
+  <!-- ── Zone 1: Search ─────────────────────────────────────────── -->
+  <div class="search-zone">
+    <h2>Explore transport climate commitments by country</h2>
+    <div class="search-wrap">
+      <input type="text" id="searchInput" class="search-input"
+        placeholder="Type a country name…" autocomplete="off"
+        aria-label="Search countries" role="combobox"
+        aria-autocomplete="list" aria-expanded="false"
+        aria-controls="autocompleteList" />
+      <button type="button" class="search-clear" id="searchClear" aria-label="Clear search">×</button>
+      <ul id="autocompleteList" class="autocomplete-list" role="listbox"></ul>
+    </div>
+    <p class="suggestions-label">Not sure where to start?</p>
+    <div class="suggestion-pills" id="suggestionPills"></div>
   </div>
-  <p class="cp-count" id="dir-count"></p>
-  <div class="cp-dir-grid" id="dir-grid"></div>
-</main>
 
-<footer class="cp-footer">
-  <div class="cp-container">
-    <p>
-      Source: GIZ-SLOCAT <a href="https://changing-transport.org/tracker/" target="_blank" rel="noopener">NDC Transport Tracker</a>
-      database · Part of the <a href="https://changing-transport.org/" target="_blank" rel="noopener">Changing Transport</a> initiative.
-    </p>
+  <!-- ── Zone 2: Featured ───────────────────────────────────────── -->
+  <div class="featured-zone">
+    <p class="zone-label">Most documented — one country per world region</p>
+    <div class="featured-grid" id="featuredGrid">
+      <div style="height:110px;" class="skeleton"></div>
+      <div style="height:110px;" class="skeleton"></div>
+      <div style="height:110px;" class="skeleton"></div>
+      <div style="height:110px;" class="skeleton"></div>
+      <div style="height:110px;" class="skeleton"></div>
+      <div style="height:110px;" class="skeleton"></div>
+    </div>
   </div>
-</footer>
 
-<script src="js/directory.js"></script>
+</div>
+
+<script>
+(function () {
+"use strict";
+
+const INDEX_URL   = "data/countries/index.json";
+const PROFILE_URL = (code) => "country.html?country=" + encodeURIComponent(code);
+const FLAG_LOCAL  = (iso2) => "../assets/flags/" + iso2 + ".png";
+const FLAG_CDN    = (iso2) => "https://flagcdn.com/w80/" + iso2 + ".png";
+const NUM_PILLS   = 5;
+
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g,
+    (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const normalize = (s) =>
+    (s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+
+function flagImg(iso2, cls) {
+    if (!iso2) return "";
+    return `<img class="${cls}" src="${FLAG_LOCAL(iso2)}"
+        onerror="this.onerror=null;this.src='${FLAG_CDN(iso2)}'" alt="" loading="lazy">`;
+}
+
+function highlight(text, query) {
+    const t = String(text ?? "");
+    const normT = normalize(t), normQ = normalize(query);
+    const i = normT.indexOf(normQ);
+    if (i === -1) return esc(t);
+    return esc(t.slice(0,i)) + "<mark>" + esc(t.slice(i,i+query.length)) + "</mark>" + esc(t.slice(i+query.length));
+}
+
+function pickRandom(list, n) {
+    const a = [...list];
+    for (let i = 0; i < Math.min(n, a.length); i++) {
+        const j = i + Math.floor(Math.random() * (a.length - i));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a.slice(0, n);
+}
+
+let ALL = [];
+
+fetch(INDEX_URL)
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(idx => {
+        ALL = idx.countries;
+        initSearch();
+        initFeatured();
+    })
+    .catch(() => {
+        document.getElementById("featuredGrid").innerHTML =
+            `<p style="color:var(--ct-muted);font-style:italic;">Could not load country data.</p>`;
+    });
+
+/* ── Zone 1: Search ──────────────────────────────────────────────── */
+function initSearch() {
+    const input    = document.getElementById("searchInput");
+    const clearBtn = document.getElementById("searchClear");
+    const list     = document.getElementById("autocompleteList");
+    const pills    = document.getElementById("suggestionPills");
+
+    let activeIdx = -1, current = [], timer = null;
+
+    const withContent = ALL.filter(c => c.has_transport_content && c.iso2);
+    pills.innerHTML = pickRandom(withContent, NUM_PILLS).map(c => `
+        <button class="suggestion-pill" data-code="${esc(c.code)}" aria-label="Explore ${esc(c.name)}">
+          ${flagImg(c.iso2, "")}
+          <span>${esc(c.name)}</span>
+        </button>`).join("");
+    pills.querySelectorAll(".suggestion-pill").forEach(btn =>
+        btn.addEventListener("click", () => { location.href = PROFILE_URL(btn.dataset.code); }));
+
+    function render(items, query) {
+        activeIdx = -1;
+        list.innerHTML = !items.length
+            ? `<li class="no-result">No countries found</li>`
+            : items.slice(0,20).map((c,i) => `
+                <li id="ac-opt-${i}" role="option" aria-selected="false" data-code="${esc(c.code)}">
+                  ${flagImg(c.iso2,"")}
+                  <span>${highlight(c.name, query)}</span>
+                </li>`).join("");
+        list.querySelectorAll("li[role='option']").forEach((li,i) => {
+            li.addEventListener("mouseenter", () => setActive(i));
+            li.addEventListener("click", () => { location.href = PROFILE_URL(li.dataset.code); hide(); });
+        });
+        list.classList.add("open");
+        input.setAttribute("aria-expanded","true");
+    }
+
+    function setActive(i) {
+        list.querySelectorAll("li[role='option']").forEach(o => o.setAttribute("aria-selected","false"));
+        const opts = list.querySelectorAll("li[role='option']");
+        if (i >= 0 && i < opts.length) opts[i].setAttribute("aria-selected","true");
+        activeIdx = i;
+    }
+
+    function hide() {
+        list.classList.remove("open");
+        input.setAttribute("aria-expanded","false");
+        activeIdx = -1;
+    }
+
+    input.addEventListener("input", () => {
+        clearBtn.classList.toggle("visible", !!input.value);
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            const q = input.value.trim();
+            if (!q) { hide(); return; }
+            current = ALL.filter(c => normalize(c.name).includes(normalize(q)));
+            render(current, q);
+        }, 120);
+    });
+
+    input.addEventListener("keydown", e => {
+        const opts = list.querySelectorAll("li[role='option']");
+        if (e.key==="ArrowDown") { setActive((activeIdx+1)%opts.length); e.preventDefault(); }
+        else if (e.key==="ArrowUp") { setActive((activeIdx-1+opts.length)%opts.length); e.preventDefault(); }
+        else if (e.key==="Enter") {
+            const t = activeIdx>=0 ? current[activeIdx] : current[0];
+            if (t) { location.href = PROFILE_URL(t.code); hide(); }
+        }
+        else if (e.key==="Escape") hide();
+    });
+
+    clearBtn.addEventListener("click", () => {
+        input.value=""; clearBtn.classList.remove("visible"); hide(); input.focus();
+    });
+    document.addEventListener("click", e => {
+        if (!e.target.closest(".search-wrap")) hide();
+    });
+}
+
+/* ── Zone 2: Featured ────────────────────────────────────────────── */
+function initFeatured() {
+    const grid = document.getElementById("featuredGrid");
+
+    const byRegion = {};
+    ALL.forEach(c => {
+        if (!c.has_transport_content || !c.n_measures) return;
+        if (!byRegion[c.region] || c.n_measures > byRegion[c.region].n_measures)
+            byRegion[c.region] = c;
+    });
+    const featured = Object.values(byRegion).sort((a,b) => a.region.localeCompare(b.region));
+    if (!featured.length) { grid.innerHTML = ""; return; }
+
+    Promise.all(featured.map(c =>
+        fetch("data/countries/" + c.code + ".json")
+            .then(r => r.ok ? r.json() : null)
+            .catch(() => null)
+    )).then(profiles => {
+        grid.innerHTML = featured.map((c, i) => {
+            const p = profiles[i];
+            const activeTargets = p ? p.targets.filter(t => t.status==="Active").length : 0;
+            const hasBtr = p ? (p.btr && p.btr.available) : false;
+            return `
+            <a class="featured-card" href="${esc(PROFILE_URL(c.code))}" aria-label="Explore ${esc(c.name)}">
+              <div class="featured-card-top">
+                ${flagImg(c.iso2, "featured-flag")}
+                <span class="featured-name">${esc(c.name)}</span>
+              </div>
+              <p class="featured-region">${esc(c.region)}</p>
+              <div class="featured-stats">
+                <span class="f-badge f-badge-measures">${c.n_measures} measures</span>
+                ${activeTargets ? `<span class="f-badge f-badge-target">${activeTargets} targets</span>` : ""}
+                ${c.has_lts ? `<span class="f-badge f-badge-lts">LTS ✓</span>` : ""}
+                ${hasBtr ? `<span class="f-badge f-badge-btr">BTR ✓</span>` : ""}
+                ${c.transport_share_pct != null
+                    ? `<span class="f-badge f-badge-neutral">transport ${c.transport_share_pct}% of nat. emissions</span>`
+                    : ""}
+              </div>
+            </a>`;
+        }).join("");
+        sendHeight();
+    });
+}
+
+/* ── iframe height ───────────────────────────────────────────────── */
+function sendHeight() {
+    window.parent.postMessage({ type: "ndcTrackerHeight", height: document.body.scrollHeight }, "*");
+}
+window.addEventListener("load", sendHeight);
+new ResizeObserver(sendHeight).observe(document.body);
+
+})();
+</script>
 </body>
 </html>

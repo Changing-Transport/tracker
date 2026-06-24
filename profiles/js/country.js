@@ -1,956 +1,583 @@
-/* ============================================================================
-   GIZ-SLOCAT Transport Tracker — Country Profile renderer (v2)
-   Works both as country.html?country=ISO3 and as a pre-rendered static page
-   (countries/<slug>/index.html) where window.CP_CODE / CP_BASE are baked in.
-   ============================================================================ */
-
-(function () {
+/* ================================================================
+   GIZ-SLOCAT NDC Transport Tracker — Country Profile Renderer
+   profiles/js/country.js  v3
+   ================================================================ */
 "use strict";
 
-const BASE = window.CP_BASE || "";
-const params = new URLSearchParams(location.search);
-const CODE = (window.CP_CODE || params.get("country") || params.get("code") || "").toUpperCase();
-
-if (!CODE) { location.replace(BASE + "index.html"); return; }
-
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g,
-    (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
-const fmt = (n) => n == null ? "—" :
-    Number(n).toLocaleString("en-US", { maximumFractionDigits: 2 });
+const NAVY="#003D5C", TEAL="#00A4BD", GREEN="#9DBE3D", ORANGE="#E8821A", MUTED="#6B7280";
+const ASI_COLOR = { Avoid:NAVY, Shift:TEAL, Improve:GREEN };
 
-const fmtDate = (iso) => {
-    if (!iso) return "";
-    const d = new Date(iso + "T00:00:00");
-    return d.toLocaleDateString("en-US", { year: "numeric", month: "short" });
+const SDG_COLORS = {
+  1:"#E5243B",2:"#DDA63A",3:"#4C9F38",4:"#C5192D",5:"#FF3A21",6:"#26BDE2",
+  7:"#FCC30B",8:"#A21942",9:"#FD6925",10:"#DD1367",11:"#FD9D24",12:"#BF8B2E",
+  13:"#3F7E44",14:"#0A97D9",15:"#56C02B",16:"#00689D",17:"#19486A"
 };
-const year = (iso) => iso ? iso.slice(0, 4) : "";
+const SDG_NAMES = {
+  1:"No Poverty",2:"Zero Hunger",3:"Good Health and Well-being",4:"Quality Education",
+  5:"Gender Equality",6:"Clean Water and Sanitation",7:"Affordable and Clean Energy",
+  8:"Decent Work and Economic Growth",9:"Industry, Innovation and Infrastructure",
+  10:"Reduced Inequalities",11:"Sustainable Cities and Communities",
+  12:"Responsible Consumption and Production",13:"Climate Action",14:"Life Below Water",
+  15:"Life on Land",16:"Peace, Justice and Strong Institutions",17:"Partnerships for the Goals"
+};
+const BENEFIT_ICONS = {
+  "Air pollution reduction":  { label:"Air quality",      icon:`<path d="M3 8h13a3 3 0 1 0-3-3M3 12h17a3 3 0 1 1-3 3M3 16h11a3 3 0 1 1-3 3"/>` },
+  "Health Benefits":          { label:"Health",           icon:`<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/>` },
+  "Better social inclusion":  { label:"Social inclusion", icon:`<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>` },
+  "Economic benefits":        { label:"Economic",         icon:`<path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>` },
+  "Road safety improvements": { label:"Road safety",      icon:`<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/>` },
+  "Congestion reduction":     { label:"Less congestion",  icon:`<path d="M5 17h14M5 17a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2M7 17v3M17 17v3M7 11h.01M17 11h.01"/>` },
+  "Improved accessibility":   { label:"Accessibility",    icon:`<circle cx="12" cy="4" r="2"/><path d="M19 13v-2a7 7 0 0 0-14 0v2M12 6v9M8 21l4-6 4 6"/>` }
+};
+const ADAPT_ICONS = {
+  "Structural and Technical":                 `<path d="M2 22h20M6 18V9l6-4 6 4v9M9 18v-5h6v5"/>`,
+  "Institutional and Regulatory":             `<path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h.01M9 13h.01M9 17h.01M15 9h.01M15 13h.01M15 17h.01"/>`,
+  "Informational and Educational":            `<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>`,
+  "Other adaptation and resilience measures": `<circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>`
+};
+const PARIS_DEADLINES = [
+  {year:2015,label:"Paris Agreement"},
+  {year:2020,label:"NDC update due"},
+  {year:2025,label:"NDC update due"},
+  {year:2030,label:"NDC update due"}
+];
+const GEN_NOTE = `Our definition of NDC generations:
+\u2022 Third-generation NDCs: Any submissions since November 2024, also referred to as NDCs 3.0 or third-round NDCs.
+\u2022 Second-generation NDCs: Any NDC submissions between January 2020 and October 2024.
+\u2022 First-generation NDCs: Any NDC submissions mostly up to December 2019; once a country ratified the Paris Agreement, their INDCs formally became their NDC.`;
 
-const NAVY = "#003D5C", TEAL = "#00A4BD", GREEN = "#9DBE3D", ORANGE = "#E8821A";
-const FONT = "'Source Sans 3', sans-serif";
+/* ── Bootstrap ───────────────────────────────────────────────────── */
+const params = new URLSearchParams(location.search);
+const CODE   = (window.CP_CODE || params.get("country") || "COL").toUpperCase();
+const BASE   = window.CP_BASE  || "";
 
-const DOC_LABEL = { NDC: "NDC", LTS: "LTS", BTR: "BTR",
-    "National policy document": "NPD", Other: "DOC" };
-
-const flagSrc = (iso2, size) =>
-    iso2 ? `${BASE}../assets/flags/${iso2}.png` : "";
-const flagFallback = (iso2, size) =>
-    `this.onerror=null;this.src='https://flagcdn.com/w${size}/${iso2}.png'`;
-
-let PROFILE = null;
+function comparisonUrl(mode, opts) {
+  const base = BASE + "../comparison/index_c.html";
+  if (mode === "track")   return `${base}?mode=track&c=${encodeURIComponent(opts.c)}`;
+  if (mode === "compare") return `${base}?mode=compare&c1=${encodeURIComponent(opts.c1||"")}&c2=${encodeURIComponent(opts.c2||"")}&c3=${encodeURIComponent(opts.c3||"")}&gen=${encodeURIComponent(opts.gen||"latest")}`;
+  return base;
+}
+function buildDocUrlMap(docs) {
+  const m={}; docs.forEach(d=>{ if(d.url) m[d.id]=d.url; }); return m;
+}
+function makePanel(id) {
+  const p = document.createElement("div");
+  p.className="cp-detail-panel"; p.id=id;
+  p.innerHTML=`<button class="cp-detail-panel-close" aria-label="Close">\xd7</button><div class="cp-detail-panel-title"></div><div class="cp-detail-panel-body"></div>`;
+  return p;
+}
 
 fetch(`${BASE}data/countries/${CODE}.json`)
-    .then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
-    .then(render)
-    .catch(() => {
-        document.querySelector("main").innerHTML =
-            `<div class="cp-empty" style="margin-top:2rem;">No profile found for
-             code “${esc(CODE)}”. <a href="${BASE}index.html">Browse all countries</a>.</div>`;
-    });
+  .then(r=>{ if(!r.ok) throw new Error(r.status); return r.json(); })
+  .then(profile=>{
+    fetch(`${BASE}data/ghg.json`).then(r=>r.ok?r.json():null).catch(()=>null)
+      .then(ghg=>render(profile,ghg));
+  })
+  .catch(()=>{
+    const el=document.getElementById("cp-story");
+    if(el) el.innerHTML=`<p style="color:${ORANGE};">Could not load profile for <strong>${CODE}</strong>.</p>`;
+  });
 
-function render(p) {
-    PROFILE = p;
-    document.title = `${p.name} — Transport in Climate Policy | GIZ-SLOCAT Transport Tracker`;
-    renderHero(p);
-    renderStory(p);
-    renderTrend(p);
-    renderJourney(p);
-    renderDocCards(p);
-    renderTargets(p);
-    renderMeasures(p);
-    renderAdaptation(p);
-    renderBenefits(p);
-    renderBtr(p);
-    renderCoalitions(p);
-    renderSimilar(p);
-    renderCompareLink(p);
-    renderResources(p);
-    const gen = p.meta && p.meta.generated;
-    document.getElementById("cp-footer-meta").textContent =
-        `Profile: ${p.name} (${p.code})` +
-        (gen ? ` · Data refreshed: ${fmtDate(gen)}` : "");
+/* ================================================================ RENDER */
+function render(p, ghg) {
+  document.title=`${p.name} \u2014 Transport in Climate Policy | GIZ-SLOCAT Transport Tracker`;
+  const flagEl=document.getElementById("cp-flag");
+  if(flagEl){ flagEl.src=`${BASE}../assets/flags/${p.iso2}.png`; flagEl.onerror=()=>{flagEl.src=`https://flagcdn.com/w160/${p.iso2}.png`;}; flagEl.alt=`${p.name} flag`; }
+  const nameEl=document.getElementById("cp-name"); if(nameEl) nameEl.textContent=p.name;
+  const subEl=document.getElementById("cp-sub"); if(subEl) subEl.textContent=[p.region,p.income,p.annex].filter(Boolean).join(" \xb7 ");
+  if(ghg&&ghg[p.code]) p.emissions={...(p.emissions||{}),...ghg[p.code]};
+  const docUrlMap=buildDocUrlMap(p.documents);
+  renderKPIs(p); renderEUNote(p); renderStory(p); renderTargetAxis(p);
+  renderJourney(p,docUrlMap); renderTargets(p,docUrlMap); renderMeasures(p,docUrlMap);
+  renderBenefits(p); renderAdaptation(p,docUrlMap); renderCoalitions(p);
+  renderSimilar(p); renderResources(p); setupExport(p);
+  const gen=p.meta&&p.meta.generated;
+  const fm=document.getElementById("cp-footer-meta");
+  if(fm) fm.textContent=`Profile: ${p.name} (${p.code})${gen?" \xb7 Data generated "+gen:""}`;
 }
 
-/* ── Hero ─────────────────────────────────────────────────────────── */
-function renderHero(p) {
-    document.getElementById("cp-name").textContent = p.name;
-    document.getElementById("cp-region").textContent = p.region || "—";
-    document.getElementById("cp-income").textContent = p.income || "—";
-    const flag = document.getElementById("cp-flag");
-    if (p.iso2) {
-        flag.src = flagSrc(p.iso2, 160);
-        flag.setAttribute("onerror", flagFallback(p.iso2, 160));
-        flag.alt = `Flag of ${p.name}`;
-    } else { flag.remove(); }
-
-    const dates = p.documents.map((d) => d.date).filter(Boolean).sort();
-    const lines = [];
-    if (dates.length) lines.push(`Latest assessed submission: ${fmtDate(dates[dates.length - 1])}`);
-    if (p.meta && p.meta.generated) lines.push(`Database last updated: ${fmtDate(p.meta.generated)}`);
-    document.getElementById("cp-updated").innerHTML = lines.map(esc).join("<br>");
-
-    if (p.reports_via_eu) document.getElementById("cp-eu-note").hidden = false;
-
-    // Assessed documents — clickable, linking to the original source
-    const items = p.documents.map((d) => {
-        const label = esc(d.version || d.name);
-        return d.url
-            ? `<a class="cp-hero-doclink" href="${esc(d.url)}" target="_blank"
-                 rel="noopener" title="Open the original document">${label}</a>`
-            : label;
-    });
-    document.getElementById("cp-docs-list").innerHTML = items.length
-        ? items.join(", ")
-        : `<span class="cp-soft">No documents assessed yet.</span>`;
-
-    // Memberships
-    const m = p.memberships || {};
-    const chips = [];
-    if (m.g20) chips.push("G20");
-    if (m.g7) chips.push("G7");
-    if (m.oecd) chips.push("OECD");
-    if (m.eu27) chips.push("EU27");
-    if (m.mena) chips.push("MENA");
-    document.getElementById("cp-memberships").innerHTML = chips.length
-        ? chips.map((c) => `<span class="cp-chip">${esc(c)}</span>`).join("")
-        : `<span class="cp-soft">No tracked group memberships.</span>`;
-
-    document.getElementById("cp-annex").textContent = p.annex || "—";
-
-    // Long-term direction
-    const lt = [];
-    lt.push(p.net_zero_target
-        ? `<span class="cp-chip cp-chip-green">Net-zero target ✓</span>`
-        : `<span class="cp-chip">No net-zero target</span>`);
-    if (p.ice_phaseout && p.ice_phaseout.has) {
-        const y = p.ice_phaseout.year ? ` by ${esc(p.ice_phaseout.year)}` : "";
-        const t = p.ice_phaseout.type ? ` (${esc(p.ice_phaseout.type)})` : "";
-        lt.push(`<span class="cp-chip cp-chip-green">ICE phase-out${y}${t}</span>`);
-    } else {
-        lt.push(`<span class="cp-chip">No ICE phase-out target</span>`);
-    }
-    document.getElementById("cp-longterm").innerHTML =
-        `<div class="cp-chips">${lt.join("")}</div>`;
-
-    // Emissions
-    const e = p.emissions || {};
-    const box = document.getElementById("cp-emissions");
-    if (e.total_mt == null) {
-        box.innerHTML = `<span class="cp-soft">No emissions data available for this country.</span>`;
-        return;
-    }
-    const sharePct = e.transport_share_pct != null
-        ? Math.min(100, Math.max(2, e.transport_share_pct)) : 0;
-    box.innerHTML = `
-      <div class="cp-embar-label"><span>Transport CO₂e</span><span>Total CO₂e (Mt)</span></div>
-      <div class="cp-embar">
-        <div class="cp-embar-fill" style="width:${sharePct}%;">${fmt(e.transport_mt)}</div>
-        <div class="cp-embar-total">${fmt(e.total_mt)}</div>
-      </div>
-      <p class="cp-emissions-note">Greenhouse-gas emissions in million tonnes CO₂-equivalent, ${e.year}.</p>
-      <p class="cp-emissions-share">Transport share of total emissions:
-        <strong>${e.transport_share_pct != null ? e.transport_share_pct + "%" : "—"}</strong></p>
-      <p class="cp-emissions-source"><strong>Source:</strong> ${esc(e.source)}, ${e.year}</p>`;
+/* ── KPIs ─────────────────────────────────────────────────────────── */
+function renderKPIs(p) {
+  const el=document.getElementById("cp-kpi"); if(!el)return;
+  const am=p.measures.filter(m=>m.status==="Active").length;
+  const at=p.targets.filter(t=>t.status==="Active").length;
+  const e=p.emissions||{};
+  const kpis=[
+    {num:am,label:"Transport measures",sub:"in active documents"},
+    {num:at,label:"Transport targets",sub:"in active documents"},
+    {num:e.transport_share_pct!=null?e.transport_share_pct:"\u2014",unit:e.transport_share_pct!=null?"%":"",label:"Transport emissions",sub:"share of national total"},
+    {num:e.transport_mt!=null?e.transport_mt:"\u2014",unit:e.transport_mt!=null?" Mt":"",label:"Transport CO\u2082e",sub:[e.year,e.source].filter(Boolean).join(" \xb7 ")}
+  ];
+  if(e.transport_per_capita!=null) kpis.push({num:e.transport_per_capita,unit:" t/cap",label:"Per capita transport",sub:"CO\u2082e per person"});
+  if(e.transport_sector_rank!=null) kpis.push({num:e.transport_sector_rank,label:"Sector rank",sub:"by emissions"});
+  el.innerHTML=kpis.map(k=>`<div class="cp-kpi"><div class="cp-kpi-num">${esc(k.num)}${k.unit?`<span class="unit">${esc(k.unit)}</span>`:""}</div><div class="cp-kpi-label">${esc(k.label)}</div><div class="cp-kpi-sub">${esc(k.sub||"")}</div></div>`).join("");
 }
 
-/* ── Story at a glance ────────────────────────────────────────────── */
+/* ── EU note ──────────────────────────────────────────────────────── */
+function renderEUNote(p) {
+  const el=document.getElementById("cp-eu-note"); if(!el)return;
+  if(p.reports_via_eu){ el.hidden=false; el.innerHTML=`<strong>Reports collectively through the EU NDC.</strong> NDC information below refers to the joint submission of the European Union and its 27 member states.`; }
+}
+
+/* ── Story ────────────────────────────────────────────────────────── */
 function renderStory(p) {
-    const ndcs = p.documents.filter((d) => d.type === "NDC");
-    const lts = p.documents.filter((d) => d.type === "LTS");
-    const firstNdc = ndcs.map((d) => d.date).filter(Boolean).sort()[0];
-    const activeNdc = ndcs.find((d) => d.status === "Active");
-    const firstTransportTarget = p.documents
-        .filter((d) => d.transport.mitigation_target && d.date)
-        .sort((a, b) => a.date.localeCompare(b.date))[0];
-    const activeMeasures = p.measures.filter((m) => m.status === "Active").length;
+  const el=document.getElementById("cp-story"); if(!el)return;
+  const e=p.emissions||{};
+  const am=p.measures.filter(m=>m.status==="Active").length;
+  const at=p.targets.filter(t=>t.status==="Active").length;
+  const aa=p.adaptation.filter(a=>a.status==="Active").length;
+  const asi=p.asi_summary||{};
+  const topAsi=Object.entries(asi).sort((a,b)=>b[1]-a[1]).slice(0,1).map(x=>x[0]);
+  const cats=p.category_summary||{};
+  const topCats=Object.entries(cats).sort((a,b)=>b[1]-a[1]).slice(0,2).map(x=>x[0]);
+  const ndcN=p.documents.filter(d=>d.type==="NDC").length;
+  const hasLTS=p.documents.some(d=>d.type==="LTS"&&d.status==="Active");
 
-    const bits = [];
-    if (ndcs.length) {
-        bits.push(`<strong>${esc(p.name)}</strong> has submitted
-            <strong>${ndcs.length} NDC document${ndcs.length > 1 ? "s" : ""}</strong>
-            ${firstNdc ? `since ${year(firstNdc)}` : ""}${p.reports_via_eu
-                ? " (jointly through the European Union)" : ""}`);
-    } else {
-        bits.push(`<strong>${esc(p.name)}</strong> has no assessed NDC in the database yet`);
-    }
-    if (lts.length) bits.push(`a long-term strategy is in place`);
-    if (firstTransportTarget) {
-        bits.push(`a transport target first appeared in the
-            <strong>${esc(firstTransportTarget.version || firstTransportTarget.name)}</strong>
-            (${year(firstTransportTarget.date)})`);
-    } else if (activeNdc && !activeNdc.transport.mitigation_target) {
-        bits.push(`the current NDC does not yet set a dedicated transport target`);
-    }
-    if (activeMeasures) {
-        bits.push(`the documents currently in force contain
-            <strong>${activeMeasures} transport mitigation measure${activeMeasures > 1 ? "s" : ""}</strong>`);
-    }
-    const e = p.emissions || {};
-    if (e.transport_share_pct != null) {
-        bits.push(`transport accounts for <strong>${e.transport_share_pct}%</strong>
-            of national emissions (${esc(e.source)}, ${e.year})`);
-    }
-    document.getElementById("cp-story").innerHTML = bits.join(" · ") + ".";
+  let h=`<p><strong>${esc(p.name)}</strong> has submitted <strong>${ndcN} NDC${ndcN>1?"s":""}</strong>`;
+  if(hasLTS) h+=` and a <strong>long-term strategy</strong>`;
+  h+=` under the Paris Agreement. `;
+  if(e.transport_share_pct!=null) h+=`Transport accounts for <span class="hl">${e.transport_share_pct}% of national emissions</span> (${e.transport_mt} Mt CO\u2082e in ${e.year}). `;
+  if(e.transport_per_capita!=null) h+=`Per capita transport emissions stand at <strong>${e.transport_per_capita} t CO\u2082e</strong>. `;
+  if(e.transport_sector_rank!=null){ const ord=["1st","2nd","3rd"][e.transport_sector_rank-1]||e.transport_sector_rank+"th"; h+=`Transport is the <span class="hl">${ord} largest emitting sector</span>. `; }
+  h+=`</p><p>Its active documents `;
+  h+=at>0?`set <strong>${at} transport target${at>1?"s":""}</strong>`:`<strong>do not set a transport target</strong>`;
+  h+=` and `;
+  h+=am>0?`include <strong>${am} transport mitigation measure${am>1?"s":""}</strong>`:`<strong>do not include transport mitigation measures</strong>`;
+  if(am>0&&topAsi.length){
+    h+=`, weighted toward <strong>${esc(topAsi[0])}</strong> approaches`;
+    if(topCats.length===2) h+=`, with <strong>${esc(topCats[0])}</strong> and <strong>${esc(topCats[1])}</strong> as the leading categories`;
+    else if(topCats.length===1) h+=`, with <strong>${esc(topCats[0])}</strong> as the leading category`;
+  }
+  h+=`. `;
+  h+=aa>0?`It also addresses <strong>transport adaptation</strong> (${aa} measure${aa>1?"s":""}).`:`It does not address transport adaptation.`;
+  h+=`</p>`;
+  if(p.net_zero_target||(p.coalitions&&p.coalitions.length)){
+    h+=`<p>`;
+    if(p.net_zero_target) h+=`${esc(p.name)} has committed to a <span class="hl">net-zero target</span>. `;
+    if(p.coalitions&&p.coalitions.length) h+=`It has joined <strong>${p.coalitions.length} international transport coalition${p.coalitions.length>1?"s":""}</strong>.`;
+    h+=`</p>`;
+  }
+  el.innerHTML=h;
 }
 
-/* ── Emissions trend & target horizon ─────────────────────────────── */
-const SCOPE_META = {
-    "transport":    { color: GREEN,  label: "Transport GHG target" },
-    "economy-wide": { color: NAVY,   label: "Economy-wide GHG target" },
-    "net-zero":     { color: ORANGE, label: "Net-zero target" },
-};
+/* ── Target axis — pins → shared detail panel below ──────────────── */
+function renderTargetAxis(p) {
+  const el=document.getElementById("cp-target-axis"); if(!el)return;
+  const years=p.target_years||[];
+  if(!years.length){ el.innerHTML=`<div class="cp-empty">No target years recorded.</div>`; return; }
+  const seen={};
+  const uniq=years.filter(y=>{ const k=y.year+y.scope; if(seen[k])return false; seen[k]=1; return true; });
 
-function renderTrend(p) {
-    const section = document.getElementById("cp-trend-section");
-    const sub = document.getElementById("cp-trend-sub");
-    const card = document.getElementById("cp-trend-card");
-    const axis = document.getElementById("cp-target-axis");
-    const legend = document.getElementById("cp-trend-legend");
-    const ty = p.target_years || [];
-    const tr = p.trends;
+  el.innerHTML=uniq.map((y,i)=>{
+    const matching=p.targets.filter(t=>t.year===y.year&&t.status==="Active");
+    const hasQ=matching.length>0;
+    return `<div class="cp-target-pin${hasQ?" clickable":""}" data-pin="${i}">
+      <div class="cp-target-pin-year">${esc(y.year)}</div>
+      <div class="cp-target-pin-label">${esc(y.scope)}</div>
+      ${hasQ?`<div class="cp-target-pin-hint">\u25be detail</div>`:""}
+    </div>`;
+  }).join("");
 
-    if (!tr && !ty.length) return; // nothing honest to show — keep hidden
-    section.hidden = false;
+  // Panel below
+  const panel=makePanel("cp-target-detail-panel");
+  el.parentNode.insertBefore(panel,el.nextSibling);
+  panel.querySelector(".cp-detail-panel-close").addEventListener("click",()=>{
+    panel.classList.remove("open");
+    el.querySelectorAll(".cp-target-pin").forEach(p=>p.classList.remove("selected"));
+  });
 
-    const scopes = [...new Set(ty.map((t) => t.scope))];
-    legend.innerHTML = scopes.map((s) =>
-        `<span style="--lg:${SCOPE_META[s].color}" class="lg-dyn">${esc(SCOPE_META[s].label)}</span>`
-    ).join("");
+  el.querySelectorAll(".cp-target-pin.clickable").forEach(pin=>{
+    const idx=+pin.dataset.pin;
+    const y=uniq[idx];
+    const matching=p.targets.filter(t=>t.year===y.year&&t.status==="Active");
+    pin.addEventListener("click",()=>{
+      const already=pin.classList.contains("selected");
+      el.querySelectorAll(".cp-target-pin").forEach(p=>p.classList.remove("selected"));
+      if(already){ panel.classList.remove("open"); return; }
+      pin.classList.add("selected");
+      panel.querySelector(".cp-detail-panel-title").textContent=`${y.year} \u2014 ${y.scope}`;
+      panel.querySelector(".cp-detail-panel-body").innerHTML=matching.map(t=>`
+        <div class="cp-pin-pop-item">
+          <div class="cp-pin-pop-type">${esc(t.area||t.type||"")}</div>
+          <div class="cp-pin-pop-content">${esc(t.content)}</div>
+          <div class="cp-pin-pop-meta">${esc(t.conditionality||"")}${t.conditionality&&(t.version||t.document)?" \xb7 ":""}${esc(t.version||t.document||"")}</div>
+        </div>`).join("");
+      panel.classList.add("open");
+      panel.scrollIntoView({behavior:"smooth",block:"nearest"});
+    });
+  });
+}
 
-    if (tr && tr.years && tr.years.length) {
-        axis.remove();
-        sub.textContent =
-            `${p.name}'s emissions over time (${tr.source}) and the years its
-             active GHG targets point to.`;
-        const maxTargetYear = ty.length ? Math.max(...ty.map((t) => t.year)) : 0;
-        const lastDataYear = tr.years[tr.years.length - 1];
-        const pad = Math.max(maxTargetYear, lastDataYear) + 2;
+/* ── Journey — timeline line + version labels + detail panel ─────── */
+function renderJourney(p, docUrlMap) {
+  const wrap=document.getElementById("cp-journey"); if(!wrap)return;
+  const docs=p.documents;
 
-        const markerPlugin = {
-            id: "cpTargetMarkers",
-            afterDatasetsDraw(chart) {
-                const { ctx, chartArea, scales } = chart;
-                ty.forEach((t) => {
-                    const x = scales.x.getPixelForValue(t.year);
-                    if (x < chartArea.left || x > chartArea.right) return;
-                    ctx.save();
-                    ctx.strokeStyle = SCOPE_META[t.scope].color;
-                    ctx.setLineDash([5, 4]);
-                    ctx.lineWidth = 2;
-                    ctx.beginPath();
-                    ctx.moveTo(x, chartArea.top);
-                    ctx.lineTo(x, chartArea.bottom);
-                    ctx.stroke();
-                    ctx.setLineDash([]);
-                    ctx.fillStyle = SCOPE_META[t.scope].color;
-                    ctx.font = `700 11px ${FONT}`;
-                    ctx.textAlign = "center";
-                    ctx.fillText(String(t.year), x, chartArea.top - 4);
-                    ctx.restore();
-                });
-            },
-        };
-
-        new Chart(document.getElementById("cp-trend-chart"), {
-            type: "line",
-            data: {
-                datasets: [
-                    { label: "Total GHG (Mt CO₂e)",
-                      data: tr.years.map((y, i) => ({ x: y, y: tr.total[i] })),
-                      borderColor: TEAL, backgroundColor: TEAL,
-                      pointRadius: 0, borderWidth: 2.5, tension: 0.2 },
-                    { label: "Transport GHG (Mt CO₂e)",
-                      data: tr.years.map((y, i) => ({ x: y, y: tr.transport[i] })),
-                      borderColor: GREEN, backgroundColor: GREEN,
-                      pointRadius: 0, borderWidth: 2.5, tension: 0.2 },
-                ],
-            },
-            options: {
-                plugins: { legend: { position: "bottom",
-                    labels: { font: { family: FONT } } } },
-                scales: {
-                    x: { type: "linear", min: tr.years[0], max: pad,
-                         ticks: { callback: (v) => String(v), precision: 0 } },
-                    y: { beginAtZero: true,
-                         title: { display: true, text: "Mt CO₂e" } },
-                },
-            },
-            plugins: [markerPlugin],
-        });
-        return;
-    }
-
-    // No EDGAR series yet — show the target horizon as an honest axis strip.
-    card.remove();
-    sub.textContent =
-        `The years ${p.name}'s active GHG targets point to. An emissions
-         trend line will appear here once the EDGAR time series is added
-         to the repository.`;
-    const years_ = ty.map((t) => t.year);
-    const now = new Date().getFullYear();
-    const min = Math.min(now, ...years_) - 2;
-    const max = Math.max(...years_) + 3;
-    const posPct = (y) => ((y - min) / (max - min)) * 100;
-    axis.innerHTML = `
-      <div class="cp-axis">
-        <div class="cp-axis-line"></div>
-        <div class="cp-axis-now" style="left:${posPct(now)}%;"
-             title="Today">${now}</div>
-        ${ty.map((t) => `
-          <div class="cp-axis-dot" style="left:${posPct(t.year)}%;
-               --dot:${SCOPE_META[t.scope].color};"
-               title="${esc(SCOPE_META[t.scope].label)} — ${t.year}">
-            <span>${t.year}</span>
-          </div>`).join("")}
+  // Cards row — use d.version for the label
+  wrap.innerHTML=docs.map((d,i)=>{
+    const type=d.type.toLowerCase();
+    const active=d.status==="Active";
+    const tc=d.transport||{};
+    const year=d.date?d.date.slice(0,4):"";
+    return `<div class="cp-jcard${active?" active":""}" data-idx="${i}">
+        <div class="cp-jcard-inner">
+          <span class="cp-jcard-type ${type}">${esc(d.type)}</span>
+          <div class="cp-jcard-name">${esc(d.version)}</div>
+          ${year?`<div class="cp-jcard-year">${year}</div>`:""}
+          <div class="cp-jcard-status"><span class="cp-jcard-dot ${tc.has_content?"has":"no"}"></span>${esc(d.status)}</div>
+        </div>
+        ${i<docs.length-1?`<span class="cp-jcard-arrow">\u203a</span>`:""}
       </div>`;
-}
+  }).join("");
 
-/* ── Policy journey (clickable) ───────────────────────────────────── */
-function docSorted(p) {
-    return [...p.documents].sort((a, b) =>
-        (a.date || "9999").localeCompare(b.date || "9999"));
-}
+  // Timeline bar
+  const years=docs.map(d=>d.date?+d.date.slice(0,4):null).filter(Boolean);
+  const minY=Math.min(...years,2015), maxY=Math.max(...years,new Date().getFullYear()+1);
+  const span=maxY-minY||1;
 
-function renderJourney(p) {
-    const track = document.getElementById("cp-journey");
-    const detail = document.getElementById("cp-journey-detail");
-    const docs = docSorted(p);
+  const tlBar=document.createElement("div");
+  tlBar.style.cssText="position:relative;height:40px;margin:0.5rem 0.4rem 0;";
 
-    const nodes = docs.map((d, i) => {
-        const cls = ["cp-jnode",
-            d.status === "Active" ? "cp-active" : "cp-archived"].join(" ");
-        const transport = d.transport.has_content;
-        const tag = transport === true
-            ? `<span class="cp-jcard-tag yes">transport content</span>`
-            : transport === false
-                ? `<span class="cp-jcard-tag no">no transport content</span>` : "";
-        const eu = d.via_eu ? `<span class="cp-jcard-tag via-eu">via EU NDC</span>` : "";
-        return `
-          <div class="${cls}" data-doctype="${esc(d.type)}" data-idx="${i}"
-               role="button" tabindex="0"
-               aria-label="Show details of ${esc(d.version || d.name)}">
-            <span class="cp-jnode-year">${year(d.date) || "—"}</span>
-            <div class="cp-jdot">${esc(DOC_LABEL[d.type] || "DOC")}</div>
-            <div class="cp-jcard">
-              <div class="cp-jcard-name">${esc(d.version || d.name)}</div>
-              <div>${esc(d.status)}</div>
-              ${tag} ${eu}
-            </div>
-          </div>`;
+  // horizontal line
+  const line=document.createElement("div");
+  line.style.cssText="position:absolute;top:16px;left:0;right:0;height:2px;background:linear-gradient(to right,var(--ct-border),var(--ct-green) 80%,var(--ct-border));border-radius:2px;";
+  tlBar.appendChild(line);
+
+  // submission dots
+  years.forEach(yr=>{
+    const pct=((yr-minY)/span*100).toFixed(1);
+    const dot=document.createElement("div");
+    dot.title=yr;
+    dot.style.cssText=`position:absolute;left:${pct}%;top:10px;width:12px;height:12px;border-radius:50%;background:var(--ct-navy);border:2px solid #fff;box-shadow:0 0 0 2px var(--ct-navy);transform:translateX(-50%);z-index:2;`;
+    tlBar.appendChild(dot);
+  });
+
+  // Paris deadlines
+  PARIS_DEADLINES.filter(pd=>pd.year>=minY&&pd.year<=maxY).forEach(pd=>{
+    const pct=((pd.year-minY)/span*100).toFixed(1);
+    const m=document.createElement("div");
+    m.style.cssText=`position:absolute;left:${pct}%;top:0;transform:translateX(-50%);text-align:center;z-index:1;`;
+    m.innerHTML=`<div style="font-size:0.6rem;color:var(--ct-muted);white-space:nowrap;line-height:1;">${esc(pd.label)}</div><div style="width:1px;height:16px;background:var(--ct-muted);margin:0 auto;opacity:0.4;"></div><div style="font-size:0.65rem;font-weight:700;color:var(--ct-muted);">${pd.year}</div>`;
+    tlBar.appendChild(m);
+  });
+  wrap.parentNode.insertBefore(tlBar,wrap.nextSibling);
+
+  // Detail panel
+  const panel=makePanel("cp-journey-detail-panel");
+  tlBar.parentNode.insertBefore(panel,tlBar.nextSibling);
+  panel.querySelector(".cp-detail-panel-close").addEventListener("click",()=>{
+    panel.classList.remove("open");
+    wrap.querySelectorAll(".cp-jcard").forEach(c=>c.classList.remove("open"));
+  });
+
+  wrap.querySelectorAll(".cp-jcard").forEach(card=>{
+    card.querySelector(".cp-jcard-inner").addEventListener("click",()=>{
+      const idx=+card.dataset.idx;
+      const d=docs[idx];
+      const tc=d.transport||{};
+      const counts=d.counts||{};
+      const already=card.classList.contains("open");
+      wrap.querySelectorAll(".cp-jcard").forEach(c=>c.classList.remove("open"));
+      if(already){ panel.classList.remove("open"); return; }
+      card.classList.add("open");
+      const year=d.date?d.date.slice(0,4):"";
+      const checks=[
+        {label:"Mitigation measures",val:tc.mitigation_measures},
+        {label:"Transport targets",  val:tc.mitigation_target},
+        {label:"Adaptation measures",val:tc.adaptation_measures},
+      ];
+      panel.querySelector(".cp-detail-panel-title").innerHTML=
+        `${esc(d.version)} <span style="font-weight:400;color:var(--ct-muted);">${esc(d.type)} \xb7 ${esc(d.status)}${year?" ("+year+")":""}</span>`;
+      panel.querySelector(".cp-detail-panel-body").innerHTML=tc.has_content?`
+        <div class="cp-jcard-checks">${checks.map(c=>`<div class="cp-jcard-check ${c.val?"on":"off"}">${c.val?"\u2713":"\u25cb"} ${esc(c.label)}</div>`).join("")}</div>
+        <div class="cp-jcard-count-row">${counts.measures?`<span>${counts.measures} measures</span>`:""} ${counts.targets?`<span>${counts.targets} targets</span>`:""} ${counts.adaptation?`<span>${counts.adaptation} adaptation</span>`:""}</div>
+        <div class="cp-jcard-det-links">
+          ${d.url?`<a href="${esc(d.url)}" target="_blank" rel="noopener" class="cp-jcard-det-link">View document \u2197</a>`:""}
+          <a href="${comparisonUrl("track",{c:p.code})}" target="_blank" rel="noopener" class="cp-jcard-det-link secondary">Compare evolution in NDC Comparison \u2192</a>
+        </div>`
+        :`<p style="color:var(--ct-muted);font-size:0.88rem;">No transport content assessed in this document.</p>
+        <div class="cp-jcard-det-links"><a href="${comparisonUrl("track",{c:p.code})}" target="_blank" rel="noopener" class="cp-jcard-det-link secondary">Compare evolution in NDC Comparison \u2192</a></div>`;
+      panel.classList.add("open");
+      panel.scrollIntoView({behavior:"smooth",block:"nearest"});
     });
+  });
 
-    nodes.push(`
-      <div class="cp-jnode cp-future" data-doctype="BTR" data-idx="btr"
-           role="button" tabindex="0" aria-label="About Biennial Transparency Reports">
-        <span class="cp-jnode-year">next</span>
-        <div class="cp-jdot">BTR</div>
-        <div class="cp-jcard">
-          <div class="cp-jcard-name">Biennial Transparency Report</div>
-          <span class="cp-jcard-tag soon">analysis coming soon</span>
-        </div>
-      </div>`);
-
-    track.innerHTML = nodes.join("");
-
-    let openIdx = null;
-    const open = (node) => {
-        const idx = node.dataset.idx;
-        track.querySelectorAll(".cp-jnode").forEach((n) => n.classList.remove("cp-selected"));
-        if (idx === openIdx) {              // toggle off
-            detail.hidden = true; openIdx = null; return;
-        }
-        openIdx = idx;
-        node.classList.add("cp-selected");
-        detail.hidden = false;
-        if (idx === "btr") {
-            detail.innerHTML = `
-              <div class="cp-card cp-doc-card" data-doctype="BTR" style="max-width:560px;">
-                <div class="cp-doc-card-head">
-                  <div><div class="cp-doc-title">Biennial Transparency Report</div>
-                  <div class="cp-doc-date">The next chapter of the story</div></div>
-                  <span class="cp-pill soon">Coming soon</span>
-                </div>
-                <p style="font-size:0.93rem;">BTRs report what countries are
-                actually doing. This node will become a real document — with
-                its transport measures and implementation status — once BTR
-                data for ${esc(p.name)} enters the database.</p>
-              </div>`;
-        } else {
-            detail.innerHTML = docCard(docs[+idx], { showStatus: true });
-        }
-        if (detail.scrollIntoView)
-            detail.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    };
-    track.addEventListener("click", (e) => {
-        const node = e.target.closest(".cp-jnode");
-        if (node) open(node);
+  // Generation note
+  const noteEl=document.getElementById("cp-journey-note");
+  if(noteEl){
+    noteEl.innerHTML=`<button class="cp-gen-note-toggle" id="gen-note-toggle">\u2139 About NDC generations</button>
+      <div class="cp-gen-note-body" id="gen-note-body" hidden>
+        ${GEN_NOTE.split("\n").map(l=>l.startsWith("\u2022")?`<p style="padding-left:1rem;margin:0.2rem 0;">\u2022 ${esc(l.slice(1).trim())}</p>`:`<p style="margin:0.25rem 0;">${esc(l)}</p>`).join("")}
+      </div>`;
+    document.getElementById("gen-note-toggle").addEventListener("click",()=>{
+      const b=document.getElementById("gen-note-body"); b.hidden=!b.hidden;
     });
-    track.addEventListener("keydown", (e) => {
-        if (e.key !== "Enter" && e.key !== " ") return;
-        const node = e.target.closest(".cp-jnode");
-        if (node) { e.preventDefault(); open(node); }
-    });
-}
-
-/* ── Document cards ───────────────────────────────────────────────── */
-function docCard(d, opts = {}) {
-    const t = d.transport;
-    const li = (label, val) =>
-        `<li class="${val === true ? "yes" : val === false ? "no" : ""}">${esc(label)}</li>`;
-    const counts = d.counts || {};
-    const stats = [
-        counts.targets ? `${counts.targets} target${counts.targets > 1 ? "s" : ""}` : null,
-        counts.measures ? `${counts.measures} mitigation measure${counts.measures > 1 ? "s" : ""}` : null,
-        counts.adaptation ? `${counts.adaptation} adaptation entr${counts.adaptation > 1 ? "ies" : "y"}` : null,
-    ].filter(Boolean).join(" · ");
-    const pill = d.status === "Active"
-        ? `<span class="cp-pill active">Active</span>`
-        : `<span class="cp-pill archived">${esc(d.status)}</span>`;
-    return `
-      <article class="cp-card cp-doc-card" data-doctype="${esc(d.type)}">
-        <div class="cp-doc-card-head">
-          <div>
-            <div class="cp-doc-title">${esc(d.version || d.name)}
-              ${d.via_eu ? `<span class="cp-jcard-tag via-eu">via EU NDC</span>` : ""}</div>
-            <div class="cp-doc-date">${esc(d.type)} · ${fmtDate(d.date)}</div>
-          </div>
-          ${opts.showStatus || d.status !== "Active" ? pill : `<span class="cp-pill active">Active</span>`}
-        </div>
-        ${t.target_summary ? `<p><strong>Transport target:</strong> ${esc(t.target_summary)}</p>` : ""}
-        <ul class="cp-checklist">
-          ${li("Transport mitigation target", t.mitigation_target)}
-          ${li("Transport adaptation target", t.adaptation_target)}
-          ${li("Transport mitigation measures", t.mitigation_measures)}
-          ${li("Transport adaptation measures", t.adaptation_measures)}
-          ${li("Co-benefits of transport action", t.benefits)}
-          ${t.just_transition != null ? li("Reference to just transition", t.just_transition) : ""}
-        </ul>
-        ${stats ? `<p class="cp-measure-meta">${stats} assessed in this document</p>` : ""}
-        ${d.url ? `<a class="cp-doc-link" href="${esc(d.url)}" target="_blank" rel="noopener">Read the original document ↗</a>` : ""}
-      </article>`;
-}
-
-function renderDocCards(p) {
-    const wrap = document.getElementById("cp-doc-cards");
-    const active = p.documents.filter((d) => d.status === "Active");
-    const cards = active.map((d) => docCard(d));
-
-    cards.push(`
-      <article class="cp-card cp-doc-card" data-doctype="BTR">
-        <div class="cp-doc-card-head">
-          <div>
-            <div class="cp-doc-title">Biennial Transparency Report</div>
-            <div class="cp-doc-date">BTR · implementation reporting</div>
-          </div>
-          <span class="cp-pill soon">Coming soon</span>
-        </div>
-        <p style="font-size:0.93rem;">
-          BTRs report what countries are actually doing — the measures
-          implemented, in progress or planned. The tracker is extending its
-          methodology to BTRs to show the gap between commitment and
-          implementation. This card will populate automatically once BTR
-          data for ${esc(p.name)} enters the database.
-        </p>
-      </article>`);
-
-    wrap.innerHTML = cards.join("");
+  }
 }
 
 /* ── Targets ──────────────────────────────────────────────────────── */
-function renderTargets(p) {
-    const all = p.targets.filter((t) =>
-        (t.area || "").toLowerCase().includes("transport"));
-    const sub = document.getElementById("cp-targets-sub");
-    const wrap = document.getElementById("cp-targets");
-    const filters = document.getElementById("cp-target-filters");
-
-    if (!all.length) {
-        sub.textContent = `No transport-specific targets identified in ${p.name}'s assessed documents.`;
-        wrap.innerHTML = `<div class="cp-empty">
-            ${esc(p.name)} has not yet set a quantified transport target in its
-            NDC or LTS. Economy-wide targets may still cover the sector —
-            see the documents above.</div>`;
-        filters.remove();
-        return;
-    }
-    sub.textContent =
-        `Quantified transport commitments extracted verbatim from the documents.`;
-
-    let mode = "Active";
-    const draw = () => {
-        const list = all.filter((t) => mode === "All" || t.status === mode);
-        wrap.innerHTML = list.length ? list.map((t) => `
-          <div class="cp-card cp-target">
-            <div class="cp-target-year"><small>target year</small>${esc(t.year || "—")}</div>
-            <div>
-              <div class="cp-target-meta">
-                <span class="cp-tag ${t.ghg === "GHG" ? "ghg" : "nonghg"}">${esc(t.ghg || "")}</span>
-                ${t.type ? `<span class="cp-tag">${esc(t.type)}</span>` : ""}
-                ${t.conditionality ? `<span class="cp-tag ${/^Conditional/.test(t.conditionality) ? "conditional" : ""}">${esc(t.conditionality)}</span>` : ""}
-                ${t.area && t.area.includes("adaptation") ? `<span class="cp-tag">Adaptation</span>` : ""}
-                ${t.via_eu ? `<span class="cp-jcard-tag via-eu">via EU NDC</span>` : ""}
-              </div>
-              ${t.content ? `<p class="cp-target-content">“${esc(t.content)}”</p>` : ""}
-              <p class="cp-target-src">${esc(t.version || t.document || "")}
-                 ${t.status ? ` · ${esc(t.status)}` : ""}${t.page ? ` · p. ${esc(t.page)}` : ""}</p>
-            </div>
-          </div>`).join("")
-        : `<div class="cp-empty">No ${mode.toLowerCase()} transport targets.</div>`;
-    };
-
-    ["Active", "Archived", "All"].forEach((m, i) => {
-        const b = document.createElement("button");
-        b.className = "cp-filter" + (i === 0 ? " on" : "");
-        b.textContent = m === "All" ? "All documents" : m + " documents";
-        b.onclick = () => {
-            mode = m;
-            filters.querySelectorAll(".cp-filter").forEach((x) => x.classList.remove("on"));
-            b.classList.add("on");
-            draw();
-        };
-        filters.appendChild(b);
-    });
-    draw();
-}
-
-/* ── Mitigation measures ──────────────────────────────────────────── */
-function renderMeasures(p) {
-    const sub = document.getElementById("cp-measures-sub");
-    const wrap = document.getElementById("cp-measures");
-    const filters = document.getElementById("cp-measure-filters");
-    const moreBtn = document.getElementById("cp-measures-more");
-
-    const activeCount = p.measures.filter((m) => m.status === "Active").length;
-    sub.textContent = p.measures.length
-        ? `${activeCount} measures in the documents currently in force
-           (${p.measures.length} across all submissions), classified with the
-           Avoid–Shift–Improve framework. Filter by document to read the
-           story in chronological order.`
-        : `No transport mitigation measures identified in ${p.name}'s documents.`;
-
-    drawAsiChart(p.asi_summary);
-    drawCatChart(p.category_summary);
-    drawModeChart(p);
-
-    if (!p.measures.length) {
-        wrap.innerHTML = `<div class="cp-empty">Nothing to show yet — measures
-            will appear here as soon as they are assessed.</div>`;
-        moreBtn.remove();
-        return;
-    }
-
-    // Document order = chronological submission order (the story's spine)
-    const versionsWithMeasures = new Set(
-        p.measures.map((m) => m.version).filter(Boolean));
-    const docPills = docSorted(p)
-        .filter((d) => d.version && versionsWithMeasures.has(d.version))
-        .filter((d, i, arr) =>
-            arr.findIndex((x) => x.version === d.version) === i);
-
-    const cats = Object.keys(p.category_summary);
-    let docSel = "active";   // "active" | "all" | a specific version
-    let catSel = "All";
-    let expanded = false;
-    const LIMIT = 8;
-
-    const card = (m) => `
-      <div class="cp-card cp-measure">
-        <div class="cp-measure-top">
-          ${m.asi.map((a) => `<span class="cp-asi ${a[0]}" title="${esc(a)}">${a[0]}</span>`).join("")}
-          <span class="cp-measure-instrument">${esc(m.instrument || m.purpose || m.category)}</span>
-          ${m.status !== "Active" ? `<span class="cp-pill archived">Archived</span>` : ""}
-          ${m.via_eu ? `<span class="cp-jcard-tag via-eu">via EU NDC</span>` : ""}
-        </div>
-        ${m.quote ? `<p class="cp-measure-quote">“${esc(m.quote)}”</p>` : ""}
-        <p class="cp-measure-meta">
-          ${esc(m.category || "")}${m.modes.length ? ` · Modes: ${esc(m.modes.join(", "))}` : ""}
-          ${m.geography.length ? ` · ${esc(m.geography.join(", "))}` : ""}
-          · ${esc(m.version || m.document || "")}${m.page ? ` · p. ${esc(m.page)}` : ""}
-          ${m.measure_status ? ` · Status: ${esc(m.measure_status)}` : ""}
-        </p>
+function renderTargets(p, docUrlMap) {
+  const subEl=document.getElementById("cp-targets-sub");
+  const fbar=document.getElementById("cp-target-filters");
+  const listEl=document.getElementById("cp-targets");
+  if(!listEl)return;
+  const active=p.targets.filter(t=>t.status==="Active");
+  if(subEl) subEl.innerHTML=`<strong>${active.length}</strong> transport-related target${active.length!==1?"s":""} in active documents.`;
+  const areas=[...new Set(active.map(t=>t.area).filter(Boolean))];
+  const docTypes=[...new Set(active.map(t=>t.doc_type).filter(Boolean))];
+  if(fbar){
+    fbar.innerHTML=`
+      <div class="cp-filter-row"><span class="cp-filter-label">By type:</span>
+        <button class="cp-filter active" data-type="all">All (${active.length})</button>
+        ${areas.map(a=>`<button class="cp-filter" data-type="${esc(a)}">${esc(a)} (${active.filter(t=>t.area===a).length})</button>`).join("")}
+      </div>
+      <div class="cp-filter-row" style="margin-top:0.4rem;"><span class="cp-filter-label">By document:</span>
+        <button class="cp-filter active" data-doc="all">All</button>
+        ${docTypes.map(dt=>`<button class="cp-filter" data-doc="${esc(dt)}">${esc(dt)}</button>`).join("")}
       </div>`;
+  }
+  let curType="all",curDoc="all";
+  function draw(){
+    const list=active.filter(t=>(curType==="all"||t.area===curType)&&(curDoc==="all"||t.doc_type===curDoc));
+    listEl.innerHTML=list.length?list.map(t=>{
+      const docUrl=t.doc_id?(docUrlMap[t.doc_id]||null):null;
+      return `<div class="cp-measure"><div class="cp-measure-top">
+        <span class="cp-measure-instrument">${esc(t.content||t.type)}</span>
+        ${t.year?`<span class="cp-measure-asi shift">${esc(t.year)}</span>`:""}
+      </div><p class="cp-measure-meta">${esc(t.area||"")}${t.conditionality?" \xb7 "+esc(t.conditionality):""} \xb7 ${docUrl?`<a href="${esc(docUrl)}" target="_blank" rel="noopener" style="color:var(--ct-teal)">${esc(t.version||t.document||"")}</a>`:esc(t.version||t.document||"")}${t.page&&t.page!=="n/a"?" \xb7 p. "+esc(t.page):""}</p></div>`;
+    }).join(""):`<div class="cp-empty">No targets match.</div>`;
+  }
+  if(fbar){
+    fbar.querySelectorAll("[data-type]").forEach(b=>b.addEventListener("click",()=>{fbar.querySelectorAll("[data-type]").forEach(x=>x.classList.remove("active"));b.classList.add("active");curType=b.dataset.type;draw();}));
+    fbar.querySelectorAll("[data-doc]").forEach(b=>b.addEventListener("click",()=>{fbar.querySelectorAll("[data-doc]").forEach(x=>x.classList.remove("active"));b.classList.add("active");curDoc=b.dataset.doc;draw();}));
+  }
+  draw();
+  const cmpLink=document.getElementById("cp-targets-compare");
+  if(cmpLink){cmpLink.href=comparisonUrl("track",{c:p.code});cmpLink.hidden=false;}
+}
 
-    const groupHeader = (d) => `
-      <div class="cp-measure-group" data-doctype="${esc(d.type)}">
-        <span class="cp-jdot" style="width:28px;height:28px;font-size:0.55rem;">
-          ${esc(DOC_LABEL[d.type] || "DOC")}</span>
-        <span><strong>${esc(d.version || d.name)}</strong>
-          · ${fmtDate(d.date)} · ${esc(d.status)}</span>
+/* ── Measures ─────────────────────────────────────────────────────── */
+function renderMeasures(p, docUrlMap) {
+  const subEl=document.getElementById("cp-measures-sub");
+  const fbar=document.getElementById("cp-measure-filters");
+  const listEl=document.getElementById("cp-measures");
+  const moreBtn=document.getElementById("cp-measures-more");
+  if(!listEl)return;
+  const active=p.measures.filter(m=>m.status==="Active");
+  if(subEl) subEl.innerHTML=`<strong>${active.length}</strong> transport mitigation measures in active documents.`;
+
+  const asiC=document.getElementById("cp-asi-chart");
+  if(asiC&&window.Chart){
+    const asi=p.asi_summary||{};
+    new Chart(asiC,{type:"doughnut",
+      data:{labels:Object.keys(asi),datasets:[{data:Object.values(asi),backgroundColor:Object.keys(asi).map(k=>ASI_COLOR[k]||MUTED),borderWidth:0}]},
+      options:{plugins:{legend:{position:"bottom",labels:{font:{family:"Source Sans 3",size:12},padding:12}}},cutout:"60%"}});
+  }
+  const catC=document.getElementById("cp-cat-chart");
+  if(catC&&window.Chart){
+    const cats=p.category_summary||{};
+    new Chart(catC,{type:"bar",
+      data:{labels:Object.keys(cats),datasets:[{data:Object.values(cats),backgroundColor:TEAL,borderRadius:4}]},
+      options:{indexAxis:"y",plugins:{legend:{display:false}},
+        scales:{x:{ticks:{font:{family:"Source Sans 3"}},grid:{display:false}},
+                y:{ticks:{font:{family:"Source Sans 3",size:11},callback:v=>v.length>24?v.slice(0,24)+"\u2026":v},grid:{display:false}}}}});
+  }
+
+  const categories=[...new Set(active.map(m=>m.category).filter(Boolean))];
+  const modes=[...new Set(active.flatMap(m=>m.modes||[]).filter(Boolean))].sort();
+  let curAsi="all",curCat="all",curMode="all",curSearch="",showAll=false;
+
+  if(fbar){
+    fbar.innerHTML=`
+      <div class="cp-filter-row"><span class="cp-filter-label">By A-S-I:</span>
+        <button class="cp-filter active" data-asi="all">All (${active.length})</button>
+        ${["Avoid","Shift","Improve"].map(a=>{const n=active.filter(m=>(m.asi||[]).includes(a)).length;return n?`<button class="cp-filter" data-asi="${a}">${a} (${n})</button>`:""}).join("")}
+      </div>
+      <div class="cp-filter-row" style="margin-top:0.4rem;"><span class="cp-filter-label">By category:</span>
+        <button class="cp-filter active" data-cat="all">All</button>
+        ${categories.map(c=>`<button class="cp-filter" data-cat="${esc(c)}">${esc(c)}</button>`).join("")}
+      </div>
+      ${modes.length?`<div class="cp-filter-row" style="margin-top:0.4rem;"><span class="cp-filter-label">By mode:</span>
+        <button class="cp-filter active" data-mode="all">All</button>
+        ${modes.map(m=>`<button class="cp-filter" data-mode="${esc(m)}">${esc(m)} (${active.filter(x=>(x.modes||[]).includes(m)).length})</button>`).join("")}
+      </div>`:""}
+      <div class="cp-filter-row" style="margin-top:0.5rem;">
+        <input class="cp-search-input" id="cp-measures-search" placeholder="Search measures\u2026" type="text">
       </div>`;
-
-    const draw = () => {
-        let list = p.measures.filter((m) =>
-            (catSel === "All" || m.category === catSel) &&
-            (docSel === "all" ? true :
-             docSel === "active" ? m.status === "Active" :
-             m.version === docSel));
-
-        let html = "";
-        let count = 0;
-        const shownMax = expanded ? Infinity : LIMIT;
-
-        if (docSel === "all") {
-            // chronological grouping by document — read the story in order
-            for (const d of docPills) {
-                const group = list.filter((m) => m.version === d.version);
-                if (!group.length) continue;
-                if (count >= shownMax) break;
-                html += groupHeader(d);
-                for (const m of group) {
-                    if (count >= shownMax) break;
-                    html += card(m);
-                    count++;
-                }
-            }
-        } else {
-            for (const m of list) {
-                if (count >= shownMax) break;
-                html += card(m);
-                count++;
-            }
-        }
-        wrap.innerHTML = html ||
-            `<div class="cp-empty">No measures match these filters.</div>`;
-        moreBtn.hidden = expanded || list.length <= LIMIT;
-        moreBtn.textContent = `Show all ${list.length} measures`;
-    };
-
-    // Row 1 — documents, in chronological order
-    const docRow = document.createElement("div");
-    docRow.className = "cp-filterrow";
-    const mkDoc = (key, label) => {
-        const b = document.createElement("button");
-        b.className = "cp-filter" + (key === docSel ? " on" : "");
-        b.textContent = label;
-        b.onclick = () => {
-            docSel = key; expanded = false;
-            docRow.querySelectorAll(".cp-filter").forEach((x) => x.classList.remove("on"));
-            b.classList.add("on");
-            draw();
-        };
-        docRow.appendChild(b);
-    };
-    mkDoc("active", "Active documents");
-    docPills.forEach((d) => mkDoc(d.version, d.version));
-    mkDoc("all", "All — in order");
-    filters.appendChild(docRow);
-
-    // Row 2 — categories
-    const catRow = document.createElement("div");
-    catRow.className = "cp-filterrow";
-    ["All", ...cats].forEach((c, i) => {
-        const b = document.createElement("button");
-        b.className = "cp-filter cp-filter-cat" + (i === 0 ? " on" : "");
-        b.textContent = c === "All" ? "All categories" : c;
-        b.onclick = () => {
-            catSel = c; expanded = false;
-            catRow.querySelectorAll(".cp-filter").forEach((x) => x.classList.remove("on"));
-            b.classList.add("on");
-            draw();
-        };
-        catRow.appendChild(b);
-    });
-    filters.appendChild(catRow);
-
-    moreBtn.onclick = () => { expanded = true; draw(); };
-    draw();
+    fbar.querySelectorAll("[data-asi]").forEach(b=>b.addEventListener("click",()=>{fbar.querySelectorAll("[data-asi]").forEach(x=>x.classList.remove("active"));b.classList.add("active");curAsi=b.dataset.asi;showAll=false;draw();}));
+    fbar.querySelectorAll("[data-cat]").forEach(b=>b.addEventListener("click",()=>{fbar.querySelectorAll("[data-cat]").forEach(x=>x.classList.remove("active"));b.classList.add("active");curCat=b.dataset.cat;showAll=false;draw();}));
+    fbar.querySelectorAll("[data-mode]").forEach(b=>b.addEventListener("click",()=>{fbar.querySelectorAll("[data-mode]").forEach(x=>x.classList.remove("active"));b.classList.add("active");curMode=b.dataset.mode;showAll=false;draw();}));
+    const srch=document.getElementById("cp-measures-search");
+    if(srch) srch.addEventListener("input",()=>{curSearch=srch.value.toLowerCase().trim();showAll=false;draw();});
+  }
+  function draw(){
+    const list=active.filter(m=>(curAsi==="all"||(m.asi||[]).includes(curAsi))&&(curCat==="all"||m.category===curCat)&&(curMode==="all"||(m.modes||[]).includes(curMode))&&(!curSearch||[m.instrument,m.purpose,m.category,m.quote].some(f=>f&&f.toLowerCase().includes(curSearch))));
+    const shown=showAll?list:list.slice(0,6);
+    listEl.innerHTML=shown.map(m=>{
+      const ac=((m.asi&&m.asi[0])||"improve").toLowerCase();
+      const du=m.doc_id?(docUrlMap[m.doc_id]||null):null;
+      return `<div class="cp-measure ${ac}"><div class="cp-measure-top"><span class="cp-measure-instrument">${esc(m.instrument||m.purpose||m.category)}</span>${m.asi&&m.asi.length?`<span class="cp-measure-asi ${ac}">${esc(m.asi.join("/"))}</span>`:""}</div>${m.quote?`<p class="cp-measure-quote">${esc(m.quote)}</p>`:""}<p class="cp-measure-meta">${esc(m.category||"")} \xb7 ${du?`<a href="${esc(du)}" target="_blank" rel="noopener" style="color:var(--ct-teal)">${esc(m.version||m.document||"")}</a>`:esc(m.version||m.document||"")}${m.page?" \xb7 p. "+esc(m.page):""}</p>${m.modes&&m.modes.length?`<div class="cp-measure-tags">${m.modes.map(x=>`<span class="cp-tag">${esc(x)}</span>`).join("")}</div>`:""}</div>`;
+    }).join("")||`<div class="cp-empty">No measures match.</div>`;
+    if(moreBtn){if(list.length>6){moreBtn.hidden=false;moreBtn.textContent=showAll?"Show fewer":`Show all ${list.length} measures`;}else moreBtn.hidden=true;}
+  }
+  if(moreBtn) moreBtn.addEventListener("click",()=>{showAll=!showAll;draw();});
+  draw();
+  const cmpLink=document.getElementById("cp-measures-compare");
+  if(cmpLink){cmpLink.href=comparisonUrl("track",{c:p.code});cmpLink.hidden=false;}
 }
 
-function drawAsiChart(asi) {
-    const el = document.getElementById("cp-asi-chart");
-    const labels = Object.keys(asi);
-    if (!labels.length) { el.closest(".cp-card").innerHTML =
-        `<p class="cp-chart-caption">No A-S-I-classified measures in active documents.</p>`; return; }
-    new Chart(el, {
-        type: "doughnut",
-        data: {
-            labels,
-            datasets: [{
-                data: labels.map((l) => asi[l]),
-                backgroundColor: labels.map((l) =>
-                    l === "Avoid" ? NAVY : l === "Shift" ? TEAL : GREEN),
-                borderWidth: 2, borderColor: "#fff",
-            }],
-        },
-        options: {
-            plugins: { legend: { position: "bottom",
-                labels: { font: { family: FONT } } } },
-            cutout: "60%",
-        },
-    });
-}
+/* ── Co-benefits — icon grid + shared detail panel below ─────────── */
+function renderBenefits(p) {
+  const grid=document.getElementById("cp-benefits");
+  const sdgRow=document.getElementById("cp-sdgs");
+  if(!grid)return;
+  const active=p.benefits.filter(b=>b.status==="Active");
+  const present={};
+  active.forEach(b=>{present[b.type]=b;});
 
-function drawCatChart(cats) {
-    const el = document.getElementById("cp-cat-chart");
-    const labels = Object.keys(cats);
-    if (!labels.length) { el.closest(".cp-card").remove(); return; }
-    new Chart(el, {
-        type: "bar",
-        data: {
-            labels,
-            datasets: [{ data: labels.map((l) => cats[l]),
-                backgroundColor: GREEN, borderRadius: 4 }],
-        },
-        options: {
-            indexAxis: "y",
-            plugins: { legend: { display: false } },
-            scales: {
-                x: { ticks: { precision: 0 } },
-                y: { ticks: { font: { family: FONT, size: 11 },
-                    callback(v) {
-                        const l = this.getLabelForValue(v);
-                        return l.length > 24 ? l.slice(0, 23) + "…" : l;
-                    } } },
-            },
-        },
-    });
-}
+  grid.innerHTML=Object.entries(BENEFIT_ICONS).map(([type,info])=>{
+    const on=!!present[type];
+    return `<div class="cp-benefit ${on?"on":"off"}" data-btype="${esc(type)}" style="cursor:${on?"pointer":"default"}">
+      ${on?`<svg class="cp-benefit-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>`:""}
+      <div class="cp-benefit-icon"><svg viewBox="0 0 24 24">${info.icon}</svg></div>
+      <div class="cp-benefit-label">${esc(info.label)}</div>
+    </div>`;
+  }).join("");
 
-function drawModeChart(p) {
-    const el = document.getElementById("cp-mode-chart");
-    const counts = {};
-    p.measures.filter((m) => m.status === "Active").forEach((m) =>
-        m.modes.forEach((mo) => { counts[mo] = (counts[mo] || 0) + 1; }));
-    const entries = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 12);
-    if (!entries.length) { el.closest(".cp-card").remove(); return; }
-    new Chart(el, {
-        type: "bar",
-        data: {
-            labels: entries.map((e) => e[0]),
-            datasets: [{ data: entries.map((e) => e[1]),
-                backgroundColor: TEAL, borderRadius: 4 }],
-        },
-        options: {
-            indexAxis: "y",
-            plugins: { legend: { display: false } },
-            scales: {
-                x: { ticks: { precision: 0 } },
-                y: { ticks: { font: { family: FONT, size: 11 } } },
-            },
-        },
+  // Shared panel below grid
+  const panel=makePanel("cp-benefits-detail-panel");
+  grid.parentNode.insertBefore(panel,grid.nextSibling);
+  panel.querySelector(".cp-detail-panel-close").addEventListener("click",()=>{
+    panel.classList.remove("open");
+    grid.querySelectorAll(".cp-benefit").forEach(c=>c.classList.remove("selected"));
+  });
+  grid.querySelectorAll(".cp-benefit.on").forEach(card=>{
+    card.addEventListener("click",()=>{
+      const type=card.dataset.btype;
+      const b=present[type];
+      if(!b)return;
+      const already=card.classList.contains("selected");
+      grid.querySelectorAll(".cp-benefit").forEach(c=>c.classList.remove("selected"));
+      if(already){panel.classList.remove("open");return;}
+      card.classList.add("selected");
+      panel.querySelector(".cp-detail-panel-title").textContent=BENEFIT_ICONS[type]?.label||type;
+      panel.querySelector(".cp-detail-panel-body").innerHTML=`
+        ${b.quote?`<p class="cp-pin-pop-content">${esc(b.quote)}</p>`:""}
+        <p class="cp-pin-pop-meta" style="margin-top:0.5rem;">${esc(b.version||b.document||"")}</p>`;
+      panel.classList.add("open");
+      panel.scrollIntoView({behavior:"smooth",block:"nearest"});
     });
+  });
+
+  // SDGs
+  if(sdgRow){
+    const sdgEntry=active.find(b=>/SDG/i.test(b.type));
+    if(sdgEntry&&sdgEntry.quote){
+      const nums=(sdgEntry.quote.match(/SDG\s*(\d+)/gi)||[]).map(s=>s.match(/\d+/)[0]);
+      sdgRow.innerHTML=nums.length?`<span class="cp-sdg-label">SDGs referenced:</span>`+nums.map(n=>`<span class="cp-sdg" style="background:${SDG_COLORS[n]||MUTED}" title="SDG ${n}: ${SDG_NAMES[n]||""}">${n}</span>`).join("") : "";
+    } else sdgRow.innerHTML="";
+  }
 }
 
 /* ── Adaptation ───────────────────────────────────────────────────── */
-function renderAdaptation(p) {
-    const wrap = document.getElementById("cp-adaptation");
-    const active = p.adaptation.filter((a) => a.status === "Active");
-    if (!active.length) {
-        wrap.innerHTML = `<div class="cp-empty">No transport adaptation
-            measures identified in ${esc(p.name)}'s active documents.</div>`;
-        return;
-    }
-    wrap.innerHTML = active.map((a) => `
-      <div class="cp-card cp-measure">
-        <div class="cp-measure-top">
-          <span class="cp-measure-instrument">${esc(a.measure || a.category || "Adaptation measure")}</span>
-          ${a.via_eu ? `<span class="cp-jcard-tag via-eu">via EU NDC</span>` : ""}
-        </div>
-        ${a.quote ? `<p class="cp-measure-quote">“${esc(a.quote)}”</p>` : ""}
-        <p class="cp-measure-meta">
-          ${esc(a.category || "")}${a.modes.length ? ` · Modes: ${esc(a.modes.join(", "))}` : ""}
-          · ${esc(a.version || a.document || "")}${a.page ? ` · p. ${esc(a.page)}` : ""}
-        </p>
-      </div>`).join("");
-}
-
-/* ── Benefits ─────────────────────────────────────────────────────── */
-function renderBenefits(p) {
-    const wrap = document.getElementById("cp-benefits");
-    const active = p.benefits.filter((b) => b.status === "Active");
-    if (!active.length) {
-        wrap.innerHTML = `<div class="cp-empty">No co-benefits of transport
-            climate action identified in ${esc(p.name)}'s active documents.</div>`;
-        return;
-    }
-    wrap.innerHTML = active.map((b) => `
-      <div class="cp-card cp-measure">
-        <div class="cp-measure-top">
-          <span class="cp-measure-instrument">${esc(b.type || "Benefit")}</span>
-        </div>
-        ${b.quote ? `<p class="cp-measure-quote">“${esc(b.quote)}”</p>` : ""}
-        <p class="cp-measure-meta">${esc(b.document || "")}${b.page ? ` · p. ${esc(b.page)}` : ""}</p>
-      </div>`).join("");
-}
-
-/* ── BTR outlook ──────────────────────────────────────────────────── */
-function renderBtr(p) {
-    document.getElementById("cp-btr").innerHTML = `
-      <h3 style="color:var(--cp-navy); margin-bottom:0.4rem;">
-        Tracking implementation through Biennial Transparency Reports</h3>
-      <p style="font-size:0.97rem; max-width:80ch;">
-        NDCs and long-term strategies state what ${esc(p.name)}
-        <em>commits</em> to. Biennial Transparency Reports, submitted under
-        the Paris Agreement's Enhanced Transparency Framework, report what
-        is <em>actually being done</em>. The GIZ-SLOCAT Transport Tracker is
-        extending its methodology to BTRs so each country profile can show
-        the implementation status of transport measures — closing the loop
-        between commitment and action. BTR-based indicators for
-        ${esc(p.name)} will appear on this page automatically once the data
-        enters the database.</p>`;
+function renderAdaptation(p, docUrlMap) {
+  const wrap=document.getElementById("cp-adaptation"); if(!wrap)return;
+  const active=p.adaptation.filter(a=>a.status==="Active");
+  if(!active.length){wrap.innerHTML=`<div class="cp-empty">No transport adaptation measures in active documents.</div>`;return;}
+  const groups={};
+  active.forEach(a=>{(groups[a.category]=groups[a.category]||[]).push(a);});
+  wrap.innerHTML=Object.entries(groups).sort((a,b)=>b[1].length-a[1].length).map(([cat,items])=>`
+    <div class="cp-adapt-group">
+      <div class="cp-adapt-head">
+        <div class="cp-adapt-icon"><svg viewBox="0 0 24 24">${ADAPT_ICONS[cat]||ADAPT_ICONS["Other adaptation and resilience measures"]}</svg></div>
+        <div class="cp-adapt-titles"><div class="cp-adapt-cat">${esc(cat)}</div><div class="cp-adapt-count">${items.length} measure${items.length>1?"s":""}</div></div>
+        <svg class="cp-adapt-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="cp-adapt-body">
+        ${items.map(a=>{
+          const du=a.doc_id?(docUrlMap[a.doc_id]||null):null;
+          return `<div class="cp-adapt-item">
+            <div class="cp-adapt-item-name">${esc(a.measure||"Adaptation measure")}</div>
+            ${a.quote?`<div class="cp-adapt-item-quote">${esc(a.quote)}</div>`:""}
+            <div class="cp-adapt-item-meta">${du?`<a href="${esc(du)}" target="_blank" rel="noopener" style="color:var(--ct-teal)">${esc(a.version||a.document||"")}</a>`:esc(a.version||a.document||"")}${a.modes&&a.modes.length?" \xb7 "+a.modes.map(m=>`<span class="cp-tag">${esc(m)}</span>`).join(""):""} ${a.page?" \xb7 p. "+esc(a.page):""}</div>
+          </div>`;
+        }).join("")}
+      </div>
+    </div>`).join("");
+  wrap.querySelectorAll(".cp-adapt-head").forEach(h=>h.addEventListener("click",()=>h.parentElement.classList.toggle("open")));
+  const cmpLink=document.getElementById("cp-adaptation-compare");
+  if(cmpLink){cmpLink.href=comparisonUrl("track",{c:p.code});cmpLink.hidden=false;}
 }
 
 /* ── Coalitions ───────────────────────────────────────────────────── */
-function renderCoalitions(p) {
-    const box = document.getElementById("cp-coalitions");
-    if (!p.coalitions.length) {
-        box.outerHTML = `<div class="cp-empty">${esc(p.name)} has not joined
-            any of the transport-related coalitions and declarations tracked
-            in the database.</div>`;
-        return;
-    }
-    box.innerHTML = `<ul class="cp-linklist">${p.coalitions
-        .map((c) => `<li>${esc(c)}</li>`).join("")}</ul>`;
+function renderCoalitions(p){
+  const box=document.getElementById("cp-coalitions"); if(!box)return;
+  box.innerHTML=(!p.coalitions||!p.coalitions.length)
+    ?`<div class="cp-empty">${esc(p.name)} has not joined any of the tracked transport coalitions.</div>`
+    :p.coalitions.map(c=>`<div class="cp-coalition"><div class="cp-coalition-icon">\u2713</div><div class="cp-coalition-name">${esc(c)}</div></div>`).join("");
 }
 
-/* ── Similar countries (peer discovery, not ranking) ──────────────── */
-function simChip(c, extraHtml) {
-    return `
-      <a class="cp-sim-chip" href="${BASE}country.html?country=${esc(c.code)}">
-        ${c.iso2 ? `<img class="cp-sim-flag" loading="lazy"
-            src="${flagSrc(c.iso2, 80)}"
-            onerror="${flagFallback(c.iso2, 80)}" alt="">` : ""}
-        <span><strong>${esc(c.name)}</strong>${extraHtml || ""}</span>
-      </a>`;
+/* ── Similar countries ────────────────────────────────────────────── */
+function renderSimilar(p){
+  const wrap=document.getElementById("cp-similar"); if(!wrap)return;
+  const s=p.similar||{};
+  const cats=p.category_summary||{};
+  const top2=Object.entries(cats).sort((a,b)=>b[1]-a[1]).slice(0,2).map(x=>x[0]);
+  const lenses=[
+    {key:"region",    title:"Same region",               note:"Geographic peers"},
+    {key:"emissions", title:"Similar transport share",    note:"Comparable emissions profile"},
+    {key:"priorities",title:"Similar measure priorities", note:top2.join(" \xb7 ")||"Comparable focus areas"}
+  ];
+  wrap.innerHTML=lenses.map(l=>{
+    const list=(s[l.key]||[]).slice(0,5); if(!list.length)return"";
+    return `<div class="cp-lens"><div class="cp-lens-title">${esc(l.title)}</div><div class="cp-lens-note">${esc(l.note)}</div>
+      <div class="cp-lens-countries">${list.map(c=>{
+        const cmpHref=comparisonUrl("compare",{c1:p.code,c2:c.code,gen:"latest"});
+        return `<div class="cp-lens-row"><a class="cp-lens-country" href="${BASE}country.html?country=${esc(c.code)}">
+          <img src="${BASE}../assets/flags/${esc(c.iso2)}.png" onerror="this.onerror=null;this.src='https://flagcdn.com/w40/${esc(c.iso2)}.png'" alt="">
+          <span>${esc(c.name)}</span>
+          ${c.share!=null?`<span class="share">${c.share}%</span>`:""}
+          ${c.shared_focus?`<span class="share" style="font-size:0.7rem;">${esc(c.shared_focus)}</span>`:""}
+        </a><a class="cp-lens-cmp" href="${cmpHref}" target="_blank" rel="noopener" title="Compare with ${esc(p.name)}">\u21c4</a></div>`;
+      }).join("")}</div></div>`;
+  }).join("");
+  const link=document.getElementById("cp-compare-link");
+  if(link) link.href=comparisonUrl("track",{c:p.code});
 }
 
-function renderSimilar(p) {
-    const box = document.getElementById("cp-similar");
-    const s = p.similar || {};
-    const blocks = [];
-
-    if (s.region && s.region.length) {
-        blocks.push(`
-          <div class="cp-sim-block">
-            <h3 class="cp-sim-title">In the same region — ${esc(p.region)}</h3>
-            <div class="cp-sim-row">${s.region.map((c) => simChip(c)).join("")}</div>
-          </div>`);
-    }
-    if (s.emissions && s.emissions.length) {
-        blocks.push(`
-          <div class="cp-sim-block">
-            <h3 class="cp-sim-title">Similar transport share of emissions
-              <span class="cp-sim-note">(${esc(p.name)}: ${p.emissions.transport_share_pct}%)</span></h3>
-            <div class="cp-sim-row">${s.emissions.map((c) =>
-                simChip(c, `<span class="cp-sim-meta"> · ${c.share}%</span>`)).join("")}</div>
-          </div>`);
-    }
-    if (s.priorities && s.priorities.length) {
-        blocks.push(`
-          <div class="cp-sim-block">
-            <h3 class="cp-sim-title">Betting on the same priorities</h3>
-            <p class="cp-sim-note">Countries whose active measures have a
-               similar category mix to ${esc(p.name)}'s.</p>
-            <div class="cp-sim-row">${s.priorities.map((c) =>
-                simChip(c, c.shared_focus
-                    ? `<span class="cp-sim-meta"> · shared focus: ${esc(c.shared_focus)}</span>` : "")).join("")}</div>
-          </div>`);
-    }
-
-    box.innerHTML = blocks.length ? blocks.join("")
-        : `<div class="cp-empty">Not enough comparable data yet to suggest peers.</div>`;
+/* ── Resources ────────────────────────────────────────────────────── */
+function renderResources(p){
+  const pubBox=document.getElementById("cp-publications");
+  if(pubBox){
+    const pubs=(p.publications||[]).filter(pub=>pub.active!=="no");
+    pubBox.innerHTML=pubs.length
+      ?pubs.map(pub=>`<div class="cp-pub"><a href="${esc(pub.url)}" target="_blank" rel="noopener">${esc(pub.title)}</a><div class="cp-pub-meta">${esc(pub.type||"")}${pub.date?" \xb7 "+esc(pub.date):""}</div></div>`).join("")
+      :`<p style="font-size:0.88rem;color:var(--ct-muted);">No country-specific publications yet. <a href="https://changing-transport.org/?s=${encodeURIComponent(p.name)}" target="_blank" rel="noopener">Search Changing Transport \u2192</a></p>`;
+  }
+  const tdcLink=document.getElementById("cp-tdc-link");
+  if(tdcLink&&p.links&&p.links.tdc_search) tdcLink.href=p.links.tdc_search;
+  const dlBox=document.getElementById("cp-downloads");
+  if(dlBox){
+    dlBox.innerHTML=`
+      <button class="cp-dl-btn" id="dl-measures"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18M15 3v18"/></svg>Measures (CSV)</button>
+      <button class="cp-dl-btn" id="dl-targets"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18M15 3v18"/></svg>Targets (CSV)</button>`;
+    document.getElementById("dl-measures").onclick=()=>downloadCSV(p.measures,`${p.code}_measures.csv`);
+    document.getElementById("dl-targets").onclick=()=>downloadCSV(p.targets,`${p.code}_targets.csv`);
+  }
 }
 
-/* ── Resources: publications, TDC, downloads, references ──────────── */
-function toCsv(rows, columns) {
-    const q = (v) => {
-        const s = String(v ?? "");
-        return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
-    };
-    return [columns.join(",")]
-        .concat(rows.map((r) => columns.map((c) => q(r[c])).join(",")))
-        .join("\n");
+function setupExport(p){
+  const btn=document.getElementById("cp-export-btn");
+  if(btn) btn.onclick=()=>document.getElementById("deeper").scrollIntoView({behavior:"smooth"});
 }
-
-function downloadBlob(text, filename, type) {
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(new Blob([text], { type }));
-    a.download = filename;
-    a.click();
-    URL.revokeObjectURL(a.href);
+function downloadCSV(rows,filename){
+  if(!rows||!rows.length)return;
+  const keys=[...new Set(rows.flatMap(r=>Object.keys(r)))];
+  const csv=[keys.join(",")].concat(rows.map(r=>keys.map(k=>{let v=r[k];if(Array.isArray(v))v=v.join("; ");v=String(v??"").replace(/"/g,'""');return /[",\n]/.test(v)?`"${v}"`:v;}).join(","))).join("\n");
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));
+  a.download=filename;a.click();URL.revokeObjectURL(a.href);
 }
-
-function renderCompareLink(p) {
-    const a = document.getElementById("cp-compare-link");
-    if (a) a.href = `${BASE}../comparison/index_c.html?countries=${encodeURIComponent(p.code)}`;
-}
-
-function renderResources(p) {
-    const pubBox = document.getElementById("cp-publications");
-    const pubs = p.publications || [];
-    let html = "";
-    if (pubs.length) {
-        html += `<ul class="cp-linklist">${pubs.map((x) => `
-            <li><a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a>
-            ${x.date ? `<span class="cp-measure-meta"> · ${fmtDate(x.date)}</span>` : ""}</li>`).join("")}</ul>`;
-    } else {
-        html += `<p style="font-size:0.95rem;">Knowledge products mentioning
-            ${esc(p.name)} are published regularly on Changing Transport.</p>`;
-    }
-    html += `<a class="cp-resource-cta" href="${esc(p.links.changing_transport_search)}"
-        target="_blank" rel="noopener">Search publications for ${esc(p.name)} ↗</a>`;
-    pubBox.innerHTML = html;
-
-    document.getElementById("cp-tdc-text").textContent =
-        `The Transport Data Commons brings together transport datasets from
-         32+ institutions. Use the country filter to find data for ${p.name}.`;
-    document.getElementById("cp-tdc-link").href = p.links.tdc_search;
-
-    // Downloads
-    const dl = document.getElementById("cp-downloads");
-    if (dl) {
-        dl.innerHTML = `
-          <p style="font-size:0.95rem;">Everything on this page, as data —
-             for your own analysis, reuse or country work.</p>
-          <div class="cp-dl-row">
-            <a class="cp-resource-cta" href="${BASE}data/countries/${esc(p.code)}.json"
-               download="${esc(p.code)}_transport_tracker.json">Full profile (JSON)</a>
-            <button class="cp-resource-cta cp-dl-btn" id="cp-dl-measures">Measures (CSV)</button>
-            <button class="cp-resource-cta cp-dl-btn" id="cp-dl-targets">Targets (CSV)</button>
-          </div>`;
-        document.getElementById("cp-dl-measures").onclick = () => {
-            const rows = p.measures.map((m) => ({
-                country: p.name, code: p.code, document: m.document,
-                version: m.version, status: m.status, category: m.category,
-                purpose: m.purpose, instrument: m.instrument,
-                asi: m.asi.join("; "), modes: m.modes.join("; "),
-                geography: m.geography.join("; "),
-                measure_status: m.measure_status, page: m.page, quote: m.quote,
-                via_eu: m.via_eu ? "yes" : "",
-            }));
-            downloadBlob(toCsv(rows, Object.keys(rows[0] || { country: 1 })),
-                `${p.code}_measures.csv`, "text/csv");
-        };
-        document.getElementById("cp-dl-targets").onclick = () => {
-            const rows = p.targets.map((t) => ({
-                country: p.name, code: p.code, document: t.document,
-                version: t.version, status: t.status, area: t.area,
-                ghg: t.ghg, type: t.type, conditionality: t.conditionality,
-                target_year: t.year, page: t.page, content: t.content,
-                via_eu: t.via_eu ? "yes" : "",
-            }));
-            downloadBlob(toCsv(rows, Object.keys(rows[0] || { country: 1 })),
-                `${p.code}_targets.csv`, "text/csv");
-        };
-    }
-
-    // Referenced national documents
-    const refBox = document.getElementById("cp-references");
-    if (refBox) {
-        const refs = (p.references || []).filter((r) => r.status === "Active");
-        if (!refs.length) {
-            refBox.innerHTML = `<p style="font-size:0.95rem;" class="cp-soft-dark">
-                The active documents do not reference further national policy
-                documents captured in the database.</p>`;
-        } else {
-            refBox.innerHTML = `<ul class="cp-linklist">${refs.map((r) => `
-              <li>${r.url
-                  ? `<a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.further_type || "National document")}</a>`
-                  : esc(r.further_type || "National document")}
-                <span class="cp-measure-meta"> · referenced in ${esc(r.document || "")}${r.page ? `, p. ${esc(r.page)}` : ""}</span>
-              </li>`).join("")}</ul>`;
-        }
-    }
-}
-
-})();

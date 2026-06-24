@@ -65,7 +65,9 @@ const GEN_CONFIG = {
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         await loadComparisonData();
-        initializeDefaultSelection();
+        // Apply URL deep-link params first; fall back to random selection
+        const hadParams = applyUrlParams();
+        if (!hadParams) initializeDefaultSelection();
         renderComparison();
         setupInfoModal();
         document.getElementById('loading').classList.add('hidden');
@@ -120,6 +122,44 @@ async function loadComparisonData() {
 // ============================================================================
 // Initialize Default Selection (random country, 3 generations)
 // ============================================================================
+
+// ============================================================================
+// URL Parameter Support — deep links from country profiles
+// ============================================================================
+// ?mode=track&c=COL          → COL gen1 / gen2 / gen3
+// ?mode=compare&c1=COL&c2=KEN&c3=MAR&gen=latest  → compare across countries
+function applyUrlParams() {
+    const p = new URLSearchParams(location.search);
+    const mode = p.get('mode');
+    if (!mode) return false; // no params, use random default
+
+    if (mode === 'track') {
+        const c = p.get('c');
+        if (!c || !comparisonData.countries[c]) return false;
+        columns[0] = { country: c, generation: 'gen1', versionIndex: 0 };
+        columns[1] = { country: c, generation: 'gen2', versionIndex: 0 };
+        columns[2] = { country: c, generation: 'gen3', versionIndex: 0 };
+        return true;
+    }
+
+    if (mode === 'compare') {
+        const gen = p.get('gen') || 'latest';
+        const codes = [p.get('c1'), p.get('c2'), p.get('c3')];
+        let any = false;
+        codes.forEach((c, i) => {
+            if (!c) return;
+            const dataCode = resolveCountryCode(c);
+            if (!comparisonData.countries[dataCode]) return;
+            const resolvedGen = gen === 'latest' ? getLatestActiveGen(c) : gen;
+            columns[i] = { country: c, generation: resolvedGen, versionIndex: 0 };
+            any = true;
+        });
+        return any;
+    }
+
+    return false;
+}
+
 function initializeDefaultSelection() {
     const countries = Object.keys(comparisonData.countries);
     if (countries.length === 0) return;
