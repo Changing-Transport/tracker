@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - 'data/GIZ-SLOCAT_Transport-Tracker-database.xlsx'
+      - 'data/publications.json'
+      - 'data/ghg.json'
       - 'pipeline/update_data.py'
   workflow_dispatch:
 
@@ -23,7 +25,7 @@ jobs:
           python-version: '3.11'
 
       - name: 📦 Install dependencies
-        run: pip install openpyxl
+        run: pip install openpyxl pycountry
 
       - name: 🔄 Process Excel data
         run: python pipeline/update_data.py
@@ -36,6 +38,7 @@ jobs:
           git add data/processed/comparison-data.json
           git add profiles/data/countries/
           git diff --quiet && git diff --staged --quiet || git commit -m "🤖 Auto-update: Dashboard data refreshed"
+
       - name: 📤 Push changes
         uses: ad-m/github-push-action@master
         with:

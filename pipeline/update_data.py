@@ -1072,11 +1072,16 @@ def process(excel_path):
             val = r.get(col) or r.get(col + " ")
             if clean(val):
                 coalitions.append(label)
-        total = r.get("GHG total 2023 (Mt)")
-        transport = r.get("GHG transport 2023 (Mt)")
-        share = None
-        if isinstance(total, (int, float)) and isinstance(transport, (int, float)) and total > 0:
+        # Emissions: use ghg.json as primary source; fall back to Excel columns
+        # ghg_by_country is loaded in run_profiles() and injected via kwarg
+        _ghg = ghg_by_country.get(code, {}) if ghg_by_country else {}
+        total     = _ghg.get("total_mt")     or r.get("GHG total 2023 (Mt)")
+        transport = _ghg.get("transport_mt") or r.get("GHG transport 2023 (Mt)")
+        share = _ghg.get("transport_share_pct")
+        if share is None and isinstance(total, (int, float)) and isinstance(transport, (int, float)) and total > 0:
             share = round(transport / total * 100, 2)
+        _ghg_year   = _ghg.get("year")   or 2023
+        _ghg_source = _ghg.get("source") or "EDGAR"
         countries[code] = {
             "code": code,
             "iso2": iso2_for(code),
@@ -1101,11 +1106,14 @@ def process(excel_path):
                 "year": clean(r.get("ICE phase-out target year")),
             },
             "emissions": {
-                "year": 2023,
-                "source": "EDGAR",
+                "year": _ghg_year,
+                "source": _ghg_source,
                 "total_mt": round(total, 2) if isinstance(total, (int, float)) else None,
                 "transport_mt": round(transport, 2) if isinstance(transport, (int, float)) else None,
                 "transport_share_pct": share,
+                "transport_global_share_pct": _ghg.get("transport_global_share_pct"),
+                "transport_per_capita": _ghg.get("transport_per_capita"),
+                "transport_sector_rank": _ghg.get("transport_sector_rank"),
             },
             "eu_member": code in EU_MEMBER_ISO3,
         }
@@ -1489,7 +1497,7 @@ def summarise_active(measures):
     )
 
 
-def build_profiles(data, publications):
+def build_profiles(data, publications, ghg_by_country=None):
     (countries, docs_by_country, targets_by_country, measures_by_country,
      adaptation_by_country, benefits_by_country, references_by_country) = data
 
@@ -1652,14 +1660,39 @@ def build_index(profiles):
 
 def run_profiles(excel_path):
     """Country profile JSONs + static pages (profiles/)."""
+    # ── Publications ──────────────────────────────────────────────────
     pubs_path = Path("data/publications.json")
     publications = {}
     if pubs_path.exists():
-        publications = json.loads(
-            pubs_path.read_text(encoding="utf-8")).get("by_country", {})
+        pub_data = json.loads(pubs_path.read_text(encoding="utf-8"))
+        publications = pub_data.get("by_country", {})
+        global_pubs = publications.get("GLOBAL", [])
+        n_countries = len([k for k in publications if k != "GLOBAL"])
+        print(f"   ✅  Publications loaded: {n_countries} countries + {len(global_pubs)} GLOBAL entries")
+    else:
+        global_pubs = []
+        print("   ⚠  data/publications.json not found — run scripts/build_data_files.py")
+
+    # Merge GLOBAL publications into every country
+    for code in list(publications.keys()):
+        if code != "GLOBAL":
+            publications[code] = publications[code] + global_pubs
+
+    # ── GHG data (single source of truth for emissions) ───────────────
+    ghg_path = Path("data/ghg.json")
+    ghg_by_country = {}
+    if ghg_path.exists():
+        ghg_raw = json.loads(ghg_path.read_text(encoding="utf-8"))
+        ghg_by_country = ghg_raw.get("countries", {})
+        populated = sum(1 for v in ghg_by_country.values()
+                        if any(v.get(k) is not None
+                               for k in ("total_mt", "transport_mt", "transport_share_pct")))
+        print(f"   ✅  GHG data loaded: {len(ghg_by_country)} countries ({populated} with data)")
+    else:
+        print("   ⚠  data/ghg.json not found — emissions fall back to GIZ-SLOCAT Excel columns")
 
     data = process(excel_path)
-    profiles = build_profiles(data, publications)
+    profiles = build_profiles(data, publications, ghg_by_country=ghg_by_country)
     compute_similar(profiles)
 
     trends = load_edgar_trends()
