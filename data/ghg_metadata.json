@@ -1,0 +1,65 @@
+{
+  "source": "EDGAR",
+  "last_year": 2024,
+  "first_year": 1970,
+  "file": "data/ghg.csv",
+  "description": "GHG emissions data from EDGAR, transport and national totals by country, 1970-2024. Separate source from the GIZ-SLOCAT NDC Transport Tracker database (data/GIZ-SLOCAT_Transport-Tracker-database.xlsx). Merged with NDC policy data at render time per the two-track data architecture.",
+  "id_columns": {
+    "EDGAR Country Code": "ISO3-style EDGAR country code, used as join key against the GIZ-SLOCAT database",
+    "Country": "Country name as provided by EDGAR",
+    "Region": "Region grouping (largely empty in current extract)"
+  },
+  "year_columns": {
+    "pattern": "{Base}_{Year} [unit], e.g. Global_Emissions_1970 [MtCO2e]",
+    "years_covered": "1970-2024 (55 years per country)",
+    "fields": {
+      "Global_Emissions": {
+        "unit": "MtCO2e",
+        "description": "Total national GHG emissions across all sectors"
+      },
+      "Transport_Emissions": {
+        "unit": "MtCO2e",
+        "description": "GHG emissions from the transport sector"
+      },
+      "Share_Transport_National": {
+        "unit": "fraction",
+        "description": "Transport emissions as a share of national total emissions (0-1)"
+      },
+      "Share_Transport_Global": {
+        "unit": "fraction",
+        "description": "Transport emissions as a share of global total emissions (0-1)"
+      },
+      "Population": {
+        "unit": "million",
+        "description": "National population"
+      },
+      "PerCapita_Total": {
+        "unit": "tCO2e/capita",
+        "description": "National total emissions per capita"
+      },
+      "PerCapita_Transport": {
+        "unit": "tCO2e/capita",
+        "description": "Transport emissions per capita"
+      },
+      "Rank1_Sector": {
+        "unit": null,
+        "description": "Largest emitting sector that year (categorical, no unit)"
+      },
+      "Rank2_Sector": {
+        "unit": null,
+        "description": "Second largest emitting sector that year (categorical, no unit)"
+      },
+      "Rank3_Sector": {
+        "unit": null,
+        "description": "Third largest emitting sector that year (categorical, no unit)"
+      }
+    }
+  },
+  "notes": [
+    "Single EDGAR source line only; no version number in headers and no per-row source tag.",
+    "No data quality flags included.",
+    "No sectoral breakdown beyond Rank1/2/3_Sector for now.",
+    "Numbers in the original CSV use comma as decimal separator inside quoted fields; the pipeline must parse these as floats (replace ',' with '.' before casting), not as plain CSV numerics.",
+    "Row count: 258 countries/territories."
+  ]
+}
