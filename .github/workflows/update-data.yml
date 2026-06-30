@@ -5,7 +5,7 @@ on:
     paths:
       - 'data/GIZ-SLOCAT_Transport-Tracker-database.xlsx'
       - 'data/publications.json'
-      - 'data/ghg.json'
+      - 'data/ghg.csv'
       - 'pipeline/update_data.py'
   workflow_dispatch:
 
