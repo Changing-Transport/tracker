@@ -291,5 +291,5 @@ Data" → Run workflow.
 **Data:** GIZ-SLOCAT Transport Tracker Database · Emissions: EDGAR ·
 Map silhouette: Natural Earth (public domain)
 
-**Built for:** GIZ · SLOCAT · Mobilize Net-Zero · Changing Transport
+**Built for:** Mobilize Net-Zero Changing Transport
 (changing-transport.org)
