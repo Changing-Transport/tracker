@@ -1,12 +1,30 @@
+# ============================================================================
+# GIZ-SLOCAT Transport Tracker — unified data pipeline
+# REPLACES: .github/workflows/update-data.yml  (drop-in, full file)
+#
+# WHAT CHANGED vs the old workflow:
+#   1. Trigger on data/ghg.csv (was data/ghg.json — stale, never fired)
+#   2. Trigger on data/publications.xlsx directly — you now upload the raw
+#      Excel and CI rebuilds publications.json itself. No local step, no order.
+#   3. New step runs scripts/build_data_files.py before the main pipeline,
+#      so publications.json is always regenerated fresh in CI.
+#   4. New smoke-test step validates the outputs before committing.
+#   5. On ANY failure, a GitHub issue is opened automatically so you are
+#      notified (GitHub emails you about new issues in your repos).
+#   6. data/publications.json added to the commit list.
+# ============================================================================
+
 name: Update Dashboard Data
 
 on:
   push:
     paths:
       - 'data/GIZ-SLOCAT_Transport-Tracker-database.xlsx'
+      - 'data/publications.xlsx'
       - 'data/publications.json'
       - 'data/ghg.csv'
       - 'pipeline/update_data.py'
+      - 'scripts/build_data_files.py'
   workflow_dispatch:
 
 jobs:
@@ -14,6 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      issues: write          # needed for the failure-notification step
 
     steps:
       - name: 📥 Checkout repository
@@ -27,16 +46,31 @@ jobs:
       - name: 📦 Install dependencies
         run: pip install openpyxl pycountry
 
-      - name: 🔄 Process Excel data
+      # Rebuild publications.json from publications.xlsx on EVERY run.
+      # This is what removes the ordering problem: whether you upload the
+      # database, the publications Excel, or ghg.csv — alone or together —
+      # this step guarantees publications.json is current before the
+      # main pipeline reads it. It costs ~2 seconds.
+      - name: 📚 Rebuild publications.json
+        run: python scripts/build_data_files.py
+
+      - name: 🔄 Run main pipeline
         run: python pipeline/update_data.py
+
+      # Sanity-check outputs BEFORE committing, so a half-broken run
+      # can never silently replace good data on the live site.
+      - name: 🔍 Smoke test outputs
+        run: python scripts/smoke_test.py
 
       - name: 💾 Commit updated data
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
+          git add data/publications.json
           git add data/processed/data.json
           git add data/processed/comparison-data.json
           git add profiles/data/countries/
+          git add profiles/countries/
           git diff --quiet && git diff --staged --quiet || git commit -m "🤖 Auto-update: Dashboard data refreshed"
 
       - name: 📤 Push changes
@@ -44,3 +78,31 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
+
+      # Runs ONLY if any previous step failed. Opens a GitHub issue so the
+      # failure is visible and emailed to you — no more silent red X.
+      - name: 🚨 Notify on failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🚨 Pipeline failed: ${new Date().toISOString().slice(0,10)}`,
+              body: [
+                'The **Update Dashboard Data** workflow failed.',
+                '',
+                `**Run:** ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+                `**Triggered by commit:** ${context.sha.slice(0,7)}`,
+                '',
+                'The live dashboards are still serving the LAST GOOD data — nothing was overwritten.',
+                'Open the run link above to see which step failed and the error message.',
+                '',
+                'Common causes:',
+                '- A column was renamed or a sheet removed in the database Excel',
+                '- publications.xlsx has a malformed row (check dates and ISO-3 codes)',
+                '- ghg.csv header row changed',
+              ].join('\n'),
+              labels: ['pipeline-failure']
+            });

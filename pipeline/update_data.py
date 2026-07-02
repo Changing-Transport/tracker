@@ -29,6 +29,54 @@ def get_gen(version):
 
 
 # ============================================================================
+# Schema validation — fail fast with clear errors instead of mid-parse crashes
+# ============================================================================
+
+REQUIRED_SCHEMA = {
+    # sheet name: columns the pipeline reads (checked before any parsing)
+    "Country":    ["Country Codes", "Country", "Region", "Income Level Group"],
+    "Document":   ["Country Code", "Document ID", "Type of document",
+                   "Document name", "Version number", "Date", "Status", "URL",
+                   "Transport content", "Contains transport mitigation target",
+                   "Contains transport adaptation target",
+                   "Contains transport mitigation measures",
+                   "Contains transport adaptation measures"],
+    "Targets":    ["Country Code", "Document ID", "Target area", "Target scope",
+                   "Target type", "Target Year", "GHG target?",
+                   "Conditionality", "Content"],
+    "Mitigation": ["Country Code", "Document ID", "Category", "Purpose",
+                   "Instrument", "A-S-I", "Quote"],
+    "Adaptation": ["Country Code", "Document ID"],
+    "Benefits":   ["Country Code", "Document ID"],
+    "References": ["Country Code", "Document ID"],
+}
+
+
+def validate_workbook(wb):
+    """Check required sheets and columns exist BEFORE parsing.
+    Reports every problem at once, then aborts — so one failed run reveals
+    all schema issues instead of one cryptic KeyError at a time."""
+    problems = []
+    for sheet, cols in REQUIRED_SCHEMA.items():
+        if sheet not in wb.sheetnames:
+            problems.append(f"Sheet '{sheet}' is missing from the workbook")
+            continue
+        header = next(wb[sheet].iter_rows(values_only=True))
+        headers = {str(h).strip() for h in header if h is not None}
+        for col in cols:
+            if col not in headers:
+                problems.append(f"Sheet '{sheet}' is missing column '{col}'")
+    if problems:
+        print("❌  DATABASE SCHEMA CHECK FAILED — the Excel structure changed:")
+        for p in problems:
+            print(f"    • {p}")
+        print("    Fix the Excel (or update REQUIRED_SCHEMA in this script if")
+        print("    the change was intentional) and push again.")
+        sys.exit(1)
+    print("✅  Schema check passed — all required sheets and columns present\n")
+
+
+# ============================================================================
 # Main tracker processing (EXISTING - UNCHANGED)
 # ============================================================================
 
@@ -1892,18 +1940,27 @@ def main():
     if len(sys.argv) > 1:
         excel_path = Path(sys.argv[1])
     else:
-        candidates = sorted(Path("data").glob("*.xlsx"))
-        if not candidates:
-            print("❌  No .xlsx in data/. Either commit the database Excel there")
-            print("    (Option A) or run pipeline/fetch_database.py first (Option B).")
+        # Exact expected filename — deliberately NOT a glob. data/ also holds
+        # publications.xlsx (and possibly other .xlsx in the future); picking
+        # by glob+sort could silently process the wrong workbook.
+        excel_path = Path("data/GIZ-SLOCAT_Transport-Tracker-database.xlsx")
+        if not excel_path.exists():
+            print("❌  data/GIZ-SLOCAT_Transport-Tracker-database.xlsx not found.")
+            print("    Filename must be exact (case-sensitive). Either commit it")
+            print("    there (Option A) or run pipeline/fetch_database.py (Option B).")
             return 1
-        excel_path = candidates[0]
 
     if not excel_path.exists():
         print(f"❌  Excel file not found: {excel_path}")
         return 1
 
     print(f"📂  Database: {excel_path}\n")
+
+    # Validate schema ONCE up front — covers all three parse passes below
+    _wb = openpyxl.load_workbook(excel_path, read_only=True)
+    validate_workbook(_wb)
+    _wb.close()
+
     run_dashboards(excel_path)
     print()
     run_profiles(excel_path)
