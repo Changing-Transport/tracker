@@ -1,0 +1,5055 @@
+{
+ "generated": "2026-07-06",
+ "questions": [
+  {
+   "id": "conditional-targets",
+   "question": "Which countries have conditional transport targets?",
+   "note": "Targets whose classification or wording marks them as conditional (typically on international support or finance), in active documents.",
+   "countries": [
+    {
+     "code": "UGA",
+     "country": "Uganda",
+     "url": "profiles/countries/uganda/",
+     "n": 15
+    },
+    {
+     "code": "CRI",
+     "country": "Costa Rica",
+     "url": "profiles/countries/costa-rica/",
+     "n": 12
+    },
+    {
+     "code": "SLB",
+     "country": "Solomon Islands",
+     "url": "profiles/countries/solomon-islands/",
+     "n": 12
+    },
+    {
+     "code": "MUS",
+     "country": "Mauritius",
+     "url": "profiles/countries/mauritius/",
+     "n": 10
+    },
+    {
+     "code": "KHM",
+     "country": "Cambodia",
+     "url": "profiles/countries/cambodia/",
+     "n": 9
+    },
+    {
+     "code": "BDI",
+     "country": "Burundi",
+     "url": "profiles/countries/burundi/",
+     "n": 8
+    },
+    {
+     "code": "CHL",
+     "country": "Chile",
+     "url": "profiles/countries/chile/",
+     "n": 8
+    },
+    {
+     "code": "CIV",
+     "country": "Côte D'Ivoire",
+     "url": "profiles/countries/cote-d-ivoire/",
+     "n": 8
+    },
+    {
+     "code": "LSO",
+     "country": "Lesotho",
+     "url": "profiles/countries/lesotho/",
+     "n": 8
+    },
+    {
+     "code": "NPL",
+     "country": "Nepal",
+     "url": "profiles/countries/nepal/",
+     "n": 8
+    },
+    {
+     "code": "ATG",
+     "country": "Antigua and Barbuda",
+     "url": "profiles/countries/antigua-and-barbuda/",
+     "n": 7
+    },
+    {
+     "code": "LBR",
+     "country": "Liberia",
+     "url": "profiles/countries/liberia/",
+     "n": 7
+    },
+    {
+     "code": "MDA",
+     "country": "Republic of Moldova",
+     "url": "profiles/countries/republic-of-moldova/",
+     "n": 7
+    },
+    {
+     "code": "LKA",
+     "country": "Sri Lanka",
+     "url": "profiles/countries/sri-lanka/",
+     "n": 7
+    },
+    {
+     "code": "BGD",
+     "country": "Bangladesh",
+     "url": "profiles/countries/bangladesh/",
+     "n": 6
+    },
+    {
+     "code": "COL",
+     "country": "Colombia",
+     "url": "profiles/countries/colombia/",
+     "n": 6
+    },
+    {
+     "code": "KGZ",
+     "country": "Kyrgyzstan",
+     "url": "profiles/countries/kyrgyzstan/",
+     "n": 6
+    },
+    {
+     "code": "VUT",
+     "country": "Vanuatu",
+     "url": "profiles/countries/vanuatu/",
+     "n": 6
+    },
+    {
+     "code": "BLZ",
+     "country": "Belize",
+     "url": "profiles/countries/belize/",
+     "n": 5
+    },
+    {
+     "code": "BWA",
+     "country": "Botswana",
+     "url": "profiles/countries/botswana/",
+     "n": 5
+    },
+    {
+     "code": "SWZ",
+     "country": "Eswatini",
+     "url": "profiles/countries/eswatini/",
+     "n": 5
+    },
+    {
+     "code": "EEU",
+     "country": "European Union",
+     "url": "profiles/countries/european-union/",
+     "n": 5
+    },
+    {
+     "code": "MRT",
+     "country": "Mauritania",
+     "url": "profiles/countries/mauritania/",
+     "n": 5
+    },
+    {
+     "code": "NGA",
+     "country": "Nigeria",
+     "url": "profiles/countries/nigeria/",
+     "n": 5
+    },
+    {
+     "code": "PSE",
+     "country": "Palestine",
+     "url": "profiles/countries/palestine/",
+     "n": 5
+    },
+    {
+     "code": "RWA",
+     "country": "Rwanda",
+     "url": "profiles/countries/rwanda/",
+     "n": 5
+    },
+    {
+     "code": "WSM",
+     "country": "Samoa",
+     "url": "profiles/countries/samoa/",
+     "n": 5
+    },
+    {
+     "code": "SLE",
+     "country": "Sierra Leone",
+     "url": "profiles/countries/sierra-leone/",
+     "n": 5
+    },
+    {
+     "code": "SUR",
+     "country": "Suriname",
+     "url": "profiles/countries/suriname/",
+     "n": 5
+    },
+    {
+     "code": "ARE",
+     "country": "United Arab Emirates",
+     "url": "profiles/countries/united-arab-emirates/",
+     "n": 5
+    },
+    {
+     "code": "VEN",
+     "country": "Venezuela, Bolivarian Republic of",
+     "url": "profiles/countries/venezuela-bolivarian-republic-of/",
+     "n": 5
+    },
+    {
+     "code": "ALB",
+     "country": "Albania",
+     "url": "profiles/countries/albania/",
+     "n": 4
+    },
+    {
+     "code": "AGO",
+     "country": "Angola",
+     "url": "profiles/countries/angola/",
+     "n": 4
+    },
+    {
+     "code": "CAN",
+     "country": "Canada",
+     "url": "profiles/countries/canada/",
+     "n": 4
+    },
+    {
+     "code": "FJI",
+     "country": "Fiji",
+     "url": "profiles/countries/fiji/",
+     "n": 4
+    },
+    {
+     "code": "LAO",
+     "country": "Lao People’s Democratic Republic",
+     "url": "profiles/countries/lao-peoples-democratic-republic/",
+     "n": 4
+    },
+    {
+     "code": "STP",
+     "country": "Sao Tome and Principe",
+     "url": "profiles/countries/sao-tome-and-principe/",
+     "n": 4
+    },
+    {
+     "code": "BOL",
+     "country": "Bolivia (Plurinational State of)",
+     "url": "profiles/countries/bolivia-plurinational-state-of/",
+     "n": 3
+    },
+    {
+     "code": "CHN",
+     "country": "China",
+     "url": "profiles/countries/china/",
+     "n": 3
+    },
+    {
+     "code": "DMA",
+     "country": "Dominica",
+     "url": "profiles/countries/dominica/",
+     "n": 3
+    },
+    {
+     "code": "ETH",
+     "country": "Ethiopia",
+     "url": "profiles/countries/ethiopia/",
+     "n": 3
+    },
+    {
+     "code": "HTI",
+     "country": "Haiti",
+     "url": "profiles/countries/haiti/",
+     "n": 3
+    },
+    {
+     "code": "HND",
+     "country": "Honduras",
+     "url": "profiles/countries/honduras/",
+     "n": 3
+    },
+    {
+     "code": "ISR",
+     "country": "Israel",
+     "url": "profiles/countries/israel/",
+     "n": 3
+    },
+    {
+     "code": "KAZ",
+     "country": "Kazakhstan",
+     "url": "profiles/countries/kazakhstan/",
+     "n": 3
+    },
+    {
+     "code": "MCO",
+     "country": "Monaco",
+     "url": "profiles/countries/monaco/",
+     "n": 3
+    },
+    {
+     "code": "NER",
+     "country": "Niger",
+     "url": "profiles/countries/niger/",
+     "n": 3
+    },
+    {
+     "code": "OMN",
+     "country": "Oman",
+     "url": "profiles/countries/oman/",
+     "n": 3
+    },
+    {
+     "code": "ARM",
+     "country": "Armenia",
+     "url": "profiles/countries/armenia/",
+     "n": 2
+    },
+    {
+     "code": "COM",
+     "country": "Comoros",
+     "url": "profiles/countries/comoros/",
+     "n": 2
+    },
+    {
+     "code": "GTM",
+     "country": "Guatemala",
+     "url": "profiles/countries/guatemala/",
+     "n": 2
+    },
+    {
+     "code": "IDN",
+     "country": "Indonesia",
+     "url": "profiles/countries/indonesia/",
+     "n": 2
+    },
+    {
+     "code": "MWI",
+     "country": "Malawi",
+     "url": "profiles/countries/malawi/",
+     "n": 2
+    },
+    {
+     "code": "MLI",
+     "country": "Mali",
+     "url": "profiles/countries/mali/",
+     "n": 2
+    },
+    {
+     "code": "NAM",
+     "country": "Namibia",
+     "url": "profiles/countries/namibia/",
+     "n": 2
+    },
+    {
+     "code": "NRU",
+     "country": "Nauru",
+     "url": "profiles/countries/nauru/",
+     "n": 2
+    },
+    {
+     "code": "PNG",
+     "country": "Papua New Guinea",
+     "url": "profiles/countries/papua-new-guinea/",
+     "n": 2
+    },
+    {
+     "code": "KOR",
+     "country": "Republic of Korea",
+     "url": "profiles/countries/republic-of-korea/",
+     "n": 2
+    },
+    {
+     "code": "LCA",
+     "country": "Saint Lucia",
+     "url": "profiles/countries/saint-lucia/",
+     "n": 2
+    },
+    {
+     "code": "SYC",
+     "country": "Seychelles",
+     "url": "profiles/countries/seychelles/",
+     "n": 2
+    },
+    {
+     "code": "CHE",
+     "country": "Switzerland",
+     "url": "profiles/countries/switzerland/",
+     "n": 2
+    },
+    {
+     "code": "THA",
+     "country": "Thailand",
+     "url": "profiles/countries/thailand/",
+     "n": 2
+    },
+    {
+     "code": "TGO",
+     "country": "Togo",
+     "url": "profiles/countries/togo/",
+     "n": 2
+    },
+    {
+     "code": "GBR",
+     "country": "United Kingdom",
+     "url": "profiles/countries/united-kingdom/",
+     "n": 2
+    },
+    {
+     "code": "ZMB",
+     "country": "Zambia",
+     "url": "profiles/countries/zambia/",
+     "n": 2
+    },
+    {
+     "code": "AND",
+     "country": "Andorra",
+     "url": "profiles/countries/andorra/",
+     "n": 1
+    },
+    {
+     "code": "AUS",
+     "country": "Australia",
+     "url": "profiles/countries/australia/",
+     "n": 1
+    },
+    {
+     "code": "AZE",
+     "country": "Azerbaijan",
+     "url": "profiles/countries/azerbaijan/",
+     "n": 1
+    },
+    {
+     "code": "BHS",
+     "country": "Bahamas",
+     "url": "profiles/countries/bahamas/",
+     "n": 1
+    },
+    {
+     "code": "BRB",
+     "country": "Barbados",
+     "url": "profiles/countries/barbados/",
+     "n": 1
+    },
+    {
+     "code": "BRA",
+     "country": "Brazil",
+     "url": "profiles/countries/brazil/",
+     "n": 1
+    },
+    {
+     "code": "BFA",
+     "country": "Burkina Faso",
+     "url": "profiles/countries/burkina-faso/",
+     "n": 1
+    },
+    {
+     "code": "CPV",
+     "country": "Cabo Verde",
+     "url": "profiles/countries/cabo-verde/",
+     "n": 1
+    },
+    {
+     "code": "COG",
+     "country": "Congo",
+     "url": "profiles/countries/congo/",
+     "n": 1
+    },
+    {
+     "code": "CUB",
+     "country": "Cuba",
+     "url": "profiles/countries/cuba/",
+     "n": 1
+    },
+    {
+     "code": "DOM",
+     "country": "Dominican Republic",
+     "url": "profiles/countries/dominican-republic/",
+     "n": 1
+    },
+    {
+     "code": "EGY",
+     "country": "Egypt",
+     "url": "profiles/countries/egypt/",
+     "n": 1
+    },
+    {
+     "code": "SLV",
+     "country": "El Salvador",
+     "url": "profiles/countries/el-salvador/",
+     "n": 1
+    },
+    {
+     "code": "GAB",
+     "country": "Gabon",
+     "url": "profiles/countries/gabon/",
+     "n": 1
+    },
+    {
+     "code": "GMB",
+     "country": "Gambia (Republic of The)",
+     "url": "profiles/countries/gambia-republic-of-the/",
+     "n": 1
+    },
+    {
+     "code": "GEO",
+     "country": "Georgia",
+     "url": "profiles/countries/georgia/",
+     "n": 1
+    },
+    {
+     "code": "GRD",
+     "country": "Grenada",
+     "url": "profiles/countries/grenada/",
+     "n": 1
+    },
+    {
+     "code": "GIN",
+     "country": "Guinea",
+     "url": "profiles/countries/guinea/",
+     "n": 1
+    },
+    {
+     "code": "IND",
+     "country": "India",
+     "url": "profiles/countries/india/",
+     "n": 1
+    },
+    {
+     "code": "JPN",
+     "country": "Japan",
+     "url": "profiles/countries/japan/",
+     "n": 1
+    },
+    {
+     "code": "JOR",
+     "country": "Jordan",
+     "url": "profiles/countries/jordan/",
+     "n": 1
+    },
+    {
+     "code": "LBN",
+     "country": "Lebanon",
+     "url": "profiles/countries/lebanon/",
+     "n": 1
+    },
+    {
+     "code": "LIE",
+     "country": "Liechtenstein",
+     "url": "profiles/countries/liechtenstein/",
+     "n": 1
+    },
+    {
+     "code": "MHL",
+     "country": "Marshall Islands",
+     "url": "profiles/countries/marshall-islands/",
+     "n": 1
+    },
+    {
+     "code": "MEX",
+     "country": "Mexico",
+     "url": "profiles/countries/mexico/",
+     "n": 1
+    },
+    {
+     "code": "MAR",
+     "country": "Morocco",
+     "url": "profiles/countries/morocco/",
+     "n": 1
+    },
+    {
+     "code": "NZL",
+     "country": "New Zealand",
+     "url": "profiles/countries/new-zealand/",
+     "n": 1
+    },
+    {
+     "code": "PAK",
+     "country": "Pakistan",
+     "url": "profiles/countries/pakistan/",
+     "n": 1
+    },
+    {
+     "code": "PRY",
+     "country": "Paraguay",
+     "url": "profiles/countries/paraguay/",
+     "n": 1
+    },
+    {
+     "code": "PER",
+     "country": "Peru",
+     "url": "profiles/countries/peru/",
+     "n": 1
+    },
+    {
+     "code": "MKD",
+     "country": "Republic of North Macedonia",
+     "url": "profiles/countries/republic-of-north-macedonia/",
+     "n": 1
+    },
+    {
+     "code": "RUS",
+     "country": "Russian Federation",
+     "url": "profiles/countries/russian-federation/",
+     "n": 1
+    },
+    {
+     "code": "KNA",
+     "country": "Saint Kitts and Nevis",
+     "url": "profiles/countries/saint-kitts-and-nevis/",
+     "n": 1
+    },
+    {
+     "code": "VCT",
+     "country": "Saint Vincent and the Grenadines",
+     "url": "profiles/countries/saint-vincent-and-the-grenadines/",
+     "n": 1
+    },
+    {
+     "code": "SOM",
+     "country": "Somalia",
+     "url": "profiles/countries/somalia/",
+     "n": 1
+    },
+    {
+     "code": "ZAF",
+     "country": "South Africa",
+     "url": "profiles/countries/south-africa/",
+     "n": 1
+    },
+    {
+     "code": "SSD",
+     "country": "South Sudan",
+     "url": "profiles/countries/south-sudan/",
+     "n": 1
+    },
+    {
+     "code": "SDN",
+     "country": "Sudan",
+     "url": "profiles/countries/sudan/",
+     "n": 1
+    },
+    {
+     "code": "TLS",
+     "country": "Timor-Leste",
+     "url": "profiles/countries/timor-leste/",
+     "n": 1
+    },
+    {
+     "code": "TON",
+     "country": "Tonga",
+     "url": "profiles/countries/tonga/",
+     "n": 1
+    },
+    {
+     "code": "TTO",
+     "country": "Trinidad and Tobago",
+     "url": "profiles/countries/trinidad-and-tobago/",
+     "n": 1
+    },
+    {
+     "code": "TUV",
+     "country": "Tuvalu",
+     "url": "profiles/countries/tuvalu/",
+     "n": 1
+    },
+    {
+     "code": "TUR",
+     "country": "Türkiye",
+     "url": "profiles/countries/turkiye/",
+     "n": 1
+    },
+    {
+     "code": "UKR",
+     "country": "Ukraine",
+     "url": "profiles/countries/ukraine/",
+     "n": 1
+    },
+    {
+     "code": "VNM",
+     "country": "Viet Nam",
+     "url": "profiles/countries/viet-nam/",
+     "n": 1
+    }
+   ]
+  },
+  {
+   "id": "transport-mitigation-targets",
+   "question": "Which countries have transport mitigation targets in active documents?",
+   "note": "Countries with at least one target classified under 'Transport sector mitigation target'.",
+   "countries": [
+    {
+     "code": "UGA",
+     "country": "Uganda",
+     "url": "profiles/countries/uganda/",
+     "n": 13
+    },
+    {
+     "code": "CRI",
+     "country": "Costa Rica",
+     "url": "profiles/countries/costa-rica/",
+     "n": 11
+    },
+    {
+     "code": "SLB",
+     "country": "Solomon Islands",
+     "url": "profiles/countries/solomon-islands/",
+     "n": 11
+    },
+    {
+     "code": "MUS",
+     "country": "Mauritius",
+     "url": "profiles/countries/mauritius/",
+     "n": 9
+    },
+    {
+     "code": "CIV",
+     "country": "Côte D'Ivoire",
+     "url": "profiles/countries/cote-d-ivoire/",
+     "n": 7
+    },
+    {
+     "code": "LSO",
+     "country": "Lesotho",
+     "url": "profiles/countries/lesotho/",
+     "n": 7
+    },
+    {
+     "code": "LKA",
+     "country": "Sri Lanka",
+     "url": "profiles/countries/sri-lanka/",
+     "n": 7
+    },
+    {
+     "code": "BGD",
+     "country": "Bangladesh",
+     "url": "profiles/countries/bangladesh/",
+     "n": 6
+    },
+    {
+     "code": "NPL",
+     "country": "Nepal",
+     "url": "profiles/countries/nepal/",
+     "n": 6
+    },
+    {
+     "code": "MDA",
+     "country": "Republic of Moldova",
+     "url": "profiles/countries/republic-of-moldova/",
+     "n": 6
+    },
+    {
+     "code": "ATG",
+     "country": "Antigua and Barbuda",
+     "url": "profiles/countries/antigua-and-barbuda/",
+     "n": 5
+    },
+    {
+     "code": "BWA",
+     "country": "Botswana",
+     "url": "profiles/countries/botswana/",
+     "n": 5
+    },
+    {
+     "code": "KHM",
+     "country": "Cambodia",
+     "url": "profiles/countries/cambodia/",
+     "n": 5
+    },
+    {
+     "code": "COL",
+     "country": "Colombia",
+     "url": "profiles/countries/colombia/",
+     "n": 5
+    },
+    {
+     "code": "KGZ",
+     "country": "Kyrgyzstan",
+     "url": "profiles/countries/kyrgyzstan/",
+     "n": 5
+    },
+    {
+     "code": "MRT",
+     "country": "Mauritania",
+     "url": "profiles/countries/mauritania/",
+     "n": 5
+    },
+    {
+     "code": "PSE",
+     "country": "Palestine",
+     "url": "profiles/countries/palestine/",
+     "n": 5
+    },
+    {
+     "code": "WSM",
+     "country": "Samoa",
+     "url": "profiles/countries/samoa/",
+     "n": 5
+    },
+    {
+     "code": "ARE",
+     "country": "United Arab Emirates",
+     "url": "profiles/countries/united-arab-emirates/",
+     "n": 5
+    },
+    {
+     "code": "VUT",
+     "country": "Vanuatu",
+     "url": "profiles/countries/vanuatu/",
+     "n": 5
+    },
+    {
+     "code": "VEN",
+     "country": "Venezuela, Bolivarian Republic of",
+     "url": "profiles/countries/venezuela-bolivarian-republic-of/",
+     "n": 5
+    },
+    {
+     "code": "ALB",
+     "country": "Albania",
+     "url": "profiles/countries/albania/",
+     "n": 4
+    },
+    {
+     "code": "AGO",
+     "country": "Angola",
+     "url": "profiles/countries/angola/",
+     "n": 4
+    },
+    {
+     "code": "BLZ",
+     "country": "Belize",
+     "url": "profiles/countries/belize/",
+     "n": 4
+    },
+    {
+     "code": "CHL",
+     "country": "Chile",
+     "url": "profiles/countries/chile/",
+     "n": 4
+    },
+    {
+     "code": "SWZ",
+     "country": "Eswatini",
+     "url": "profiles/countries/eswatini/",
+     "n": 4
+    },
+    {
+     "code": "EEU",
+     "country": "European Union",
+     "url": "profiles/countries/european-union/",
+     "n": 4
+    },
+    {
+     "code": "LBR",
+     "country": "Liberia",
+     "url": "profiles/countries/liberia/",
+     "n": 4
+    },
+    {
+     "code": "NGA",
+     "country": "Nigeria",
+     "url": "profiles/countries/nigeria/",
+     "n": 4
+    },
+    {
+     "code": "SLE",
+     "country": "Sierra Leone",
+     "url": "profiles/countries/sierra-leone/",
+     "n": 4
+    },
+    {
+     "code": "BOL",
+     "country": "Bolivia (Plurinational State of)",
+     "url": "profiles/countries/bolivia-plurinational-state-of/",
+     "n": 3
+    },
+    {
+     "code": "CAN",
+     "country": "Canada",
+     "url": "profiles/countries/canada/",
+     "n": 3
+    },
+    {
+     "code": "CHN",
+     "country": "China",
+     "url": "profiles/countries/china/",
+     "n": 3
+    },
+    {
+     "code": "DMA",
+     "country": "Dominica",
+     "url": "profiles/countries/dominica/",
+     "n": 3
+    },
+    {
+     "code": "FJI",
+     "country": "Fiji",
+     "url": "profiles/countries/fiji/",
+     "n": 3
+    },
+    {
+     "code": "HTI",
+     "country": "Haiti",
+     "url": "profiles/countries/haiti/",
+     "n": 3
+    },
+    {
+     "code": "HND",
+     "country": "Honduras",
+     "url": "profiles/countries/honduras/",
+     "n": 3
+    },
+    {
+     "code": "ISR",
+     "country": "Israel",
+     "url": "profiles/countries/israel/",
+     "n": 3
+    },
+    {
+     "code": "LAO",
+     "country": "Lao People’s Democratic Republic",
+     "url": "profiles/countries/lao-peoples-democratic-republic/",
+     "n": 3
+    },
+    {
+     "code": "NER",
+     "country": "Niger",
+     "url": "profiles/countries/niger/",
+     "n": 3
+    },
+    {
+     "code": "OMN",
+     "country": "Oman",
+     "url": "profiles/countries/oman/",
+     "n": 3
+    },
+    {
+     "code": "COM",
+     "country": "Comoros",
+     "url": "profiles/countries/comoros/",
+     "n": 2
+    },
+    {
+     "code": "ETH",
+     "country": "Ethiopia",
+     "url": "profiles/countries/ethiopia/",
+     "n": 2
+    },
+    {
+     "code": "GTM",
+     "country": "Guatemala",
+     "url": "profiles/countries/guatemala/",
+     "n": 2
+    },
+    {
+     "code": "KAZ",
+     "country": "Kazakhstan",
+     "url": "profiles/countries/kazakhstan/",
+     "n": 2
+    },
+    {
+     "code": "MWI",
+     "country": "Malawi",
+     "url": "profiles/countries/malawi/",
+     "n": 2
+    },
+    {
+     "code": "MLI",
+     "country": "Mali",
+     "url": "profiles/countries/mali/",
+     "n": 2
+    },
+    {
+     "code": "MCO",
+     "country": "Monaco",
+     "url": "profiles/countries/monaco/",
+     "n": 2
+    },
+    {
+     "code": "NRU",
+     "country": "Nauru",
+     "url": "profiles/countries/nauru/",
+     "n": 2
+    },
+    {
+     "code": "LCA",
+     "country": "Saint Lucia",
+     "url": "profiles/countries/saint-lucia/",
+     "n": 2
+    },
+    {
+     "code": "STP",
+     "country": "Sao Tome and Principe",
+     "url": "profiles/countries/sao-tome-and-principe/",
+     "n": 2
+    },
+    {
+     "code": "TGO",
+     "country": "Togo",
+     "url": "profiles/countries/togo/",
+     "n": 2
+    },
+    {
+     "code": "AND",
+     "country": "Andorra",
+     "url": "profiles/countries/andorra/",
+     "n": 1
+    },
+    {
+     "code": "ARM",
+     "country": "Armenia",
+     "url": "profiles/countries/armenia/",
+     "n": 1
+    },
+    {
+     "code": "AZE",
+     "country": "Azerbaijan",
+     "url": "profiles/countries/azerbaijan/",
+     "n": 1
+    },
+    {
+     "code": "BHS",
+     "country": "Bahamas",
+     "url": "profiles/countries/bahamas/",
+     "n": 1
+    },
+    {
+     "code": "BRB",
+     "country": "Barbados",
+     "url": "profiles/countries/barbados/",
+     "n": 1
+    },
+    {
+     "code": "BRA",
+     "country": "Brazil",
+     "url": "profiles/countries/brazil/",
+     "n": 1
+    },
+    {
+     "code": "BFA",
+     "country": "Burkina Faso",
+     "url": "profiles/countries/burkina-faso/",
+     "n": 1
+    },
+    {
+     "code": "CPV",
+     "country": "Cabo Verde",
+     "url": "profiles/countries/cabo-verde/",
+     "n": 1
+    },
+    {
+     "code": "COG",
+     "country": "Congo",
+     "url": "profiles/countries/congo/",
+     "n": 1
+    },
+    {
+     "code": "CUB",
+     "country": "Cuba",
+     "url": "profiles/countries/cuba/",
+     "n": 1
+    },
+    {
+     "code": "EGY",
+     "country": "Egypt",
+     "url": "profiles/countries/egypt/",
+     "n": 1
+    },
+    {
+     "code": "SLV",
+     "country": "El Salvador",
+     "url": "profiles/countries/el-salvador/",
+     "n": 1
+    },
+    {
+     "code": "GMB",
+     "country": "Gambia (Republic of The)",
+     "url": "profiles/countries/gambia-republic-of-the/",
+     "n": 1
+    },
+    {
+     "code": "GEO",
+     "country": "Georgia",
+     "url": "profiles/countries/georgia/",
+     "n": 1
+    },
+    {
+     "code": "GRD",
+     "country": "Grenada",
+     "url": "profiles/countries/grenada/",
+     "n": 1
+    },
+    {
+     "code": "GIN",
+     "country": "Guinea",
+     "url": "profiles/countries/guinea/",
+     "n": 1
+    },
+    {
+     "code": "IDN",
+     "country": "Indonesia",
+     "url": "profiles/countries/indonesia/",
+     "n": 1
+    },
+    {
+     "code": "MHL",
+     "country": "Marshall Islands",
+     "url": "profiles/countries/marshall-islands/",
+     "n": 1
+    },
+    {
+     "code": "MAR",
+     "country": "Morocco",
+     "url": "profiles/countries/morocco/",
+     "n": 1
+    },
+    {
+     "code": "NAM",
+     "country": "Namibia",
+     "url": "profiles/countries/namibia/",
+     "n": 1
+    },
+    {
+     "code": "PAK",
+     "country": "Pakistan",
+     "url": "profiles/countries/pakistan/",
+     "n": 1
+    },
+    {
+     "code": "KOR",
+     "country": "Republic of Korea",
+     "url": "profiles/countries/republic-of-korea/",
+     "n": 1
+    },
+    {
+     "code": "MKD",
+     "country": "Republic of North Macedonia",
+     "url": "profiles/countries/republic-of-north-macedonia/",
+     "n": 1
+    },
+    {
+     "code": "RWA",
+     "country": "Rwanda",
+     "url": "profiles/countries/rwanda/",
+     "n": 1
+    },
+    {
+     "code": "KNA",
+     "country": "Saint Kitts and Nevis",
+     "url": "profiles/countries/saint-kitts-and-nevis/",
+     "n": 1
+    },
+    {
+     "code": "VCT",
+     "country": "Saint Vincent and the Grenadines",
+     "url": "profiles/countries/saint-vincent-and-the-grenadines/",
+     "n": 1
+    },
+    {
+     "code": "SYC",
+     "country": "Seychelles",
+     "url": "profiles/countries/seychelles/",
+     "n": 1
+    },
+    {
+     "code": "SOM",
+     "country": "Somalia",
+     "url": "profiles/countries/somalia/",
+     "n": 1
+    },
+    {
+     "code": "SSD",
+     "country": "South Sudan",
+     "url": "profiles/countries/south-sudan/",
+     "n": 1
+    },
+    {
+     "code": "SDN",
+     "country": "Sudan",
+     "url": "profiles/countries/sudan/",
+     "n": 1
+    },
+    {
+     "code": "SUR",
+     "country": "Suriname",
+     "url": "profiles/countries/suriname/",
+     "n": 1
+    },
+    {
+     "code": "CHE",
+     "country": "Switzerland",
+     "url": "profiles/countries/switzerland/",
+     "n": 1
+    },
+    {
+     "code": "THA",
+     "country": "Thailand",
+     "url": "profiles/countries/thailand/",
+     "n": 1
+    },
+    {
+     "code": "TON",
+     "country": "Tonga",
+     "url": "profiles/countries/tonga/",
+     "n": 1
+    },
+    {
+     "code": "TTO",
+     "country": "Trinidad and Tobago",
+     "url": "profiles/countries/trinidad-and-tobago/",
+     "n": 1
+    },
+    {
+     "code": "GBR",
+     "country": "United Kingdom",
+     "url": "profiles/countries/united-kingdom/",
+     "n": 1
+    },
+    {
+     "code": "ZMB",
+     "country": "Zambia",
+     "url": "profiles/countries/zambia/",
+     "n": 1
+    }
+   ]
+  },
+  {
+   "id": "net-zero",
+   "question": "Which countries state a net zero target?",
+   "note": "Targets classified as 'Net zero target' in active documents.",
+   "countries": [
+    {
+     "code": "ATG",
+     "country": "Antigua and Barbuda",
+     "url": "profiles/countries/antigua-and-barbuda/",
+     "n": 1
+    },
+    {
+     "code": "AUS",
+     "country": "Australia",
+     "url": "profiles/countries/australia/",
+     "n": 1
+    },
+    {
+     "code": "BLZ",
+     "country": "Belize",
+     "url": "profiles/countries/belize/",
+     "n": 1
+    },
+    {
+     "code": "KHM",
+     "country": "Cambodia",
+     "url": "profiles/countries/cambodia/",
+     "n": 1
+    },
+    {
+     "code": "CAN",
+     "country": "Canada",
+     "url": "profiles/countries/canada/",
+     "n": 1
+    },
+    {
+     "code": "CHL",
+     "country": "Chile",
+     "url": "profiles/countries/chile/",
+     "n": 1
+    },
+    {
+     "code": "COL",
+     "country": "Colombia",
+     "url": "profiles/countries/colombia/",
+     "n": 1
+    },
+    {
+     "code": "CRI",
+     "country": "Costa Rica",
+     "url": "profiles/countries/costa-rica/",
+     "n": 1
+    },
+    {
+     "code": "DOM",
+     "country": "Dominican Republic",
+     "url": "profiles/countries/dominican-republic/",
+     "n": 1
+    },
+    {
+     "code": "EEU",
+     "country": "European Union",
+     "url": "profiles/countries/european-union/",
+     "n": 1
+    },
+    {
+     "code": "FJI",
+     "country": "Fiji",
+     "url": "profiles/countries/fiji/",
+     "n": 1
+    },
+    {
+     "code": "GAB",
+     "country": "Gabon",
+     "url": "profiles/countries/gabon/",
+     "n": 1
+    },
+    {
+     "code": "IND",
+     "country": "India",
+     "url": "profiles/countries/india/",
+     "n": 1
+    },
+    {
+     "code": "IDN",
+     "country": "Indonesia",
+     "url": "profiles/countries/indonesia/",
+     "n": 1
+    },
+    {
+     "code": "JPN",
+     "country": "Japan",
+     "url": "profiles/countries/japan/",
+     "n": 1
+    },
+    {
+     "code": "JOR",
+     "country": "Jordan",
+     "url": "profiles/countries/jordan/",
+     "n": 1
+    },
+    {
+     "code": "KAZ",
+     "country": "Kazakhstan",
+     "url": "profiles/countries/kazakhstan/",
+     "n": 1
+    },
+    {
+     "code": "KGZ",
+     "country": "Kyrgyzstan",
+     "url": "profiles/countries/kyrgyzstan/",
+     "n": 1
+    },
+    {
+     "code": "LAO",
+     "country": "Lao People’s Democratic Republic",
+     "url": "profiles/countries/lao-peoples-democratic-republic/",
+     "n": 1
+    },
+    {
+     "code": "LBN",
+     "country": "Lebanon",
+     "url": "profiles/countries/lebanon/",
+     "n": 1
+    },
+    {
+     "code": "LIE",
+     "country": "Liechtenstein",
+     "url": "profiles/countries/liechtenstein/",
+     "n": 1
+    },
+    {
+     "code": "MEX",
+     "country": "Mexico",
+     "url": "profiles/countries/mexico/",
+     "n": 1
+    },
+    {
+     "code": "MCO",
+     "country": "Monaco",
+     "url": "profiles/countries/monaco/",
+     "n": 1
+    },
+    {
+     "code": "NAM",
+     "country": "Namibia",
+     "url": "profiles/countries/namibia/",
+     "n": 1
+    },
+    {
+     "code": "NPL",
+     "country": "Nepal",
+     "url": "profiles/countries/nepal/",
+     "n": 1
+    },
+    {
+     "code": "NZL",
+     "country": "New Zealand",
+     "url": "profiles/countries/new-zealand/",
+     "n": 1
+    },
+    {
+     "code": "NGA",
+     "country": "Nigeria",
+     "url": "profiles/countries/nigeria/",
+     "n": 1
+    },
+    {
+     "code": "PNG",
+     "country": "Papua New Guinea",
+     "url": "profiles/countries/papua-new-guinea/",
+     "n": 1
+    },
+    {
+     "code": "PER",
+     "country": "Peru",
+     "url": "profiles/countries/peru/",
+     "n": 1
+    },
+    {
+     "code": "KOR",
+     "country": "Republic of Korea",
+     "url": "profiles/countries/republic-of-korea/",
+     "n": 1
+    },
+    {
+     "code": "MDA",
+     "country": "Republic of Moldova",
+     "url": "profiles/countries/republic-of-moldova/",
+     "n": 1
+    },
+    {
+     "code": "RUS",
+     "country": "Russian Federation",
+     "url": "profiles/countries/russian-federation/",
+     "n": 1
+    },
+    {
+     "code": "RWA",
+     "country": "Rwanda",
+     "url": "profiles/countries/rwanda/",
+     "n": 1
+    },
+    {
+     "code": "SYC",
+     "country": "Seychelles",
+     "url": "profiles/countries/seychelles/",
+     "n": 1
+    },
+    {
+     "code": "SLE",
+     "country": "Sierra Leone",
+     "url": "profiles/countries/sierra-leone/",
+     "n": 1
+    },
+    {
+     "code": "ZAF",
+     "country": "South Africa",
+     "url": "profiles/countries/south-africa/",
+     "n": 1
+    },
+    {
+     "code": "CHE",
+     "country": "Switzerland",
+     "url": "profiles/countries/switzerland/",
+     "n": 1
+    },
+    {
+     "code": "THA",
+     "country": "Thailand",
+     "url": "profiles/countries/thailand/",
+     "n": 1
+    },
+    {
+     "code": "TLS",
+     "country": "Timor-Leste",
+     "url": "profiles/countries/timor-leste/",
+     "n": 1
+    },
+    {
+     "code": "TUV",
+     "country": "Tuvalu",
+     "url": "profiles/countries/tuvalu/",
+     "n": 1
+    },
+    {
+     "code": "TUR",
+     "country": "Türkiye",
+     "url": "profiles/countries/turkiye/",
+     "n": 1
+    },
+    {
+     "code": "UKR",
+     "country": "Ukraine",
+     "url": "profiles/countries/ukraine/",
+     "n": 1
+    },
+    {
+     "code": "GBR",
+     "country": "United Kingdom",
+     "url": "profiles/countries/united-kingdom/",
+     "n": 1
+    },
+    {
+     "code": "VNM",
+     "country": "Viet Nam",
+     "url": "profiles/countries/viet-nam/",
+     "n": 1
+    }
+   ]
+  },
+  {
+   "id": "gender",
+   "question": "Which countries mention gender in transport content?",
+   "note": "Keyword match on 'gender' across targets and measures in active documents.",
+   "countries": [
+    {
+     "code": "KEN",
+     "country": "Kenya",
+     "url": "profiles/countries/kenya/",
+     "n": 5
+    },
+    {
+     "code": "LBN",
+     "country": "Lebanon",
+     "url": "profiles/countries/lebanon/",
+     "n": 1
+    },
+    {
+     "code": "PAK",
+     "country": "Pakistan",
+     "url": "profiles/countries/pakistan/",
+     "n": 1
+    },
+    {
+     "code": "MDA",
+     "country": "Republic of Moldova",
+     "url": "profiles/countries/republic-of-moldova/",
+     "n": 1
+    },
+    {
+     "code": "SLE",
+     "country": "Sierra Leone",
+     "url": "profiles/countries/sierra-leone/",
+     "n": 1
+    }
+   ]
+  },
+  {
+   "id": "freight",
+   "question": "Which countries address freight?",
+   "note": "Keyword match on freight-related terms across targets and measures in active documents.",
+   "countries": [
+    {
+     "code": "COL",
+     "country": "Colombia",
+     "url": "profiles/countries/colombia/",
+     "n": 6
+    },
+    {
+     "code": "UGA",
+     "country": "Uganda",
+     "url": "profiles/countries/uganda/",
+     "n": 4
+    },
+    {
+     "code": "ALB",
+     "country": "Albania",
+     "url": "profiles/countries/albania/",
+     "n": 3
+    },
+    {
+     "code": "BGD",
+     "country": "Bangladesh",
+     "url": "profiles/countries/bangladesh/",
+     "n": 3
+    },
+    {
+     "code": "KHM",
+     "country": "Cambodia",
+     "url": "profiles/countries/cambodia/",
+     "n": 3
+    },
+    {
+     "code": "CRI",
+     "country": "Costa Rica",
+     "url": "profiles/countries/costa-rica/",
+     "n": 3
+    },
+    {
+     "code": "GEO",
+     "country": "Georgia",
+     "url": "profiles/countries/georgia/",
+     "n": 3
+    },
+    {
+     "code": "MEX",
+     "country": "Mexico",
+     "url": "profiles/countries/mexico/",
+     "n": 3
+    },
+    {
+     "code": "PAK",
+     "country": "Pakistan",
+     "url": "profiles/countries/pakistan/",
+     "n": 3
+    },
+    {
+     "code": "MDA",
+     "country": "Republic of Moldova",
+     "url": "profiles/countries/republic-of-moldova/",
+     "n": 3
+    },
+    {
+     "code": "USA",
+     "country": "United States of America",
+     "url": "profiles/countries/united-states-of-america/",
+     "n": 3
+    },
+    {
+     "code": "ARG",
+     "country": "Argentina",
+     "url": "profiles/countries/argentina/",
+     "n": 2
+    },
+    {
+     "code": "ARM",
+     "country": "Armenia",
+     "url": "profiles/countries/armenia/",
+     "n": 2
+    },
+    {
+     "code": "CHN",
+     "country": "China",
+     "url": "profiles/countries/china/",
+     "n": 2
+    },
+    {
+     "code": "NPL",
+     "country": "Nepal",
+     "url": "profiles/countries/nepal/",
+     "n": 2
+    },
+    {
+     "code": "LKA",
+     "country": "Sri Lanka",
+     "url": "profiles/countries/sri-lanka/",
+     "n": 2
+    },
+    {
+     "code": "SDN",
+     "country": "Sudan",
+     "url": "profiles/countries/sudan/",
+     "n": 2
+    },
+    {
+     "code": "TJK",
+     "country": "Tajikistan",
+     "url": "profiles/countries/tajikistan/",
+     "n": 2
+    },
+    {
+     "code": "AZE",
+     "country": "Azerbaijan",
+     "url": "profiles/countries/azerbaijan/",
+     "n": 1
+    },
+    {
+     "code": "BLR",
+     "country": "Belarus",
+     "url": "profiles/countries/belarus/",
+     "n": 1
+    },
+    {
+     "code": "BTN",
+     "country": "Bhutan",
+     "url": "profiles/countries/bhutan/",
+     "n": 1
+    },
+    {
+     "code": "CHL",
+     "country": "Chile",
+     "url": "profiles/countries/chile/",
+     "n": 1
+    },
+    {
+     "code": "CIV",
+     "country": "Côte D'Ivoire",
+     "url": "profiles/countries/cote-d-ivoire/",
+     "n": 1
+    },
+    {
+     "code": "DMA",
+     "country": "Dominica",
+     "url": "profiles/countries/dominica/",
+     "n": 1
+    },
+    {
+     "code": "EGY",
+     "country": "Egypt",
+     "url": "profiles/countries/egypt/",
+     "n": 1
+    },
+    {
+     "code": "SLV",
+     "country": "El Salvador",
+     "url": "profiles/countries/el-salvador/",
+     "n": 1
+    },
+    {
+     "code": "ERI",
+     "country": "Eritrea",
+     "url": "profiles/countries/eritrea/",
+     "n": 1
+    },
+    {
+     "code": "GAB",
+     "country": "Gabon",
+     "url": "profiles/countries/gabon/",
+     "n": 1
+    },
+    {
+     "code": "GIN",
+     "country": "Guinea",
+     "url": "profiles/countries/guinea/",
+     "n": 1
+    },
+    {
+     "code": "JOR",
+     "country": "Jordan",
+     "url": "profiles/countries/jordan/",
+     "n": 1
+    },
+    {
+     "code": "KGZ",
+     "country": "Kyrgyzstan",
+     "url": "profiles/countries/kyrgyzstan/",
+     "n": 1
+    },
+    {
+     "code": "LBN",
+     "country": "Lebanon",
+     "url": "profiles/countries/lebanon/",
+     "n": 1
+    },
+    {
+     "code": "MWI",
+     "country": "Malawi",
+     "url": "profiles/countries/malawi/",
+     "n": 1
+    },
+    {
+     "code": "MYS",
+     "country": "Malaysia",
+     "url": "profiles/countries/malaysia/",
+     "n": 1
+    },
+    {
+     "code": "MAR",
+     "country": "Morocco",
+     "url": "profiles/countries/morocco/",
+     "n": 1
+    },
+    {
+     "code": "PER",
+     "country": "Peru",
+     "url": "profiles/countries/peru/",
+     "n": 1
+    },
+    {
+     "code": "RUS",
+     "country": "Russian Federation",
+     "url": "profiles/countries/russian-federation/",
+     "n": 1
+    },
+    {
+     "code": "STP",
+     "country": "Sao Tome and Principe",
+     "url": "profiles/countries/sao-tome-and-principe/",
+     "n": 1
+    },
+    {
+     "code": "TKM",
+     "country": "Turkmenistan",
+     "url": "profiles/countries/turkmenistan/",
+     "n": 1
+    },
+    {
+     "code": "VEN",
+     "country": "Venezuela, Bolivarian Republic of",
+     "url": "profiles/countries/venezuela-bolivarian-republic-of/",
+     "n": 1
+    },
+    {
+     "code": "VNM",
+     "country": "Viet Nam",
+     "url": "profiles/countries/viet-nam/",
+     "n": 1
+    }
+   ]
+  },
+  {
+   "id": "electric-mobility",
+   "question": "Which countries include electric mobility measures?",
+   "note": "Mitigation measures in the 'Electric mobility' category or mentioning electric vehicles, in active documents.",
+   "countries": [
+    {
+     "code": "CAN",
+     "country": "Canada",
+     "url": "profiles/countries/canada/",
+     "n": 21
+    },
+    {
+     "code": "MEX",
+     "country": "Mexico",
+     "url": "profiles/countries/mexico/",
+     "n": 15
+    },
+    {
+     "code": "ARE",
+     "country": "United Arab Emirates",
+     "url": "profiles/countries/united-arab-emirates/",
+     "n": 11
+    },
+    {
+     "code": "BOL",
+     "country": "Bolivia (Plurinational State of)",
+     "url": "profiles/countries/bolivia-plurinational-state-of/",
+     "n": 10
+    },
+    {
+     "code": "CRI",
+     "country": "Costa Rica",
+     "url": "profiles/countries/costa-rica/",
+     "n": 10
+    },
+    {
+     "code": "NRU",
+     "country": "Nauru",
+     "url": "profiles/countries/nauru/",
+     "n": 9
+    },
+    {
+     "code": "SLE",
+     "country": "Sierra Leone",
+     "url": "profiles/countries/sierra-leone/",
+     "n": 9
+    },
+    {
+     "code": "BGD",
+     "country": "Bangladesh",
+     "url": "profiles/countries/bangladesh/",
+     "n": 8
+    },
+    {
+     "code": "ARM",
+     "country": "Armenia",
+     "url": "profiles/countries/armenia/",
+     "n": 7
+    },
+    {
+     "code": "BLZ",
+     "country": "Belize",
+     "url": "profiles/countries/belize/",
+     "n": 7
+    },
+    {
+     "code": "CHN",
+     "country": "China",
+     "url": "profiles/countries/china/",
+     "n": 7
+    },
+    {
+     "code": "DMA",
+     "country": "Dominica",
+     "url": "profiles/countries/dominica/",
+     "n": 7
+    },
+    {
+     "code": "FJI",
+     "country": "Fiji",
+     "url": "profiles/countries/fiji/",
+     "n": 7
+    },
+    {
+     "code": "AZE",
+     "country": "Azerbaijan",
+     "url": "profiles/countries/azerbaijan/",
+     "n": 6
+    },
+    {
+     "code": "BHS",
+     "country": "Bahamas",
+     "url": "profiles/countries/bahamas/",
+     "n": 6
+    },
+    {
+     "code": "KAZ",
+     "country": "Kazakhstan",
+     "url": "profiles/countries/kazakhstan/",
+     "n": 6
+    },
+    {
+     "code": "MMR",
+     "country": "Myanmar",
+     "url": "profiles/countries/myanmar/",
+     "n": 6
+    },
+    {
+     "code": "RUS",
+     "country": "Russian Federation",
+     "url": "profiles/countries/russian-federation/",
+     "n": 6
+    },
+    {
+     "code": "GBR",
+     "country": "United Kingdom",
+     "url": "profiles/countries/united-kingdom/",
+     "n": 6
+    },
+    {
+     "code": "CIV",
+     "country": "Côte D'Ivoire",
+     "url": "profiles/countries/cote-d-ivoire/",
+     "n": 5
+    },
+    {
+     "code": "ETH",
+     "country": "Ethiopia",
+     "url": "profiles/countries/ethiopia/",
+     "n": 5
+    },
+    {
+     "code": "PAK",
+     "country": "Pakistan",
+     "url": "profiles/countries/pakistan/",
+     "n": 5
+    },
+    {
+     "code": "RWA",
+     "country": "Rwanda",
+     "url": "profiles/countries/rwanda/",
+     "n": 5
+    },
+    {
+     "code": "USA",
+     "country": "United States of America",
+     "url": "profiles/countries/united-states-of-america/",
+     "n": 5
+    },
+    {
+     "code": "DJI",
+     "country": "Djibouti",
+     "url": "profiles/countries/djibouti/",
+     "n": 4
+    },
+    {
+     "code": "MUS",
+     "country": "Mauritius",
+     "url": "profiles/countries/mauritius/",
+     "n": 4
+    },
+    {
+     "code": "MAR",
+     "country": "Morocco",
+     "url": "profiles/countries/morocco/",
+     "n": 4
+    },
+    {
+     "code": "OMN",
+     "country": "Oman",
+     "url": "profiles/countries/oman/",
+     "n": 4
+    },
+    {
+     "code": "PLW",
+     "country": "Palau",
+     "url": "profiles/countries/palau/",
+     "n": 4
+    },
+    {
+     "code": "PRY",
+     "country": "Paraguay",
+     "url": "profiles/countries/paraguay/",
+     "n": 4
+    },
+    {
+     "code": "LCA",
+     "country": "Saint Lucia",
+     "url": "profiles/countries/saint-lucia/",
+     "n": 4
+    },
+    {
+     "code": "SLB",
+     "country": "Solomon Islands",
+     "url": "profiles/countries/solomon-islands/",
+     "n": 4
+    },
+    {
+     "code": "UZB",
+     "country": "Uzbekistan",
+     "url": "profiles/countries/uzbekistan/",
+     "n": 4
+    },
+    {
+     "code": "AGO",
+     "country": "Angola",
+     "url": "profiles/countries/angola/",
+     "n": 3
+    },
+    {
+     "code": "BRB",
+     "country": "Barbados",
+     "url": "profiles/countries/barbados/",
+     "n": 3
+    },
+    {
+     "code": "BRA",
+     "country": "Brazil",
+     "url": "profiles/countries/brazil/",
+     "n": 3
+    },
+    {
+     "code": "COL",
+     "country": "Colombia",
+     "url": "profiles/countries/colombia/",
+     "n": 3
+    },
+    {
+     "code": "GAB",
+     "country": "Gabon",
+     "url": "profiles/countries/gabon/",
+     "n": 3
+    },
+    {
+     "code": "ISR",
+     "country": "Israel",
+     "url": "profiles/countries/israel/",
+     "n": 3
+    },
+    {
+     "code": "JOR",
+     "country": "Jordan",
+     "url": "profiles/countries/jordan/",
+     "n": 3
+    },
+    {
+     "code": "LBN",
+     "country": "Lebanon",
+     "url": "profiles/countries/lebanon/",
+     "n": 3
+    },
+    {
+     "code": "MCO",
+     "country": "Monaco",
+     "url": "profiles/countries/monaco/",
+     "n": 3
+    },
+    {
+     "code": "NPL",
+     "country": "Nepal",
+     "url": "profiles/countries/nepal/",
+     "n": 3
+    },
+    {
+     "code": "WSM",
+     "country": "Samoa",
+     "url": "profiles/countries/samoa/",
+     "n": 3
+    },
+    {
+     "code": "STP",
+     "country": "Sao Tome and Principe",
+     "url": "profiles/countries/sao-tome-and-principe/",
+     "n": 3
+    },
+    {
+     "code": "SGP",
+     "country": "Singapore",
+     "url": "profiles/countries/singapore/",
+     "n": 3
+    },
+    {
+     "code": "SSD",
+     "country": "South Sudan",
+     "url": "profiles/countries/south-sudan/",
+     "n": 3
+    },
+    {
+     "code": "SUR",
+     "country": "Suriname",
+     "url": "profiles/countries/suriname/",
+     "n": 3
+    },
+    {
+     "code": "TON",
+     "country": "Tonga",
+     "url": "profiles/countries/tonga/",
+     "n": 3
+    },
+    {
+     "code": "TTO",
+     "country": "Trinidad and Tobago",
+     "url": "profiles/countries/trinidad-and-tobago/",
+     "n": 3
+    },
+    {
+     "code": "ATG",
+     "country": "Antigua and Barbuda",
+     "url": "profiles/countries/antigua-and-barbuda/",
+     "n": 2
+    },
+    {
+     "code": "ARG",
+     "country": "Argentina",
+     "url": "profiles/countries/argentina/",
+     "n": 2
+    },
+    {
+     "code": "AUS",
+     "country": "Australia",
+     "url": "profiles/countries/australia/",
+     "n": 2
+    },
+    {
+     "code": "BTN",
+     "country": "Bhutan",
+     "url": "profiles/countries/bhutan/",
+     "n": 2
+    },
+    {
+     "code": "BFA",
+     "country": "Burkina Faso",
+     "url": "profiles/countries/burkina-faso/",
+     "n": 2
+    },
+    {
+     "code": "CPV",
+     "country": "Cabo Verde",
+     "url": "profiles/countries/cabo-verde/",
+     "n": 2
+    },
+    {
+     "code": "COM",
+     "country": "Comoros",
+     "url": "profiles/countries/comoros/",
+     "n": 2
+    },
+    {
+     "code": "CUB",
+     "country": "Cuba",
+     "url": "profiles/countries/cuba/",
+     "n": 2
+    },
+    {
+     "code": "DOM",
+     "country": "Dominican Republic",
+     "url": "profiles/countries/dominican-republic/",
+     "n": 2
+    },
+    {
+     "code": "GNQ",
+     "country": "Equatorial Guinea",
+     "url": "profiles/countries/equatorial-guinea/",
+     "n": 2
+    },
+    {
+     "code": "EEU",
+     "country": "European Union",
+     "url": "profiles/countries/european-union/",
+     "n": 2
+    },
+    {
+     "code": "GMB",
+     "country": "Gambia (Republic of The)",
+     "url": "profiles/countries/gambia-republic-of-the/",
+     "n": 2
+    },
+    {
+     "code": "GEO",
+     "country": "Georgia",
+     "url": "profiles/countries/georgia/",
+     "n": 2
+    },
+    {
+     "code": "GTM",
+     "country": "Guatemala",
+     "url": "profiles/countries/guatemala/",
+     "n": 2
+    },
+    {
+     "code": "KGZ",
+     "country": "Kyrgyzstan",
+     "url": "profiles/countries/kyrgyzstan/",
+     "n": 2
+    },
+    {
+     "code": "LBR",
+     "country": "Liberia",
+     "url": "profiles/countries/liberia/",
+     "n": 2
+    },
+    {
+     "code": "LIE",
+     "country": "Liechtenstein",
+     "url": "profiles/countries/liechtenstein/",
+     "n": 2
+    },
+    {
+     "code": "MDV",
+     "country": "Maldives",
+     "url": "profiles/countries/maldives/",
+     "n": 2
+    },
+    {
+     "code": "FSM",
+     "country": "Micronesia (Federated States of)",
+     "url": "profiles/countries/micronesia-federated-states-of/",
+     "n": 2
+    },
+    {
+     "code": "NAM",
+     "country": "Namibia",
+     "url": "profiles/countries/namibia/",
+     "n": 2
+    },
+    {
+     "code": "QAT",
+     "country": "Qatar",
+     "url": "profiles/countries/qatar/",
+     "n": 2
+    },
+    {
+     "code": "KOR",
+     "country": "Republic of Korea",
+     "url": "profiles/countries/republic-of-korea/",
+     "n": 2
+    },
+    {
+     "code": "KNA",
+     "country": "Saint Kitts and Nevis",
+     "url": "profiles/countries/saint-kitts-and-nevis/",
+     "n": 2
+    },
+    {
+     "code": "VCT",
+     "country": "Saint Vincent and the Grenadines",
+     "url": "profiles/countries/saint-vincent-and-the-grenadines/",
+     "n": 2
+    },
+    {
+     "code": "LKA",
+     "country": "Sri Lanka",
+     "url": "profiles/countries/sri-lanka/",
+     "n": 2
+    },
+    {
+     "code": "TJK",
+     "country": "Tajikistan",
+     "url": "profiles/countries/tajikistan/",
+     "n": 2
+    },
+    {
+     "code": "THA",
+     "country": "Thailand",
+     "url": "profiles/countries/thailand/",
+     "n": 2
+    },
+    {
+     "code": "UGA",
+     "country": "Uganda",
+     "url": "profiles/countries/uganda/",
+     "n": 2
+    },
+    {
+     "code": "URY",
+     "country": "Uruguay",
+     "url": "profiles/countries/uruguay/",
+     "n": 2
+    },
+    {
+     "code": "ZMB",
+     "country": "Zambia",
+     "url": "profiles/countries/zambia/",
+     "n": 2
+    },
+    {
+     "code": "ALB",
+     "country": "Albania",
+     "url": "profiles/countries/albania/",
+     "n": 1
+    },
+    {
+     "code": "AND",
+     "country": "Andorra",
+     "url": "profiles/countries/andorra/",
+     "n": 1
+    },
+    {
+     "code": "BLR",
+     "country": "Belarus",
+     "url": "profiles/countries/belarus/",
+     "n": 1
+    },
+    {
+     "code": "BWA",
+     "country": "Botswana",
+     "url": "profiles/countries/botswana/",
+     "n": 1
+    },
+    {
+     "code": "BDI",
+     "country": "Burundi",
+     "url": "profiles/countries/burundi/",
+     "n": 1
+    },
+    {
+     "code": "KHM",
+     "country": "Cambodia",
+     "url": "profiles/countries/cambodia/",
+     "n": 1
+    },
+    {
+     "code": "CMR",
+     "country": "Cameroon",
+     "url": "profiles/countries/cameroon/",
+     "n": 1
+    },
+    {
+     "code": "CHL",
+     "country": "Chile",
+     "url": "profiles/countries/chile/",
+     "n": 1
+    },
+    {
+     "code": "COG",
+     "country": "Congo",
+     "url": "profiles/countries/congo/",
+     "n": 1
+    },
+    {
+     "code": "EGY",
+     "country": "Egypt",
+     "url": "profiles/countries/egypt/",
+     "n": 1
+    },
+    {
+     "code": "ERI",
+     "country": "Eritrea",
+     "url": "profiles/countries/eritrea/",
+     "n": 1
+    },
+    {
+     "code": "SWZ",
+     "country": "Eswatini",
+     "url": "profiles/countries/eswatini/",
+     "n": 1
+    },
+    {
+     "code": "GIN",
+     "country": "Guinea",
+     "url": "profiles/countries/guinea/",
+     "n": 1
+    },
+    {
+     "code": "HND",
+     "country": "Honduras",
+     "url": "profiles/countries/honduras/",
+     "n": 1
+    },
+    {
+     "code": "IDN",
+     "country": "Indonesia",
+     "url": "profiles/countries/indonesia/",
+     "n": 1
+    },
+    {
+     "code": "IRQ",
+     "country": "Iraq",
+     "url": "profiles/countries/iraq/",
+     "n": 1
+    },
+    {
+     "code": "KEN",
+     "country": "Kenya",
+     "url": "profiles/countries/kenya/",
+     "n": 1
+    },
+    {
+     "code": "LAO",
+     "country": "Lao People’s Democratic Republic",
+     "url": "profiles/countries/lao-peoples-democratic-republic/",
+     "n": 1
+    },
+    {
+     "code": "LSO",
+     "country": "Lesotho",
+     "url": "profiles/countries/lesotho/",
+     "n": 1
+    },
+    {
+     "code": "MDG",
+     "country": "Madagascar",
+     "url": "profiles/countries/madagascar/",
+     "n": 1
+    },
+    {
+     "code": "MYS",
+     "country": "Malaysia",
+     "url": "profiles/countries/malaysia/",
+     "n": 1
+    },
+    {
+     "code": "MHL",
+     "country": "Marshall Islands",
+     "url": "profiles/countries/marshall-islands/",
+     "n": 1
+    },
+    {
+     "code": "MRT",
+     "country": "Mauritania",
+     "url": "profiles/countries/mauritania/",
+     "n": 1
+    },
+    {
+     "code": "MNE",
+     "country": "Montenegro",
+     "url": "profiles/countries/montenegro/",
+     "n": 1
+    },
+    {
+     "code": "NIC",
+     "country": "Nicaragua",
+     "url": "profiles/countries/nicaragua/",
+     "n": 1
+    },
+    {
+     "code": "NGA",
+     "country": "Nigeria",
+     "url": "profiles/countries/nigeria/",
+     "n": 1
+    },
+    {
+     "code": "PNG",
+     "country": "Papua New Guinea",
+     "url": "profiles/countries/papua-new-guinea/",
+     "n": 1
+    },
+    {
+     "code": "PER",
+     "country": "Peru",
+     "url": "profiles/countries/peru/",
+     "n": 1
+    },
+    {
+     "code": "MDA",
+     "country": "Republic of Moldova",
+     "url": "profiles/countries/republic-of-moldova/",
+     "n": 1
+    },
+    {
+     "code": "SEN",
+     "country": "Senegal",
+     "url": "profiles/countries/senegal/",
+     "n": 1
+    },
+    {
+     "code": "SOM",
+     "country": "Somalia",
+     "url": "profiles/countries/somalia/",
+     "n": 1
+    },
+    {
+     "code": "SYR",
+     "country": "Syrian Arab Republic",
+     "url": "profiles/countries/syrian-arab-republic/",
+     "n": 1
+    },
+    {
+     "code": "TGO",
+     "country": "Togo",
+     "url": "profiles/countries/togo/",
+     "n": 1
+    },
+    {
+     "code": "TKM",
+     "country": "Turkmenistan",
+     "url": "profiles/countries/turkmenistan/",
+     "n": 1
+    },
+    {
+     "code": "TUV",
+     "country": "Tuvalu",
+     "url": "profiles/countries/tuvalu/",
+     "n": 1
+    },
+    {
+     "code": "VUT",
+     "country": "Vanuatu",
+     "url": "profiles/countries/vanuatu/",
+     "n": 1
+    },
+    {
+     "code": "VAT",
+     "country": "Vatican",
+     "url": "profiles/countries/vatican/",
+     "n": 1
+    },
+    {
+     "code": "VNM",
+     "country": "Viet Nam",
+     "url": "profiles/countries/viet-nam/",
+     "n": 1
+    },
+    {
+     "code": "YEM",
+     "country": "Yemen",
+     "url": "profiles/countries/yemen/",
+     "n": 1
+    }
+   ]
+  },
+  {
+   "id": "public-transport",
+   "question": "Which countries commit to public transport measures?",
+   "note": "Mitigation measures in public/collective transport categories or wording, in active documents.",
+   "countries": [
+    {
+     "code": "CAN",
+     "country": "Canada",
+     "url": "profiles/countries/canada/",
+     "n": 7
+    },
+    {
+     "code": "COL",
+     "country": "Colombia",
+     "url": "profiles/countries/colombia/",
+     "n": 7
+    },
+    {
+     "code": "MEX",
+     "country": "Mexico",
+     "url": "profiles/countries/mexico/",
+     "n": 7
+    },
+    {
+     "code": "AZE",
+     "country": "Azerbaijan",
+     "url": "profiles/countries/azerbaijan/",
+     "n": 6
+    },
+    {
+     "code": "MMR",
+     "country": "Myanmar",
+     "url": "profiles/countries/myanmar/",
+     "n": 6
+    },
+    {
+     "code": "CRI",
+     "country": "Costa Rica",
+     "url": "profiles/countries/costa-rica/",
+     "n": 5
+    },
+    {
+     "code": "DOM",
+     "country": "Dominican Republic",
+     "url": "profiles/countries/dominican-republic/",
+     "n": 5
+    },
+    {
+     "code": "LBN",
+     "country": "Lebanon",
+     "url": "profiles/countries/lebanon/",
+     "n": 5
+    },
+    {
+     "code": "QAT",
+     "country": "Qatar",
+     "url": "profiles/countries/qatar/",
+     "n": 5
+    },
+    {
+     "code": "UGA",
+     "country": "Uganda",
+     "url": "profiles/countries/uganda/",
+     "n": 5
+    },
+    {
+     "code": "ARM",
+     "country": "Armenia",
+     "url": "profiles/countries/armenia/",
+     "n": 4
+    },
+    {
+     "code": "BRB",
+     "country": "Barbados",
+     "url": "profiles/countries/barbados/",
+     "n": 4
+    },
+    {
+     "code": "BRA",
+     "country": "Brazil",
+     "url": "profiles/countries/brazil/",
+     "n": 4
+    },
+    {
+     "code": "DJI",
+     "country": "Djibouti",
+     "url": "profiles/countries/djibouti/",
+     "n": 4
+    },
+    {
+     "code": "EGY",
+     "country": "Egypt",
+     "url": "profiles/countries/egypt/",
+     "n": 4
+    },
+    {
+     "code": "ERI",
+     "country": "Eritrea",
+     "url": "profiles/countries/eritrea/",
+     "n": 4
+    },
+    {
+     "code": "KAZ",
+     "country": "Kazakhstan",
+     "url": "profiles/countries/kazakhstan/",
+     "n": 4
+    },
+    {
+     "code": "RUS",
+     "country": "Russian Federation",
+     "url": "profiles/countries/russian-federation/",
+     "n": 4
+    },
+    {
+     "code": "RWA",
+     "country": "Rwanda",
+     "url": "profiles/countries/rwanda/",
+     "n": 4
+    },
+    {
+     "code": "VCT",
+     "country": "Saint Vincent and the Grenadines",
+     "url": "profiles/countries/saint-vincent-and-the-grenadines/",
+     "n": 4
+    },
+    {
+     "code": "SGP",
+     "country": "Singapore",
+     "url": "profiles/countries/singapore/",
+     "n": 4
+    },
+    {
+     "code": "LKA",
+     "country": "Sri Lanka",
+     "url": "profiles/countries/sri-lanka/",
+     "n": 4
+    },
+    {
+     "code": "BWA",
+     "country": "Botswana",
+     "url": "profiles/countries/botswana/",
+     "n": 3
+    },
+    {
+     "code": "COD",
+     "country": "Democratic Republic of the Congo",
+     "url": "profiles/countries/democratic-republic-of-the-congo/",
+     "n": 3
+    },
+    {
+     "code": "EEU",
+     "country": "European Union",
+     "url": "profiles/countries/european-union/",
+     "n": 3
+    },
+    {
+     "code": "GMB",
+     "country": "Gambia (Republic of The)",
+     "url": "profiles/countries/gambia-republic-of-the/",
+     "n": 3
+    },
+    {
+     "code": "LBR",
+     "country": "Liberia",
+     "url": "profiles/countries/liberia/",
+     "n": 3
+    },
+    {
+     "code": "MAR",
+     "country": "Morocco",
+     "url": "profiles/countries/morocco/",
+     "n": 3
+    },
+    {
+     "code": "NRU",
+     "country": "Nauru",
+     "url": "profiles/countries/nauru/",
+     "n": 3
+    },
+    {
+     "code": "STP",
+     "country": "Sao Tome and Principe",
+     "url": "profiles/countries/sao-tome-and-principe/",
+     "n": 3
+    },
+    {
+     "code": "TON",
+     "country": "Tonga",
+     "url": "profiles/countries/tonga/",
+     "n": 3
+    },
+    {
+     "code": "ARE",
+     "country": "United Arab Emirates",
+     "url": "profiles/countries/united-arab-emirates/",
+     "n": 3
+    },
+    {
+     "code": "ALB",
+     "country": "Albania",
+     "url": "profiles/countries/albania/",
+     "n": 2
+    },
+    {
+     "code": "AND",
+     "country": "Andorra",
+     "url": "profiles/countries/andorra/",
+     "n": 2
+    },
+    {
+     "code": "BGD",
+     "country": "Bangladesh",
+     "url": "profiles/countries/bangladesh/",
+     "n": 2
+    },
+    {
+     "code": "BLZ",
+     "country": "Belize",
+     "url": "profiles/countries/belize/",
+     "n": 2
+    },
+    {
+     "code": "BEN",
+     "country": "Benin",
+     "url": "profiles/countries/benin/",
+     "n": 2
+    },
+    {
+     "code": "BOL",
+     "country": "Bolivia (Plurinational State of)",
+     "url": "profiles/countries/bolivia-plurinational-state-of/",
+     "n": 2
+    },
+    {
+     "code": "KHM",
+     "country": "Cambodia",
+     "url": "profiles/countries/cambodia/",
+     "n": 2
+    },
+    {
+     "code": "CIV",
+     "country": "Côte D'Ivoire",
+     "url": "profiles/countries/cote-d-ivoire/",
+     "n": 2
+    },
+    {
+     "code": "DMA",
+     "country": "Dominica",
+     "url": "profiles/countries/dominica/",
+     "n": 2
+    },
+    {
+     "code": "SLV",
+     "country": "El Salvador",
+     "url": "profiles/countries/el-salvador/",
+     "n": 2
+    },
+    {
+     "code": "IRQ",
+     "country": "Iraq",
+     "url": "profiles/countries/iraq/",
+     "n": 2
+    },
+    {
+     "code": "MYS",
+     "country": "Malaysia",
+     "url": "profiles/countries/malaysia/",
+     "n": 2
+    },
+    {
+     "code": "MDV",
+     "country": "Maldives",
+     "url": "profiles/countries/maldives/",
+     "n": 2
+    },
+    {
+     "code": "NPL",
+     "country": "Nepal",
+     "url": "profiles/countries/nepal/",
+     "n": 2
+    },
+    {
+     "code": "NGA",
+     "country": "Nigeria",
+     "url": "profiles/countries/nigeria/",
+     "n": 2
+    },
+    {
+     "code": "OMN",
+     "country": "Oman",
+     "url": "profiles/countries/oman/",
+     "n": 2
+    },
+    {
+     "code": "PAK",
+     "country": "Pakistan",
+     "url": "profiles/countries/pakistan/",
+     "n": 2
+    },
+    {
+     "code": "SDN",
+     "country": "Sudan",
+     "url": "profiles/countries/sudan/",
+     "n": 2
+    },
+    {
+     "code": "TZA",
+     "country": "United Republic of Tanzania",
+     "url": "profiles/countries/united-republic-of-tanzania/",
+     "n": 2
+    },
+    {
+     "code": "USA",
+     "country": "United States of America",
+     "url": "profiles/countries/united-states-of-america/",
+     "n": 2
+    },
+    {
+     "code": "URY",
+     "country": "Uruguay",
+     "url": "profiles/countries/uruguay/",
+     "n": 2
+    },
+    {
+     "code": "UZB",
+     "country": "Uzbekistan",
+     "url": "profiles/countries/uzbekistan/",
+     "n": 2
+    },
+    {
+     "code": "VEN",
+     "country": "Venezuela, Bolivarian Republic of",
+     "url": "profiles/countries/venezuela-bolivarian-republic-of/",
+     "n": 2
+    },
+    {
+     "code": "ZMB",
+     "country": "Zambia",
+     "url": "profiles/countries/zambia/",
+     "n": 2
+    },
+    {
+     "code": "AGO",
+     "country": "Angola",
+     "url": "profiles/countries/angola/",
+     "n": 1
+    },
+    {
+     "code": "BHS",
+     "country": "Bahamas",
+     "url": "profiles/countries/bahamas/",
+     "n": 1
+    },
+    {
+     "code": "BTN",
+     "country": "Bhutan",
+     "url": "profiles/countries/bhutan/",
+     "n": 1
+    },
+    {
+     "code": "BFA",
+     "country": "Burkina Faso",
+     "url": "profiles/countries/burkina-faso/",
+     "n": 1
+    },
+    {
+     "code": "BDI",
+     "country": "Burundi",
+     "url": "profiles/countries/burundi/",
+     "n": 1
+    },
+    {
+     "code": "CMR",
+     "country": "Cameroon",
+     "url": "profiles/countries/cameroon/",
+     "n": 1
+    },
+    {
+     "code": "CHN",
+     "country": "China",
+     "url": "profiles/countries/china/",
+     "n": 1
+    },
+    {
+     "code": "COM",
+     "country": "Comoros",
+     "url": "profiles/countries/comoros/",
+     "n": 1
+    },
+    {
+     "code": "GNQ",
+     "country": "Equatorial Guinea",
+     "url": "profiles/countries/equatorial-guinea/",
+     "n": 1
+    },
+    {
+     "code": "FJI",
+     "country": "Fiji",
+     "url": "profiles/countries/fiji/",
+     "n": 1
+    },
+    {
+     "code": "GAB",
+     "country": "Gabon",
+     "url": "profiles/countries/gabon/",
+     "n": 1
+    },
+    {
+     "code": "GEO",
+     "country": "Georgia",
+     "url": "profiles/countries/georgia/",
+     "n": 1
+    },
+    {
+     "code": "GIN",
+     "country": "Guinea",
+     "url": "profiles/countries/guinea/",
+     "n": 1
+    },
+    {
+     "code": "IDN",
+     "country": "Indonesia",
+     "url": "profiles/countries/indonesia/",
+     "n": 1
+    },
+    {
+     "code": "JOR",
+     "country": "Jordan",
+     "url": "profiles/countries/jordan/",
+     "n": 1
+    },
+    {
+     "code": "KEN",
+     "country": "Kenya",
+     "url": "profiles/countries/kenya/",
+     "n": 1
+    },
+    {
+     "code": "KIR",
+     "country": "Kiribati",
+     "url": "profiles/countries/kiribati/",
+     "n": 1
+    },
+    {
+     "code": "LAO",
+     "country": "Lao People’s Democratic Republic",
+     "url": "profiles/countries/lao-peoples-democratic-republic/",
+     "n": 1
+    },
+    {
+     "code": "LSO",
+     "country": "Lesotho",
+     "url": "profiles/countries/lesotho/",
+     "n": 1
+    },
+    {
+     "code": "LIE",
+     "country": "Liechtenstein",
+     "url": "profiles/countries/liechtenstein/",
+     "n": 1
+    },
+    {
+     "code": "MWI",
+     "country": "Malawi",
+     "url": "profiles/countries/malawi/",
+     "n": 1
+    },
+    {
+     "code": "MUS",
+     "country": "Mauritius",
+     "url": "profiles/countries/mauritius/",
+     "n": 1
+    },
+    {
+     "code": "FSM",
+     "country": "Micronesia (Federated States of)",
+     "url": "profiles/countries/micronesia-federated-states-of/",
+     "n": 1
+    },
+    {
+     "code": "MCO",
+     "country": "Monaco",
+     "url": "profiles/countries/monaco/",
+     "n": 1
+    },
+    {
+     "code": "PLW",
+     "country": "Palau",
+     "url": "profiles/countries/palau/",
+     "n": 1
+    },
+    {
+     "code": "PSE",
+     "country": "Palestine",
+     "url": "profiles/countries/palestine/",
+     "n": 1
+    },
+    {
+     "code": "PER",
+     "country": "Peru",
+     "url": "profiles/countries/peru/",
+     "n": 1
+    },
+    {
+     "code": "KOR",
+     "country": "Republic of Korea",
+     "url": "profiles/countries/republic-of-korea/",
+     "n": 1
+    },
+    {
+     "code": "MDA",
+     "country": "Republic of Moldova",
+     "url": "profiles/countries/republic-of-moldova/",
+     "n": 1
+    },
+    {
+     "code": "SEN",
+     "country": "Senegal",
+     "url": "profiles/countries/senegal/",
+     "n": 1
+    },
+    {
+     "code": "SLE",
+     "country": "Sierra Leone",
+     "url": "profiles/countries/sierra-leone/",
+     "n": 1
+    },
+    {
+     "code": "SLB",
+     "country": "Solomon Islands",
+     "url": "profiles/countries/solomon-islands/",
+     "n": 1
+    },
+    {
+     "code": "SOM",
+     "country": "Somalia",
+     "url": "profiles/countries/somalia/",
+     "n": 1
+    },
+    {
+     "code": "SUR",
+     "country": "Suriname",
+     "url": "profiles/countries/suriname/",
+     "n": 1
+    },
+    {
+     "code": "SYR",
+     "country": "Syrian Arab Republic",
+     "url": "profiles/countries/syrian-arab-republic/",
+     "n": 1
+    },
+    {
+     "code": "TJK",
+     "country": "Tajikistan",
+     "url": "profiles/countries/tajikistan/",
+     "n": 1
+    },
+    {
+     "code": "TLS",
+     "country": "Timor-Leste",
+     "url": "profiles/countries/timor-leste/",
+     "n": 1
+    },
+    {
+     "code": "TTO",
+     "country": "Trinidad and Tobago",
+     "url": "profiles/countries/trinidad-and-tobago/",
+     "n": 1
+    },
+    {
+     "code": "TKM",
+     "country": "Turkmenistan",
+     "url": "profiles/countries/turkmenistan/",
+     "n": 1
+    },
+    {
+     "code": "GBR",
+     "country": "United Kingdom",
+     "url": "profiles/countries/united-kingdom/",
+     "n": 1
+    },
+    {
+     "code": "VUT",
+     "country": "Vanuatu",
+     "url": "profiles/countries/vanuatu/",
+     "n": 1
+    },
+    {
+     "code": "YEM",
+     "country": "Yemen",
+     "url": "profiles/countries/yemen/",
+     "n": 1
+    }
+   ]
+  },
+  {
+   "id": "adaptation",
+   "question": "Which countries include transport adaptation measures?",
+   "note": "Countries with at least one transport adaptation measure in active documents.",
+   "countries": [
+    {
+     "code": "BDI",
+     "country": "Burundi",
+     "url": "profiles/countries/burundi/",
+     "n": 11
+    },
+    {
+     "code": "LBR",
+     "country": "Liberia",
+     "url": "profiles/countries/liberia/",
+     "n": 9
+    },
+    {
+     "code": "ETH",
+     "country": "Ethiopia",
+     "url": "profiles/countries/ethiopia/",
+     "n": 8
+    },
+    {
+     "code": "LBN",
+     "country": "Lebanon",
+     "url": "profiles/countries/lebanon/",
+     "n": 8
+    },
+    {
+     "code": "MEX",
+     "country": "Mexico",
+     "url": "profiles/countries/mexico/",
+     "n": 8
+    },
+    {
+     "code": "MAR",
+     "country": "Morocco",
+     "url": "profiles/countries/morocco/",
+     "n": 8
+    },
+    {
+     "code": "ARE",
+     "country": "United Arab Emirates",
+     "url": "profiles/countries/united-arab-emirates/",
+     "n": 8
+    },
+    {
+     "code": "FSM",
+     "country": "Micronesia (Federated States of)",
+     "url": "profiles/countries/micronesia-federated-states-of/",
+     "n": 7
+    },
+    {
+     "code": "NIU",
+     "country": "Niue",
+     "url": "profiles/countries/niue/",
+     "n": 7
+    },
+    {
+     "code": "ZAF",
+     "country": "South Africa",
+     "url": "profiles/countries/south-africa/",
+     "n": 7
+    },
+    {
+     "code": "NGA",
+     "country": "Nigeria",
+     "url": "profiles/countries/nigeria/",
+     "n": 6
+    },
+    {
+     "code": "OMN",
+     "country": "Oman",
+     "url": "profiles/countries/oman/",
+     "n": 6
+    },
+    {
+     "code": "ARG",
+     "country": "Argentina",
+     "url": "profiles/countries/argentina/",
+     "n": 5
+    },
+    {
+     "code": "COL",
+     "country": "Colombia",
+     "url": "profiles/countries/colombia/",
+     "n": 5
+    },
+    {
+     "code": "SOM",
+     "country": "Somalia",
+     "url": "profiles/countries/somalia/",
+     "n": 5
+    },
+    {
+     "code": "SUR",
+     "country": "Suriname",
+     "url": "profiles/countries/suriname/",
+     "n": 5
+    },
+    {
+     "code": "TJK",
+     "country": "Tajikistan",
+     "url": "profiles/countries/tajikistan/",
+     "n": 5
+    },
+    {
+     "code": "TZA",
+     "country": "United Republic of Tanzania",
+     "url": "profiles/countries/united-republic-of-tanzania/",
+     "n": 5
+    },
+    {
+     "code": "ARM",
+     "country": "Armenia",
+     "url": "profiles/countries/armenia/",
+     "n": 4
+    },
+    {
+     "code": "BWA",
+     "country": "Botswana",
+     "url": "profiles/countries/botswana/",
+     "n": 4
+    },
+    {
+     "code": "CMR",
+     "country": "Cameroon",
+     "url": "profiles/countries/cameroon/",
+     "n": 4
+    },
+    {
+     "code": "TCD",
+     "country": "Chad",
+     "url": "profiles/countries/chad/",
+     "n": 4
+    },
+    {
+     "code": "CHL",
+     "country": "Chile",
+     "url": "profiles/countries/chile/",
+     "n": 4
+    },
+    {
+     "code": "CRI",
+     "country": "Costa Rica",
+     "url": "profiles/countries/costa-rica/",
+     "n": 4
+    },
+    {
+     "code": "DMA",
+     "country": "Dominica",
+     "url": "profiles/countries/dominica/",
+     "n": 4
+    },
+    {
+     "code": "DOM",
+     "country": "Dominican Republic",
+     "url": "profiles/countries/dominican-republic/",
+     "n": 4
+    },
+    {
+     "code": "SWZ",
+     "country": "Eswatini",
+     "url": "profiles/countries/eswatini/",
+     "n": 4
+    },
+    {
+     "code": "KEN",
+     "country": "Kenya",
+     "url": "profiles/countries/kenya/",
+     "n": 4
+    },
+    {
+     "code": "LSO",
+     "country": "Lesotho",
+     "url": "profiles/countries/lesotho/",
+     "n": 4
+    },
+    {
+     "code": "PRY",
+     "country": "Paraguay",
+     "url": "profiles/countries/paraguay/",
+     "n": 4
+    },
+    {
+     "code": "RWA",
+     "country": "Rwanda",
+     "url": "profiles/countries/rwanda/",
+     "n": 4
+    },
+    {
+     "code": "SLE",
+     "country": "Sierra Leone",
+     "url": "profiles/countries/sierra-leone/",
+     "n": 4
+    },
+    {
+     "code": "BHS",
+     "country": "Bahamas",
+     "url": "profiles/countries/bahamas/",
+     "n": 3
+    },
+    {
+     "code": "BRA",
+     "country": "Brazil",
+     "url": "profiles/countries/brazil/",
+     "n": 3
+    },
+    {
+     "code": "COG",
+     "country": "Congo",
+     "url": "profiles/countries/congo/",
+     "n": 3
+    },
+    {
+     "code": "EGY",
+     "country": "Egypt",
+     "url": "profiles/countries/egypt/",
+     "n": 3
+    },
+    {
+     "code": "MRT",
+     "country": "Mauritania",
+     "url": "profiles/countries/mauritania/",
+     "n": 3
+    },
+    {
+     "code": "MUS",
+     "country": "Mauritius",
+     "url": "profiles/countries/mauritius/",
+     "n": 3
+    },
+    {
+     "code": "NAM",
+     "country": "Namibia",
+     "url": "profiles/countries/namibia/",
+     "n": 3
+    },
+    {
+     "code": "NPL",
+     "country": "Nepal",
+     "url": "profiles/countries/nepal/",
+     "n": 3
+    },
+    {
+     "code": "PAK",
+     "country": "Pakistan",
+     "url": "profiles/countries/pakistan/",
+     "n": 3
+    },
+    {
+     "code": "QAT",
+     "country": "Qatar",
+     "url": "profiles/countries/qatar/",
+     "n": 3
+    },
+    {
+     "code": "KOR",
+     "country": "Republic of Korea",
+     "url": "profiles/countries/republic-of-korea/",
+     "n": 3
+    },
+    {
+     "code": "KNA",
+     "country": "Saint Kitts and Nevis",
+     "url": "profiles/countries/saint-kitts-and-nevis/",
+     "n": 3
+    },
+    {
+     "code": "LCA",
+     "country": "Saint Lucia",
+     "url": "profiles/countries/saint-lucia/",
+     "n": 3
+    },
+    {
+     "code": "TON",
+     "country": "Tonga",
+     "url": "profiles/countries/tonga/",
+     "n": 3
+    },
+    {
+     "code": "ALB",
+     "country": "Albania",
+     "url": "profiles/countries/albania/",
+     "n": 2
+    },
+    {
+     "code": "BGD",
+     "country": "Bangladesh",
+     "url": "profiles/countries/bangladesh/",
+     "n": 2
+    },
+    {
+     "code": "CPV",
+     "country": "Cabo Verde",
+     "url": "profiles/countries/cabo-verde/",
+     "n": 2
+    },
+    {
+     "code": "CIV",
+     "country": "Côte D'Ivoire",
+     "url": "profiles/countries/cote-d-ivoire/",
+     "n": 2
+    },
+    {
+     "code": "ERI",
+     "country": "Eritrea",
+     "url": "profiles/countries/eritrea/",
+     "n": 2
+    },
+    {
+     "code": "GAB",
+     "country": "Gabon",
+     "url": "profiles/countries/gabon/",
+     "n": 2
+    },
+    {
+     "code": "GIN",
+     "country": "Guinea",
+     "url": "profiles/countries/guinea/",
+     "n": 2
+    },
+    {
+     "code": "KAZ",
+     "country": "Kazakhstan",
+     "url": "profiles/countries/kazakhstan/",
+     "n": 2
+    },
+    {
+     "code": "LAO",
+     "country": "Lao People’s Democratic Republic",
+     "url": "profiles/countries/lao-peoples-democratic-republic/",
+     "n": 2
+    },
+    {
+     "code": "MWI",
+     "country": "Malawi",
+     "url": "profiles/countries/malawi/",
+     "n": 2
+    },
+    {
+     "code": "MDV",
+     "country": "Maldives",
+     "url": "profiles/countries/maldives/",
+     "n": 2
+    },
+    {
+     "code": "NRU",
+     "country": "Nauru",
+     "url": "profiles/countries/nauru/",
+     "n": 2
+    },
+    {
+     "code": "PER",
+     "country": "Peru",
+     "url": "profiles/countries/peru/",
+     "n": 2
+    },
+    {
+     "code": "MDA",
+     "country": "Republic of Moldova",
+     "url": "profiles/countries/republic-of-moldova/",
+     "n": 2
+    },
+    {
+     "code": "STP",
+     "country": "Sao Tome and Principe",
+     "url": "profiles/countries/sao-tome-and-principe/",
+     "n": 2
+    },
+    {
+     "code": "SAU",
+     "country": "Saudi Arabia",
+     "url": "profiles/countries/saudi-arabia/",
+     "n": 2
+    },
+    {
+     "code": "SLB",
+     "country": "Solomon Islands",
+     "url": "profiles/countries/solomon-islands/",
+     "n": 2
+    },
+    {
+     "code": "LKA",
+     "country": "Sri Lanka",
+     "url": "profiles/countries/sri-lanka/",
+     "n": 2
+    },
+    {
+     "code": "TUV",
+     "country": "Tuvalu",
+     "url": "profiles/countries/tuvalu/",
+     "n": 2
+    },
+    {
+     "code": "VNM",
+     "country": "Viet Nam",
+     "url": "profiles/countries/viet-nam/",
+     "n": 2
+    },
+    {
+     "code": "ZMB",
+     "country": "Zambia",
+     "url": "profiles/countries/zambia/",
+     "n": 2
+    },
+    {
+     "code": "DZA",
+     "country": "Algeria",
+     "url": "profiles/countries/algeria/",
+     "n": 1
+    },
+    {
+     "code": "AND",
+     "country": "Andorra",
+     "url": "profiles/countries/andorra/",
+     "n": 1
+    },
+    {
+     "code": "AGO",
+     "country": "Angola",
+     "url": "profiles/countries/angola/",
+     "n": 1
+    },
+    {
+     "code": "ATG",
+     "country": "Antigua and Barbuda",
+     "url": "profiles/countries/antigua-and-barbuda/",
+     "n": 1
+    },
+    {
+     "code": "BHR",
+     "country": "Bahrain",
+     "url": "profiles/countries/bahrain/",
+     "n": 1
+    },
+    {
+     "code": "BRB",
+     "country": "Barbados",
+     "url": "profiles/countries/barbados/",
+     "n": 1
+    },
+    {
+     "code": "BLZ",
+     "country": "Belize",
+     "url": "profiles/countries/belize/",
+     "n": 1
+    },
+    {
+     "code": "KHM",
+     "country": "Cambodia",
+     "url": "profiles/countries/cambodia/",
+     "n": 1
+    },
+    {
+     "code": "CAN",
+     "country": "Canada",
+     "url": "profiles/countries/canada/",
+     "n": 1
+    },
+    {
+     "code": "CAF",
+     "country": "Central African Republic",
+     "url": "profiles/countries/central-african-republic/",
+     "n": 1
+    },
+    {
+     "code": "COM",
+     "country": "Comoros",
+     "url": "profiles/countries/comoros/",
+     "n": 1
+    },
+    {
+     "code": "SLV",
+     "country": "El Salvador",
+     "url": "profiles/countries/el-salvador/",
+     "n": 1
+    },
+    {
+     "code": "EEU",
+     "country": "European Union",
+     "url": "profiles/countries/european-union/",
+     "n": 1
+    },
+    {
+     "code": "FJI",
+     "country": "Fiji",
+     "url": "profiles/countries/fiji/",
+     "n": 1
+    },
+    {
+     "code": "GMB",
+     "country": "Gambia (Republic of The)",
+     "url": "profiles/countries/gambia-republic-of-the/",
+     "n": 1
+    },
+    {
+     "code": "GHA",
+     "country": "Ghana",
+     "url": "profiles/countries/ghana/",
+     "n": 1
+    },
+    {
+     "code": "GUY",
+     "country": "Guyana",
+     "url": "profiles/countries/guyana/",
+     "n": 1
+    },
+    {
+     "code": "IRQ",
+     "country": "Iraq",
+     "url": "profiles/countries/iraq/",
+     "n": 1
+    },
+    {
+     "code": "KGZ",
+     "country": "Kyrgyzstan",
+     "url": "profiles/countries/kyrgyzstan/",
+     "n": 1
+    },
+    {
+     "code": "MDG",
+     "country": "Madagascar",
+     "url": "profiles/countries/madagascar/",
+     "n": 1
+    },
+    {
+     "code": "MYS",
+     "country": "Malaysia",
+     "url": "profiles/countries/malaysia/",
+     "n": 1
+    },
+    {
+     "code": "MNG",
+     "country": "Mongolia",
+     "url": "profiles/countries/mongolia/",
+     "n": 1
+    },
+    {
+     "code": "NIC",
+     "country": "Nicaragua",
+     "url": "profiles/countries/nicaragua/",
+     "n": 1
+    },
+    {
+     "code": "PSE",
+     "country": "Palestine",
+     "url": "profiles/countries/palestine/",
+     "n": 1
+    },
+    {
+     "code": "PAN",
+     "country": "Panama",
+     "url": "profiles/countries/panama/",
+     "n": 1
+    },
+    {
+     "code": "PNG",
+     "country": "Papua New Guinea",
+     "url": "profiles/countries/papua-new-guinea/",
+     "n": 1
+    },
+    {
+     "code": "RUS",
+     "country": "Russian Federation",
+     "url": "profiles/countries/russian-federation/",
+     "n": 1
+    },
+    {
+     "code": "SYR",
+     "country": "Syrian Arab Republic",
+     "url": "profiles/countries/syrian-arab-republic/",
+     "n": 1
+    },
+    {
+     "code": "TLS",
+     "country": "Timor-Leste",
+     "url": "profiles/countries/timor-leste/",
+     "n": 1
+    },
+    {
+     "code": "TUR",
+     "country": "Türkiye",
+     "url": "profiles/countries/turkiye/",
+     "n": 1
+    },
+    {
+     "code": "VUT",
+     "country": "Vanuatu",
+     "url": "profiles/countries/vanuatu/",
+     "n": 1
+    },
+    {
+     "code": "YEM",
+     "country": "Yemen",
+     "url": "profiles/countries/yemen/",
+     "n": 1
+    },
+    {
+     "code": "ZWE",
+     "country": "Zimbabwe",
+     "url": "profiles/countries/zimbabwe/",
+     "n": 1
+    }
+   ]
+  },
+  {
+   "id": "ndc3",
+   "question": "Which countries have already submitted a 3rd generation NDC?",
+   "note": "Countries with at least one NDC 3.x document in the database.",
+   "countries": [
+    {
+     "code": "AND",
+     "country": "Andorra",
+     "url": "profiles/countries/andorra/",
+     "n": null
+    },
+    {
+     "code": "AGO",
+     "country": "Angola",
+     "url": "profiles/countries/angola/",
+     "n": null
+    },
+    {
+     "code": "ARM",
+     "country": "Armenia",
+     "url": "profiles/countries/armenia/",
+     "n": null
+    },
+    {
+     "code": "AUS",
+     "country": "Australia",
+     "url": "profiles/countries/australia/",
+     "n": null
+    },
+    {
+     "code": "AUT",
+     "country": "Austria",
+     "url": "profiles/countries/austria/",
+     "n": null
+    },
+    {
+     "code": "AZE",
+     "country": "Azerbaijan",
+     "url": "profiles/countries/azerbaijan/",
+     "n": null
+    },
+    {
+     "code": "BHS",
+     "country": "Bahamas",
+     "url": "profiles/countries/bahamas/",
+     "n": null
+    },
+    {
+     "code": "BHR",
+     "country": "Bahrain",
+     "url": "profiles/countries/bahrain/",
+     "n": null
+    },
+    {
+     "code": "BGD",
+     "country": "Bangladesh",
+     "url": "profiles/countries/bangladesh/",
+     "n": null
+    },
+    {
+     "code": "BRB",
+     "country": "Barbados",
+     "url": "profiles/countries/barbados/",
+     "n": null
+    },
+    {
+     "code": "BLR",
+     "country": "Belarus",
+     "url": "profiles/countries/belarus/",
+     "n": null
+    },
+    {
+     "code": "BEL",
+     "country": "Belgium",
+     "url": "profiles/countries/belgium/",
+     "n": null
+    },
+    {
+     "code": "BLZ",
+     "country": "Belize",
+     "url": "profiles/countries/belize/",
+     "n": null
+    },
+    {
+     "code": "BTN",
+     "country": "Bhutan",
+     "url": "profiles/countries/bhutan/",
+     "n": null
+    },
+    {
+     "code": "BOL",
+     "country": "Bolivia (Plurinational State of)",
+     "url": "profiles/countries/bolivia-plurinational-state-of/",
+     "n": null
+    },
+    {
+     "code": "BWA",
+     "country": "Botswana",
+     "url": "profiles/countries/botswana/",
+     "n": null
+    },
+    {
+     "code": "BRA",
+     "country": "Brazil",
+     "url": "profiles/countries/brazil/",
+     "n": null
+    },
+    {
+     "code": "BRN",
+     "country": "Brunei Darussalam",
+     "url": "profiles/countries/brunei-darussalam/",
+     "n": null
+    },
+    {
+     "code": "BGR",
+     "country": "Bulgaria",
+     "url": "profiles/countries/bulgaria/",
+     "n": null
+    },
+    {
+     "code": "BFA",
+     "country": "Burkina Faso",
+     "url": "profiles/countries/burkina-faso/",
+     "n": null
+    },
+    {
+     "code": "BDI",
+     "country": "Burundi",
+     "url": "profiles/countries/burundi/",
+     "n": null
+    },
+    {
+     "code": "CPV",
+     "country": "Cabo Verde",
+     "url": "profiles/countries/cabo-verde/",
+     "n": null
+    },
+    {
+     "code": "KHM",
+     "country": "Cambodia",
+     "url": "profiles/countries/cambodia/",
+     "n": null
+    },
+    {
+     "code": "CAN",
+     "country": "Canada",
+     "url": "profiles/countries/canada/",
+     "n": null
+    },
+    {
+     "code": "CAF",
+     "country": "Central African Republic",
+     "url": "profiles/countries/central-african-republic/",
+     "n": null
+    },
+    {
+     "code": "CHL",
+     "country": "Chile",
+     "url": "profiles/countries/chile/",
+     "n": null
+    },
+    {
+     "code": "CHN",
+     "country": "China",
+     "url": "profiles/countries/china/",
+     "n": null
+    },
+    {
+     "code": "COL",
+     "country": "Colombia",
+     "url": "profiles/countries/colombia/",
+     "n": null
+    },
+    {
+     "code": "COM",
+     "country": "Comoros",
+     "url": "profiles/countries/comoros/",
+     "n": null
+    },
+    {
+     "code": "COG",
+     "country": "Congo",
+     "url": "profiles/countries/congo/",
+     "n": null
+    },
+    {
+     "code": "CRI",
+     "country": "Costa Rica",
+     "url": "profiles/countries/costa-rica/",
+     "n": null
+    },
+    {
+     "code": "HRV",
+     "country": "Croatia",
+     "url": "profiles/countries/croatia/",
+     "n": null
+    },
+    {
+     "code": "CUB",
+     "country": "Cuba",
+     "url": "profiles/countries/cuba/",
+     "n": null
+    },
+    {
+     "code": "CYP",
+     "country": "Cyprus",
+     "url": "profiles/countries/cyprus/",
+     "n": null
+    },
+    {
+     "code": "CZE",
+     "country": "Czech Republic",
+     "url": "profiles/countries/czech-republic/",
+     "n": null
+    },
+    {
+     "code": "CIV",
+     "country": "Côte D'Ivoire",
+     "url": "profiles/countries/cote-d-ivoire/",
+     "n": null
+    },
+    {
+     "code": "DNK",
+     "country": "Denmark",
+     "url": "profiles/countries/denmark/",
+     "n": null
+    },
+    {
+     "code": "DJI",
+     "country": "Djibouti",
+     "url": "profiles/countries/djibouti/",
+     "n": null
+    },
+    {
+     "code": "ECU",
+     "country": "Ecuador",
+     "url": "profiles/countries/ecuador/",
+     "n": null
+    },
+    {
+     "code": "SLV",
+     "country": "El Salvador",
+     "url": "profiles/countries/el-salvador/",
+     "n": null
+    },
+    {
+     "code": "ERI",
+     "country": "Eritrea",
+     "url": "profiles/countries/eritrea/",
+     "n": null
+    },
+    {
+     "code": "EST",
+     "country": "Estonia",
+     "url": "profiles/countries/estonia/",
+     "n": null
+    },
+    {
+     "code": "SWZ",
+     "country": "Eswatini",
+     "url": "profiles/countries/eswatini/",
+     "n": null
+    },
+    {
+     "code": "ETH",
+     "country": "Ethiopia",
+     "url": "profiles/countries/ethiopia/",
+     "n": null
+    },
+    {
+     "code": "EEU",
+     "country": "European Union",
+     "url": "profiles/countries/european-union/",
+     "n": null
+    },
+    {
+     "code": "FJI",
+     "country": "Fiji",
+     "url": "profiles/countries/fiji/",
+     "n": null
+    },
+    {
+     "code": "FIN",
+     "country": "Finland",
+     "url": "profiles/countries/finland/",
+     "n": null
+    },
+    {
+     "code": "FRA",
+     "country": "France",
+     "url": "profiles/countries/france/",
+     "n": null
+    },
+    {
+     "code": "GAB",
+     "country": "Gabon",
+     "url": "profiles/countries/gabon/",
+     "n": null
+    },
+    {
+     "code": "GEO",
+     "country": "Georgia",
+     "url": "profiles/countries/georgia/",
+     "n": null
+    },
+    {
+     "code": "DEU",
+     "country": "Germany",
+     "url": "profiles/countries/germany/",
+     "n": null
+    },
+    {
+     "code": "GRC",
+     "country": "Greece",
+     "url": "profiles/countries/greece/",
+     "n": null
+    },
+    {
+     "code": "GIN",
+     "country": "Guinea",
+     "url": "profiles/countries/guinea/",
+     "n": null
+    },
+    {
+     "code": "HND",
+     "country": "Honduras",
+     "url": "profiles/countries/honduras/",
+     "n": null
+    },
+    {
+     "code": "HUN",
+     "country": "Hungary",
+     "url": "profiles/countries/hungary/",
+     "n": null
+    },
+    {
+     "code": "ISL",
+     "country": "Iceland",
+     "url": "profiles/countries/iceland/",
+     "n": null
+    },
+    {
+     "code": "IND",
+     "country": "India",
+     "url": "profiles/countries/india/",
+     "n": null
+    },
+    {
+     "code": "IDN",
+     "country": "Indonesia",
+     "url": "profiles/countries/indonesia/",
+     "n": null
+    },
+    {
+     "code": "IRQ",
+     "country": "Iraq",
+     "url": "profiles/countries/iraq/",
+     "n": null
+    },
+    {
+     "code": "IRL",
+     "country": "Ireland",
+     "url": "profiles/countries/ireland/",
+     "n": null
+    },
+    {
+     "code": "ITA",
+     "country": "Italy",
+     "url": "profiles/countries/italy/",
+     "n": null
+    },
+    {
+     "code": "JAM",
+     "country": "Jamaica",
+     "url": "profiles/countries/jamaica/",
+     "n": null
+    },
+    {
+     "code": "JPN",
+     "country": "Japan",
+     "url": "profiles/countries/japan/",
+     "n": null
+    },
+    {
+     "code": "JOR",
+     "country": "Jordan",
+     "url": "profiles/countries/jordan/",
+     "n": null
+    },
+    {
+     "code": "KAZ",
+     "country": "Kazakhstan",
+     "url": "profiles/countries/kazakhstan/",
+     "n": null
+    },
+    {
+     "code": "KEN",
+     "country": "Kenya",
+     "url": "profiles/countries/kenya/",
+     "n": null
+    },
+    {
+     "code": "KGZ",
+     "country": "Kyrgyzstan",
+     "url": "profiles/countries/kyrgyzstan/",
+     "n": null
+    },
+    {
+     "code": "LVA",
+     "country": "Latvia",
+     "url": "profiles/countries/latvia/",
+     "n": null
+    },
+    {
+     "code": "LBN",
+     "country": "Lebanon",
+     "url": "profiles/countries/lebanon/",
+     "n": null
+    },
+    {
+     "code": "LSO",
+     "country": "Lesotho",
+     "url": "profiles/countries/lesotho/",
+     "n": null
+    },
+    {
+     "code": "LBR",
+     "country": "Liberia",
+     "url": "profiles/countries/liberia/",
+     "n": null
+    },
+    {
+     "code": "LIE",
+     "country": "Liechtenstein",
+     "url": "profiles/countries/liechtenstein/",
+     "n": null
+    },
+    {
+     "code": "LTU",
+     "country": "Lithuania",
+     "url": "profiles/countries/lithuania/",
+     "n": null
+    },
+    {
+     "code": "LUX",
+     "country": "Luxembourg",
+     "url": "profiles/countries/luxembourg/",
+     "n": null
+    },
+    {
+     "code": "MYS",
+     "country": "Malaysia",
+     "url": "profiles/countries/malaysia/",
+     "n": null
+    },
+    {
+     "code": "MDV",
+     "country": "Maldives",
+     "url": "profiles/countries/maldives/",
+     "n": null
+    },
+    {
+     "code": "MLT",
+     "country": "Malta",
+     "url": "profiles/countries/malta/",
+     "n": null
+    },
+    {
+     "code": "MHL",
+     "country": "Marshall Islands",
+     "url": "profiles/countries/marshall-islands/",
+     "n": null
+    },
+    {
+     "code": "MRT",
+     "country": "Mauritania",
+     "url": "profiles/countries/mauritania/",
+     "n": null
+    },
+    {
+     "code": "MUS",
+     "country": "Mauritius",
+     "url": "profiles/countries/mauritius/",
+     "n": null
+    },
+    {
+     "code": "MEX",
+     "country": "Mexico",
+     "url": "profiles/countries/mexico/",
+     "n": null
+    },
+    {
+     "code": "FSM",
+     "country": "Micronesia (Federated States of)",
+     "url": "profiles/countries/micronesia-federated-states-of/",
+     "n": null
+    },
+    {
+     "code": "MCO",
+     "country": "Monaco",
+     "url": "profiles/countries/monaco/",
+     "n": null
+    },
+    {
+     "code": "MNG",
+     "country": "Mongolia",
+     "url": "profiles/countries/mongolia/",
+     "n": null
+    },
+    {
+     "code": "MNE",
+     "country": "Montenegro",
+     "url": "profiles/countries/montenegro/",
+     "n": null
+    },
+    {
+     "code": "MAR",
+     "country": "Morocco",
+     "url": "profiles/countries/morocco/",
+     "n": null
+    },
+    {
+     "code": "MOZ",
+     "country": "Mozambique",
+     "url": "profiles/countries/mozambique/",
+     "n": null
+    },
+    {
+     "code": "NRU",
+     "country": "Nauru",
+     "url": "profiles/countries/nauru/",
+     "n": null
+    },
+    {
+     "code": "NPL",
+     "country": "Nepal",
+     "url": "profiles/countries/nepal/",
+     "n": null
+    },
+    {
+     "code": "NLD",
+     "country": "Netherlands",
+     "url": "profiles/countries/netherlands/",
+     "n": null
+    },
+    {
+     "code": "NZL",
+     "country": "New Zealand",
+     "url": "profiles/countries/new-zealand/",
+     "n": null
+    },
+    {
+     "code": "NIC",
+     "country": "Nicaragua",
+     "url": "profiles/countries/nicaragua/",
+     "n": null
+    },
+    {
+     "code": "NGA",
+     "country": "Nigeria",
+     "url": "profiles/countries/nigeria/",
+     "n": null
+    },
+    {
+     "code": "NIU",
+     "country": "Niue",
+     "url": "profiles/countries/niue/",
+     "n": null
+    },
+    {
+     "code": "NOR",
+     "country": "Norway",
+     "url": "profiles/countries/norway/",
+     "n": null
+    },
+    {
+     "code": "PAK",
+     "country": "Pakistan",
+     "url": "profiles/countries/pakistan/",
+     "n": null
+    },
+    {
+     "code": "PLW",
+     "country": "Palau",
+     "url": "profiles/countries/palau/",
+     "n": null
+    },
+    {
+     "code": "PAN",
+     "country": "Panama",
+     "url": "profiles/countries/panama/",
+     "n": null
+    },
+    {
+     "code": "PRY",
+     "country": "Paraguay",
+     "url": "profiles/countries/paraguay/",
+     "n": null
+    },
+    {
+     "code": "PER",
+     "country": "Peru",
+     "url": "profiles/countries/peru/",
+     "n": null
+    },
+    {
+     "code": "POL",
+     "country": "Poland",
+     "url": "profiles/countries/poland/",
+     "n": null
+    },
+    {
+     "code": "PRT",
+     "country": "Portugal",
+     "url": "profiles/countries/portugal/",
+     "n": null
+    },
+    {
+     "code": "QAT",
+     "country": "Qatar",
+     "url": "profiles/countries/qatar/",
+     "n": null
+    },
+    {
+     "code": "KOR",
+     "country": "Republic of Korea",
+     "url": "profiles/countries/republic-of-korea/",
+     "n": null
+    },
+    {
+     "code": "MDA",
+     "country": "Republic of Moldova",
+     "url": "profiles/countries/republic-of-moldova/",
+     "n": null
+    },
+    {
+     "code": "ROU",
+     "country": "Romania",
+     "url": "profiles/countries/romania/",
+     "n": null
+    },
+    {
+     "code": "RUS",
+     "country": "Russian Federation",
+     "url": "profiles/countries/russian-federation/",
+     "n": null
+    },
+    {
+     "code": "RWA",
+     "country": "Rwanda",
+     "url": "profiles/countries/rwanda/",
+     "n": null
+    },
+    {
+     "code": "LCA",
+     "country": "Saint Lucia",
+     "url": "profiles/countries/saint-lucia/",
+     "n": null
+    },
+    {
+     "code": "VCT",
+     "country": "Saint Vincent and the Grenadines",
+     "url": "profiles/countries/saint-vincent-and-the-grenadines/",
+     "n": null
+    },
+    {
+     "code": "WSM",
+     "country": "Samoa",
+     "url": "profiles/countries/samoa/",
+     "n": null
+    },
+    {
+     "code": "STP",
+     "country": "Sao Tome and Principe",
+     "url": "profiles/countries/sao-tome-and-principe/",
+     "n": null
+    },
+    {
+     "code": "SAU",
+     "country": "Saudi Arabia",
+     "url": "profiles/countries/saudi-arabia/",
+     "n": null
+    },
+    {
+     "code": "SRB",
+     "country": "Serbia",
+     "url": "profiles/countries/serbia/",
+     "n": null
+    },
+    {
+     "code": "SYC",
+     "country": "Seychelles",
+     "url": "profiles/countries/seychelles/",
+     "n": null
+    },
+    {
+     "code": "SLE",
+     "country": "Sierra Leone",
+     "url": "profiles/countries/sierra-leone/",
+     "n": null
+    },
+    {
+     "code": "SGP",
+     "country": "Singapore",
+     "url": "profiles/countries/singapore/",
+     "n": null
+    },
+    {
+     "code": "SVK",
+     "country": "Slovakia",
+     "url": "profiles/countries/slovakia/",
+     "n": null
+    },
+    {
+     "code": "SVN",
+     "country": "Slovenia",
+     "url": "profiles/countries/slovenia/",
+     "n": null
+    },
+    {
+     "code": "SLB",
+     "country": "Solomon Islands",
+     "url": "profiles/countries/solomon-islands/",
+     "n": null
+    },
+    {
+     "code": "SOM",
+     "country": "Somalia",
+     "url": "profiles/countries/somalia/",
+     "n": null
+    },
+    {
+     "code": "ZAF",
+     "country": "South Africa",
+     "url": "profiles/countries/south-africa/",
+     "n": null
+    },
+    {
+     "code": "ESP",
+     "country": "Spain",
+     "url": "profiles/countries/spain/",
+     "n": null
+    },
+    {
+     "code": "LKA",
+     "country": "Sri Lanka",
+     "url": "profiles/countries/sri-lanka/",
+     "n": null
+    },
+    {
+     "code": "SUR",
+     "country": "Suriname",
+     "url": "profiles/countries/suriname/",
+     "n": null
+    },
+    {
+     "code": "SWE",
+     "country": "Sweden",
+     "url": "profiles/countries/sweden/",
+     "n": null
+    },
+    {
+     "code": "CHE",
+     "country": "Switzerland",
+     "url": "profiles/countries/switzerland/",
+     "n": null
+    },
+    {
+     "code": "THA",
+     "country": "Thailand",
+     "url": "profiles/countries/thailand/",
+     "n": null
+    },
+    {
+     "code": "TON",
+     "country": "Tonga",
+     "url": "profiles/countries/tonga/",
+     "n": null
+    },
+    {
+     "code": "TTO",
+     "country": "Trinidad and Tobago",
+     "url": "profiles/countries/trinidad-and-tobago/",
+     "n": null
+    },
+    {
+     "code": "TUN",
+     "country": "Tunisia",
+     "url": "profiles/countries/tunisia/",
+     "n": null
+    },
+    {
+     "code": "TUV",
+     "country": "Tuvalu",
+     "url": "profiles/countries/tuvalu/",
+     "n": null
+    },
+    {
+     "code": "TUR",
+     "country": "Türkiye",
+     "url": "profiles/countries/turkiye/",
+     "n": null
+    },
+    {
+     "code": "UKR",
+     "country": "Ukraine",
+     "url": "profiles/countries/ukraine/",
+     "n": null
+    },
+    {
+     "code": "ARE",
+     "country": "United Arab Emirates",
+     "url": "profiles/countries/united-arab-emirates/",
+     "n": null
+    },
+    {
+     "code": "GBR",
+     "country": "United Kingdom",
+     "url": "profiles/countries/united-kingdom/",
+     "n": null
+    },
+    {
+     "code": "USA",
+     "country": "United States of America",
+     "url": "profiles/countries/united-states-of-america/",
+     "n": null
+    },
+    {
+     "code": "URY",
+     "country": "Uruguay",
+     "url": "profiles/countries/uruguay/",
+     "n": null
+    },
+    {
+     "code": "UZB",
+     "country": "Uzbekistan",
+     "url": "profiles/countries/uzbekistan/",
+     "n": null
+    },
+    {
+     "code": "VUT",
+     "country": "Vanuatu",
+     "url": "profiles/countries/vanuatu/",
+     "n": null
+    },
+    {
+     "code": "VAT",
+     "country": "Vatican",
+     "url": "profiles/countries/vatican/",
+     "n": null
+    },
+    {
+     "code": "VEN",
+     "country": "Venezuela, Bolivarian Republic of",
+     "url": "profiles/countries/venezuela-bolivarian-republic-of/",
+     "n": null
+    },
+    {
+     "code": "YEM",
+     "country": "Yemen",
+     "url": "profiles/countries/yemen/",
+     "n": null
+    },
+    {
+     "code": "ZMB",
+     "country": "Zambia",
+     "url": "profiles/countries/zambia/",
+     "n": null
+    },
+    {
+     "code": "ZWE",
+     "country": "Zimbabwe",
+     "url": "profiles/countries/zimbabwe/",
+     "n": null
+    }
+   ]
+  },
+  {
+   "id": "lts",
+   "question": "Which countries have a Long-Term Strategy (LTS) in the tracker?",
+   "note": "Countries with at least one LTS document recorded.",
+   "countries": [
+    {
+     "code": "AND",
+     "country": "Andorra",
+     "url": "profiles/countries/andorra/",
+     "n": null
+    },
+    {
+     "code": "ARG",
+     "country": "Argentina",
+     "url": "profiles/countries/argentina/",
+     "n": null
+    },
+    {
+     "code": "ARM",
+     "country": "Armenia",
+     "url": "profiles/countries/armenia/",
+     "n": null
+    },
+    {
+     "code": "AUS",
+     "country": "Australia",
+     "url": "profiles/countries/australia/",
+     "n": null
+    },
+    {
+     "code": "AUT",
+     "country": "Austria",
+     "url": "profiles/countries/austria/",
+     "n": null
+    },
+    {
+     "code": "BEL",
+     "country": "Belgium",
+     "url": "profiles/countries/belgium/",
+     "n": null
+    },
+    {
+     "code": "BLZ",
+     "country": "Belize",
+     "url": "profiles/countries/belize/",
+     "n": null
+    },
+    {
+     "code": "BEN",
+     "country": "Benin",
+     "url": "profiles/countries/benin/",
+     "n": null
+    },
+    {
+     "code": "BTN",
+     "country": "Bhutan",
+     "url": "profiles/countries/bhutan/",
+     "n": null
+    },
+    {
+     "code": "BIH",
+     "country": "Bosnia and Herzegovina",
+     "url": "profiles/countries/bosnia-and-herzegovina/",
+     "n": null
+    },
+    {
+     "code": "BFA",
+     "country": "Burkina Faso",
+     "url": "profiles/countries/burkina-faso/",
+     "n": null
+    },
+    {
+     "code": "KHM",
+     "country": "Cambodia",
+     "url": "profiles/countries/cambodia/",
+     "n": null
+    },
+    {
+     "code": "CAN",
+     "country": "Canada",
+     "url": "profiles/countries/canada/",
+     "n": null
+    },
+    {
+     "code": "CHL",
+     "country": "Chile",
+     "url": "profiles/countries/chile/",
+     "n": null
+    },
+    {
+     "code": "CHN",
+     "country": "China",
+     "url": "profiles/countries/china/",
+     "n": null
+    },
+    {
+     "code": "COL",
+     "country": "Colombia",
+     "url": "profiles/countries/colombia/",
+     "n": null
+    },
+    {
+     "code": "CRI",
+     "country": "Costa Rica",
+     "url": "profiles/countries/costa-rica/",
+     "n": null
+    },
+    {
+     "code": "CYP",
+     "country": "Cyprus",
+     "url": "profiles/countries/cyprus/",
+     "n": null
+    },
+    {
+     "code": "CZE",
+     "country": "Czech Republic",
+     "url": "profiles/countries/czech-republic/",
+     "n": null
+    },
+    {
+     "code": "DNK",
+     "country": "Denmark",
+     "url": "profiles/countries/denmark/",
+     "n": null
+    },
+    {
+     "code": "GNQ",
+     "country": "Equatorial Guinea",
+     "url": "profiles/countries/equatorial-guinea/",
+     "n": null
+    },
+    {
+     "code": "ETH",
+     "country": "Ethiopia",
+     "url": "profiles/countries/ethiopia/",
+     "n": null
+    },
+    {
+     "code": "EEU",
+     "country": "European Union",
+     "url": "profiles/countries/european-union/",
+     "n": null
+    },
+    {
+     "code": "FJI",
+     "country": "Fiji",
+     "url": "profiles/countries/fiji/",
+     "n": null
+    },
+    {
+     "code": "FIN",
+     "country": "Finland",
+     "url": "profiles/countries/finland/",
+     "n": null
+    },
+    {
+     "code": "FRA",
+     "country": "France",
+     "url": "profiles/countries/france/",
+     "n": null
+    },
+    {
+     "code": "GMB",
+     "country": "Gambia (Republic of The)",
+     "url": "profiles/countries/gambia-republic-of-the/",
+     "n": null
+    },
+    {
+     "code": "GEO",
+     "country": "Georgia",
+     "url": "profiles/countries/georgia/",
+     "n": null
+    },
+    {
+     "code": "DEU",
+     "country": "Germany",
+     "url": "profiles/countries/germany/",
+     "n": null
+    },
+    {
+     "code": "GTM",
+     "country": "Guatemala",
+     "url": "profiles/countries/guatemala/",
+     "n": null
+    },
+    {
+     "code": "HUN",
+     "country": "Hungary",
+     "url": "profiles/countries/hungary/",
+     "n": null
+    },
+    {
+     "code": "ISL",
+     "country": "Iceland",
+     "url": "profiles/countries/iceland/",
+     "n": null
+    },
+    {
+     "code": "IND",
+     "country": "India",
+     "url": "profiles/countries/india/",
+     "n": null
+    },
+    {
+     "code": "IDN",
+     "country": "Indonesia",
+     "url": "profiles/countries/indonesia/",
+     "n": null
+    },
+    {
+     "code": "IRL",
+     "country": "Ireland",
+     "url": "profiles/countries/ireland/",
+     "n": null
+    },
+    {
+     "code": "JAM",
+     "country": "Jamaica",
+     "url": "profiles/countries/jamaica/",
+     "n": null
+    },
+    {
+     "code": "JPN",
+     "country": "Japan",
+     "url": "profiles/countries/japan/",
+     "n": null
+    },
+    {
+     "code": "KAZ",
+     "country": "Kazakhstan",
+     "url": "profiles/countries/kazakhstan/",
+     "n": null
+    },
+    {
+     "code": "LVA",
+     "country": "Latvia",
+     "url": "profiles/countries/latvia/",
+     "n": null
+    },
+    {
+     "code": "LBN",
+     "country": "Lebanon",
+     "url": "profiles/countries/lebanon/",
+     "n": null
+    },
+    {
+     "code": "LTU",
+     "country": "Lithuania",
+     "url": "profiles/countries/lithuania/",
+     "n": null
+    },
+    {
+     "code": "LUX",
+     "country": "Luxembourg",
+     "url": "profiles/countries/luxembourg/",
+     "n": null
+    },
+    {
+     "code": "MLT",
+     "country": "Malta",
+     "url": "profiles/countries/malta/",
+     "n": null
+    },
+    {
+     "code": "MHL",
+     "country": "Marshall Islands",
+     "url": "profiles/countries/marshall-islands/",
+     "n": null
+    },
+    {
+     "code": "MEX",
+     "country": "Mexico",
+     "url": "profiles/countries/mexico/",
+     "n": null
+    },
+    {
+     "code": "MAR",
+     "country": "Morocco",
+     "url": "profiles/countries/morocco/",
+     "n": null
+    },
+    {
+     "code": "NPL",
+     "country": "Nepal",
+     "url": "profiles/countries/nepal/",
+     "n": null
+    },
+    {
+     "code": "NLD",
+     "country": "Netherlands",
+     "url": "profiles/countries/netherlands/",
+     "n": null
+    },
+    {
+     "code": "NZL",
+     "country": "New Zealand",
+     "url": "profiles/countries/new-zealand/",
+     "n": null
+    },
+    {
+     "code": "NGA",
+     "country": "Nigeria",
+     "url": "profiles/countries/nigeria/",
+     "n": null
+    },
+    {
+     "code": "NOR",
+     "country": "Norway",
+     "url": "profiles/countries/norway/",
+     "n": null
+    },
+    {
+     "code": "OMN",
+     "country": "Oman",
+     "url": "profiles/countries/oman/",
+     "n": null
+    },
+    {
+     "code": "PAN",
+     "country": "Panama",
+     "url": "profiles/countries/panama/",
+     "n": null
+    },
+    {
+     "code": "PER",
+     "country": "Peru",
+     "url": "profiles/countries/peru/",
+     "n": null
+    },
+    {
+     "code": "PRT",
+     "country": "Portugal",
+     "url": "profiles/countries/portugal/",
+     "n": null
+    },
+    {
+     "code": "KOR",
+     "country": "Republic of Korea",
+     "url": "profiles/countries/republic-of-korea/",
+     "n": null
+    },
+    {
+     "code": "MKD",
+     "country": "Republic of North Macedonia",
+     "url": "profiles/countries/republic-of-north-macedonia/",
+     "n": null
+    },
+    {
+     "code": "RUS",
+     "country": "Russian Federation",
+     "url": "profiles/countries/russian-federation/",
+     "n": null
+    },
+    {
+     "code": "SRB",
+     "country": "Serbia",
+     "url": "profiles/countries/serbia/",
+     "n": null
+    },
+    {
+     "code": "SGP",
+     "country": "Singapore",
+     "url": "profiles/countries/singapore/",
+     "n": null
+    },
+    {
+     "code": "SVK",
+     "country": "Slovakia",
+     "url": "profiles/countries/slovakia/",
+     "n": null
+    },
+    {
+     "code": "SVN",
+     "country": "Slovenia",
+     "url": "profiles/countries/slovenia/",
+     "n": null
+    },
+    {
+     "code": "SLB",
+     "country": "Solomon Islands",
+     "url": "profiles/countries/solomon-islands/",
+     "n": null
+    },
+    {
+     "code": "ZAF",
+     "country": "South Africa",
+     "url": "profiles/countries/south-africa/",
+     "n": null
+    },
+    {
+     "code": "ESP",
+     "country": "Spain",
+     "url": "profiles/countries/spain/",
+     "n": null
+    },
+    {
+     "code": "LKA",
+     "country": "Sri Lanka",
+     "url": "profiles/countries/sri-lanka/",
+     "n": null
+    },
+    {
+     "code": "SWE",
+     "country": "Sweden",
+     "url": "profiles/countries/sweden/",
+     "n": null
+    },
+    {
+     "code": "CHE",
+     "country": "Switzerland",
+     "url": "profiles/countries/switzerland/",
+     "n": null
+    },
+    {
+     "code": "THA",
+     "country": "Thailand",
+     "url": "profiles/countries/thailand/",
+     "n": null
+    },
+    {
+     "code": "TON",
+     "country": "Tonga",
+     "url": "profiles/countries/tonga/",
+     "n": null
+    },
+    {
+     "code": "TUN",
+     "country": "Tunisia",
+     "url": "profiles/countries/tunisia/",
+     "n": null
+    },
+    {
+     "code": "TUR",
+     "country": "Türkiye",
+     "url": "profiles/countries/turkiye/",
+     "n": null
+    },
+    {
+     "code": "UKR",
+     "country": "Ukraine",
+     "url": "profiles/countries/ukraine/",
+     "n": null
+    },
+    {
+     "code": "ARE",
+     "country": "United Arab Emirates",
+     "url": "profiles/countries/united-arab-emirates/",
+     "n": null
+    },
+    {
+     "code": "GBR",
+     "country": "United Kingdom",
+     "url": "profiles/countries/united-kingdom/",
+     "n": null
+    },
+    {
+     "code": "USA",
+     "country": "United States of America",
+     "url": "profiles/countries/united-states-of-america/",
+     "n": null
+    },
+    {
+     "code": "URY",
+     "country": "Uruguay",
+     "url": "profiles/countries/uruguay/",
+     "n": null
+    },
+    {
+     "code": "VUT",
+     "country": "Vanuatu",
+     "url": "profiles/countries/vanuatu/",
+     "n": null
+    },
+    {
+     "code": "ZWE",
+     "country": "Zimbabwe",
+     "url": "profiles/countries/zimbabwe/",
+     "n": null
+    }
+   ]
+  }
+ ]
+}

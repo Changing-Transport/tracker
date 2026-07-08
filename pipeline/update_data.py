@@ -599,15 +599,18 @@ def process_excel(excel_path):
         },
     }
 
-    # ── Per-country transport emissions (Mt CO₂e, EDGAR 2023) for KPIs ──
+    # ── Per-country transport emissions (Mt CO₂e) for KPIs ──────────────
+    # Single source of truth: data/ghg.csv (EDGAR), same loader the country
+    # profiles use — previously read from the Excel "Country" sheet col 28,
+    # which had drifted from ghg.csv for 75 countries (older EDGAR vintage).
     try:
-        ctry_sheet = wb["Country"]
-        for row in ctry_sheet.iter_rows(min_row=2, values_only=True):
-            code = str(row[1] or "").strip()
-            if code in countries_tab1 and isinstance(row[28], (int, float)):
-                countries_tab1[code]["ghg_transport"] = round(row[28], 2)
+        ghg_data = load_ghg_csv()
+        for code, cd in countries_tab1.items():
+            snap = ghg_data.get(code, {}).get("snapshot")
+            if snap and isinstance(snap.get("transport_mt"), (int, float)):
+                cd["ghg_transport"] = round(snap["transport_mt"], 2)
     except Exception as exc:
-        print(f"   ⚠ Could not attach per-country emissions: {exc}")
+        print(f"   ⚠ Could not attach per-country emissions from ghg.csv: {exc}")
 
     wb.close()
     return output
@@ -1899,16 +1902,31 @@ def run_profiles(excel_path):
         global_pubs = []
         print("   ⚠  data/publications.json not found — run scripts/build_data_files.py")
 
-    # Merge GLOBAL publications into every country
-    for code in list(publications.keys()):
-        if code != "GLOBAL":
-            publications[code] = publications[code] + global_pubs
-
     # ── GHG data (single source of truth: data/ghg.csv) ────────────────
     ghg_data = load_ghg_csv()
     ghg_by_country = {code: v["snapshot"] for code, v in ghg_data.items()}
 
     data = process(excel_path, ghg_by_country=ghg_by_country)
+
+    # Merge GLOBAL publications into every profiled country, tagged by scope
+    # so the profile UI can show country-specific items first and collapse
+    # the rest. Dates before 2000 are corrupt (WP parsing artefacts, e.g.
+    # "1920-…") and are blanked rather than shown.
+    def _sane(pub, scope):
+        p = dict(pub)
+        p["scope"] = scope
+        if (p.get("date") or "") < "2000":
+            p["date"] = ""
+        return p
+
+    global_tagged = [_sane(p, "global") for p in global_pubs]
+    profiled_codes = set(data[0].keys())  # data[0] = countries dict from process()
+    for code in set(publications.keys()) | profiled_codes:
+        if code == "GLOBAL":
+            continue
+        own = [_sane(p, "country") for p in publications.get(code, [])]
+        publications[code] = own + global_tagged
+
     profiles = build_profiles(data, publications, ghg_by_country=ghg_by_country)
     compute_similar(profiles)
 

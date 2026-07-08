@@ -549,6 +549,68 @@ button.cp-country-name:hover::after { border-color: #fff; }
 .cp-pub a { font-weight: 600; text-decoration: none; color: var(--ct-navy); }
 .cp-pub a:hover { color: var(--ct-teal); }
 .cp-pub-meta { font-size: 0.76rem; color: var(--ct-muted); margin-top: 0.15rem; }
+
+/* Publication filters, show-more, and collapsed global block */
+.cp-pub-filters { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
+.cp-pub-chip {
+  padding: 0.25rem 0.7rem; border: 1px solid var(--ct-border); border-radius: 999px;
+  background: var(--ct-surface); color: var(--ct-muted); font-family: var(--ct-font);
+  font-size: 0.76rem; font-weight: 600; cursor: pointer; transition: all 0.15s;
+}
+.cp-pub-chip:hover { border-color: var(--ct-teal); color: var(--ct-teal); }
+.cp-pub-chip.on { background: var(--ct-navy); border-color: var(--ct-navy); color: #fff; }
+.cp-pub-more {
+  display: block; width: 100%; margin-top: 0.5rem; padding: 0.45rem;
+  border: 1px dashed var(--ct-border); border-radius: var(--ct-radius-md);
+  background: transparent; color: var(--ct-teal); font-family: var(--ct-font);
+  font-size: 0.82rem; font-weight: 600; cursor: pointer;
+}
+.cp-pub-more:hover { border-color: var(--ct-teal); background: rgba(0,164,189,0.05); }
+.cp-pub-global-toggle {
+  display: flex; align-items: center; gap: 0.35rem; width: 100%;
+  margin-top: 0.9rem; padding: 0.5rem 0; border: none; border-top: 1px solid var(--ct-border);
+  background: transparent; color: var(--ct-muted); font-family: var(--ct-font);
+  font-size: 0.8rem; font-weight: 700; cursor: pointer; text-align: left;
+}
+.cp-pub-global-toggle:hover { color: var(--ct-navy); }
+.cp-pub-global { max-height: 320px; overflow-y: auto; padding-right: 0.25rem; }
+
+/* Emissions trend block (Story section) */
+.cp-trend-block { margin-top: 1.5rem; background: var(--ct-surface); border: 1px solid var(--ct-border); border-radius: var(--ct-radius-lg); padding: 1.1rem 1.25rem; }
+.cp-trend-title { font-size: 1rem; font-weight: 700; color: var(--ct-navy); margin-bottom: 0.25rem; }
+.cp-trend-sub { font-size: 0.88rem; color: var(--ct-muted); margin-bottom: 0.75rem; }
+.cp-trend-wrap { position: relative; height: 200px; }
+.cp-trend-wrap canvas { max-height: 200px; }
+.cp-trend-fallback { width: 100%; height: 160px; display: block; }
+
+/* Chart HTML fallback (rendered when Chart.js CDN is unreachable) */
+.cp-chart-fallback { display: flex; flex-direction: column; gap: 0.35rem; padding: 0.25rem 0; }
+.cp-fb-row { display: grid; grid-template-columns: minmax(90px, 30%) 1fr 2.5rem; align-items: center; gap: 0.5rem; font-size: 0.8rem; }
+.cp-fb-label { color: var(--ct-text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cp-fb-bar { height: 10px; background: var(--ct-bg); border-radius: 5px; overflow: hidden; }
+.cp-fb-bar span { display: block; height: 100%; border-radius: 5px; }
+.cp-fb-val { text-align: right; font-weight: 700; color: var(--ct-navy); }
+
+a.cp-dl-btn { text-decoration: none; }
+
+/* Hero topic search (queries the global full-text search) */
+.cp-topic-search { display:flex; align-items:center; gap:.5rem; margin:1rem 0 .35rem; max-width:620px;
+  background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.25); border-radius:10px; padding:.3rem .3rem .3rem .8rem; }
+.cp-topic-search svg { width:16px; height:16px; color:rgba(255,255,255,.75); flex:none; }
+.cp-topic-search input { flex:1; min-width:0; background:transparent; border:none; outline:none;
+  color:#fff; font-family:var(--ct-font); font-size:.88rem; }
+.cp-topic-search input::placeholder { color:rgba(255,255,255,.55); }
+.cp-topic-search button { flex:none; padding:.4rem .85rem; border:none; border-radius:8px;
+  background:var(--ct-green,#9DBE3D); color:var(--ct-navy,#003D5C); font-family:var(--ct-font);
+  font-size:.78rem; font-weight:700; cursor:pointer; }
+.cp-topic-search button:hover { filter:brightness(1.06); }
+
+/* Generation evolution block */
+.cp-gen-block { margin-top:1.4rem; background:var(--ct-surface); border:1px solid var(--ct-border);
+  border-radius:var(--ct-radius-lg); padding:1.1rem 1.25rem; }
+.cp-gen-wrap { position:relative; height:150px; }
+.cp-gen-wrap canvas { max-height:150px; }
+.cp-asi-sentence { font-size:.85rem; color:var(--ct-text); margin-bottom:.5rem; line-height:1.4; }
 .cp-dl-btn {
   display: flex; align-items: center; gap: 0.5rem;
   width: 100%; padding: 0.6rem 0.85rem; margin-bottom: 0.5rem;

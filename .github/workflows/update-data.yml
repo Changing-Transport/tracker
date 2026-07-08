@@ -25,6 +25,8 @@ on:
       - 'data/ghg.csv'
       - 'pipeline/update_data.py'
       - 'scripts/build_data_files.py'
+      - 'pipeline/build_search_index.py'
+      - 'pipeline/build_factsheets.py'
   workflow_dispatch:
 
 jobs:
@@ -44,7 +46,7 @@ jobs:
           python-version: '3.11'
 
       - name: 📦 Install dependencies
-        run: pip install openpyxl pycountry
+        run: pip install openpyxl pycountry reportlab
 
       # Rebuild publications.json from publications.xlsx on EVERY run.
       # This is what removes the ordering problem: whether you upload the
@@ -62,6 +64,14 @@ jobs:
       - name: 🔍 Smoke test outputs
         run: python scripts/smoke_test.py
 
+      # Derived products: search index + guided answers, then factsheets.
+      # Both read only the validated pipeline outputs above.
+      - name: 🔎 Build search index & guided questions
+        run: python pipeline/build_search_index.py
+
+      - name: 📄 Build country factsheets (PDF)
+        run: python pipeline/build_factsheets.py
+
       - name: 💾 Commit updated data
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
@@ -71,6 +81,10 @@ jobs:
           git add data/processed/comparison-data.json
           git add profiles/data/countries/
           git add profiles/countries/
+          git add profiles/factsheets/
+          git add data/processed/search-index.json
+          git add data/processed/questions.json
+          git add data/processed/benchmarks.json
           git diff --quiet && git diff --staged --quiet || git commit -m "🤖 Auto-update: Dashboard data refreshed"
 
       - name: 📤 Push changes

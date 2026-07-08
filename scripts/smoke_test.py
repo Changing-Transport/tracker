@@ -130,7 +130,31 @@ def main():
                  f"show as plain text): {', '.join(no_url[:15])}"
                  + (" …" if len(no_url) > 15 else ""))
         else:
-            ok("all countries have a URL entry")
+            ok("all dashboard countries have a URL entry")
+    # 5b. Also cover the full profile set (199), not just dashboard countries
+    if urls and index:
+        listed = index if isinstance(index, list) else index.get("countries", [])
+        no_url_prof = sorted({c["code"] for c in listed} - set(urls))
+        if no_url_prof:
+            warn(f"{len(no_url_prof)} profiled countries have no URL entry: "
+                 f"{', '.join(no_url_prof[:15])}")
+        else:
+            ok("all profiled countries have a URL entry")
+    # 5c. WP-slug drift check: warn when a URL slug has no matching GitHub
+    # profile folder. Not necessarily wrong (WordPress slugs can legitimately
+    # differ) but every mismatch should be verified once against the live WP.
+    if urls:
+        folders = {p.name for p in Path("profiles/countries").iterdir()
+                   if p.is_dir()} if Path("profiles/countries").exists() else set()
+        if folders:
+            drifted = sorted(code for code, u in urls.items()
+                             if u.rstrip("/").rsplit("/", 1)[-1] not in folders)
+            if drifted:
+                warn(f"{len(drifted)} URL slugs differ from profile folder "
+                     f"names (verify against live WordPress): "
+                     f"{', '.join(drifted[:15])}")
+            else:
+                ok("all URL slugs match profile folder names")
 
     # Verdict -----------------------------------------------------------------
     print("\n" + "=" * 60)

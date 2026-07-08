@@ -86,6 +86,11 @@ def build_publications():
         else:
             pub_date = ""
 
+        # Sanity: WP metadata occasionally yields corrupt years ("1920-…").
+        # A blank date is more honest than a wrong one.
+        if pub_date and pub_date < "2000":
+            pub_date = ""
+
         if not countries_raw:
             skipped += 1
             continue

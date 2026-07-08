@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search — GIZ-SLOCAT NDC Transport Tracker</title>
+<meta name="description" content="Search every transport target and measure across all NDCs in the GIZ-SLOCAT Transport Tracker.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/design-tokens.css">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: var(--ct-font, 'Source Sans 3', sans-serif); background: var(--ct-bg, #F4F6F8); color: var(--ct-text, #2C3E50); }
+.wrap { max-width: 860px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+.kicker { font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ct-teal, #00A4BD); }
+h1 { font-size: 1.7rem; font-weight: 800; color: var(--ct-navy, #003D5C); margin: .25rem 0 .35rem; }
+.sub { font-size: .95rem; color: var(--ct-muted, #6B7280); margin-bottom: 1.4rem; }
+.searchbox { display:flex; gap:.5rem; }
+.searchbox input {
+  flex:1; padding: .8rem 1rem; font-family: inherit; font-size: 1rem;
+  border: 2px solid var(--ct-border, #E1E4E8); border-radius: 10px; background: #fff; color: inherit;
+}
+.searchbox input:focus { outline: none; border-color: var(--ct-teal, #00A4BD); }
+.filters { display:flex; gap:.4rem; flex-wrap:wrap; margin:.8rem 0 1.2rem; }
+.chip {
+  padding:.3rem .8rem; border:1px solid var(--ct-border,#E1E4E8); border-radius:999px;
+  background:#fff; color:var(--ct-muted,#6B7280); font-family:inherit; font-size:.8rem; font-weight:600; cursor:pointer;
+}
+.chip.on { background: var(--ct-navy,#003D5C); border-color: var(--ct-navy,#003D5C); color:#fff; }
+.meta { font-size:.82rem; color:var(--ct-muted,#6B7280); margin-bottom:.8rem; }
+.result { background:#fff; border:1px solid var(--ct-border,#E1E4E8); border-radius:12px; padding: .9rem 1.1rem; margin-bottom:.7rem; }
+.r-top { display:flex; gap:.5rem; align-items:center; flex-wrap:wrap; margin-bottom:.3rem; }
+.r-country { font-weight:700; color: var(--ct-navy,#003D5C); text-decoration:none; }
+.r-country:hover { color: var(--ct-teal,#00A4BD); }
+.badge { font-size:.68rem; font-weight:700; padding:.1rem .5rem; border-radius:999px; text-transform:uppercase; letter-spacing:.04em; }
+.badge.target { background:rgba(0,61,92,.1); color:#003D5C; }
+.badge.measure { background:rgba(0,164,189,.12); color:#007a8d; }
+.badge.adaptation { background:rgba(157,190,61,.18); color:#5c7522; }
+.badge.country { background:rgba(232,130,26,.14); color:#b05f0d; }
+.r-meta { font-size:.74rem; color:var(--ct-muted,#6B7280); }
+.r-text { font-size:.9rem; line-height:1.45; }
+.r-text mark { background: rgba(157,190,61,.35); padding:0 .1em; border-radius:2px; }
+.r-cat { font-size:.76rem; color:var(--ct-teal,#00A4BD); font-weight:700; margin-top:.25rem; }
+.empty { text-align:center; color:var(--ct-muted,#6B7280); padding:3rem 0; font-size:.95rem; }
+.more { display:block; width:100%; margin-top:.5rem; padding:.6rem; border:1px dashed var(--ct-border,#E1E4E8); border-radius:10px; background:transparent; color:var(--ct-teal,#00A4BD); font-family:inherit; font-size:.85rem; font-weight:700; cursor:pointer; }
+footer { margin-top:2.5rem; font-size:.78rem; color:var(--ct-muted,#6B7280); }
+footer a { color: var(--ct-teal,#00A4BD); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">GIZ-SLOCAT NDC Transport Tracker</p>
+  <h1>Search the tracker</h1>
+  <p class="sub">Every transport target, mitigation and adaptation measure across all NDCs — searchable in one place. Try <em>rail freight</em>, <em>bus electrification</em>, or a country name.</p>
+
+  <div class="searchbox"><input id="q" type="search" placeholder="Search targets, measures, countries…" autofocus autocomplete="off"></div>
+  <div class="filters" id="filters">
+    <button class="chip on" data-kind="all">All</button>
+    <button class="chip" data-kind="target">Targets</button>
+    <button class="chip" data-kind="measure">Mitigation measures</button>
+    <button class="chip" data-kind="adaptation">Adaptation measures</button>
+    <button class="chip" data-kind="country">Countries</button>
+  </div>
+  <div class="meta" id="meta"></div>
+  <div id="results"><div class="empty">Loading index…</div></div>
+
+  <footer>Data: GIZ-SLOCAT Transport Tracker database · <a href="../methodology/">Methodology &amp; citation</a> · <a href="../index.html">Dashboard</a> · <a href="../profiles/index.html">Country Explorer</a></footer>
+</div>
+
+<script>
+(function(){
+  const PAGE=30;
+  let INDEX=[], kind='all', shown=PAGE;
+  const $q=document.getElementById('q'), $r=document.getElementById('results'), $m=document.getElementById('meta');
+
+  fetch('../data/processed/search-index.json')
+    .then(r=>{ if(!r.ok) throw 0; return r.json(); })
+    .then(d=>{ INDEX=d.entries||[];
+      const pre=new URLSearchParams(location.search).get('q');
+      if(pre){ $q.value=pre; }
+      $m.textContent=INDEX.length.toLocaleString()+' entries indexed · updated '+(d.generated||'');
+      run(); })
+    .catch(()=>{ $r.innerHTML='<div class="empty">Could not load the search index. Run <code>python pipeline/build_search_index.py</code> after the data pipeline.</div>'; });
+
+  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const norm=s=>String(s??'').toLowerCase();
+
+  function tokens(q){ return norm(q).split(/\s+/).filter(t=>t.length>1); }
+
+  function score(e,ts){
+    const hay = norm(e.text)+' '+norm(e.extra||'')+' '+norm(e.category||'')+' '+norm(e.country||'');
+    let s=0;
+    for(const t of ts){ if(!hay.includes(t)) return 0; s += (norm(e.text).includes(t)?3:1); if(norm(e.country).includes(t)) s+=2; }
+    if(e.status==='Active') s+=1;
+    return s;
+  }
+
+  function highlight(text,ts){
+    let out=esc(text);
+    for(const t of ts){ out=out.replace(new RegExp('('+t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'),'<mark>$1</mark>'); }
+    return out;
+  }
+
+  function run(){
+    const q=$q.value.trim(), ts=tokens(q);
+    let list = kind==='all' ? INDEX : INDEX.filter(e=>e.kind===kind);
+    if(ts.length){ list = list.map(e=>[score(e,ts),e]).filter(x=>x[0]>0).sort((a,b)=>b[0]-a[0]).map(x=>x[1]); }
+    else { list = []; }
+    if(!q){ $r.innerHTML='<div class="empty">Type to search '+INDEX.length.toLocaleString()+' entries.</div>'; return; }
+    if(!list.length){ $r.innerHTML='<div class="empty">No matches for “'+esc(q)+'”.</div>'; return; }
+    const view=list.slice(0,shown);
+    $r.innerHTML = view.map(e=>{
+      const link = e.url ? '<a class="r-country" href="../'+esc(e.url)+'">'+esc(e.country)+'</a>' : '<span class="r-country">'+esc(e.country)+'</span>';
+      const meta = [e.gen,e.version,e.status].filter(Boolean).join(' · ');
+      return '<div class="result"><div class="r-top">'+link+
+        '<span class="badge '+esc(e.kind)+'">'+esc(e.kind)+'</span>'+
+        (meta?'<span class="r-meta">'+esc(meta)+'</span>':'')+'</div>'+
+        (e.kind!=='country'?'<div class="r-text">'+highlight(e.text,ts)+'</div>':'')+
+        (e.category?'<div class="r-cat">'+esc(e.category)+'</div>':'')+
+        '</div>';
+    }).join('') + (list.length>shown?'<button class="more" id="more">Show more ('+(list.length-shown)+' remaining)</button>':'');
+    const mb=document.getElementById('more'); if(mb) mb.onclick=()=>{shown+=PAGE;run();};
+    $m.textContent=list.length.toLocaleString()+' result'+(list.length===1?'':'s')+' for “'+q+'”';
+  }
+
+  let deb; $q.addEventListener('input',()=>{shown=PAGE;clearTimeout(deb);deb=setTimeout(run,180);});
+  document.getElementById('filters').addEventListener('click',e=>{
+    const b=e.target.closest('.chip'); if(!b) return;
+    document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
+    b.classList.add('on'); kind=b.dataset.kind; shown=PAGE; run();
+  });
+})();
+</script>
+</body>
+</html>

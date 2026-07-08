@@ -549,7 +549,7 @@ body {
 
     body {
         background: white;
-        font-family: 'IBM Plex Sans', sans-serif;
+        font-family: var(--font-sans);
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
     }

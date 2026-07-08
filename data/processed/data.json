@@ -1,7 +1,7 @@
 {
   "metadata": {
     "total_possible_ndcs": 169,
-    "last_updated": "2026-07-06",
+    "last_updated": "2026-07-08",
     "data_source": "GIZ-SLOCAT Transport Tracker Database",
     "gen_counts": {
       "gen1": {
@@ -169,7 +169,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 37.01
+        "ghg_transport": 39.44
       },
       "YEM": {
         "iso3": "YEM",
@@ -189,7 +189,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 2.67
+        "ghg_transport": 2.77
       },
       "BRN": {
         "iso3": "BRN",
@@ -213,7 +213,7 @@
           }
         },
         "had_transport_previously": true,
-        "ghg_transport": 1.26
+        "ghg_transport": 1.28
       },
       "PNG": {
         "iso3": "PNG",
@@ -233,7 +233,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 2.63
+        "ghg_transport": 2.25
       },
       "NRU": {
         "iso3": "NRU",
@@ -256,7 +256,8 @@
             "version": "NDC 3.0"
           }
         },
-        "had_transport_previously": false
+        "had_transport_previously": false,
+        "ghg_transport": 0.0
       },
       "PAN": {
         "iso3": "PAN",
@@ -280,7 +281,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 5.74
+        "ghg_transport": 6.22
       },
       "BLZ": {
         "iso3": "BLZ",
@@ -304,7 +305,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 0.1
+        "ghg_transport": 0.13
       },
       "BRB": {
         "iso3": "BRB",
@@ -328,7 +329,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 0.25
+        "ghg_transport": 0.22
       },
       "FJI": {
         "iso3": "FJI",
@@ -352,7 +353,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 1.13
+        "ghg_transport": 0.75
       },
       "GRD": {
         "iso3": "GRD",
@@ -371,7 +372,8 @@
             "version": "NDC 2.0"
           }
         },
-        "had_transport_previously": false
+        "had_transport_previously": false,
+        "ghg_transport": 0.06
       },
       "MDV": {
         "iso3": "MDV",
@@ -395,7 +397,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 1.5
+        "ghg_transport": 0.98
       },
       "MHL": {
         "iso3": "MHL",
@@ -418,7 +420,8 @@
             "version": "NDC 3.0"
           }
         },
-        "had_transport_previously": false
+        "had_transport_previously": false,
+        "ghg_transport": 0.0
       },
       "MUS": {
         "iso3": "MUS",
@@ -442,7 +445,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 1.16
+        "ghg_transport": 1.25
       },
       "PLW": {
         "iso3": "PLW",
@@ -462,7 +465,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 0.77
+        "ghg_transport": 0.78
       },
       "KNA": {
         "iso3": "KNA",
@@ -481,7 +484,8 @@
             "version": "NDC 2.0"
           }
         },
-        "had_transport_previously": false
+        "had_transport_previously": false,
+        "ghg_transport": 0.05
       },
       "LCA": {
         "iso3": "LCA",
@@ -529,7 +533,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 0.24
+        "ghg_transport": 0.18
       },
       "SOM": {
         "iso3": "SOM",
@@ -553,7 +557,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 0.49
+        "ghg_transport": 0.5
       },
       "TUV": {
         "iso3": "TUV",
@@ -576,7 +580,8 @@
             "version": "NDC 3.0"
           }
         },
-        "had_transport_previously": false
+        "had_transport_previously": false,
+        "ghg_transport": 0.0
       },
       "SYC": {
         "iso3": "SYC",
@@ -600,7 +605,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 0.72
+        "ghg_transport": 0.53
       },
       "GUY": {
         "iso3": "GUY",
@@ -616,7 +621,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 1.06
+        "ghg_transport": 1.15
       },
       "NOR": {
         "iso3": "NOR",
@@ -640,7 +645,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 13.65
+        "ghg_transport": 12.9
       },
       "VCT": {
         "iso3": "VCT",
@@ -659,7 +664,8 @@
             "version": "NDC 3.0"
           }
         },
-        "had_transport_previously": false
+        "had_transport_previously": false,
+        "ghg_transport": 0.05
       },
       "PER": {
         "iso3": "PER",
@@ -683,7 +689,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 24.49
+        "ghg_transport": 29.67
       },
       "CMR": {
         "iso3": "CMR",
@@ -703,7 +709,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 4.34
+        "ghg_transport": 3.93
       },
       "COK": {
         "iso3": "COK",
@@ -719,7 +725,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 0.07
+        "ghg_transport": 0.05
       },
       "CHN": {
         "iso3": "CHN",
@@ -743,7 +749,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 1110.18
+        "ghg_transport": 957.39
       },
       "USA": {
         "iso3": "USA",
@@ -767,7 +773,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 1735.9
+        "ghg_transport": 1702.83
       },
       "LAO": {
         "iso3": "LAO",
@@ -787,7 +793,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 2.73
+        "ghg_transport": 2.7
       },
       "FSM": {
         "iso3": "FSM",
@@ -810,7 +816,8 @@
             "version": "NDC 3.0"
           }
         },
-        "had_transport_previously": false
+        "had_transport_previously": false,
+        "ghg_transport": 0.04
       },
       "MAR": {
         "iso3": "MAR",
@@ -834,7 +841,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 17.69
+        "ghg_transport": 19.78
       },
       "UKR": {
         "iso3": "UKR",
@@ -858,7 +865,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 22.57
+        "ghg_transport": 23.05
       },
       "ALB": {
         "iso3": "ALB",
@@ -878,7 +885,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 1.7
+        "ghg_transport": 1.57
       },
       "ATG": {
         "iso3": "ATG",
@@ -922,7 +929,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 12.41
+        "ghg_transport": 14.01
       },
       "BLR": {
         "iso3": "BLR",
@@ -946,7 +953,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 9.87
+        "ghg_transport": 10.14
       },
       "BRA": {
         "iso3": "BRA",
@@ -970,7 +977,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 221.13
+        "ghg_transport": 223.67
       },
       "DMA": {
         "iso3": "DMA",
@@ -989,7 +996,8 @@
             "version": "NDC 2.0"
           }
         },
-        "had_transport_previously": false
+        "had_transport_previously": false,
+        "ghg_transport": 0.03
       },
       "SWZ": {
         "iso3": "SWZ",
@@ -1013,7 +1021,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 0.87
+        "ghg_transport": 0.89
       },
       "GHA": {
         "iso3": "GHA",
@@ -1033,7 +1041,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 9.22
+        "ghg_transport": 10.06
       },
       "GIN": {
         "iso3": "GIN",
@@ -1057,7 +1065,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 1.79
+        "ghg_transport": 2.7
       },
       "HND": {
         "iso3": "HND",
@@ -1081,7 +1089,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 5.04
+        "ghg_transport": 5.43
       },
       "ISL": {
         "iso3": "ISL",
@@ -1105,7 +1113,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 0.91
+        "ghg_transport": 0.98
       },
       "KIR": {
         "iso3": "KIR",
@@ -1124,7 +1132,8 @@
             "version": "NDC 2.0"
           }
         },
-        "had_transport_previously": false
+        "had_transport_previously": false,
+        "ghg_transport": 0.04
       },
       "MDG": {
         "iso3": "MDG",
@@ -1144,7 +1153,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 1.38
+        "ghg_transport": 1.6
       },
       "MEX": {
         "iso3": "MEX",
@@ -1168,7 +1177,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 132.22
+        "ghg_transport": 129.17
       },
       "MNG": {
         "iso3": "MNG",
@@ -1192,7 +1201,7 @@
           }
         },
         "had_transport_previously": true,
-        "ghg_transport": 3.01
+        "ghg_transport": 3.25
       },
       "NAM": {
         "iso3": "NAM",
@@ -1212,7 +1221,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 2.19
+        "ghg_transport": 2.03
       },
       "NER": {
         "iso3": "NER",
@@ -1232,7 +1241,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 1.29
+        "ghg_transport": 1.57
       },
       "SGP": {
         "iso3": "SGP",
@@ -1256,7 +1265,7 @@
           }
         },
         "had_transport_previously": true,
-        "ghg_transport": 6.81
+        "ghg_transport": 6.33
       },
       "SLB": {
         "iso3": "SLB",
@@ -1280,7 +1289,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 0.22
+        "ghg_transport": 0.16
       },
       "THA": {
         "iso3": "THA",
@@ -1304,7 +1313,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 81.22
+        "ghg_transport": 84.66
       },
       "TON": {
         "iso3": "TON",
@@ -1328,7 +1337,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 0.11
+        "ghg_transport": 0.09
       },
       "UGA": {
         "iso3": "UGA",
@@ -1348,7 +1357,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 3.62
+        "ghg_transport": 3.92
       },
       "ARE": {
         "iso3": "ARE",
@@ -1372,7 +1381,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 43.86
+        "ghg_transport": 38.87
       },
       "VUT": {
         "iso3": "VUT",
@@ -1416,7 +1425,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 3.39
+        "ghg_transport": 3.94
       },
       "IND": {
         "iso3": "IND",
@@ -1440,7 +1449,7 @@
           }
         },
         "had_transport_previously": true,
-        "ghg_transport": 349.27
+        "ghg_transport": 354.23
       },
       "PRK": {
         "iso3": "PRK",
@@ -1460,7 +1469,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 4.97
+        "ghg_transport": 5.05
       },
       "BOL": {
         "iso3": "BOL",
@@ -1484,7 +1493,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 12.14
+        "ghg_transport": 14.07
       },
       "EEU": {
         "iso3": "EEU",
@@ -1507,7 +1516,8 @@
             "version": "NDC 3.0"
           }
         },
-        "had_transport_previously": false
+        "had_transport_previously": false,
+        "ghg_transport": 791.25
       },
       "NPL": {
         "iso3": "NPL",
@@ -1531,7 +1541,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 4.86
+        "ghg_transport": 5.15
       },
       "NZL": {
         "iso3": "NZL",
@@ -1555,7 +1565,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 16.24
+        "ghg_transport": 15.3
       },
       "RWA": {
         "iso3": "RWA",
@@ -1579,7 +1589,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 0.61
+        "ghg_transport": 0.83
       },
       "CAF": {
         "iso3": "CAF",
@@ -1603,7 +1613,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 0.21
+        "ghg_transport": 0.2
       },
       "CRI": {
         "iso3": "CRI",
@@ -1627,7 +1637,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 6.17
+        "ghg_transport": 6.35
       },
       "PRY": {
         "iso3": "PRY",
@@ -1651,7 +1661,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 7.3
+        "ghg_transport": 6.84
       },
       "DZA": {
         "iso3": "DZA",
@@ -1667,7 +1677,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 47.38
+        "ghg_transport": 49.51
       },
       "TKM": {
         "iso3": "TKM",
@@ -1687,7 +1697,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 12.19
+        "ghg_transport": 9.49
       },
       "CIV": {
         "iso3": "CIV",
@@ -1711,7 +1721,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 5.26
+        "ghg_transport": 7.51
       },
       "MCO": {
         "iso3": "MCO",
@@ -1734,7 +1744,8 @@
             "version": "NDC 3.0"
           }
         },
-        "had_transport_previously": false
+        "had_transport_previously": false,
+        "ghg_transport": 0.0
       },
       "NIU": {
         "iso3": "NIU",
@@ -1753,7 +1764,8 @@
             "version": "NDC 3.0"
           }
         },
-        "had_transport_previously": false
+        "had_transport_previously": false,
+        "ghg_transport": 0.0
       },
       "BHS": {
         "iso3": "BHS",
@@ -1777,7 +1789,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 0.6
+        "ghg_transport": 0.51
       },
       "SLE": {
         "iso3": "SLE",
@@ -1801,7 +1813,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 0.54
+        "ghg_transport": 0.78
       },
       "ZAF": {
         "iso3": "ZAF",
@@ -1825,7 +1837,7 @@
           }
         },
         "had_transport_previously": true,
-        "ghg_transport": 50.35
+        "ghg_transport": 45.34
       },
       "GAB": {
         "iso3": "GAB",
@@ -1849,7 +1861,7 @@
           }
         },
         "had_transport_previously": true,
-        "ghg_transport": 0.22
+        "ghg_transport": 0.2
       },
       "STP": {
         "iso3": "STP",
@@ -1873,7 +1885,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 0.12
+        "ghg_transport": 0.09
       },
       "KOR": {
         "iso3": "KOR",
@@ -1897,7 +1909,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 107.92
+        "ghg_transport": 110.83
       },
       "SAU": {
         "iso3": "SAU",
@@ -1921,7 +1933,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 147.59
+        "ghg_transport": 145.11
       },
       "VNM": {
         "iso3": "VNM",
@@ -1941,7 +1953,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 39.88
+        "ghg_transport": 52.15
       },
       "JOR": {
         "iso3": "JOR",
@@ -1965,7 +1977,7 @@
           }
         },
         "had_transport_previously": true,
-        "ghg_transport": 7.98
+        "ghg_transport": 8.08
       },
       "IDN": {
         "iso3": "IDN",
@@ -1989,7 +2001,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 152.11
+        "ghg_transport": 154.41
       },
       "LKA": {
         "iso3": "LKA",
@@ -2013,7 +2025,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 9.63
+        "ghg_transport": 10.53
       },
       "GMB": {
         "iso3": "GMB",
@@ -2033,7 +2045,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 0.35
+        "ghg_transport": 0.29
       },
       "JPN": {
         "iso3": "JPN",
@@ -2057,7 +2069,7 @@
           }
         },
         "had_transport_previously": true,
-        "ghg_transport": 181.96
+        "ghg_transport": 177.19
       },
       "AUS": {
         "iso3": "AUS",
@@ -2081,7 +2093,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 97.49
+        "ghg_transport": 102.35
       },
       "PAK": {
         "iso3": "PAK",
@@ -2105,7 +2117,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 44.89
+        "ghg_transport": 48.76
       },
       "BWA": {
         "iso3": "BWA",
@@ -2125,7 +2137,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 2.44
+        "ghg_transport": 2.36
       },
       "BFA": {
         "iso3": "BFA",
@@ -2149,7 +2161,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 2.78
+        "ghg_transport": 3.12
       },
       "DJI": {
         "iso3": "DJI",
@@ -2169,7 +2181,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 0.35
+        "ghg_transport": 0.42
       },
       "MYS": {
         "iso3": "MYS",
@@ -2193,7 +2205,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 67.38
+        "ghg_transport": 61.22
       },
       "ARG": {
         "iso3": "ARG",
@@ -2213,7 +2225,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 48.34
+        "ghg_transport": 48.8
       },
       "ISR": {
         "iso3": "ISR",
@@ -2233,7 +2245,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 18.69
+        "ghg_transport": 17.71
       },
       "AFG": {
         "iso3": "AFG",
@@ -2249,7 +2261,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 2.38
+        "ghg_transport": 4.38
       },
       "COM": {
         "iso3": "COM",
@@ -2273,7 +2285,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 0.18
+        "ghg_transport": 0.27
       },
       "KAZ": {
         "iso3": "KAZ",
@@ -2297,7 +2309,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 24.0
+        "ghg_transport": 31.48
       },
       "ZMB": {
         "iso3": "ZMB",
@@ -2321,7 +2333,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 2.4
+        "ghg_transport": 2.63
       },
       "KEN": {
         "iso3": "KEN",
@@ -2345,7 +2357,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 10.81
+        "ghg_transport": 10.57
       },
       "BHR": {
         "iso3": "BHR",
@@ -2369,7 +2381,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 3.56
+        "ghg_transport": 3.91
       },
       "CUB": {
         "iso3": "CUB",
@@ -2393,7 +2405,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 1.24
+        "ghg_transport": 1.25
       },
       "AZE": {
         "iso3": "AZE",
@@ -2417,7 +2429,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 8.45
+        "ghg_transport": 9.88
       },
       "TCD": {
         "iso3": "TCD",
@@ -2437,7 +2449,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 1.09
+        "ghg_transport": 1.31
       },
       "LSO": {
         "iso3": "LSO",
@@ -2457,7 +2469,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 0.51
+        "ghg_transport": 0.6
       },
       "GTM": {
         "iso3": "GTM",
@@ -2477,7 +2489,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 11.71
+        "ghg_transport": 11.21
       },
       "KHM": {
         "iso3": "KHM",
@@ -2501,7 +2513,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 7.55
+        "ghg_transport": 7.29
       },
       "CHL": {
         "iso3": "CHL",
@@ -2525,7 +2537,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 32.48
+        "ghg_transport": 30.27
       },
       "TUN": {
         "iso3": "TUN",
@@ -2549,7 +2561,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 8.28
+        "ghg_transport": 9.27
       },
       "MRT": {
         "iso3": "MRT",
@@ -2573,7 +2585,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 2.48
+        "ghg_transport": 2.76
       },
       "ETH": {
         "iso3": "ETH",
@@ -2597,7 +2609,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 6.75
+        "ghg_transport": 7.69
       },
       "BIH": {
         "iso3": "BIH",
@@ -2617,7 +2629,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 4.44
+        "ghg_transport": 4.22
       },
       "TJK": {
         "iso3": "TJK",
@@ -2637,7 +2649,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 1.99
+        "ghg_transport": 2.29
       },
       "ARM": {
         "iso3": "ARM",
@@ -2661,7 +2673,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 2.54
+        "ghg_transport": 2.36
       },
       "AND": {
         "iso3": "AND",
@@ -2684,7 +2696,8 @@
             "version": "NDC 3.0"
           }
         },
-        "had_transport_previously": false
+        "had_transport_previously": false,
+        "ghg_transport": 0.11
       },
       "SLV": {
         "iso3": "SLV",
@@ -2708,7 +2721,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 4.48
+        "ghg_transport": 4.63
       },
       "JAM": {
         "iso3": "JAM",
@@ -2732,7 +2745,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 2.45
+        "ghg_transport": 2.73
       },
       "COG": {
         "iso3": "COG",
@@ -2756,7 +2769,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 1.49
+        "ghg_transport": 1.35
       },
       "GEO": {
         "iso3": "GEO",
@@ -2780,7 +2793,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 4.51
+        "ghg_transport": 4.79
       },
       "CAN": {
         "iso3": "CAN",
@@ -2804,7 +2817,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 169.02
+        "ghg_transport": 168.94
       },
       "NGA": {
         "iso3": "NGA",
@@ -2828,7 +2841,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 58.97
+        "ghg_transport": 61.6
       },
       "MDA": {
         "iso3": "MDA",
@@ -2852,7 +2865,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 2.4
+        "ghg_transport": 2.21
       },
       "QAT": {
         "iso3": "QAT",
@@ -2876,7 +2889,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 15.01
+        "ghg_transport": 13.22
       },
       "TGO": {
         "iso3": "TGO",
@@ -2896,7 +2909,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 1.33
+        "ghg_transport": 1.25
       },
       "EGY": {
         "iso3": "EGY",
@@ -2916,7 +2929,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 53.14
+        "ghg_transport": 63.66
       },
       "MWI": {
         "iso3": "MWI",
@@ -2936,7 +2949,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 0.78
+        "ghg_transport": 1.37
       },
       "SRB": {
         "iso3": "SRB",
@@ -2960,7 +2973,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 10.45
+        "ghg_transport": 12.01
       },
       "HTI": {
         "iso3": "HTI",
@@ -2980,7 +2993,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 1.48
+        "ghg_transport": 1.44
       },
       "SDN": {
         "iso3": "SDN",
@@ -3000,7 +3013,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 12.27
+        "ghg_transport": 13.77
       },
       "ZWE": {
         "iso3": "ZWE",
@@ -3024,7 +3037,7 @@
           }
         },
         "had_transport_previously": true,
-        "ghg_transport": 1.52
+        "ghg_transport": 2.4
       },
       "TLS": {
         "iso3": "TLS",
@@ -3044,7 +3057,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 0.35
+        "ghg_transport": 0.34
       },
       "PSE": {
         "iso3": "PSE",
@@ -3063,7 +3076,8 @@
             "version": "NDC 2.0"
           }
         },
-        "had_transport_previously": false
+        "had_transport_previously": false,
+        "ghg_transport": 5.49
       },
       "BTN": {
         "iso3": "BTN",
@@ -3087,7 +3101,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 0.44
+        "ghg_transport": 0.27
       },
       "MMR": {
         "iso3": "MMR",
@@ -3107,7 +3121,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 5.54
+        "ghg_transport": 13.77
       },
       "LIE": {
         "iso3": "LIE",
@@ -3126,7 +3140,8 @@
             "version": "NDC 3.0"
           }
         },
-        "had_transport_previously": false
+        "had_transport_previously": false,
+        "ghg_transport": 0.12
       },
       "CPV": {
         "iso3": "CPV",
@@ -3150,7 +3165,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 0.59
+        "ghg_transport": 0.4
       },
       "DOM": {
         "iso3": "DOM",
@@ -3170,7 +3185,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 8.52
+        "ghg_transport": 9.15
       },
       "CHE": {
         "iso3": "CHE",
@@ -3194,7 +3209,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 14.82
+        "ghg_transport": 14.65
       },
       "BEN": {
         "iso3": "BEN",
@@ -3214,7 +3229,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 4.36
+        "ghg_transport": 4.49
       },
       "URY": {
         "iso3": "URY",
@@ -3238,7 +3253,7 @@
           }
         },
         "had_transport_previously": true,
-        "ghg_transport": 4.09
+        "ghg_transport": 4.43
       },
       "COD": {
         "iso3": "COD",
@@ -3258,7 +3273,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 2.82
+        "ghg_transport": 5.0
       },
       "MNE": {
         "iso3": "MNE",
@@ -3281,7 +3296,8 @@
             "version": "NDC 3.0"
           }
         },
-        "had_transport_previously": false
+        "had_transport_previously": false,
+        "ghg_transport": 1.38
       },
       "MKD": {
         "iso3": "MKD",
@@ -3301,7 +3317,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 2.52
+        "ghg_transport": 2.49
       },
       "BDI": {
         "iso3": "BDI",
@@ -3325,7 +3341,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 0.42
+        "ghg_transport": 0.5
       },
       "TTO": {
         "iso3": "TTO",
@@ -3345,7 +3361,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 2.55
+        "ghg_transport": 2.72
       },
       "VEN": {
         "iso3": "VEN",
@@ -3369,7 +3385,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 17.91
+        "ghg_transport": 16.22
       },
       "KWT": {
         "iso3": "KWT",
@@ -3389,7 +3405,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 15.28
+        "ghg_transport": 19.27
       },
       "TZA": {
         "iso3": "TZA",
@@ -3409,7 +3425,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 9.07
+        "ghg_transport": 10.56
       },
       "MOZ": {
         "iso3": "MOZ",
@@ -3433,7 +3449,7 @@
           }
         },
         "had_transport_previously": true,
-        "ghg_transport": 3.99
+        "ghg_transport": 4.6
       },
       "ERI": {
         "iso3": "ERI",
@@ -3453,7 +3469,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 0.21
+        "ghg_transport": 0.26
       },
       "COL": {
         "iso3": "COL",
@@ -3477,7 +3493,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 37.37
+        "ghg_transport": 37.78
       },
       "LBR": {
         "iso3": "LBR",
@@ -3501,7 +3517,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 0.83
+        "ghg_transport": 0.4
       },
       "NIC": {
         "iso3": "NIC",
@@ -3525,7 +3541,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 2.77
+        "ghg_transport": 2.68
       },
       "SMR": {
         "iso3": "SMR",
@@ -3540,7 +3556,8 @@
             "version": "NDC 1.0"
           }
         },
-        "had_transport_previously": false
+        "had_transport_previously": false,
+        "ghg_transport": 0.04
       },
       "GNB": {
         "iso3": "GNB",
@@ -3580,7 +3597,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 0.54
+        "ghg_transport": 0.46
       },
       "UZB": {
         "iso3": "UZB",
@@ -3604,7 +3621,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 16.79
+        "ghg_transport": 19.84
       },
       "SYR": {
         "iso3": "SYR",
@@ -3620,7 +3637,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 5.04
+        "ghg_transport": 5.15
       },
       "SUR": {
         "iso3": "SUR",
@@ -3644,7 +3661,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 0.85
+        "ghg_transport": 0.99
       },
       "ECU": {
         "iso3": "ECU",
@@ -3664,7 +3681,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 22.25
+        "ghg_transport": 22.57
       },
       "OMN": {
         "iso3": "OMN",
@@ -3684,7 +3701,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 12.35
+        "ghg_transport": 13.16
       },
       "LBN": {
         "iso3": "LBN",
@@ -3708,7 +3725,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 7.14
+        "ghg_transport": 6.56
       },
       "KGZ": {
         "iso3": "KGZ",
@@ -3732,7 +3749,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 1.74
+        "ghg_transport": 1.51
       },
       "AGO": {
         "iso3": "AGO",
@@ -3756,7 +3773,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 8.65
+        "ghg_transport": 8.84
       },
       "RUS": {
         "iso3": "RUS",
@@ -3776,7 +3793,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 265.7
+        "ghg_transport": 291.29
       },
       "GBR": {
         "iso3": "GBR",
@@ -3796,7 +3813,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 109.75
+        "ghg_transport": 108.01
       },
       "SEN": {
         "iso3": "SEN",
@@ -3812,7 +3829,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 3.49
+        "ghg_transport": 5.64
       },
       "SSD": {
         "iso3": "SSD",
@@ -3831,7 +3848,8 @@
             "version": "NDC 2.0"
           }
         },
-        "had_transport_previously": false
+        "had_transport_previously": false,
+        "ghg_transport": 8.84
       },
       "TUR": {
         "iso3": "TUR",
@@ -3855,7 +3873,7 @@
           }
         },
         "had_transport_previously": true,
-        "ghg_transport": 95.92
+        "ghg_transport": 100.2
       },
       "IRQ": {
         "iso3": "IRQ",
@@ -3875,7 +3893,7 @@
           }
         },
         "had_transport_previously": false,
-        "ghg_transport": 40.53
+        "ghg_transport": 45.38
       },
       "VAT": {
         "iso3": "VAT",
@@ -3894,7 +3912,8 @@
             "version": "NDC 3.0"
           }
         },
-        "had_transport_previously": false
+        "had_transport_previously": false,
+        "ghg_transport": 0.0
       },
       "AUT": {
         "iso3": "AUT",
@@ -3919,7 +3938,7 @@
           }
         },
         "covered_by_eu": true,
-        "ghg_transport": 21.37
+        "ghg_transport": 20.22
       },
       "BEL": {
         "iso3": "BEL",
@@ -3944,7 +3963,7 @@
           }
         },
         "covered_by_eu": true,
-        "ghg_transport": 22.2
+        "ghg_transport": 24.16
       },
       "BGR": {
         "iso3": "BGR",
@@ -3969,7 +3988,7 @@
           }
         },
         "covered_by_eu": true,
-        "ghg_transport": 9.53
+        "ghg_transport": 10.31
       },
       "HRV": {
         "iso3": "HRV",
@@ -3994,7 +4013,7 @@
           }
         },
         "covered_by_eu": true,
-        "ghg_transport": 6.97
+        "ghg_transport": 8.13
       },
       "CYP": {
         "iso3": "CYP",
@@ -4019,7 +4038,7 @@
           }
         },
         "covered_by_eu": true,
-        "ghg_transport": 1.9
+        "ghg_transport": 2.05
       },
       "CZE": {
         "iso3": "CZE",
@@ -4044,7 +4063,7 @@
           }
         },
         "covered_by_eu": true,
-        "ghg_transport": 19.61
+        "ghg_transport": 20.89
       },
       "DNK": {
         "iso3": "DNK",
@@ -4069,7 +4088,7 @@
           }
         },
         "covered_by_eu": true,
-        "ghg_transport": 11.37
+        "ghg_transport": 11.39
       },
       "EST": {
         "iso3": "EST",
@@ -4094,7 +4113,7 @@
           }
         },
         "covered_by_eu": true,
-        "ghg_transport": 2.39
+        "ghg_transport": 2.46
       },
       "FIN": {
         "iso3": "FIN",
@@ -4119,7 +4138,7 @@
           }
         },
         "covered_by_eu": true,
-        "ghg_transport": 9.06
+        "ghg_transport": 9.18
       },
       "FRA": {
         "iso3": "FRA",
@@ -4144,7 +4163,7 @@
           }
         },
         "covered_by_eu": true,
-        "ghg_transport": 123.56
+        "ghg_transport": 120.5
       },
       "DEU": {
         "iso3": "DEU",
@@ -4169,7 +4188,7 @@
           }
         },
         "covered_by_eu": true,
-        "ghg_transport": 141.26
+        "ghg_transport": 139.55
       },
       "GRC": {
         "iso3": "GRC",
@@ -4194,7 +4213,7 @@
           }
         },
         "covered_by_eu": true,
-        "ghg_transport": 17.76
+        "ghg_transport": 18.78
       },
       "HUN": {
         "iso3": "HUN",
@@ -4219,7 +4238,7 @@
           }
         },
         "covered_by_eu": true,
-        "ghg_transport": 14.4
+        "ghg_transport": 13.94
       },
       "IRL": {
         "iso3": "IRL",
@@ -4244,7 +4263,7 @@
           }
         },
         "covered_by_eu": true,
-        "ghg_transport": 11.24
+        "ghg_transport": 11.54
       },
       "ITA": {
         "iso3": "ITA",
@@ -4269,7 +4288,7 @@
           }
         },
         "covered_by_eu": true,
-        "ghg_transport": 103.99
+        "ghg_transport": 105.99
       },
       "LVA": {
         "iso3": "LVA",
@@ -4294,7 +4313,7 @@
           }
         },
         "covered_by_eu": true,
-        "ghg_transport": 3.1
+        "ghg_transport": 2.96
       },
       "LTU": {
         "iso3": "LTU",
@@ -4319,7 +4338,7 @@
           }
         },
         "covered_by_eu": true,
-        "ghg_transport": 6.28
+        "ghg_transport": 6.05
       },
       "LUX": {
         "iso3": "LUX",
@@ -4344,7 +4363,7 @@
           }
         },
         "covered_by_eu": true,
-        "ghg_transport": 4.24
+        "ghg_transport": 4.36
       },
       "MLT": {
         "iso3": "MLT",
@@ -4369,7 +4388,7 @@
           }
         },
         "covered_by_eu": true,
-        "ghg_transport": 0.73
+        "ghg_transport": 0.78
       },
       "NLD": {
         "iso3": "NLD",
@@ -4394,7 +4413,7 @@
           }
         },
         "covered_by_eu": true,
-        "ghg_transport": 25.78
+        "ghg_transport": 24.69
       },
       "POL": {
         "iso3": "POL",
@@ -4419,7 +4438,7 @@
           }
         },
         "covered_by_eu": true,
-        "ghg_transport": 68.7
+        "ghg_transport": 69.42
       },
       "PRT": {
         "iso3": "PRT",
@@ -4444,7 +4463,7 @@
           }
         },
         "covered_by_eu": true,
-        "ghg_transport": 15.95
+        "ghg_transport": 17.25
       },
       "ROU": {
         "iso3": "ROU",
@@ -4469,7 +4488,7 @@
           }
         },
         "covered_by_eu": true,
-        "ghg_transport": 21.0
+        "ghg_transport": 23.03
       },
       "SVK": {
         "iso3": "SVK",
@@ -4494,7 +4513,7 @@
           }
         },
         "covered_by_eu": true,
-        "ghg_transport": 7.66
+        "ghg_transport": 7.44
       },
       "SVN": {
         "iso3": "SVN",
@@ -4519,7 +4538,7 @@
           }
         },
         "covered_by_eu": true,
-        "ghg_transport": 4.83
+        "ghg_transport": 5.29
       },
       "ESP": {
         "iso3": "ESP",
@@ -4544,7 +4563,7 @@
           }
         },
         "covered_by_eu": true,
-        "ghg_transport": 93.11
+        "ghg_transport": 96.37
       },
       "SWE": {
         "iso3": "SWE",
@@ -4569,7 +4588,7 @@
           }
         },
         "covered_by_eu": true,
-        "ghg_transport": 13.5
+        "ghg_transport": 14.53
       }
     }
   },
