@@ -135,10 +135,16 @@ function renderKPIs(p){
   const tt=transportTargets(p,"Active").length;
   const mm=(p.measures||[]).filter(x=>x.status==="Active").length
           +(p.adaptation||[]).filter(x=>x.status==="Active").length;
-  const check=(ok,yes,no)=>`<span class="cp-hero-check ${ok?"yes":"no"}">${ok?"\u2713 "+yes:no}</span>`;
+  const chip=(n,label)=>`
+    <div class="cp-hero-chip ${n>0?"yes":"no"}">
+      <span class="cp-hero-chip-icon">${n>0
+        ?`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>`
+        :`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/></svg>`}</span>
+      <span class="cp-hero-chip-text">${n>0?`<strong>${n}</strong> ${label}${n>1?"s":""}`:`No ${label}s`}</span>
+    </div>`;
   el.innerHTML=`<div class="cp-hero-checks">
-      ${check(tt>0,"Transport targets","No transport targets")}
-      ${check(mm>0,"Transport measures","No transport measures")}
+      ${chip(tt,"transport target")}
+      ${chip(mm,"transport measure")}
     </div>`;
 }
 
@@ -318,22 +324,43 @@ function renderTrend(p,bench){
 
   const pinPlugin={id:"targetPins",afterDatasetsDraw(chart){
     const {ctx,chartArea,scales:{x}}=chart;
-    pinYears.forEach((pin,idx)=>{
+    const PILL_H=16, PILL_Y=chartArea.top+2, PAD=6, GAP=4;
+    ctx.save();
+    ctx.font="700 10px 'Source Sans 3'";
+    // Pass 1: measure every pill and clamp inside the chart area
+    const pills=[];
+    pinYears.forEach(pin=>{
       const i=allYears.indexOf(pin.year); if(i<0) return;
       const px=x.getPixelForValue(i);
-      ctx.save();
-      ctx.strokeStyle=pin.c; ctx.setLineDash([4,3]); ctx.lineWidth=1.5;
-      ctx.beginPath(); ctx.moveTo(px,chartArea.top+16); ctx.lineTo(px,chartArea.bottom); ctx.stroke();
-      ctx.setLineDash([]);
-      ctx.fillStyle=pin.c; ctx.font="700 10px 'Source Sans 3'";
-      // year-only label, clamped so it never truncates at the edges
-      const w=ctx.measureText(String(pin.year)).width;
-      let tx=px; ctx.textAlign="center";
-      if(px-w/2<chartArea.left){ tx=chartArea.left; ctx.textAlign="left"; }
-      else if(px+w/2>chartArea.right){ tx=chartArea.right; ctx.textAlign="right"; }
-      ctx.fillText(String(pin.year),tx,chartArea.top+(idx%2?12:2)+8);
-      ctx.restore();
+      const label=String(pin.year);
+      const w=ctx.measureText(label).width+PAD*2;
+      let cx=Math.min(Math.max(px,chartArea.left+w/2),chartArea.right-w/2);
+      pills.push({pin,px,label,w,cx});
     });
+    // Pass 2: resolve overlaps left→right, then bounce back off the right wall
+    for(let i=1;i<pills.length;i++){
+      const prev=pills[i-1],cur=pills[i];
+      if(cur.cx-cur.w/2<prev.cx+prev.w/2+GAP) cur.cx=prev.cx+prev.w/2+GAP+cur.w/2;
+    }
+    for(let i=pills.length-1;i>=0;i--){
+      const cur=pills[i];
+      const wall=i===pills.length-1?chartArea.right:pills[i+1].cx-pills[i+1].w/2-GAP;
+      if(cur.cx+cur.w/2>wall) cur.cx=wall-cur.w/2;
+      if(cur.cx-cur.w/2<chartArea.left) cur.cx=chartArea.left+cur.w/2;
+    }
+    // Draw: dashed line at the true year, pill at its resolved position
+    pills.forEach(({pin,px,label,w,cx})=>{
+      ctx.strokeStyle=pin.c; ctx.setLineDash([4,3]); ctx.lineWidth=1.5;
+      ctx.beginPath(); ctx.moveTo(px,PILL_Y+PILL_H); ctx.lineTo(px,chartArea.bottom); ctx.stroke();
+      ctx.setLineDash([]);
+      const bx=cx-w/2;
+      ctx.fillStyle=pin.c;
+      if(ctx.roundRect){ ctx.beginPath(); ctx.roundRect(bx,PILL_Y,w,PILL_H,PILL_H/2); ctx.fill(); }
+      else ctx.fillRect(bx,PILL_Y,w,PILL_H);
+      ctx.fillStyle="#fff"; ctx.textAlign="center"; ctx.textBaseline="middle";
+      ctx.fillText(label,cx,PILL_Y+PILL_H/2+0.5);
+    });
+    ctx.restore();
   }};
 
   const F={family:"Source Sans 3",size:11};
@@ -396,7 +423,7 @@ function renderGenerations(p){
   const LBL={gen1:"1st generation",gen2:"2nd generation",gen3:"3rd generation"};
   const COL={gen1:NAVY,gen2:TEAL,gen3:ORANGE};
   const counts={gen1:{t:0,m:0},gen2:{t:0,m:0},gen3:{t:0,m:0}};
-  (p.targets||[]).forEach(t=>{const g=genByDoc[t.doc_id];if(counts[g])counts[g].t++;});
+  (p.targets||[]).forEach(t=>{if(!T_AREAS.has(t.area))return;const g=genByDoc[t.doc_id];if(counts[g])counts[g].t++;});
   (p.measures||[]).forEach(m=>{const g=genByDoc[m.doc_id];if(counts[g])counts[g].m++;});
   const present=GENS.filter(g=>counts[g].t+counts[g].m>0);
   if(present.length<2) return; // one generation = nothing to evolve; keep hidden
@@ -408,13 +435,30 @@ function renderGenerations(p){
     const verb=v2>v1?"has grown":v2<v1?"has decreased":"has stayed level";
     sub.innerHTML=`Transport content volume ${verb} from the ${LBL[first]} (${v1} items) to the ${LBL[last]} (${v2}). Content volume is not the same as ambition, but it shows where attention went.`;
   }
+  // Letters above each bar identify the series (T/M); color stays per generation
+  const letterPlugin={id:"genLetters",afterDatasetsDraw(chart){
+    const {ctx}=chart;
+    chart.data.datasets.forEach((ds,di)=>{
+      const meta=chart.getDatasetMeta(di); if(!meta||meta.hidden)return;
+      meta.data.forEach((bar,i)=>{
+        const v=ds.data[i]; if(!v)return;
+        ctx.save();
+        ctx.fillStyle=COL[present[i]]||NAVY;
+        ctx.font="800 12px 'Source Sans 3'";
+        ctx.textAlign="center";
+        ctx.fillText(di===0?"T":"M",bar.x,bar.y-5);
+        ctx.restore();
+      });
+    });
+  }};
   const cfg={type:"bar",
     data:{labels:present.map(g=>LBL[g]),datasets:[
       {label:"Targets",data:present.map(g=>counts[g].t),backgroundColor:present.map(g=>COL[g]),borderRadius:4},
       {label:"Measures",data:present.map(g=>counts[g].m),backgroundColor:present.map(g=>COL[g]+"80"),borderRadius:4}]},
-    options:{plugins:{legend:{position:"bottom",labels:{font:{family:"Source Sans 3",size:11},boxWidth:12}}},
+    options:{layout:{padding:{top:16}},plugins:{legend:{display:false}},
       scales:{x:{ticks:{font:{family:"Source Sans 3",size:11}},grid:{display:false}},
-              y:{ticks:{font:{family:"Source Sans 3",size:11},precision:0},grid:{color:"rgba(0,0,0,0.05)"}}}}};
+              y:{ticks:{font:{family:"Source Sans 3",size:11},precision:0},grid:{color:"rgba(0,0,0,0.05)"}}}},
+    plugins:[letterPlugin]};
   if(window.Chart){ try{ new Chart(canvas,cfg); return; }catch(e){ console.warn("Gen chart failed:",e); } }
   chartFallbackBars(canvas, present.map(g=>[LBL[g],counts[g].t+counts[g].m]), g=>COL[present.find(x=>LBL[x]===g)]||TEAL);
 }
@@ -422,7 +466,8 @@ function renderGenerations(p){
 /* ── Journey — timeline line + version labels + detail panel ─────── */
 function renderJourney(p, docUrlMap) {
   const wrap=document.getElementById("cp-journey"); if(!wrap)return;
-  const docs=p.documents;
+  // Strict chronological order (NDC, LTS, BTR interleaved by submission date)
+  const docs=[...(p.documents||[])].sort((a,b)=>String(a.date||"").localeCompare(String(b.date||"")));
 
   // Cards row — use d.version for the label
   wrap.innerHTML=docs.map((d,i)=>{
@@ -435,14 +480,20 @@ function renderJourney(p, docUrlMap) {
           <span class="cp-jcard-type ${type}">${esc(d.type)}</span>
           <div class="cp-jcard-name">${esc(d.version)}</div>
           ${year?`<div class="cp-jcard-year">${year}</div>`:""}
-          <div class="cp-jcard-status"><span class="cp-jcard-dot ${tc.has_content?"has":"no"}"></span>${esc(d.status)}</div>
+          <div class="cp-jcard-status"><span class="cp-jcard-dot ${active?"st-active":"st-archived"}"></span>${esc(d.status)}</div>
         </div>
         ${i<docs.length-1?`<span class="cp-jcard-arrow">\u203a</span>`:""}
       </div>`;
   }).join("");
 
   // Timeline bar
-  const years=docs.map(d=>d.date?+d.date.slice(0,4):null).filter(Boolean);
+  const yearOf=d=>d.date?+d.date.slice(0,4):null;
+  const frac=d=>{ // year + month fraction, so same-year documents don't overlap
+    if(!d.date) return null;
+    const y=+d.date.slice(0,4), m=+(d.date.slice(5,7)||1);
+    return y+(m-1)/12;
+  };
+  const years=docs.map(yearOf).filter(Boolean);
   const minY=Math.min(...years,2015), maxY=Math.max(...years,new Date().getFullYear()+1);
   const span=maxY-minY||1;
 
@@ -454,12 +505,18 @@ function renderJourney(p, docUrlMap) {
   line.style.cssText="position:absolute;top:16px;left:0;right:0;height:2px;background:linear-gradient(to right,var(--ct-border),var(--ct-green) 80%,var(--ct-border));border-radius:2px;";
   tlBar.appendChild(line);
 
-  // submission dots
-  years.forEach(yr=>{
-    const pct=((yr-minY)/span*100).toFixed(1);
-    const dot=document.createElement("div");
-    dot.title=yr;
-    dot.style.cssText=`position:absolute;left:${pct}%;top:10px;width:12px;height:12px;border-radius:50%;background:var(--ct-navy);border:2px solid #fff;box-shadow:0 0 0 2px var(--ct-navy);transform:translateX(-50%);z-index:2;`;
+  // one dot per document: green = active (always), gray = archived,
+  // archived turns navy while its summary is open
+  docs.forEach((d,i)=>{
+    const f=frac(d); if(f==null) return;
+    const pct=Math.min(100,Math.max(0,(f-minY)/span*100)).toFixed(1);
+    const dot=document.createElement("button");
+    dot.type="button";
+    dot.className=`cp-tl-dot ${d.status==="Active"?"is-active":"is-archived"}`;
+    dot.dataset.idx=i;
+    dot.title=`${d.version||d.type} (${d.date?d.date.slice(0,4):""}, ${d.status})`;
+    dot.setAttribute("aria-label",dot.title);
+    dot.style.left=pct+"%";
     tlBar.appendChild(dot);
   });
 
@@ -476,41 +533,67 @@ function renderJourney(p, docUrlMap) {
   // Detail panel
   const panel=makePanel("cp-journey-detail-panel");
   tlBar.parentNode.insertBefore(panel,tlBar.nextSibling);
+
+  function clearSelection(){
+    wrap.querySelectorAll(".cp-jcard").forEach(c=>c.classList.remove("open"));
+    tlBar.querySelectorAll(".cp-tl-dot").forEach(x=>x.classList.remove("selected"));
+  }
   panel.querySelector(".cp-detail-panel-close").addEventListener("click",()=>{
     panel.classList.remove("open");
-    wrap.querySelectorAll(".cp-jcard").forEach(c=>c.classList.remove("open"));
+    clearSelection();
   });
 
-  wrap.querySelectorAll(".cp-jcard").forEach(card=>{
-    card.querySelector(".cp-jcard-inner").addEventListener("click",()=>{
-      const idx=+card.dataset.idx;
-      const d=docs[idx];
-      const tc=d.transport||{};
-      const counts=d.counts||{};
-      const already=card.classList.contains("open");
-      wrap.querySelectorAll(".cp-jcard").forEach(c=>c.classList.remove("open"));
-      if(already){ panel.classList.remove("open"); return; }
-      card.classList.add("open");
-      const year=d.date?d.date.slice(0,4):"";
-      const checks=[
-        {label:"Mitigation measures",val:tc.mitigation_measures},
-        {label:"Transport targets",  val:tc.mitigation_target},
-        {label:"Adaptation measures",val:tc.adaptation_measures},
-      ];
-      panel.querySelector(".cp-detail-panel-title").innerHTML=
-        `${esc(d.version)} <span style="font-weight:400;color:var(--ct-muted);">${esc(d.type)}, ${esc(d.status)}${year?" ("+year+")":""}</span>`;
-      panel.querySelector(".cp-detail-panel-body").innerHTML=tc.has_content?`
+  function openDoc(idx){
+    const d=docs[idx];
+    const tc=d.transport||{};
+    const card=wrap.querySelector(`.cp-jcard[data-idx="${idx}"]`);
+    const dot=tlBar.querySelector(`.cp-tl-dot[data-idx="${idx}"]`);
+    const already=card&&card.classList.contains("open");
+    clearSelection();
+    if(already){ panel.classList.remove("open"); return; }
+    if(card) card.classList.add("open");
+    if(dot) dot.classList.add("selected");
+    const year=d.date?d.date.slice(0,4):"";
+    // Fixed summary order: mitigation targets, mitigation measures,
+    // adaptation targets, adaptation measures
+    const checks=[
+      {label:"Mitigation targets",  val:tc.mitigation_target},
+      {label:"Mitigation measures", val:tc.mitigation_measures},
+      {label:"Adaptation targets",  val:tc.adaptation_target},
+      {label:"Adaptation measures", val:tc.adaptation_measures},
+    ];
+    panel.querySelector(".cp-detail-panel-title").innerHTML=
+      `${esc(d.version)} <span style="font-weight:400;color:var(--ct-muted);">${esc(d.type)}, ${esc(d.status)}${year?" ("+year+")":""}</span>`;
+    const compareTile=`
+      <a class="cp-doc-tile green" href="${comparisonUrl("track",{c:p.code})}" target="_blank" rel="noopener">
+        <span class="cp-doc-tile-kicker">NDC comparison</span>
+        <span class="cp-doc-tile-text">Check the content of previous NDCs and how it evolved \u2192</span>
+      </a>`;
+    const docTile=d.url?`
+      <a class="cp-doc-tile navy" href="${esc(d.url)}" target="_blank" rel="noopener">
+        <span class="cp-doc-tile-kicker"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M8 13h8M8 17h8"/></svg> Original document</span>
+        <span class="cp-doc-tile-text">View the full text \u2197</span>
+        <span class="cp-doc-tile-src">Source: UNFCCC registry</span>
+      </a>`:"";
+    const tiles=`<div class="cp-doc-tiles${docTile?"":" single"}">${compareTile}${docTile}</div>`;
+    panel.querySelector(".cp-detail-panel-body").innerHTML=tc.has_content?`
+      <div class="cp-doc-panel-grid">
         <div class="cp-jcard-checks">${checks.map(c=>`<div class="cp-jcard-check ${c.val?"on":"off"}">${c.val?"\u2713":"\u25cb"} ${esc(c.label)}</div>`).join("")}</div>
-        <div class="cp-jcard-count-row">${counts.measures?`<span>${counts.measures} measures</span>`:""} ${counts.targets?`<span>${counts.targets} targets</span>`:""} ${counts.adaptation?`<span>${counts.adaptation} adaptation</span>`:""}</div>
-        <div class="cp-jcard-det-links">
-          ${d.url?`<a href="${esc(d.url)}" target="_blank" rel="noopener" class="cp-jcard-det-link">View document \u2197</a>`:""}
-          <a href="${comparisonUrl("track",{c:p.code})}" target="_blank" rel="noopener" class="cp-jcard-det-link secondary">Compare evolution in NDC Comparison \u2192</a>
-        </div>`
-        :`<p style="color:var(--ct-muted);font-size:0.88rem;">No transport content assessed in this document.</p>
-        <div class="cp-jcard-det-links"><a href="${comparisonUrl("track",{c:p.code})}" target="_blank" rel="noopener" class="cp-jcard-det-link secondary">Compare evolution in NDC Comparison \u2192</a></div>`;
-      panel.classList.add("open");
-      panel.scrollIntoView({behavior:"smooth",block:"nearest"});
-    });
+        ${tiles}
+      </div>`
+      :`<div class="cp-doc-panel-grid">
+        <p style="color:var(--ct-muted);font-size:0.88rem;margin:0;">No transport content assessed in this document.</p>
+        ${tiles}
+      </div>`;
+    panel.classList.add("open");
+    panel.scrollIntoView({behavior:"smooth",block:"nearest"});
+  }
+
+  wrap.querySelectorAll(".cp-jcard").forEach(card=>{
+    card.querySelector(".cp-jcard-inner").addEventListener("click",()=>openDoc(+card.dataset.idx));
+  });
+  tlBar.querySelectorAll(".cp-tl-dot").forEach(dot=>{
+    dot.addEventListener("click",()=>openDoc(+dot.dataset.idx));
   });
 
   // Generation note
@@ -532,8 +615,8 @@ function renderTargets(p, docUrlMap) {
   const fbar=document.getElementById("cp-target-filters");
   const listEl=document.getElementById("cp-targets");
   if(!listEl)return;
-  const active=p.targets.filter(t=>t.status==="Active");
-  if(subEl) subEl.innerHTML=`<strong>${active.length}</strong> transport-related target${active.length!==1?"s":""} in active documents.`;
+  const active=transportTargets(p,"Active");
+  if(subEl) subEl.innerHTML=`<strong>${active.length}</strong> transport target${active.length!==1?"s":""} in <span class="hl">active documents</span>.`;
   const areas=[...new Set(active.map(t=>t.area).filter(Boolean))];
   const docTypes=[...new Set(active.map(t=>t.doc_type).filter(Boolean))];
   if(fbar){
@@ -563,8 +646,6 @@ function renderTargets(p, docUrlMap) {
     fbar.querySelectorAll("[data-doc]").forEach(b=>b.addEventListener("click",()=>{fbar.querySelectorAll("[data-doc]").forEach(x=>x.classList.remove("active"));b.classList.add("active");curDoc=b.dataset.doc;draw();}));
   }
   draw();
-  const navCmp=document.getElementById("cp-nav-compare");
-  if(navCmp) navCmp.href=comparisonUrl("track",{c:p.code});
   const cmpLink=document.getElementById("cp-targets-compare");
   if(cmpLink){cmpLink.href=comparisonUrl("track",{c:p.code});cmpLink.hidden=false;}
 }
@@ -577,7 +658,7 @@ function renderMeasures(p, docUrlMap, bench) {
   const moreBtn=document.getElementById("cp-measures-more");
   if(!listEl)return;
   const active=p.measures.filter(m=>m.status==="Active");
-  if(subEl) subEl.innerHTML=`<strong>${active.length}</strong> transport mitigation measures in active documents.`;
+  if(subEl) subEl.innerHTML=`<strong>${active.length}</strong> transport mitigation measures in <span class="hl">active documents</span>.`;
 
   // A-S-I: one stacked bar plus a generated sentence — the sentence is the
   // insight, the bar is its picture (replaces the space-hungry doughnut).
@@ -808,14 +889,22 @@ function renderResources(p){
     const global=hasScope?all.filter(pub=>pub.scope==="global"):[];
     renderPubList(pubBox,own,global,p);
   }
-  const tdcLink=document.getElementById("cp-tdc-link");
-  if(tdcLink&&p.links&&p.links.tdc_search) tdcLink.href=p.links.tdc_search;
+  // TDC tile links to the portal home (per-country search deliberately disabled)
+  // Factsheet button deferred — build_factsheets.py and PDFs stay in the repo, unused for now
   const dlBox=document.getElementById("cp-downloads");
   if(dlBox){
     dlBox.innerHTML=`
-      <a class="cp-dl-btn" href="${BASE}factsheets/${esc(p.code)}.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M12 18v-6M9 15l3 3 3-3"/></svg>Country factsheet (PDF)</a>
-      <button class="cp-dl-btn" id="dl-measures"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18M15 3v18"/></svg>Measures (CSV)</button>
-      <button class="cp-dl-btn" id="dl-targets"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18M15 3v18"/></svg>Targets (CSV)</button>`;
+      <button class="cp-dl-btn" id="dl-all"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Full country dataset (CSV)</button>
+      <button class="cp-dl-btn" id="dl-measures"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18M15 3v18"/></svg>Measures only (CSV)</button>
+      <button class="cp-dl-btn" id="dl-targets"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18M15 3v18"/></svg>Targets only (CSV)</button>`;
+    document.getElementById("dl-all").onclick=()=>{
+      const tag=(rows,t)=>(rows||[]).map(r=>({record_type:t,...r}));
+      downloadCSV([
+        ...tag(p.targets,"target"),
+        ...tag(p.measures,"mitigation measure"),
+        ...tag(p.adaptation,"adaptation measure")
+      ],`${p.code}_transport_tracker_dataset.csv`);
+    };
     document.getElementById("dl-measures").onclick=()=>downloadCSV(p.measures,`${p.code}_measures.csv`);
     document.getElementById("dl-targets").onclick=()=>downloadCSV(p.targets,`${p.code}_targets.csv`);
   }
@@ -863,7 +952,10 @@ function renderPubList(box,own,global,p){
 
 function setupExport(p){
   const btn=document.getElementById("cp-export-btn");
-  if(btn) btn.onclick=()=>document.getElementById("deeper").scrollIntoView({behavior:"smooth"});
+  if(btn) btn.onclick=()=>{
+    const target=document.getElementById("downloads")||document.getElementById("deeper");
+    if(target) target.scrollIntoView({behavior:"smooth"});
+  };
 }
 function downloadCSV(rows,filename){
   if(!rows||!rows.length)return;

@@ -405,7 +405,7 @@ function createHeaderCell(col, colIndex) {
     });
     
     cell.appendChild(countrySelect);
-    
+
     // Generation Selector
     const genSelect = document.createElement('select');
     genSelect.className = 'generation-selector';
@@ -574,6 +574,8 @@ function createContentCell(col, colIndex) {
     // know which column you're reading as you scroll down (replaces sticky)
     const config = GEN_CONFIG[col.generation];
     const countryName = countryData.country_name || col.country;
+    const profSlug = String(countryName).normalize('NFKD').replace(/[^\x00-\x7F]/g, '')
+        .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
     const status = getDocStatus(doc);
     const labelBadge = status
         ? `<span class="content-label-badge content-label-${status}">${status === 'active' ? 'Active' : 'Archived'}</span>`
@@ -582,7 +584,7 @@ function createContentCell(col, colIndex) {
     labelEl.className = 'content-cell-label';
     if (config) labelEl.style.setProperty('--gen-color', config.color);
     labelEl.innerHTML = `
-        <span class="content-label-country">${countryName}</span>
+        <a class="content-label-country" href="../profiles/countries/${profSlug}/" target="_blank" rel="noopener" title="Open country profile">${countryName}</a>
         <span class="content-label-gen">${config ? config.label : ''}</span>
         ${labelBadge}
     `;

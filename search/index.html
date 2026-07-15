@@ -22,12 +22,53 @@ h1 { font-size: 1.7rem; font-weight: 800; color: var(--ct-navy, #003D5C); margin
   border: 2px solid var(--ct-border, #E1E4E8); border-radius: 10px; background: #fff; color: inherit;
 }
 .searchbox input:focus { outline: none; border-color: var(--ct-teal, #00A4BD); }
-.filters { display:flex; gap:.4rem; flex-wrap:wrap; margin:.8rem 0 1.2rem; }
+.filters { display:flex; gap:.4rem; flex-wrap:wrap; margin:.8rem 0 .4rem; align-items:center; }
+.f-label { font-size:.75rem; font-weight:700; color:var(--ct-muted,#6B7280); margin-right:.1rem; }
 .chip {
   padding:.3rem .8rem; border:1px solid var(--ct-border,#E1E4E8); border-radius:999px;
   background:#fff; color:var(--ct-muted,#6B7280); font-family:inherit; font-size:.8rem; font-weight:600; cursor:pointer;
 }
 .chip.on { background: var(--ct-navy,#003D5C); border-color: var(--ct-navy,#003D5C); color:#fff; }
+
+/* Country filter */
+.cfilter { position:relative; display:flex; gap:.4rem; flex-wrap:wrap; align-items:center; margin:.35rem 0 .6rem; }
+.cfilter input {
+  padding:.35rem .8rem; font-family:inherit; font-size:.85rem; min-width:220px;
+  border:1px solid var(--ct-border,#E1E4E8); border-radius:999px; background:#fff; color:inherit;
+}
+.cfilter input:focus { outline:none; border-color: var(--ct-teal,#00A4BD); }
+.ctoken {
+  display:inline-flex; align-items:center; gap:.35rem;
+  padding:.25rem .4rem .25rem .7rem; border-radius:999px;
+  background:rgba(0,164,189,.12); color:#007a8d; font-size:.8rem; font-weight:700;
+}
+.ctoken button { border:none; background:transparent; color:inherit; cursor:pointer; font-size:.85rem; line-height:1; padding:.05rem .25rem; border-radius:50%; }
+.ctoken button:hover { background:rgba(0,0,0,.08); }
+.cdrop {
+  position:absolute; top:calc(100% + .3rem); left:0; z-index:40;
+  width:280px; max-height:260px; overflow-y:auto;
+  background:#fff; border:1px solid var(--ct-border,#E1E4E8); border-radius:10px;
+  box-shadow:0 12px 32px rgba(0,0,0,.16); display:none;
+}
+.cdrop.open { display:block; }
+.cdrop-item { display:flex; align-items:center; gap:.5rem; padding:.4rem .7rem; cursor:pointer; font-size:.85rem; }
+.cdrop-item:hover { background:var(--ct-bg,#F4F6F8); }
+.cdrop-empty { padding:.7rem; color:var(--ct-muted,#6B7280); font-size:.82rem; }
+
+/* Theme explorer */
+.themes { margin:1.2rem 0 .5rem; }
+.themes-title { font-size:.8rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--ct-muted,#6B7280); margin-bottom:.55rem; }
+.themes-row { display:flex; gap:.45rem; flex-wrap:wrap; }
+.theme-chip {
+  display:inline-flex; align-items:center; gap:.4rem;
+  padding:.42rem .95rem; border:1px solid var(--ct-border,#E1E4E8); border-radius:999px;
+  background:#fff; color:var(--ct-navy,#003D5C); font-family:inherit; font-size:.85rem; font-weight:700; cursor:pointer;
+}
+.theme-chip small { font-weight:600; color:var(--ct-muted,#6B7280); }
+.theme-chip:hover { border-color:var(--ct-teal,#00A4BD); }
+.theme-chip.on { background:var(--ct-teal,#00A4BD); border-color:var(--ct-teal,#00A4BD); color:#fff; }
+.theme-chip.on small { color:rgba(255,255,255,.85); }
+
 .meta { font-size:.82rem; color:var(--ct-muted,#6B7280); margin-bottom:.8rem; }
 .result { background:#fff; border:1px solid var(--ct-border,#E1E4E8); border-radius:12px; padding: .9rem 1.1rem; margin-bottom:.7rem; }
 .r-top { display:flex; gap:.5rem; align-items:center; flex-wrap:wrap; margin-bottom:.3rem; }
@@ -50,50 +91,107 @@ footer a { color: var(--ct-teal,#00A4BD); }
 </head>
 <body>
 <div class="wrap">
-  <p class="kicker">GIZ-SLOCAT NDC Transport Tracker</p>
+  <p class="kicker"> </p>
   <h1>Search the tracker</h1>
-  <p class="sub">Every transport target, mitigation and adaptation measure across all NDCs — searchable in one place. Try <em>rail freight</em>, <em>bus electrification</em>, or a country name.</p>
+  <p class="sub">Every transport target, mitigation and adaptation measure across all NDCs searchable in one place. Try <em>rail freight</em>, <em>bus electrification</em>, or pick a theme below.</p>
 
-  <div class="searchbox"><input id="q" type="search" placeholder="Search targets, measures, countries…" autofocus autocomplete="off"></div>
+  <div class="searchbox"><input id="q" type="search" placeholder="Search targets and measures…" autofocus autocomplete="off"></div>
+
   <div class="filters" id="filters">
     <button class="chip on" data-kind="all">All</button>
     <button class="chip" data-kind="target">Targets</button>
     <button class="chip" data-kind="measure">Mitigation measures</button>
     <button class="chip" data-kind="adaptation">Adaptation measures</button>
-    <button class="chip" data-kind="country">Countries</button>
   </div>
+
+  <div class="cfilter" id="cfilter">
+    <span class="f-label">Filter by country:</span>
+    <span id="ctokens"></span>
+    <span style="position:relative;">
+      <input id="cq" type="text" placeholder="Add a country…" autocomplete="off">
+      <div class="cdrop" id="cdrop"></div>
+    </span>
+  </div>
+
+  <div class="themes" id="themes" hidden>
+    <div class="themes-title">Or explore by theme</div>
+    <div class="themes-row" id="themes-row"></div>
+  </div>
+
   <div class="meta" id="meta"></div>
   <div id="results"><div class="empty">Loading index…</div></div>
 
-  <footer>Data: GIZ-SLOCAT Transport Tracker database | <a href="../methodology/">Methodology &amp; citation</a> | <a href="../index.html">Dashboard</a> | <a href="../profiles/index.html">Country Explorer</a></footer>
+  <footer>Data: GIZ-SLOCAT Transport Tracker database | <a href="https://portal.transport-data.org/@giz/gizslocat-transport-climate-tracker?org=GIZ&dataset=gizslocat-transport-climate-tracker">Download dataset</a> </footer>
 </div>
 
 <script>
 (function(){
   const PAGE=30;
-  let INDEX=[], kind='all', shown=PAGE, countryFilter=null;
+  let INDEX=[], COUNTRIES=[], kind='all', theme=null, shown=PAGE;
+  let selected=[]; // [{code,name}]
   const $q=document.getElementById('q'), $r=document.getElementById('results'), $m=document.getElementById('meta');
+  const $cq=document.getElementById('cq'), $cdrop=document.getElementById('cdrop'), $ctokens=document.getElementById('ctokens');
+
+  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const norm=s=>String(s??'').toLowerCase();
 
   fetch('../data/processed/search-index.json')
     .then(r=>{ if(!r.ok) throw 0; return r.json(); })
     .then(d=>{ INDEX=d.entries||[];
+      COUNTRIES=INDEX.filter(e=>e.kind==='country')
+        .map(e=>({code:e.code,name:e.country}))
+        .sort((a,b)=>a.name.localeCompare(b.name));
+      buildThemes();
       const sp=new URLSearchParams(location.search);
       const pre=sp.get('q'); if(pre){ $q.value=pre; }
-      countryFilter=(sp.get('country')||'').toUpperCase()||null;
-      if(countryFilter){
-        const cn=(INDEX.find(e=>e.code===countryFilter)||{}).country||countryFilter;
-        const chip=document.createElement('button');
-        chip.className='chip on'; chip.style.marginLeft='.25rem';
-        chip.innerHTML='Only: '+cn+' \u2715';
-        chip.onclick=()=>{ countryFilter=null; chip.remove(); run(); };
-        document.getElementById('filters').appendChild(chip);
-      }
+      const pc=(sp.get('country')||'').toUpperCase();
+      if(pc){ const c=COUNTRIES.find(x=>x.code===pc); if(c) selected.push(c); drawTokens(); }
       $m.textContent=INDEX.length.toLocaleString()+' entries indexed, updated '+(d.generated||'');
       run(); })
     .catch(()=>{ $r.innerHTML='<div class="empty">Could not load the search index. Run <code>python pipeline/build_search_index.py</code> after the data pipeline.</div>'; });
 
-  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const norm=s=>String(s??'').toLowerCase();
+  /* ── Theme explorer: top categories computed from the live index ── */
+  function buildThemes(){
+    const counts={};
+    INDEX.forEach(e=>{ if(e.category && e.kind!=='country'){ counts[e.category]=(counts[e.category]||0)+1; } });
+    const top=Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,8);
+    if(!top.length) return;
+    document.getElementById('themes').hidden=false;
+    document.getElementById('themes-row').innerHTML=top.map(([c,n])=>
+      '<button class="theme-chip" data-theme="'+esc(c)+'">'+esc(c)+' <small>'+n.toLocaleString()+'</small></button>').join('');
+    document.getElementById('themes-row').addEventListener('click',e=>{
+      const b=e.target.closest('.theme-chip'); if(!b) return;
+      theme = (theme===b.dataset.theme) ? null : b.dataset.theme;
+      document.querySelectorAll('.theme-chip').forEach(t=>t.classList.toggle('on',t.dataset.theme===theme));
+      shown=PAGE; run();
+    });
+  }
+
+  /* ── Country multi-select ── */
+  function drawTokens(){
+    $ctokens.innerHTML=selected.map(c=>
+      '<span class="ctoken">'+esc(c.name)+'<button data-code="'+esc(c.code)+'" aria-label="Remove '+esc(c.name)+'">\u2715</button></span>').join('');
+    $ctokens.querySelectorAll('button').forEach(b=>b.onclick=()=>{
+      selected=selected.filter(c=>c.code!==b.dataset.code); drawTokens(); shown=PAGE; run();
+    });
+  }
+  function drawDrop(){
+    const q=norm($cq.value).trim();
+    if(!q){ $cdrop.classList.remove('open'); return; }
+    const pool=COUNTRIES.filter(c=>norm(c.name).includes(q)&&!selected.some(s=>s.code===c.code));
+    const list=[...pool.filter(c=>norm(c.name).startsWith(q)),...pool.filter(c=>!norm(c.name).startsWith(q))].slice(0,12);
+    $cdrop.innerHTML=list.length
+      ?list.map(c=>'<div class="cdrop-item" data-code="'+esc(c.code)+'">'+esc(c.name)+'</div>').join('')
+      :'<div class="cdrop-empty">No countries match.</div>';
+    $cdrop.classList.add('open');
+    $cdrop.querySelectorAll('.cdrop-item').forEach(it=>it.onclick=()=>{
+      const c=COUNTRIES.find(x=>x.code===it.dataset.code);
+      if(c){ selected.push(c); drawTokens(); }
+      $cq.value=''; $cdrop.classList.remove('open'); shown=PAGE; run();
+    });
+  }
+  $cq.addEventListener('input',drawDrop);
+  document.addEventListener('click',e=>{ if(!e.target.closest('#cfilter')) $cdrop.classList.remove('open'); });
 
   function tokens(q){ return norm(q).split(/\s+/).filter(t=>t.length>1); }
 
@@ -111,14 +209,35 @@ footer a { color: var(--ct-teal,#00A4BD); }
     return out;
   }
 
+  function baseList(){
+    let list=INDEX;
+    if(selected.length){ const set=new Set(selected.map(c=>c.code)); list=list.filter(e=>set.has(e.code)); }
+    if(theme) list=list.filter(e=>e.category===theme);
+    return list;
+  }
+
+  function updatePillCounts(list){
+    document.querySelectorAll('#filters .chip').forEach(ch=>{
+      const k=ch.dataset.kind;
+      const base=k==='all'?list.filter(e=>e.kind!=='country'):list.filter(e=>e.kind===k);
+      const label={all:'All',target:'Targets',measure:'Mitigation measures',adaptation:'Adaptation measures'}[k];
+      ch.textContent=(list===INDEX)?label:label+' ('+base.length.toLocaleString()+')';
+    });
+  }
+
   function run(){
     const q=$q.value.trim(), ts=tokens(q);
-    let list = kind==='all' ? INDEX : INDEX.filter(e=>e.kind===kind);
-    if(countryFilter) list=list.filter(e=>e.code===countryFilter);
-    if(ts.length){ list = list.map(e=>[score(e,ts),e]).filter(x=>x[0]>0).sort((a,b)=>b[0]-a[0]).map(x=>x[1]); }
-    else { list = []; }
-    if(!q){ $r.innerHTML='<div class="empty">Type to search '+INDEX.length.toLocaleString()+' entries.</div>'; return; }
-    if(!list.length){ $r.innerHTML='<div class="empty">No matches for “'+esc(q)+'”.</div>'; return; }
+    const active=q||theme||selected.length;
+    let list=baseList();
+    updatePillCounts(active?(ts.length?list.map(e=>[score(e,ts),e]).filter(x=>x[0]>0).map(x=>x[1]):list):INDEX);
+    if(kind!=='all') list=list.filter(e=>e.kind===kind);
+    else if(theme||selected.length) list=list.filter(e=>e.kind!=='country');
+    if(ts.length){ list=list.map(e=>[score(e,ts),e]).filter(x=>x[0]>0).sort((a,b)=>b[0]-a[0]).map(x=>x[1]); }
+    else if(!active){ list=[]; }
+
+    if(!active){ $r.innerHTML='<div class="empty">Type to search '+INDEX.length.toLocaleString()+' entries, or pick a theme above.</div>'; $m.textContent=''; return; }
+    if(!list.length){ $r.innerHTML='<div class="empty">No matches'+(q?' for \u201c'+esc(q)+'\u201d':'')+'.</div>'; $m.textContent='0 results'; return; }
+
     const view=list.slice(0,shown);
     $r.innerHTML = view.map(e=>{
       const link = e.url ? '<a class="r-country" href="../'+esc(e.url)+'">'+esc(e.country)+'</a>' : '<span class="r-country">'+esc(e.country)+'</span>';
@@ -131,13 +250,18 @@ footer a { color: var(--ct-teal,#00A4BD); }
         '</div>';
     }).join('') + (list.length>shown?'<button class="more" id="more">Show more ('+(list.length-shown)+' remaining)</button>':'');
     const mb=document.getElementById('more'); if(mb) mb.onclick=()=>{shown+=PAGE;run();};
-    $m.textContent=list.length.toLocaleString()+' result'+(list.length===1?'':'s')+' for “'+q+'”';
+
+    const parts=[];
+    if(q) parts.push('\u201c'+q+'\u201d');
+    if(theme) parts.push('theme: '+theme);
+    if(selected.length) parts.push('showing results for '+selected.map(c=>c.name).join(', '));
+    $m.textContent=list.length.toLocaleString()+' result'+(list.length===1?'':'s')+(parts.length?' \u2014 '+parts.join(' \u00b7 '):'');
   }
 
   let deb; $q.addEventListener('input',()=>{shown=PAGE;clearTimeout(deb);deb=setTimeout(run,180);});
   document.getElementById('filters').addEventListener('click',e=>{
     const b=e.target.closest('.chip'); if(!b) return;
-    document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
+    document.querySelectorAll('#filters .chip').forEach(c=>c.classList.remove('on'));
     b.classList.add('on'); kind=b.dataset.kind; shown=PAGE; run();
   });
 })();

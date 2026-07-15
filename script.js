@@ -110,7 +110,7 @@ function sendHeightDebounced() {
 // ============================================================================
 document.addEventListener('DOMContentLoaded', async () => {
     try {
-        await Promise.all([loadData(), loadGeoJSON(), loadCountryUrls()]);
+        await Promise.all([loadData(), loadGeoJSON(), loadCountryUrls(), stampEdgarYear()]);
         initializeTabs();
         initializeTooltips();
         initializeTab1();
@@ -164,6 +164,26 @@ async function loadCountryUrls() {
     } catch (e) {
         console.warn('country-urls.json not found, links disabled');
     }
+}
+
+// EDGAR year in map captions comes from the data, never hardcoded
+async function stampEdgarYear() {
+    try {
+        const res = await fetch('data/ghg_metadata.json');
+        if (!res.ok) return;
+        const meta = await res.json();
+        if (meta.last_year) document.querySelectorAll('.edgar-year')
+            .forEach(el => { el.textContent = meta.last_year; });
+    } catch (e) { /* keep fallback year in markup */ }
+}
+
+// Country profile URLs (Country Explorer pages), slug identical to the pipeline's
+function profileSlug(name) {
+    return String(name).normalize('NFKD').replace(/[^\x00-\x7F]/g, '')
+        .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+}
+function profileUrl(name) {
+    return `profiles/countries/${profileSlug(name)}/`;
 }
 
 async function loadGeoJSON() {
@@ -1023,11 +1043,13 @@ function makePannable(svg) {
 
     svg.addEventListener('mousedown', e => {
         dragging = true; startX = e.clientX - ox; startY = e.clientY - oy;
+        svg._dragged = false; svg._downX = e.clientX; svg._downY = e.clientY;
         svg.style.cursor = 'grabbing';
     });
     window.addEventListener('mousemove', e => {
         if (!dragging) return;
         ox = e.clientX - startX; oy = e.clientY - startY;
+        if (Math.abs(e.clientX - svg._downX) + Math.abs(e.clientY - svg._downY) > 4) svg._dragged = true;
         applyTransform();
     });
     window.addEventListener('mouseup', () => {
@@ -1143,9 +1165,14 @@ function renderDotsMap(containerId, colorFn, tipFn, region, allCountries) {
             fill: colorFn(cd), opacity: inRegion ? 1 : 0.25,
             stroke: '#fff', 'stroke-width': 1.2, style: 'cursor:pointer'
         });
-        const tipHtml = tipFn(code, cd);
+        const tipHtml = tipFn(code, cd)
+            + '<br><span class="tt-tag">Click to open country profile \u2197</span>';
         dot.addEventListener('mousemove', e => showMapTip(e, tipHtml));
         dot.addEventListener('mouseleave', hideMapTip);
+        dot.addEventListener('click', () => {
+            if (svg._dragged || !cd.name) return;
+            window.open(profileUrl(cd.name), '_blank', 'noopener');
+        });
         g.appendChild(dot);
     });
 
@@ -1202,9 +1229,14 @@ function renderDorlingMap(containerId, colorFn, sizeFn, tipFn, region, allCountr
             fill: colorFn(cd), 'fill-opacity': inRegion ? 0.9 : 0.2,
             stroke: '#fff', 'stroke-width': 1, style: 'cursor:pointer'
         });
-        const tipHtml = tipFn(code, cd);
+        const tipHtml = tipFn(code, cd)
+            + '<br><span class="tt-tag">Click to open country profile \u2197</span>';
         circ.addEventListener('mousemove', e => showMapTip(e, tipHtml));
         circ.addEventListener('mouseleave', hideMapTip);
+        circ.addEventListener('click', () => {
+            if (svg._dragged || !cd || !cd.name) return;
+            window.open(profileUrl(cd.name), '_blank', 'noopener');
+        });
         g.appendChild(circ);
 
         if (r > 14 && inRegion) {

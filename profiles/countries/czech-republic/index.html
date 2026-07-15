@@ -42,22 +42,17 @@
 <div class="cp-actionbar">
   <div class="cp-container cp-actionbar-inner">
     <nav class="cp-jump">
-      <a href="#story">Story</a>
-      <a href="#emissions">Emissions</a>
+      <a href="#story">Overview</a>
       <a href="#journey">Journey</a>
       <a href="#targets">Targets</a>
       <a href="#measures">Measures</a>
-      <a href="#benefits">Co-benefits</a>
       <a href="#adaptation">Adaptation</a>
-      <a href="#engage">Engagement</a>
-      <a href="#deeper">Go deeper</a>
-      <a href="#" id="cp-nav-compare" target="_blank" rel="noopener">Compare</a>
+      <a href="#benefits">Co-benefits</a>
+      <a href="#engage">Initiatives</a>
+      <a href="#deeper">Publications</a>
+      <a href="#similar" id="cp-nav-compare">Compare</a>
     </nav>
     <div class="cp-actions">
-      <button class="cp-btn" onclick="window.print()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v8H6z"/></svg>
-        Print
-      </button>
       <button class="cp-btn cp-btn-primary" id="cp-export-btn">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
         Export data
@@ -97,12 +92,13 @@
         <h3 class="cp-trend-title">Transport content across NDC generations</h3>
         <p class="cp-trend-sub" id="cp-gen-sub"></p>
         <div class="cp-gen-wrap"><canvas id="cp-gen-chart" height="120" aria-label="Transport content per NDC generation" role="img"></canvas></div>
+        <p class="cp-chart-caption" style="text-align:center;">T = Targets, M = Measures</p>
       </div>
       <div class="cp-journey" id="cp-journey"></div>
       <div class="cp-jlegend">
-        <span><span class="cp-jcard-dot has"></span> Carries transport content (teal)</span>
-        <span><span class="cp-jcard-dot no"></span> No transport content</span>
-        <span style="color:var(--ct-green);font-weight:700;">● Green outline = currently active</span>
+        <span><span class="cp-tl-dot-key is-active"></span> Active document</span>
+        <span><span class="cp-tl-dot-key is-archived"></span> Archived</span>
+        <span><span class="cp-tl-dot-key selected"></span> Selected (archived)</span>
       </div>
       <!-- Generation note: filled by JS -->
       <div id="cp-journey-note"></div>
@@ -154,21 +150,10 @@
     </div>
   </section>
 
-  <!-- Co-benefits -->
-  <section class="cp-section band" id="benefits">
+  <!-- Adaptation measures -->
+  <section class="cp-section band" id="adaptation">
     <div class="cp-container">
-      <p class="cp-kicker">Co-benefits</p>
-      <h2 class="cp-section-title">Wider gains from transport action</h2>
-      <p class="cp-section-sub">Beyond cutting emissions — the wider benefits associated with transport climate action. <strong>Click a benefit to see what the documents say.</strong></p>
-      <div class="cp-benefits-grid" id="cp-benefits"></div>
-      <div class="cp-sdg-row" id="cp-sdgs"></div>
-    </div>
-  </section>
-
-  <!-- Adaptation -->
-  <section class="cp-section" id="adaptation">
-    <div class="cp-container">
-      <p class="cp-kicker">Transport adaptation</p>
+      <p class="cp-kicker">Transport adaptation measures</p>
       <h2 class="cp-section-title">Making transport resilient to climate impacts</h2>
       <p class="cp-section-sub">Grouped by type of action. <strong>Click a group to expand.</strong></p>
       <div class="cp-adapt-groups" id="cp-adaptation"></div>
@@ -178,10 +163,21 @@
     </div>
   </section>
 
+  <!-- Co-benefits -->
+  <section class="cp-section" id="benefits">
+    <div class="cp-container">
+      <p class="cp-kicker">Co-benefits</p>
+      <h2 class="cp-section-title">Wider gains from transport action</h2>
+      <p class="cp-section-sub">Beyond cutting emissions — the wider benefits associated with transport climate action. <strong>Click a benefit to see what the documents say.</strong></p>
+      <div class="cp-benefits-grid" id="cp-benefits"></div>
+      <div class="cp-sdg-row" id="cp-sdgs"></div>
+    </div>
+  </section>
+
   <!-- International engagement -->
   <section class="cp-section band" id="engage">
     <div class="cp-container">
-      <p class="cp-kicker">International engagement</p>
+      <p class="cp-kicker">International initiatives</p>
       <h2 class="cp-section-title">Coalitions &amp; declarations joined</h2>
       <p class="cp-section-sub">Transport-related international initiatives this country has signed onto.</p>
       <div class="cp-coalitions" id="cp-coalitions"></div>
@@ -201,24 +197,31 @@
     </div>
   </section>
 
-  <!-- Go deeper -->
+  <!-- Publications -->
   <section class="cp-section band" id="deeper">
     <div class="cp-container">
-      <p class="cp-kicker">Go deeper</p>
-      <h2 class="cp-section-title">Publications, data &amp; downloads</h2>
-      <div class="cp-go-grid">
+      <p class="cp-kicker">Publications</p>
+      <h2 class="cp-section-title">Read more on this country</h2>
+      <div class="cp-go-card cp-pub-card">
+        <div id="cp-publications"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Data & downloads -->
+  <section class="cp-section" id="downloads">
+    <div class="cp-container">
+      <p class="cp-kicker">Data &amp; downloads</p>
+      <h2 class="cp-section-title">Take the data with you</h2>
+      <div class="cp-go-grid cp-dl-grid">
         <div class="cp-go-card">
-          <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5z"/></svg> Publications</h3>
-          <div id="cp-publications"></div>
+          <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Country dataset</h3>
+          <div id="cp-downloads"></div>
         </div>
         <div class="cp-go-card">
           <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></svg> Transport Data Commons</h3>
-          <p style="font-size:0.9rem;color:var(--ct-muted);">Explore transport datasets on the TDC portal.</p>
+          <p style="font-size:0.9rem;color:var(--ct-muted);">Explore transport datasets for this country on the TDC portal.</p>
           <a class="cp-resource-cta" id="cp-tdc-link" href="https://portal.transport-data.org/search" target="_blank" rel="noopener">Explore datasets →</a>
-        </div>
-        <div class="cp-go-card">
-          <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Download</h3>
-          <div id="cp-downloads"></div>
         </div>
       </div>
       <a class="cp-back" href="../../index.html">← All country profiles</a>

@@ -887,7 +887,10 @@ body {
     font-weight: 700;
     font-size: 0.9rem;
     color: var(--color-secondary);
+    text-decoration: none;
 }
+a.content-label-country:hover { text-decoration: underline; }
+a.content-label-country:hover::after { content: ' \2197'; font-size: 0.78em; }
 .content-label-gen {
     font-size: 0.8rem;
     color: var(--color-muted);
