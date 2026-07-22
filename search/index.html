@@ -12,7 +12,7 @@
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 body { font-family: var(--ct-font, 'Source Sans 3', sans-serif); background: var(--ct-bg, #F4F6F8); color: var(--ct-text, #2C3E50); }
-.wrap { max-width: 860px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+.wrap { max-width: 1150px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
 .kicker { font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ct-teal, #00A4BD); }
 h1 { font-size: 1.7rem; font-weight: 800; color: var(--ct-navy, #003D5C); margin: .25rem 0 .35rem; }
 .sub { font-size: .95rem; color: var(--ct-muted, #6B7280); margin-bottom: 1.4rem; }
@@ -58,16 +58,7 @@ h1 { font-size: 1.7rem; font-weight: 800; color: var(--ct-navy, #003D5C); margin
 /* Theme explorer */
 .themes { margin:1.2rem 0 .5rem; }
 .themes-title { font-size:.8rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--ct-muted,#6B7280); margin-bottom:.55rem; }
-.themes-row { display:flex; gap:.45rem; flex-wrap:wrap; }
-.theme-chip {
-  display:inline-flex; align-items:center; gap:.4rem;
-  padding:.42rem .95rem; border:1px solid var(--ct-border,#E1E4E8); border-radius:999px;
-  background:#fff; color:var(--ct-navy,#003D5C); font-family:inherit; font-size:.85rem; font-weight:700; cursor:pointer;
-}
-.theme-chip small { font-weight:600; color:var(--ct-muted,#6B7280); }
-.theme-chip:hover { border-color:var(--ct-teal,#00A4BD); }
-.theme-chip.on { background:var(--ct-teal,#00A4BD); border-color:var(--ct-teal,#00A4BD); color:#fff; }
-.theme-chip.on small { color:rgba(255,255,255,.85); }
+.themes-row { display:flex; gap:.4rem; flex-wrap:wrap; }
 
 .meta { font-size:.82rem; color:var(--ct-muted,#6B7280); margin-bottom:.8rem; }
 .result { background:#fff; border:1px solid var(--ct-border,#E1E4E8); border-radius:12px; padding: .9rem 1.1rem; margin-bottom:.7rem; }
@@ -91,9 +82,7 @@ footer a { color: var(--ct-teal,#00A4BD); }
 </head>
 <body>
 <div class="wrap">
-  <p class="kicker"> </p>
-  <h1>Search the tracker</h1>
-  <p class="sub">Every transport target, mitigation and adaptation measure across all NDCs searchable in one place. Try <em>rail freight</em>, <em>bus electrification</em>, or pick a theme below.</p>
+  <p class="sub">Try <em>rail freight</em>, <em>bus electrification</em>, or pick a theme below. Includes every NDC generation submitted so far, both active and archived.</p>
 
   <div class="searchbox"><input id="q" type="search" placeholder="Search targets and measures…" autofocus autocomplete="off"></div>
 
@@ -102,6 +91,12 @@ footer a { color: var(--ct-teal,#00A4BD); }
     <button class="chip" data-kind="target">Targets</button>
     <button class="chip" data-kind="measure">Mitigation measures</button>
     <button class="chip" data-kind="adaptation">Adaptation measures</button>
+  </div>
+
+  <div class="filters" id="status-filters">
+    <button class="chip on" data-status="all">All generations</button>
+    <button class="chip" data-status="active">Active only</button>
+    <button class="chip" data-status="archived">Archived only</button>
   </div>
 
   <div class="cfilter" id="cfilter">
@@ -127,7 +122,7 @@ footer a { color: var(--ct-teal,#00A4BD); }
 <script>
 (function(){
   const PAGE=30;
-  let INDEX=[], COUNTRIES=[], kind='all', theme=null, shown=PAGE;
+  let INDEX=[], COUNTRIES=[], kind='all', theme=null, status='all', shown=PAGE;
   let selected=[]; // [{code,name}]
   const $q=document.getElementById('q'), $r=document.getElementById('results'), $m=document.getElementById('meta');
   const $cq=document.getElementById('cq'), $cdrop=document.getElementById('cdrop'), $ctokens=document.getElementById('ctokens');
@@ -157,15 +152,23 @@ footer a { color: var(--ct-teal,#00A4BD); }
     const top=Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,8);
     if(!top.length) return;
     document.getElementById('themes').hidden=false;
-    document.getElementById('themes-row').innerHTML=top.map(([c,n])=>
-      '<button class="theme-chip" data-theme="'+esc(c)+'">'+esc(c)+' <small>'+n.toLocaleString()+'</small></button>').join('');
+    document.getElementById('themes-row').innerHTML=top.map(([c])=>
+      '<button class="chip" data-theme="'+esc(c)+'">'+esc(c)+'</button>').join('');
     document.getElementById('themes-row').addEventListener('click',e=>{
-      const b=e.target.closest('.theme-chip'); if(!b) return;
+      const b=e.target.closest('.chip'); if(!b) return;
       theme = (theme===b.dataset.theme) ? null : b.dataset.theme;
-      document.querySelectorAll('.theme-chip').forEach(t=>t.classList.toggle('on',t.dataset.theme===theme));
+      document.querySelectorAll('#themes-row .chip').forEach(t=>t.classList.toggle('on',t.dataset.theme===theme));
       shown=PAGE; run();
     });
   }
+
+  /* ── Active/archived filter ── */
+  document.getElementById('status-filters').addEventListener('click',e=>{
+    const b=e.target.closest('.chip'); if(!b) return;
+    status=b.dataset.status;
+    document.querySelectorAll('#status-filters .chip').forEach(c=>c.classList.toggle('on',c===b));
+    shown=PAGE; run();
+  });
 
   /* ── Country multi-select ── */
   function drawTokens(){
@@ -212,6 +215,7 @@ footer a { color: var(--ct-teal,#00A4BD); }
   function baseList(){
     let list=INDEX;
     if(selected.length){ const set=new Set(selected.map(c=>c.code)); list=list.filter(e=>set.has(e.code)); }
+    if(status!=='all') list=list.filter(e=>norm(e.status)===status);
     if(theme) list=list.filter(e=>e.category===theme);
     return list;
   }
@@ -225,13 +229,30 @@ footer a { color: var(--ct-teal,#00A4BD); }
     });
   }
 
+  /* Theme counts always reflect the current search/kind/status/country filters,
+     but never the currently active theme itself (so you can compare themes). */
+  function updateThemeCounts(q,ts){
+    let list=INDEX;
+    if(selected.length){ const set=new Set(selected.map(c=>c.code)); list=list.filter(e=>set.has(e.code)); }
+    if(status!=='all') list=list.filter(e=>norm(e.status)===status);
+    list=kind!=='all' ? list.filter(e=>e.kind===kind) : list.filter(e=>e.kind!=='country');
+    if(ts.length) list=list.filter(e=>score(e,ts)>0);
+    const counts={};
+    list.forEach(e=>{ if(e.category){ counts[e.category]=(counts[e.category]||0)+1; } });
+    document.querySelectorAll('#themes-row .chip').forEach(ch=>{
+      const c=ch.dataset.theme;
+      ch.textContent=c+' ('+(counts[c]||0).toLocaleString()+')';
+    });
+  }
+
   function run(){
     const q=$q.value.trim(), ts=tokens(q);
-    const active=q||theme||selected.length;
+    const active=q||theme||selected.length||status!=='all';
     let list=baseList();
     updatePillCounts(active?(ts.length?list.map(e=>[score(e,ts),e]).filter(x=>x[0]>0).map(x=>x[1]):list):INDEX);
+    updateThemeCounts(q,ts);
     if(kind!=='all') list=list.filter(e=>e.kind===kind);
-    else if(theme||selected.length) list=list.filter(e=>e.kind!=='country');
+    else if(theme||selected.length||status!=='all') list=list.filter(e=>e.kind!=='country');
     if(ts.length){ list=list.map(e=>[score(e,ts),e]).filter(x=>x[0]>0).sort((a,b)=>b[0]-a[0]).map(x=>x[1]); }
     else if(!active){ list=[]; }
 
@@ -254,6 +275,7 @@ footer a { color: var(--ct-teal,#00A4BD); }
     const parts=[];
     if(q) parts.push('\u201c'+q+'\u201d');
     if(theme) parts.push('theme: '+theme);
+    if(status!=='all') parts.push(status==='active'?'active only':'archived only');
     if(selected.length) parts.push('showing results for '+selected.map(c=>c.name).join(', '));
     $m.textContent=list.length.toLocaleString()+' result'+(list.length===1?'':'s')+(parts.length?' \u2014 '+parts.join(' \u00b7 '):'');
   }
