@@ -264,6 +264,19 @@ footer a { color: var(--ct-teal,#00A4BD); }
     document.querySelectorAll('#filters .chip').forEach(c=>c.classList.remove('on'));
     b.classList.add('on'); kind=b.dataset.kind; shown=PAGE; run();
   });
+
+  // iframe auto-resize — sends height to WordPress parent
+  function sendHeight() {
+    const height = document.body.scrollHeight;
+    window.parent.postMessage({ type: 'ndcTrackerHeight', height }, '*');
+  }
+  function sendHeightDebounced() {
+    clearTimeout(window._sendHeightTimer);
+    window._sendHeightTimer = setTimeout(sendHeight, 150);
+  }
+  sendHeight();
+  window.addEventListener('resize', sendHeightDebounced);
+  new ResizeObserver(sendHeightDebounced).observe(document.body);
 })();
 </script>
 </body>

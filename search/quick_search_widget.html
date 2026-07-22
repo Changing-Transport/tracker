@@ -1,0 +1,114 @@
+<!-- Tracker quick search widget — paste into a WordPress Custom HTML block.
+     Points at the DEV repo (belentdc.github.io) for testing.
+     Swap TRACKER_BASE to the production GitHub Pages URL before going live. -->
+<div id="tracker-quick-search" style="font-family:'Source Sans 3',sans-serif;max-width:680px;">
+
+  <label for="tqs-input" style="font-size:13px;font-weight:600;color:#003D5C;display:block;margin-bottom:6px;">
+    Search by keyword
+  </label>
+
+  <input id="tqs-input" type="text" placeholder="Search targets, measures, countries..."
+    style="width:100%;padding:10px 14px;font-size:14px;border:2px solid #E1E4E8;border-radius:10px;font-family:inherit;box-sizing:border-box;">
+
+  <div id="tqs-status" style="font-size:11px;color:#999;margin-top:6px;"></div>
+  <div id="tqs-results" style="margin-top:10px;display:flex;flex-direction:column;gap:8px;"></div>
+
+  <div id="tqs-footer" style="margin-top:12px;display:none;">
+    <a id="tqs-see-all" href="#" style="font-size:13px;color:#00A4BD;font-weight:600;text-decoration:none;"></a>
+  </div>
+
+  <div style="margin-top:14px;border-top:1px solid #eee;padding-top:10px;">
+    <a href="#" id="tqs-open-full" style="font-size:12px;color:#003D5C;font-weight:600;text-decoration:none;">Open full search &rarr;</a>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var TRACKER_BASE = 'https://belentdc.github.io/tracker/';
+
+  var data = null, loading = false, timer = null;
+  var box = document.getElementById('tqs-input');
+  var results = document.getElementById('tqs-results');
+  var status = document.getElementById('tqs-status');
+  var footer = document.getElementById('tqs-footer');
+  var seeAll = document.getElementById('tqs-see-all');
+  var openFull = document.getElementById('tqs-open-full');
+
+  openFull.href = TRACKER_BASE + 'search/';
+
+  function kindLabel(k){
+    if(k==='country') return 'Country';
+    if(k==='target') return 'Target';
+    if(k==='measure') return 'Measure';
+    if(k==='adaptation') return 'Adaptation';
+    return k;
+  }
+  function kindColor(k){
+    if(k==='country') return '#5a7a1f';
+    if(k==='target') return '#8a4d0a';
+    if(k==='measure') return '#0a6b7a';
+    if(k==='adaptation') return '#3c3489';
+    return '#666';
+  }
+
+  function ensureData(cb){
+    if(data){ cb(); return; }
+    if(loading) return;
+    loading = true;
+    status.textContent = 'Loading search index...';
+    fetch(TRACKER_BASE + 'data/processed/search-index.json')
+      .then(function(r){ if(!r.ok) throw new Error('bad response'); return r.json(); })
+      .then(function(json){ data = json.entries; loading = false; status.textContent = ''; cb(); })
+      .catch(function(err){ loading = false; status.textContent = 'Could not load search index.'; console.error('tracker quick search:', err); });
+  }
+
+  function render(term){
+    var t = term.toLowerCase();
+    var matches = data.filter(function(e){
+      return (e.text && e.text.toLowerCase().indexOf(t) >= 0) ||
+             (e.country && e.country.toLowerCase().indexOf(t) >= 0) ||
+             (e.category && e.category.toLowerCase().indexOf(t) >= 0);
+    });
+
+    status.textContent = matches.length + ' result' + (matches.length === 1 ? '' : 's');
+    results.innerHTML = '';
+
+    matches.slice(0, 3).forEach(function(e){
+      var row = document.createElement('a');
+      row.href = TRACKER_BASE + e.url;
+      row.target = '_blank';
+      row.rel = 'noopener';
+      row.style.cssText = 'display:block;padding:10px 12px;border:1px solid #eee;border-radius:8px;text-decoration:none;color:inherit;';
+      var c = kindColor(e.kind);
+      row.innerHTML =
+        '<span style="display:inline-block;font-size:10px;font-weight:700;color:' + c + ';border:1px solid ' + c + ';border-radius:8px;padding:1px 7px;margin-bottom:4px;">' + kindLabel(e.kind) + '</span>' +
+        '<div style="font-size:13px;color:#003D5C;font-weight:600;line-height:1.4;">' + (e.text || e.country) + '</div>' +
+        '<div style="font-size:11px;color:#888;margin-top:2px;">' + (e.country || '') + (e.category ? ' &middot; ' + e.category : '') + '</div>';
+      results.appendChild(row);
+    });
+
+    if(matches.length > 0){
+      footer.style.display = 'block';
+      seeAll.href = TRACKER_BASE + 'search/?q=' + encodeURIComponent(term);
+      seeAll.innerHTML = 'See all ' + matches.length + ' results for &ldquo;' + term + '&rdquo; &rarr;';
+    } else {
+      footer.style.display = 'none';
+    }
+  }
+
+  box.addEventListener('input', function(){
+    var term = box.value.trim();
+    clearTimeout(timer);
+    if(term.length < 2){
+      results.innerHTML = '';
+      status.textContent = '';
+      footer.style.display = 'none';
+      return;
+    }
+    timer = setTimeout(function(){
+      ensureData(function(){ render(term); });
+    }, 300);
+  });
+})();
+</script>
