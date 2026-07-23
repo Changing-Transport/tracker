@@ -1857,6 +1857,9 @@ def build_static_pages(profiles, template="profiles/country.html"):
     return n
 
 
+ELIGIBLE_RECENT_TYPES = {"NDC", "LTS"}
+
+
 def build_index(profiles):
     items = []
     for code, p in sorted(profiles.items(), key=lambda kv: kv[1]["name"]):
@@ -1864,6 +1867,19 @@ def build_index(profiles):
             d["status"] == "Active" and d["transport"]["has_content"]
             for d in p["documents"]
         )
+        candidates = [
+            d for d in p["documents"]
+            if d["status"] == "Active" and d["type"] in ELIGIBLE_RECENT_TYPES and d.get("date")
+        ]
+        latest_doc = max(candidates, key=lambda d: d["date"]) if candidates else None
+        latest_active_document = None
+        if latest_doc:
+            latest_active_document = {
+                "type": latest_doc["type"],
+                "name": latest_doc["name"],
+                "date": latest_doc["date"],
+                "counts": latest_doc["counts"],
+            }
         items.append({
             "code": code,
             "iso2": p["iso2"],
@@ -1877,6 +1893,7 @@ def build_index(profiles):
             "n_documents": len(p["documents"]),
             "n_measures": len(p["measures"]),
             "transport_share_pct": p["emissions"]["transport_share_pct"],
+            "latest_active_document": latest_active_document,
         })
     return items
 

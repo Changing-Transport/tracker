@@ -17,7 +17,7 @@ body {
 }
 
 .explorer {
-  max-width: 860px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 2rem 1.25rem 2.5rem;
 }
@@ -134,8 +134,14 @@ body {
   border-radius: 2px; border: 1px solid rgba(0,0,0,0.1);
 }
 
-/* ── Featured zone ───────────────────────────────────────────────── */
-.featured-zone { margin-bottom: 0.5rem; }
+/* ── Zone 2 + 3: side-by-side row ───────────────────────────────── */
+.explore-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+@media (max-width: 760px) { .explore-row { grid-template-columns: 1fr; } }
 
 .zone-label {
   font-size: 0.78rem; font-weight: 700;
@@ -143,18 +149,13 @@ body {
   color: var(--ct-muted); margin-bottom: 0.75rem;
 }
 
-.featured-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.75rem;
-}
-@media (max-width: 600px) { .featured-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 380px) { .featured-grid { grid-template-columns: 1fr; } }
+/* Zone 2: recently updated countries */
+.recent-list { display: flex; flex-direction: column; gap: 0.6rem; }
 
 .featured-card {
   display: block; text-decoration: none;
   background: var(--ct-surface); border: 1px solid var(--ct-border);
-  border-radius: var(--ct-radius-md); padding: 1rem;
+  border-radius: var(--ct-radius-md); padding: 0.85rem 1rem;
   box-shadow: var(--ct-shadow-sm);
   transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
   position: relative; overflow: hidden;
@@ -175,8 +176,9 @@ body {
 
 .featured-card-top {
   display: flex; align-items: center;
-  gap: 0.6rem; margin-bottom: 0.5rem;
+  gap: 0.6rem; margin-bottom: 0.4rem;
 }
+.featured-card-top .f-badge-doctype { margin-left: auto; }
 
 .featured-flag {
   width: 32px; height: 22px; object-fit: cover;
@@ -188,8 +190,8 @@ body {
   color: var(--ct-navy); line-height: 1.2;
 }
 
-.featured-region {
-  font-size: 0.75rem; color: var(--ct-muted); margin-bottom: 0.6rem;
+.featured-date {
+  font-size: 0.75rem; color: var(--ct-muted); margin-bottom: 0.5rem;
 }
 
 .featured-stats { display: flex; flex-wrap: wrap; gap: 0.35rem; }
@@ -206,13 +208,16 @@ body {
   background: rgba(0,164,189,0.1); border-color: rgba(0,164,189,0.4);
   color: var(--ct-navy);
 }
-.f-badge-lts {
-  background: rgba(157,190,61,0.08); border-color: rgba(157,190,61,0.3);
-  color: var(--ct-green-dark);
+.f-badge-doctype {
+  font-weight: 700; letter-spacing: 0.03em;
 }
-.f-badge-btr {
-  background: rgba(232,130,26,0.1); border-color: rgba(232,130,26,0.4);
-  color: var(--ct-orange);
+.f-badge-doctype-NDC {
+  background: rgba(0,61,92,0.08); border-color: rgba(0,61,92,0.3);
+  color: var(--ct-navy);
+}
+.f-badge-doctype-LTS {
+  background: rgba(157,190,61,0.15); border-color: rgba(157,190,61,0.5);
+  color: var(--ct-green-dark);
 }
 .f-badge-neutral {
   background: var(--ct-bg); border-color: var(--ct-border); color: var(--ct-text);
@@ -228,25 +233,42 @@ body {
   100% { background-position: -200% 0; }
 }
 
-/* ── Zone 3: Topic search callout ─────────────────────────────── */
-.topic-zone { max-width: 720px; margin: 1.75rem auto 0; padding: 0 1rem; }
-.topic-card {
-  display: flex; align-items: center; gap: 0.9rem;
-  padding: 1rem 1.25rem; border-radius: var(--ct-radius-lg, 14px);
-  background: var(--ct-surface, #fff); border: 1px solid var(--ct-border);
-  text-decoration: none; transition: border-color .15s ease, box-shadow .15s ease;
+/* Zone 3: keyword search widget */
+.qs-card {
+  background: var(--ct-surface); border: 1px solid var(--ct-border);
+  border-radius: var(--ct-radius-lg, 14px); padding: 1.1rem 1.25rem;
+  box-shadow: var(--ct-shadow-sm);
 }
-.topic-card:hover { border-color: var(--ct-teal, #00A4BD); box-shadow: var(--ct-shadow-sm); }
-.topic-card-icon {
-  display: flex; align-items: center; justify-content: center;
-  width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
-  background: rgba(0,164,189,0.12); color: var(--ct-teal, #00A4BD);
+.qs-input {
+  width: 100%; padding: 0.65rem 0.9rem; font-family: var(--ct-font); font-size: 0.95rem;
+  border: 2px solid var(--ct-border); border-radius: var(--ct-radius-md);
+  background: #fff; color: var(--ct-text); transition: border-color 0.15s;
 }
-.topic-card-icon svg { width: 18px; height: 18px; }
-.topic-card-text { display: flex; flex-direction: column; gap: 0.1rem; flex: 1; }
-.topic-card-title { font-weight: 700; color: var(--ct-navy, #003D5C); font-size: 0.95rem; }
-.topic-card-sub { font-size: 0.82rem; color: var(--ct-muted, #6B7280); }
-.topic-card-arrow { color: var(--ct-teal, #00A4BD); font-weight: 700; font-size: 1.1rem; flex-shrink: 0; }
+.qs-input:focus { outline: none; border-color: var(--ct-teal, #00A4BD); }
+.qs-status { font-size: 0.78rem; color: var(--ct-muted); margin-top: 0.5rem; min-height: 1.1em; }
+.qs-results { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.4rem; }
+.qs-result {
+  display: block; text-decoration: none; color: inherit;
+  border: 1px solid var(--ct-border); border-radius: var(--ct-radius-md);
+  padding: 0.55rem 0.75rem; transition: border-color 0.15s;
+}
+.qs-result:hover { border-color: var(--ct-teal, #00A4BD); }
+.qs-kind {
+  display: inline-block; font-size: 0.68rem; font-weight: 700;
+  border-radius: 999px; padding: 0.05rem 0.5rem; margin-bottom: 0.25rem;
+  text-transform: uppercase; letter-spacing: 0.03em;
+}
+.qs-kind-country { background: rgba(157,190,61,0.15); color: var(--ct-green-dark); }
+.qs-kind-target { background: rgba(0,61,92,0.1); color: var(--ct-navy); }
+.qs-kind-measure { background: rgba(0,164,189,0.12); color: #007a8d; }
+.qs-kind-adaptation { background: rgba(232,130,26,0.14); color: var(--ct-orange); }
+.qs-result-text { font-size: 0.88rem; font-weight: 700; color: var(--ct-navy); line-height: 1.35; }
+.qs-result-meta { font-size: 0.75rem; color: var(--ct-muted); margin-top: 0.1rem; }
+.qs-footer { margin-top: 0.7rem; padding-top: 0.6rem; border-top: 1px solid var(--ct-border); display: flex; flex-direction: column; gap: 0.35rem; }
+.qs-link { font-size: 0.85rem; font-weight: 700; color: var(--ct-teal, #00A4BD); text-decoration: none; }
+.qs-link:hover { text-decoration: underline; }
+.qs-link-secondary { font-size: 0.8rem; font-weight: 600; color: var(--ct-navy); text-decoration: none; }
+.qs-link-secondary:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -269,31 +291,31 @@ body {
     <div class="suggestion-pills" id="suggestionPills"></div>
   </div>
 
-  <!-- ── Zone 2: Featured ───────────────────────────────────────── -->
-  <div class="featured-zone">
-    <p class="zone-label">Most documented — one country per world region</p>
-    <div class="featured-grid" id="featuredGrid">
-      <div style="height:110px;" class="skeleton"></div>
-      <div style="height:110px;" class="skeleton"></div>
-      <div style="height:110px;" class="skeleton"></div>
-      <div style="height:110px;" class="skeleton"></div>
-      <div style="height:110px;" class="skeleton"></div>
-      <div style="height:110px;" class="skeleton"></div>
-    </div>
-  </div>
+  <!-- ── Zone 2 + 3: Recently updated & Search by keyword ─────────── -->
+  <div class="explore-row">
 
-  <!-- ── Zone 3: Topic search callout ───────────────────────────── -->
-  <div class="topic-zone">
-    <a class="topic-card" href="../search/">
-      <span class="topic-card-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-      </span>
-      <span class="topic-card-text">
-        <span class="topic-card-title">Looking for a topic instead?</span>
-        <span class="topic-card-sub">Search all transport targets and measures across every country</span>
-      </span>
-      <span class="topic-card-arrow">&rarr;</span>
-    </a>
+    <div class="recent-zone">
+      <p class="zone-label">Recently updated commitments</p>
+      <div class="recent-list" id="featuredGrid">
+        <div style="height:90px;" class="skeleton"></div>
+        <div style="height:90px;" class="skeleton"></div>
+        <div style="height:90px;" class="skeleton"></div>
+      </div>
+    </div>
+
+    <div class="search-zone-qs">
+      <p class="zone-label">Search by keyword</p>
+      <div class="qs-card">
+        <input type="text" id="qsInput" class="qs-input" placeholder="Search targets, measures, countries…" autocomplete="off">
+        <p class="qs-status" id="qsStatus"></p>
+        <div class="qs-results" id="qsResults"></div>
+        <div class="qs-footer" id="qsFooter" hidden>
+          <a href="#" id="qsSeeAll" class="qs-link"></a>
+          <a href="../search/" id="qsOpenFull" class="qs-link-secondary">Open full search →</a>
+        </div>
+      </div>
+    </div>
+
   </div>
 
 </div>
@@ -428,49 +450,99 @@ function initSearch() {
     });
 }
 
-/* ── Zone 2: Featured ────────────────────────────────────────────── */
+/* ── Zone 2: Recently updated ───────────────────────────────────── */
 function initFeatured() {
     const grid = document.getElementById("featuredGrid");
 
-    const byRegion = {};
-    ALL.forEach(c => {
-        if (!c.has_transport_content || !c.n_measures) return;
-        if (!byRegion[c.region] || c.n_measures > byRegion[c.region].n_measures)
-            byRegion[c.region] = c;
-    });
-    const featured = Object.values(byRegion).sort((a,b) => a.region.localeCompare(b.region));
+    const eligible = ALL.filter(c => c.latest_active_document && c.latest_active_document.date);
+    const featured = [...eligible]
+        .sort((a, b) => b.latest_active_document.date.localeCompare(a.latest_active_document.date))
+        .slice(0, 3);
     if (!featured.length) { grid.innerHTML = ""; return; }
 
-    Promise.all(featured.map(c =>
-        fetch("data/countries/" + c.code + ".json")
-            .then(r => r.ok ? r.json() : null)
-            .catch(() => null)
-    )).then(profiles => {
-        grid.innerHTML = featured.map((c, i) => {
-            const p = profiles[i];
-            const activeTargets = p ? p.targets.filter(t => t.status==="Active").length : 0;
-            const hasBtr = p ? (p.btr && p.btr.available) : false;
-            return `
-            <a class="featured-card" href="${esc(PROFILE_URL(c.code))}" aria-label="Explore ${esc(c.name)}">
-              <div class="featured-card-top">
-                ${flagImg(c.iso2, "featured-flag")}
-                <span class="featured-name">${esc(c.name)}</span>
-              </div>
-              <p class="featured-region">${esc(c.region)}</p>
-              <div class="featured-stats">
-                <span class="f-badge f-badge-measures">${c.n_measures} measures</span>
-                ${activeTargets ? `<span class="f-badge f-badge-target">${activeTargets} targets</span>` : ""}
-                ${c.has_lts ? `<span class="f-badge f-badge-lts">LTS ✓</span>` : ""}
-                ${hasBtr ? `<span class="f-badge f-badge-btr">BTR ✓</span>` : ""}
-                ${c.transport_share_pct != null
-                    ? `<span class="f-badge f-badge-neutral">transport ${c.transport_share_pct}% of nat. emissions</span>`
-                    : ""}
-              </div>
-            </a>`;
-        }).join("");
-        sendHeight();
+    const dateLabel = (iso) => {
+        const d = new Date(iso + "T00:00:00");
+        return d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+    };
+    const typeLabel = (t) => t === "LTS" ? "Long-term strategy" : t;
+
+    grid.innerHTML = featured.map(c => {
+        const doc = c.latest_active_document;
+        return `
+        <a class="featured-card" href="${esc(PROFILE_URL(c.code))}" aria-label="Explore ${esc(c.name)}">
+          <div class="featured-card-top">
+            ${flagImg(c.iso2, "featured-flag")}
+            <span class="featured-name">${esc(c.name)}</span>
+            <span class="f-badge f-badge-doctype f-badge-doctype-${esc(doc.type)}">${esc(doc.type)}</span>
+          </div>
+          <p class="featured-date">${esc(typeLabel(doc.type))} · analysed ${dateLabel(doc.date)}</p>
+        </a>`;
+    }).join("");
+    sendHeight();
+}
+
+/* ── Zone 3: Search by keyword ──────────────────────────────────── */
+function initQuickSearch() {
+    const SEARCH_INDEX_URL = "../data/processed/search-index.json";
+    const input   = document.getElementById("qsInput");
+    const status  = document.getElementById("qsStatus");
+    const results = document.getElementById("qsResults");
+    const footer  = document.getElementById("qsFooter");
+    const seeAll  = document.getElementById("qsSeeAll");
+
+    let data = null, loading = false, timer = null;
+
+    const kindLabel = { country: "Country", target: "Target", measure: "Measure", adaptation: "Adaptation" };
+
+    function ensureData(cb) {
+        if (data) { cb(); return; }
+        if (loading) return;
+        loading = true;
+        status.textContent = "Loading search index…";
+        fetch(SEARCH_INDEX_URL)
+            .then(r => { if (!r.ok) throw new Error("bad response"); return r.json(); })
+            .then(json => { data = json.entries || []; loading = false; status.textContent = ""; cb(); })
+            .catch(() => { loading = false; status.textContent = "Could not load search index."; });
+    }
+
+    function render(term) {
+        const t = normalize(term);
+        const matches = data.filter(e =>
+            (e.text && normalize(e.text).includes(t)) ||
+            (e.country && normalize(e.country).includes(t)) ||
+            (e.category && normalize(e.category).includes(t))
+        );
+
+        status.textContent = matches.length + " result" + (matches.length === 1 ? "" : "s");
+        results.innerHTML = matches.slice(0, 3).map(e => `
+            <a class="qs-result" href="${esc(e.url)}" target="_blank" rel="noopener">
+              <span class="qs-kind qs-kind-${esc(e.kind)}">${esc(kindLabel[e.kind] || e.kind)}</span>
+              <div class="qs-result-text">${esc(e.text || e.country)}</div>
+              <div class="qs-result-meta">${esc(e.country || "")}${e.category ? " · " + esc(e.category) : ""}</div>
+            </a>`).join("");
+
+        if (matches.length) {
+            footer.hidden = false;
+            seeAll.href = "../search/?q=" + encodeURIComponent(term);
+            seeAll.textContent = `See all ${matches.length} results for "${term}" →`;
+        } else {
+            footer.hidden = false;
+            seeAll.href = "../search/?q=" + encodeURIComponent(term);
+            seeAll.textContent = `Open full search for "${term}" →`;
+        }
+    }
+
+    input.addEventListener("input", () => {
+        const term = input.value.trim();
+        clearTimeout(timer);
+        if (term.length < 2) {
+            results.innerHTML = ""; status.textContent = ""; footer.hidden = true;
+            return;
+        }
+        timer = setTimeout(() => ensureData(() => render(term)), 300);
     });
 }
+initQuickSearch();
 
 /* ── iframe height ───────────────────────────────────────────────── */
 function sendHeight() {
