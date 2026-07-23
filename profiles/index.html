@@ -12,7 +12,7 @@
 
 body {
   font-family: var(--ct-font);
-  background: var(--ct-bg);
+  background: #fff;
   color: var(--ct-text);
 }
 
@@ -393,7 +393,7 @@ function initSearch() {
           <span>${esc(c.name)}</span>
         </button>`).join("");
     pills.querySelectorAll(".suggestion-pill").forEach(btn =>
-        btn.addEventListener("click", () => { location.href = PROFILE_URL(btn.dataset.code); }));
+        btn.addEventListener("click", () => { window.open(PROFILE_URL(btn.dataset.code), "_blank", "noopener"); }));
 
     function render(items, query) {
         activeIdx = -1;
@@ -406,7 +406,7 @@ function initSearch() {
                 </li>`).join("");
         list.querySelectorAll("li[role='option']").forEach((li,i) => {
             li.addEventListener("mouseenter", () => setActive(i));
-            li.addEventListener("click", () => { location.href = PROFILE_URL(li.dataset.code); hide(); });
+            li.addEventListener("click", () => { window.open(PROFILE_URL(li.dataset.code), "_blank", "noopener"); hide(); });
         });
         list.classList.add("open");
         input.setAttribute("aria-expanded","true");
@@ -442,7 +442,7 @@ function initSearch() {
         else if (e.key==="ArrowUp") { setActive((activeIdx-1+opts.length)%opts.length); e.preventDefault(); }
         else if (e.key==="Enter") {
             const t = activeIdx>=0 ? current[activeIdx] : current[0];
-            if (t) { location.href = PROFILE_URL(t.code); hide(); }
+            if (t) { window.open(PROFILE_URL(t.code), "_blank", "noopener"); hide(); }
         }
         else if (e.key==="Escape") hide();
     });
@@ -474,7 +474,7 @@ function initFeatured() {
     grid.innerHTML = featured.map(c => {
         const doc = c.latest_active_document;
         return `
-        <a class="featured-card" href="${esc(PROFILE_URL(c.code))}" aria-label="Explore ${esc(c.name)}">
+        <a class="featured-card" href="${esc(PROFILE_URL(c.code))}" target="_blank" rel="noopener" aria-label="Explore ${esc(c.name)}">
           <div class="featured-card-top">
             ${flagImg(c.iso2, "featured-flag")}
             <span class="featured-name">${esc(c.name)}</span>
