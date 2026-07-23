@@ -116,8 +116,7 @@ footer a { color: var(--ct-teal,#00A4BD); }
   <div class="meta" id="meta"></div>
   <div id="results"><div class="empty">Loading index…</div></div>
 
-  <footer>Data: GIZ-SLOCAT Transport Tracker database | <a href="https://portal.transport-data.org/@giz/gizslocat-transport-climate-tracker?org=GIZ&dataset=gizslocat-transport-climate-tracker">Download dataset</a> </footer>
-</div>
+  </div>
 
 <script>
 (function(){
@@ -261,7 +260,7 @@ footer a { color: var(--ct-teal,#00A4BD); }
 
     const view=list.slice(0,shown);
     $r.innerHTML = view.map(e=>{
-      const link = e.url ? '<a class="r-country" href="../'+esc(e.url)+'">'+esc(e.country)+'</a>' : '<span class="r-country">'+esc(e.country)+'</span>';
+      const link = e.url ? '<a class="r-country" href="../'+esc(e.url)+'" target="_blank" rel="noopener">'+esc(e.country)+'</a>' : '<span class="r-country">'+esc(e.country)+'</span>';
       const meta = [e.gen,e.version,e.status].filter(Boolean).join(', ');
       return '<div class="result"><div class="r-top">'+link+
         '<span class="badge '+esc(e.kind)+'">'+esc(e.kind)+'</span>'+
