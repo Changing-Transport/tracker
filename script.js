@@ -91,11 +91,7 @@ function normalizeWorldGeoJSON(geojson) {
 // iframe auto-resize — sends height to WordPress parent
 // ============================================================================
 function sendHeight() {
-    const activeTab = document.querySelector('.tab-content.active');
-    const nav = document.querySelector('.tab-navigation');
-    const navH = nav ? nav.offsetHeight : 0;
-    const tabH = activeTab ? activeTab.scrollHeight : 0;
-    const height = navH + tabH + 32;
+    const height = document.body.scrollHeight;
     window.parent.postMessage({ type: 'ndcTrackerHeight', height }, '*');
 }
 
