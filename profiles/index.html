@@ -150,12 +150,16 @@ body {
 }
 
 /* Zone 2: recently updated countries */
-.recent-list { display: flex; flex-direction: column; gap: 0.6rem; }
+.recent-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
+@media (max-width: 480px) { .recent-list { grid-template-columns: 1fr; } }
 
 .featured-card {
-  display: block; text-decoration: none;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; gap: 0.4rem;
+  aspect-ratio: 1 / 1;
+  text-decoration: none;
   background: var(--ct-surface); border: 1px solid var(--ct-border);
-  border-radius: var(--ct-radius-md); padding: 0.85rem 1rem;
+  border-radius: var(--ct-radius-md); padding: 0.75rem 0.5rem;
   box-shadow: var(--ct-shadow-sm);
   transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
   position: relative; overflow: hidden;
@@ -175,23 +179,23 @@ body {
 .featured-card:hover::before { transform: scaleX(1); }
 
 .featured-card-top {
-  display: flex; align-items: center;
-  gap: 0.6rem; margin-bottom: 0.4rem;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 0.35rem;
 }
-.featured-card-top .f-badge-doctype { margin-left: auto; }
+.featured-card-top .f-badge-doctype { margin-left: 0; }
 
 .featured-flag {
-  width: 32px; height: 22px; object-fit: cover;
+  width: 28px; height: 19px; object-fit: cover;
   border-radius: 3px; border: 1px solid var(--ct-border); flex-shrink: 0;
 }
 
 .featured-name {
-  font-weight: 700; font-size: 0.95rem;
+  font-weight: 700; font-size: 0.85rem;
   color: var(--ct-navy); line-height: 1.2;
 }
 
 .featured-date {
-  font-size: 0.75rem; color: var(--ct-muted); margin-bottom: 0.5rem;
+  font-size: 0.72rem; color: var(--ct-muted); line-height: 1.3;
 }
 
 .featured-stats { display: flex; flex-wrap: wrap; gap: 0.35rem; }
@@ -262,7 +266,8 @@ body {
 .qs-kind-target { background: rgba(0,61,92,0.1); color: var(--ct-navy); }
 .qs-kind-measure { background: rgba(0,164,189,0.12); color: #007a8d; }
 .qs-kind-adaptation { background: rgba(232,130,26,0.14); color: var(--ct-orange); }
-.qs-result-text { font-size: 0.88rem; font-weight: 700; color: var(--ct-navy); line-height: 1.35; }
+.qs-result-text { font-size: 0.88rem; font-weight: 400; color: var(--ct-text); line-height: 1.35; }
+.qs-result-text mark { background: rgba(157,190,61,.35); color: inherit; padding: 0 .1em; border-radius: 2px; }
 .qs-result-meta { font-size: 0.75rem; color: var(--ct-muted); margin-top: 0.1rem; }
 .qs-footer { margin-top: 0.7rem; padding-top: 0.6rem; border-top: 1px solid var(--ct-border); display: flex; flex-direction: column; gap: 0.35rem; }
 .qs-link { font-size: 0.85rem; font-weight: 700; color: var(--ct-teal, #00A4BD); text-decoration: none; }
@@ -297,9 +302,9 @@ body {
     <div class="recent-zone">
       <p class="zone-label">Recently updated commitments</p>
       <div class="recent-list" id="featuredGrid">
-        <div style="height:90px;" class="skeleton"></div>
-        <div style="height:90px;" class="skeleton"></div>
-        <div style="height:90px;" class="skeleton"></div>
+        <div style="aspect-ratio:1/1;" class="skeleton"></div>
+        <div style="aspect-ratio:1/1;" class="skeleton"></div>
+        <div style="aspect-ratio:1/1;" class="skeleton"></div>
       </div>
     </div>
 
@@ -505,6 +510,13 @@ function initQuickSearch() {
             .catch(() => { loading = false; status.textContent = "Could not load search index."; });
     }
 
+    const highlight = (text, term) => {
+        let out = esc(text);
+        const t = term.trim().replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        if (t) out = out.replace(new RegExp("(" + t + ")", "gi"), "<mark>$1</mark>");
+        return out;
+    };
+
     function render(term) {
         const t = normalize(term);
         const matches = data.filter(e =>
@@ -515,9 +527,9 @@ function initQuickSearch() {
 
         status.textContent = matches.length + " result" + (matches.length === 1 ? "" : "s");
         results.innerHTML = matches.slice(0, 3).map(e => `
-            <a class="qs-result" href="${esc(e.url)}" target="_blank" rel="noopener">
+            <a class="qs-result" href="../${esc(e.url)}" target="_blank" rel="noopener">
               <span class="qs-kind qs-kind-${esc(e.kind)}">${esc(kindLabel[e.kind] || e.kind)}</span>
-              <div class="qs-result-text">${esc(e.text || e.country)}</div>
+              <div class="qs-result-text">${highlight(e.text || e.country, term)}</div>
               <div class="qs-result-meta">${esc(e.country || "")}${e.category ? " · " + esc(e.category) : ""}</div>
             </a>`).join("");
 

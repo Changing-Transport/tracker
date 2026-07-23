@@ -1,0 +1,446 @@
+<!-- NDC Explorer – improved: a11y, keyboard nav, highlight, debounce, clear, random pills -->
+<div class="ndc-explorer-box">
+  <h4 style="text-align:center; color:#003e5f;">Start typing a country to explore their climate commitments</h4>
+
+  <div class="ndc-input-wrap">
+    <input
+      type="text"
+      id="ndcCountrySearch"
+      class="ndc-search-bar"
+      placeholder="Type a country name..."
+      autocomplete="off"
+      aria-label="Search country"
+      role="combobox"
+      aria-autocomplete="list"
+      aria-expanded="false"
+      aria-controls="ndcSearchResults"
+      aria-activedescendant=""
+    />
+    <button type="button" class="ndc-clear-btn" aria-label="Clear search" title="Clear">×</button>
+  </div>
+
+  <ul id="ndcSearchResults" class="ndc-autocomplete-list" role="listbox" aria-label="Country suggestions"></ul>
+
+  <div id="ndcSuggestions" class="ndc-suggestions"></div>
+</div>
+
+<style>
+/* Scoped to this widget */
+.ndc-explorer-box {
+  --ndc-green:#AFC841; --ndc-blue:#003e5f; --ndc-pill:#EBFAFA; --ndc-border:#C3CDD2; --ndc-focus:#05BCFF;
+  background-color: var(--ndc-green);
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 30px 20px;
+  max-width: 960px;
+  margin: 40px auto;
+  box-shadow: 0 2px 10px rgba(0,0,0,.03);
+  width: 100%;
+}
+
+.ndc-input-wrap{ position:relative; max-width:400px; margin:0 auto 12px; }
+.ndc-search-bar{
+  width:100%; padding:10px 34px 10px 15px;
+  font-size:14px; border:1px solid #ccc; border-radius:8px; box-shadow:0 1px 2px rgba(0,0,0,.05);
+}
+.ndc-clear-btn{
+  position:absolute; right:6px; top:50%; transform:translateY(-50%);
+  width:26px; height:26px; line-height:26px; border-radius:50%;
+  border:1px solid transparent; background:#f5f7f8; cursor:pointer; font-size:16px; color:#666;
+}
+.ndc-clear-btn:hover{ background:#eef1f2; }
+.ndc-clear-btn:focus-visible{ outline:2px solid var(--ndc-focus); }
+
+.ndc-autocomplete-list{
+  max-width:400px; margin:0 auto; padding:0; list-style:none;
+  border:1px solid #ddd; border-top:none; border-radius:0 0 8px 8px; background:#fff;
+  display:none; position:relative; z-index:10; max-height:240px; overflow-y:auto;
+}
+.ndc-autocomplete-list li{
+  padding:10px; cursor:pointer; font-size:14px; display:flex; align-items:center; gap:10px;
+  border-bottom:1px solid #eee;
+}
+.ndc-autocomplete-list li[aria-selected="true"]{ background:#EBFAFA; outline:1px solid #D7EDEF; }
+.ndc-autocomplete-list li.no-result{ justify-content:center; font-style:italic; color:#888; cursor:default; }
+.ndc-autocomplete-list li:hover:not(.no-result){ background:#f0f0f0; }
+.ndc-autocomplete-list img{ width:24px; height:16px; object-fit:cover; border:1px solid #ccc; border-radius:2px; }
+.ndc-autocomplete-list mark{ background: #fff3a3; padding:0 .05em; }
+
+.ndc-suggestions{ max-width:400px; margin:10px auto 0; text-align:center; }
+.ndc-suggestions h5{ margin:8px 0 6px; font-size:13px; color:var(--ndc-blue); font-weight:700; }
+.ndc-sugg-pills{ display:flex; flex-wrap:wrap; justify-content:center; gap:8px; }
+.ndc-sugg-pill{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:6px 12px; font-size:13px; border-radius:999px;
+  background:var(--ndc-pill); border:1px solid var(--ndc-border); color:var(--ndc-blue);
+  cursor:pointer;
+}
+.ndc-sugg-pill img{ width:18px; height:12px; border:1px solid #ccc; border-radius:2px; }
+.ndc-sugg-pill:hover,
+.ndc-sugg-pill:focus-visible{ background:var(--ndc-green); border-color:var(--ndc-green); color:#fff; outline:none; }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  const NUM_SUGGESTIONS = 5; // how many "Try these" pills
+  const OPEN_IN_NEW_TAB = true;
+
+  const flag = code => `https://flagcdn.com/w40/${(code||'').toLowerCase()}.png`;
+
+  // ===== Replace with your FULL list =====
+  const countries = [
+     {name:"Algeria",code:"dz", link:"https://changing-transport.org/ndc_country/algeria/"},
+  {name:"Angola",code:"ao", link:"https://changing-transport.org/ndc_country/angola/"},
+  {name:"Benin",code:"bj", link:"https://changing-transport.org/ndc_country/benin/"},
+  {name:"Botswana",code:"bw", link:"https://changing-transport.org/ndc_country/botswana/"},
+  {name:"Burkina Faso",code:"bf", link:"https://changing-transport.org/ndc_country/burkina-faso/"},
+  {name:"Burundi",code:"bi", link:"https://changing-transport.org/ndc_country/burundi/"},
+  {name:"Cabo Verde",code:"cv", link:"https://changing-transport.org/ndc_country/cabo-verde/"},
+  {name:"Cameroon",code:"cm", link:"https://changing-transport.org/ndc_country/cameroon/"},
+  {name:"Central African Republic",code:"cf", link:"https://changing-transport.org/ndc_country/central-african-republic/"},
+  {name:"Chad",code:"td", link:"https://changing-transport.org/ndc_country/chad/"},
+{name:"Cote d'Ivoire",code:"ci", link:"https://changing-transport.org/ndc_country/cote-divoire/"},
+  {name:"Comoros",code:"km", link:"https://changing-transport.org/ndc_country/comoros/"},
+  {name:"Congo",code:"cg", link:"https://changing-transport.org/ndc_country/congo/"},
+  {name:"Democratic Republic of the Congo",code:"cd", link:"https://changing-transport.org/ndc_country/democratic-republic-of-the-congo/"},
+  {name:"Djibouti",code:"dj", link:"https://changing-transport.org/ndc_country/djibouti/"},
+  {name:"Egypt",code:"eg", link:"https://changing-transport.org/ndc_country/egypt/"},
+  {name:"Equatorial Guinea",code:"gq", link:"https://changing-transport.org/ndc_country/equatorial-guinea/"},
+  {name:"Eritrea",code:"er", link:"https://changing-transport.org/ndc_country/eritrea/"},
+  {name:"Eswatini",code:"sz", link:"https://changing-transport.org/ndc_country/eswatini/"},
+  {name:"Ethiopia",code:"et", link:"https://changing-transport.org/ndc_country/ethiopia/"},
+  {name:"Gabon",code:"ga", link:"https://changing-transport.org/ndc_country/gabon/"},
+  {name:"Gambia",code:"gm", link:"https://changing-transport.org/ndc_country/gambia/"},
+  {name:"Ghana",code:"gh", link:"https://changing-transport.org/ndc_country/ghana/"},
+  {name:"Guinea",code:"gn", link:"https://changing-transport.org/ndc_country/guinea/"},
+  {name:"Guinea-Bissau",code:"gw", link:"https://changing-transport.org/ndc_country/guinea-bissau/"},
+  {name:"Kenya",code:"ke", link:"https://changing-transport.org/ndc_country/kenya/"},
+  {name:"Lesotho",code:"ls", link:"https://changing-transport.org/ndc_country/lesotho/"},
+  {name:"Liberia",code:"lr", link:"https://changing-transport.org/ndc_country/liberia/"},
+  {name:"Libya",code:"ly", link:"https://changing-transport.org/ndc_country/libya/"},
+  {name:"Madagascar",code:"mg", link:"https://changing-transport.org/ndc_country/madagascar/"},
+  {name:"Malawi",code:"mw", link:"https://changing-transport.org/ndc_country/malawi/"},
+  {name:"Mali",code:"ml", link:"https://changing-transport.org/ndc_country/mali/"},
+  {name:"Mauritania",code:"mr", link:"https://changing-transport.org/ndc_country/mauritania/"},
+  {name:"Mauritius",code:"mu", link:"https://changing-transport.org/ndc_country/mauritius/"},
+  {name:"Morocco",code:"ma", link:"https://changing-transport.org/ndc_country/morocco/"},
+  {name:"Mozambique",code:"mz", link:"https://changing-transport.org/ndc_country/mozambique/"},
+  {name:"Namibia",code:"na", link:"https://changing-transport.org/ndc_country/namibia/"},
+  {name:"Niger",code:"ne", link:"https://changing-transport.org/ndc_country/niger/"},
+  {name:"Nigeria",code:"ng", link:"https://changing-transport.org/ndc_country/nigeria/"},
+  {name:"Rwanda",code:"rw", link:"https://changing-transport.org/ndc_country/rwanda/"},
+  {name:"Sao Tome and Principe",code:"st", link:"https://changing-transport.org/ndc_country/sao-tome-and-principe/"},
+  {name:"Senegal",code:"sn", link:"https://changing-transport.org/ndc_country/senegal/"},
+  {name:"Seychelles",code:"sc", link:"https://changing-transport.org/ndc_country/seychelles/"},
+  {name:"Sierra Leone",code:"sl", link:"https://changing-transport.org/ndc_country/sierra-leone/"},
+  {name:"Somalia",code:"so", link:"https://changing-transport.org/ndc_country/somalia/"},
+  {name:"South Africa",code:"za", link:"https://changing-transport.org/ndc_country/south-africa/"},
+  {name:"South Sudan",code:"ss", link:"https://changing-transport.org/ndc_country/south-sudan/"},
+  {name:"Sudan",code:"sd", link:"https://changing-transport.org/ndc_country/sudan/"},
+  {name:"Togo",code:"tg", link:"https://changing-transport.org/ndc_country/togo/"},
+  {name:"Tunisia",code:"tn", link:"https://changing-transport.org/ndc_country/tunisia/"},
+  {name:"Uganda",code:"ug", link:"https://changing-transport.org/ndc_country/uganda/"},
+  {name:"United Republic of Tanzania",code:"tz", link:"https://changing-transport.org/ndc_country/united-republic-of-tanzania/"},
+  {name:"Zambia",code:"zm", link:"https://changing-transport.org/ndc_country/zambia/"},
+  {name:"Zimbabwe",code:"zw", link:"https://changing-transport.org/ndc_country/zimbabwe/"},
+{name:"Afghanistan",code:"af", link:"https://changing-transport.org/ndc_country/afghanistan/"},
+{name:"Armenia",code:"am", link:"https://changing-transport.org/ndc_country/armenia/"},
+{name:"Azerbaijan",code:"az", link:"https://changing-transport.org/ndc_country/azerbaijan/"},
+{name:"Bahrain",code:"bh", link:"https://changing-transport.org/ndc_country/bahrain/"},
+{name:"Bangladesh",code:"bd", link:"https://changing-transport.org/ndc_country/bangladesh/"},
+{name:"Bhutan",code:"bt", link:"https://changing-transport.org/ndc_country/bhutan/"},
+{name:"Brunei Darussalam",code:"bn", link:"https://changing-transport.org/ndc_country/brunei-darussalam/"},
+{name:"Cambodia",code:"kh", link:"https://changing-transport.org/ndc_country/cambodia/"},
+{name:"China",code:"cn", link:"https://changing-transport.org/ndc_country/china/"},
+{name:"Cyprus",code:"cy", link:"https://changing-transport.org/ndc_country/cyprus/"},
+{name:"Democratic People's Republic of Korea",code:"kp", link:"https://changing-transport.org/ndc_country/democratic-peoples-republic-of-korea/"},
+{name:"Georgia",code:"ge", link:"https://changing-transport.org/ndc_country/georgia/"},
+{name:"India",code:"in", link:"https://changing-transport.org/ndc_country/india/"},
+{name:"Indonesia",code:"id", link:"https://changing-transport.org/ndc_country/indonesia/"},
+{name:"Iran (Islamic Republic of)",code:"ir", link:"https://changing-transport.org/ndc_country/iran-islamic-republic-of/"},
+{name:"Iraq",code:"iq", link:"https://changing-transport.org/ndc_country/iraq/"},
+{name:"Israel",code:"il", link:"https://changing-transport.org/ndc_country/israel/"},
+{name:"Japan",code:"jp", link:"https://changing-transport.org/ndc_country/japan/"},
+{name:"Jordan",code:"jo", link:"https://changing-transport.org/ndc_country/jordan/"},
+{name:"Kazakhstan",code:"kz", link:"https://changing-transport.org/ndc_country/kazakhstan/"},
+{name:"Kuwait",code:"kw", link:"https://changing-transport.org/ndc_country/kuwait/"},
+{name:"Kyrgyzstan",code:"kg", link:"https://changing-transport.org/ndc_country/kyrgyzstan/"},
+{name:"Lao PDR",code:"la", link:"https://changing-transport.org/ndc_country/lao-peoples-democratic-republic/"},
+{name:"Lebanon",code:"lb", link:"https://changing-transport.org/ndc_country/lebanon/"},
+{name:"Malaysia",code:"my", link:"https://changing-transport.org/ndc_country/malaysia/"},
+{name:"Maldives",code:"mv", link:"https://changing-transport.org/ndc_country/maldives/"},
+{name:"Mongolia",code:"mn", link:"https://changing-transport.org/ndc_country/mongolia/"},
+{name:"Myanmar",code:"mm", link:"https://changing-transport.org/ndc_country/myanmar/"},
+{name:"Nepal",code:"np", link:"https://changing-transport.org/ndc_country/nepal/"},
+{name:"Oman",code:"om", link:"https://changing-transport.org/ndc_country/oman/"},
+{name:"Pakistan",code:"pk", link:"https://changing-transport.org/ndc_country/pakistan/"},
+{name:"Palestine",code:"ps", link:"https://changing-transport.org/ndc_country/palestine/"},
+{name:"Philippines",code:"ph", link:"https://changing-transport.org/ndc_country/philippines/"},
+{name:"Qatar",code:"qa", link:"https://changing-transport.org/ndc_country/qatar/"},
+{name:"Republic of Korea",code:"kr", link:"https://changing-transport.org/ndc_country/republic-of-korea/"},
+{name:"Saudi Arabia",code:"sa", link:"https://changing-transport.org/ndc_country/saudi-arabia/"},
+{name:"Singapore",code:"sg", link:"https://changing-transport.org/ndc_country/singapore/"},
+{name:"Sri Lanka",code:"lk", link:"https://changing-transport.org/ndc_country/sri-lanka/"},
+{name:"Syrian Arab Republic",code:"sy", link:"https://changing-transport.org/ndc_country/syrian-arab-republic/"},
+{name:"Tajikistan",code:"tj", link:"https://changing-transport.org/ndc_country/tajikistan/"},
+{name:"Thailand",code:"th", link:"https://changing-transport.org/ndc_country/thailand/"},
+{name:"Timor-Leste",code:"tl", link:"https://changing-transport.org/ndc_country/timor-leste/"},
+{name:"Türkiye",code:"tr", link:"https://changing-transport.org/ndc_country/tuerkiye/"},
+{name:"Turkmenistan",code:"tm", link:"https://changing-transport.org/ndc_country/turkmenistan/"},
+{name:"United Arab Emirates",code:"ae", link:"https://changing-transport.org/ndc_country/united-arab-emirates/"},
+{name:"Uzbekistan",code:"uz", link:"https://changing-transport.org/ndc_country/uzbekistan/"},
+{name:"Viet Nam",code:"vn", link:"https://changing-transport.org/ndc_country/viet-nam/"},
+{name:"Yemen",code:"ye", link:"https://changing-transport.org/ndc_country/yemen/"},
+ {name:"Albania",code:"al", link:"https://changing-transport.org/ndc_country/albania/"},
+  {name:"Andorra",code:"ad", link:"https://changing-transport.org/ndc_country/andorra/"},
+  {name:"Austria",code:"at", link:"https://changing-transport.org/ndc_country/austria/"},
+  {name:"Belarus",code:"by", link:"https://changing-transport.org/ndc_country/belarus/"},
+  {name:"Belgium",code:"be", link:"https://changing-transport.org/ndc_country/belgium/"},
+  {name:"Bosnia and Herzegovina",code:"ba", link:"https://changing-transport.org/ndc_country/bosnia-and-herzegovina/"},
+  {name:"Bulgaria",code:"bg", link:"https://changing-transport.org/ndc_country/bulgaria/"},
+  {name:"Croatia",code:"hr", link:"https://changing-transport.org/ndc_country/croatia/"},
+  {name:"Czech Republic",code:"cz", link:"https://changing-transport.org/ndc_country/czech-republic/"},
+  {name:"Denmark",code:"dk", link:"https://changing-transport.org/ndc_country/denmark/"},
+  {name:"Estonia",code:"ee", link:"https://changing-transport.org/ndc_country/estonia/"},
+  {name:"Finland",code:"fi", link:"https://changing-transport.org/ndc_country/finland/"},
+  {name:"France",code:"fr", link:"https://changing-transport.org/ndc_country/france/"},
+  {name:"Germany",code:"de", link:"https://changing-transport.org/ndc_country/germany/"},
+  {name:"Greece",code:"gr", link:"https://changing-transport.org/ndc_country/greece/"},
+  {name:"Hungary",code:"hu", link:"https://changing-transport.org/ndc_country/hungary/"},
+  {name:"Iceland",code:"is", link:"https://changing-transport.org/ndc_country/iceland/"},
+  {name:"Ireland",code:"ie", link:"https://changing-transport.org/ndc_country/ireland/"},
+  {name:"Italy",code:"it", link:"https://changing-transport.org/ndc_country/italy/"},
+  {name:"Kosovo",code:"xk", link:"https://changing-transport.org/ndc_country/kosovo/"},
+  {name:"Latvia",code:"lv", link:"https://changing-transport.org/ndc_country/latvia/"},
+  {name:"Liechtenstein",code:"li", link:"https://changing-transport.org/ndc_country/liechtenstein/"},
+  {name:"Lithuania",code:"lt", link:"https://changing-transport.org/ndc_country/lithuania/"},
+  {name:"Luxembourg",code:"lu", link:"https://changing-transport.org/ndc_country/luxembourg/"},
+  {name:"Malta",code:"mt", link:"https://changing-transport.org/ndc_country/malta/"},
+  {name:"Monaco",code:"mc", link:"https://changing-transport.org/ndc_country/monaco/"},
+  {name:"Montenegro",code:"me", link:"https://changing-transport.org/ndc_country/montenegro/"},
+  {name:"Netherlands",code:"nl", link:"https://changing-transport.org/ndc_country/netherlands/"},
+  {name:"North Macedonia",code:"mk", link:"https://changing-transport.org/ndc_country/north-macedonia/"},
+  {name:"Norway",code:"no", link:"https://changing-transport.org/ndc_country/norway/"},
+  {name:"Poland",code:"pl", link:"https://changing-transport.org/ndc_country/poland/"},
+  {name:"Portugal",code:"pt", link:"https://changing-transport.org/ndc_country/portugal/"},
+  {name:"Republic of Moldova",code:"md", link:"https://changing-transport.org/ndc_country/republic-of-moldova/"},
+  {name:"Romania",code:"ro", link:"https://changing-transport.org/ndc_country/romania/"},
+  {name:"Russian Federation",code:"ru", link:"https://changing-transport.org/ndc_country/russian-federation/"},
+  {name:"San Marino",code:"sm", link:"https://changing-transport.org/ndc_country/san-marino/"},
+  {name:"Serbia",code:"rs", link:"https://changing-transport.org/ndc_country/serbia/"},
+  {name:"Slovakia",code:"sk", link:"https://changing-transport.org/ndc_country/slovakia/"},
+  {name:"Slovenia",code:"si", link:"https://changing-transport.org/ndc_country/slovenia/"},
+  {name:"Spain",code:"es", link:"https://changing-transport.org/ndc_country/spain/"},
+  {name:"Sweden",code:"se", link:"https://changing-transport.org/ndc_country/sweden/"},
+  {name:"Switzerland",code:"ch", link:"https://changing-transport.org/ndc_country/switzerland/"},
+  {name:"Ukraine",code:"ua", link:"https://changing-transport.org/ndc_country/ukraine/"},
+  {name:"United Kingdom",code:"gb", link:"https://changing-transport.org/ndc_country/united-kingdom/"},
+  {name:"Vatican",code:"va", link:"https://changing-transport.org/ndc_country/vatican/"},
+  {name:"European Union",code:"eu", link:"https://changing-transport.org/ndc_country/european-union/"},
+{name:"Antigua and Barbuda",code:"ag", link:"https://changing-transport.org/ndc_country/antigua-and-barbuda/"},
+  {name:"Argentina",code:"ar", link:"https://changing-transport.org/ndc_country/argentina/"},
+  {name:"Bahamas",code:"bs", link:"https://changing-transport.org/ndc_country/bahamas/"},
+  {name:"Barbados",code:"bb", link:"https://changing-transport.org/ndc_country/barbados/"},
+  {name:"Belize",code:"bz", link:"https://changing-transport.org/ndc_country/belize/"},
+  {name:"Bolivia",code:"bo", link:"https://changing-transport.org/ndc_country/bolivia/"},
+  {name:"Brazil",code:"br", link:"https://changing-transport.org/ndc_country/brazil/"},
+  {name:"Chile",code:"cl", link:"https://changing-transport.org/ndc_country/chile/"},
+  {name:"Colombia",code:"co", link:"https://changing-transport.org/ndc_country/colombia/"},
+  {name:"Costa Rica",code:"cr", link:"https://changing-transport.org/ndc_country/costa-rica/"},
+  {name:"Cuba",code:"cu", link:"https://changing-transport.org/ndc_country/cuba/"},
+  {name:"Dominica",code:"dm", link:"https://changing-transport.org/ndc_country/dominica/"},
+  {name:"Dominican Republic",code:"do", link:"https://changing-transport.org/ndc_country/dominican-republic/"},
+  {name:"Ecuador",code:"ec", link:"https://changing-transport.org/ndc_country/ecuador/"},
+  {name:"El Salvador",code:"sv", link:"https://changing-transport.org/ndc_country/el-salvador/"},
+  {name:"Grenada",code:"gd", link:"https://changing-transport.org/ndc_country/grenada/"},
+  {name:"Guatemala",code:"gt", link:"https://changing-transport.org/ndc_country/guatemala/"},
+  {name:"Guyana",code:"gy", link:"https://changing-transport.org/ndc_country/guyana/"},
+  {name:"Haiti",code:"ht", link:"https://changing-transport.org/ndc_country/haiti/"},
+  {name:"Honduras",code:"hn", link:"https://changing-transport.org/ndc_country/honduras/"},
+  {name:"Jamaica",code:"jm", link:"https://changing-transport.org/ndc_country/jamaica/"},
+  {name:"Mexico",code:"mx", link:"https://changing-transport.org/ndc_country/mexico/"},
+  {name:"Nicaragua",code:"ni", link:"https://changing-transport.org/ndc_country/nicaragua/"},
+  {name:"Panama",code:"pa", link:"https://changing-transport.org/ndc_country/panama/"},
+  {name:"Paraguay",code:"py", link:"https://changing-transport.org/ndc_country/paraguay/"},
+  {name:"Peru",code:"pe", link:"https://changing-transport.org/ndc_country/peru/"},
+  {name:"Saint Kitts and Nevis",code:"kn", link:"https://changing-transport.org/ndc_country/saint-kitts-and-nevis/"},
+  {name:"Saint Lucia",code:"lc", link:"https://changing-transport.org/ndc_country/saint-lucia/"},
+  {name:"Saint Vincent and the Grenadines",code:"vc", link:"https://changing-transport.org/ndc_country/saint-vincent-and-the-grenadines/"},
+  {name:"Suriname",code:"sr", link:"https://changing-transport.org/ndc_country/suriname/"},
+  {name:"Trinidad and Tobago",code:"tt", link:"https://changing-transport.org/ndc_country/trinidad-and-tobago/"},
+  {name:"Uruguay",code:"uy", link:"https://changing-transport.org/ndc_country/uruguay/"},
+  {name:"Venezuela",code:"ve", link:"https://changing-transport.org/ndc_country/venezuela/"},
+  {name:"Canada",code:"ca", link:"https://changing-transport.org/ndc_country/canada/"},
+  {name:"United States of America",code:"us", link:"https://changing-transport.org/ndc_country/united-states-of-america/"},
+   {name:"Australia",code:"au",          link:"https://changing-transport.org/ndc_country/australia/"},
+  {name:"Cook Islands",code:"ck",       link:"https://changing-transport.org/ndc_country/cook-islands/"},
+  {name:"Fiji",code:"fj",               link:"https://changing-transport.org/ndc_country/fiji/"},
+  {name:"Kiribati",code:"ki",           link:"https://changing-transport.org/ndc_country/kiribati/"},
+  {name:"Marshall Islands",code:"mh",   link:"https://changing-transport.org/ndc_country/marshall-islands/"},
+  {name:"Micronesia (FS)",code:"fm",    link:"https://changing-transport.org/ndc_country/micronesia-fs/"},
+  {name:"Nauru",code:"nr",              link:"https://changing-transport.org/ndc_country/nauru/"},
+  {name:"New Zealand",code:"nz",        link:"https://changing-transport.org/ndc_country/new-zealand/"},
+  {name:"Niue",code:"nu",               link:"https://changing-transport.org/ndc_country/niue/"},
+  {name:"Palau",code:"pw",              link:"https://changing-transport.org/ndc_country/palau/"},
+  {name:"Papua New Guinea",code:"pg",   link:"https://changing-transport.org/ndc_country/papua-new-guinea/"},
+  {name:"Samoa",code:"ws",              link:"https://changing-transport.org/ndc_country/samoa/"},
+  {name:"Solomon Islands",code:"sb",    link:"https://changing-transport.org/ndc_country/solomon-islands/"},
+  {name:"Tonga",code:"to",              link:"https://changing-transport.org/ndc_country/tonga/"},
+  {name:"Tuvalu",code:"tv",             link:"https://changing-transport.org/ndc_country/tuvalu/"},
+  {name:"Vanuatu",code:"vu",            link:"https://changing-transport.org/ndc_country/vanuatu/"}
+  ];
+  // ======================================
+
+  // DOM
+  const input = document.getElementById("ndcCountrySearch");
+  const resultsList = document.getElementById("ndcSearchResults");
+  const suggBox = document.getElementById("ndcSuggestions");
+  const clearBtn = document.querySelector(".ndc-clear-btn");
+
+  // Helpers
+  const openLink = url => OPEN_IN_NEW_TAB ? window.open(url, "_blank", "noopener") : (location.href = url);
+  const normalize = s => (s||"").normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+  const escapeRx = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+  function highlight(text, query){
+    if(!query) return text;
+    const t = text ?? "";
+    const normText = normalize(t);
+    const normQ = normalize(query);
+    const i = normText.indexOf(normQ);
+    if(i === -1) return t;
+    // insert <mark> around the matching raw substring
+    return t.slice(0,i) + '<mark>' + t.slice(i, i+query.length) + '</mark>' + t.slice(i+query.length);
+  }
+
+  function pickRandom(list, n){
+    const a = list.slice();
+    const limit = Math.min(n, a.length);
+    for (let i = 0; i < limit; i++){
+      const j = i + Math.floor(Math.random() * (a.length - i));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a.slice(0, limit);
+  }
+
+  // Suggestions
+  function renderSuggestions(){
+    const picks = pickRandom(countries, NUM_SUGGESTIONS);
+    suggBox.innerHTML = `<h5>Not sure where to start? Explore these countries</h5>
+      <div class="ndc-sugg-pills">
+        ${picks.map(p => `
+          <button class="ndc-sugg-pill" data-link="${p.link}" aria-label="Open ${p.name}">
+            <img src="${flag(p.code)}" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <span>${p.name}</span>
+          </button>
+        `).join("")}
+      </div>`;
+    suggBox.querySelectorAll(".ndc-sugg-pill").forEach(btn => {
+      btn.addEventListener('click', () => openLink(btn.getAttribute('data-link')));
+    });
+  }
+
+  // Autocomplete
+  let activeIndex = -1;      // keyboard highlight index
+  let currentItems = [];     // current filtered list
+  let debounceTimer = null;
+
+  function renderResults(list, query){
+    resultsList.innerHTML = "";
+    activeIndex = -1;
+    input.setAttribute('aria-activedescendant','');
+    if(list.length === 0){
+      const li = document.createElement("li");
+      li.className = "no-result";
+      li.textContent = "No results found";
+      resultsList.appendChild(li);
+      resultsList.style.display = "block";
+      input.setAttribute('aria-expanded', 'true');
+      return;
+    }
+    list.forEach((c, idx) => {
+      const li = document.createElement("li");
+      li.id = `ndc-opt-${idx}`;
+      li.setAttribute("role","option");
+      li.setAttribute("aria-selected","false");
+      li.innerHTML = `
+        <img src="${flag(c.code)}" alt="${c.name} flag" onerror="this.style.display='none'">
+        <span>${highlight(c.name, query)}</span>
+      `;
+      li.addEventListener('mouseenter', () => setActive(idx));
+      li.addEventListener('click', () => { openLink(c.link); hideResults(); });
+      resultsList.appendChild(li);
+    });
+    resultsList.style.display = "block";
+    input.setAttribute('aria-expanded', 'true');
+  }
+
+  function setActive(idx){
+    const items = resultsList.querySelectorAll('li[role="option"]');
+    items.forEach(el => el.setAttribute('aria-selected','false'));
+    if(idx >= 0 && idx < items.length){
+      items[idx].setAttribute('aria-selected','true');
+      input.setAttribute('aria-activedescendant', items[idx].id);
+      activeIndex = idx;
+    }else{
+      input.setAttribute('aria-activedescendant','');
+      activeIndex = -1;
+    }
+  }
+
+  function hideResults(){
+    resultsList.style.display = "none";
+    input.setAttribute('aria-expanded', 'false');
+    setActive(-1);
+  }
+
+  function doFilter(){
+    const qRaw = input.value.trim();
+    const q = normalize(qRaw);
+    if(!q){ hideResults(); return; }
+    currentItems = countries.filter(c => normalize(c.name).includes(q));
+    // cap displayed options; scroll for more if needed
+    renderResults(currentItems.slice(0, 20), qRaw);
+  }
+
+  // Events
+  input.addEventListener("input", () => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(doFilter, 120);
+  });
+
+  input.addEventListener("keydown", (e) => {
+    const options = resultsList.querySelectorAll('li[role="option"]');
+    if(e.key === "ArrowDown"){
+      if(options.length){ setActive((activeIndex + 1) % options.length); }
+      e.preventDefault();
+    } else if(e.key === "ArrowUp"){
+      if(options.length){ setActive((activeIndex - 1 + options.length) % options.length); }
+      e.preventDefault();
+    } else if(e.key === "Enter"){
+      if(activeIndex >= 0 && currentItems[activeIndex]){
+        openLink(currentItems[activeIndex].link);
+        hideResults();
+      } else if(currentItems.length){
+        openLink(currentItems[0].link);
+        hideResults();
+      }
+    } else if(e.key === "Escape"){
+      hideResults();
+    }
+  });
+
+  document.addEventListener("click", e => {
+    if (!e.target.closest(".ndc-explorer-box")) hideResults();
+  });
+
+  clearBtn.addEventListener("click", () => {
+    input.value = "";
+    hideResults();
+    input.focus();
+  });
+
+  // init
+  renderSuggestions();
+});
+</script>
