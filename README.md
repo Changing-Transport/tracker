@@ -13,16 +13,16 @@ public version is published through the Changing Transport website
 
 | Product | URL | Accessed from |
 |---|---|---|
-| Main dashboard | `https://belentdc.github.io/tracker/` | Entry point, embedded via iframe on changing-transport.org |
-| NDC Comparison | `https://belentdc.github.io/tracker/comparison/` | Linked from the main dashboard navigation |
-| Country Explorer | `https://belentdc.github.io/tracker/profiles/` | Direct link. Also reached from the map on the main dashboard and from country names in the comparison tool (both open in a new tab) |
-| Search | `https://belentdc.github.io/tracker/search/` | Linked from the Country Explorer page |
-| Methodology | `https://belentdc.github.io/tracker/methodology/` | Direct link |
-| Ask the Tracker | `https://belentdc.github.io/tracker/ask/` | Direct link *Still under development*|
+| Main dashboard | `https://changing-transport.github.io/tracker/` | Entry point, embedded via iframe on changing-transport.org |
+| NDC Comparison | `https://changing-transport.github.io/tracker/comparison/` | Linked from the main dashboard navigation |
+| Country Explorer | `https://changing-transport.github.io/tracker/profiles/` | Direct link. Also reached from the map on the main dashboard and from country names in the comparison tool (both open in a new tab) |
+| Search | `https://changing-transport.github.io/tracker/search/` | Linked from the Country Explorer page |
+| Methodology | `https://changing-transport.github.io/tracker/methodology/` | Direct link |
+| Ask the Tracker | `https://changing-transport.github.io/tracker/ask/` | Direct link *Still under development*|
 
 Embed in WordPress via iframe:
 ```html
-<iframe src="https://belentdc.github.io/tracker/"
+<iframe src="https://changing-transport.github.io/tracker/"
         width="100%" style="border:none;" height="900"></iframe>
 ```
 
