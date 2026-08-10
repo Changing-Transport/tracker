@@ -38,6 +38,22 @@ const ADAPT_ICONS = {
   "Informational and Educational":            `<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>`,
   "Other adaptation and resilience measures": `<circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>`
 };
+const MITIG_ICONS = {
+  "Mode shift and demand management": `<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>`,
+  "Transport system improvements":    `<path d="M3 17l2-7h14l2 7M3 17h18M7 17v2m10-2v2M5 10h14"/>`,
+  "Electrification":                  `<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>`,
+  "Alternative fuels":                `<path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0M12 8v4l3 3"/>`,
+  "Energy efficiency":                `<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>`,
+  "Aviation and maritime":            `<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.93 12a19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 3.88 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91"/>`
+};
+const MITIG_ICON_COLORS = {
+  "Mode shift and demand management": {bg:"rgba(0,164,189,0.12)",   fg:"var(--ct-teal)"},
+  "Transport system improvements":    {bg:"rgba(0,61,92,0.10)",     fg:"var(--ct-navy)"},
+  "Electrification":                  {bg:"rgba(157,190,61,0.15)",  fg:"var(--ct-green-dark)"},
+  "Alternative fuels":                {bg:"rgba(232,130,26,0.12)",  fg:"#B85E0A"},
+  "Energy efficiency":                {bg:"rgba(157,190,61,0.15)",  fg:"var(--ct-green-dark)"},
+  "Aviation and maritime":            {bg:"rgba(0,164,189,0.12)",   fg:"var(--ct-teal)"}
+};
 const PARIS_DEADLINES = [
   {year:2015,label:"Paris Agreement"},
   {year:2020,label:"NDC update due"},
@@ -53,6 +69,13 @@ const GEN_NOTE = `Our definition of NDC generations:
    Net zero, overall mitigation, and energy targets are NOT transport targets. */
 const T_AREAS=new Set(["Transport sector mitigation target","Transport sector adaptation target"]);
 function transportTargets(p,status){return (p.targets||[]).filter(t=>T_AREAS.has(t.area)&&(!status||t.status===status));}
+const TARGET_TYPE_CFG=[
+  {area:"Net zero target",                    label:"Net-zero",             color:"#9DBE3D", icon:`<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>`},
+  {area:"Overall mitigation target",          label:"Overall mitigation",   color:"#E8821A", icon:`<path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0M12 8v4l3 3"/>`},
+  {area:"Transport sector mitigation target", label:"Transport mitigation", color:"#00A4BD", icon:`<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>`},
+  {area:"Transport sector adaptation target", label:"Transport adaptation", color:"#003D5C", icon:`<path d="M2 22h20M6 18V9l6-4 6 4v9M9 18v-5h6v5"/>`},
+];
+const TARGET_AREAS_ALL=new Set(TARGET_TYPE_CFG.map(c=>c.area));
 
 /* ── Bootstrap ───────────────────────────────────────────────────── */
 const params = new URLSearchParams(location.search);
@@ -60,7 +83,7 @@ const CODE   = (window.CP_CODE || params.get("country") || "COL").toUpperCase();
 const BASE   = window.CP_BASE  || "";
 
 function comparisonUrl(mode, opts) {
-  const base = BASE + "../comparison/index_c.html";
+  const base = "https://changing-transport.org/tracker/compare-ndc";
   if (mode === "track")   return `${base}?mode=track&c=${encodeURIComponent(opts.c)}`;
   if (mode === "compare") return `${base}?mode=compare&c1=${encodeURIComponent(opts.c1||"")}&c2=${encodeURIComponent(opts.c2||"")}&c3=${encodeURIComponent(opts.c3||"")}&gen=${encodeURIComponent(opts.gen||"latest")}`;
   return base;
@@ -294,74 +317,73 @@ function renderTrend(p,bench){
     sub.innerHTML=`Transport CO\u2082 in <strong>${esc(p.name)}</strong> ${dir} since ${years[0]}: from ${first} to <strong>${last} Mt</strong> in ${years[years.length-1]} (${esc(t.source||"EDGAR")}).`;
   }
 
-  // Target pins: active targets grouped by year, colour by highest-priority type
-  const PIN_TYPE={"Net zero target":{k:"Net zero",c:"#9DBE3D",pr:0},
-    "Transport sector mitigation target":{k:"Transport",c:"#003D5C",pr:1},
-    "Transport sector adaptation target":{k:"Adaptation",c:"#7A9B2E",pr:2},
-    "Overall mitigation target":{k:"Overall",c:"#E8821A",pr:3}};
-  const byYear={};
-  (p.targets||[]).filter(x=>x.status==="Active"&&PIN_TYPE[x.area]&&+x.year>years[0])
-    .forEach(x=>{ (byYear[+x.year]=byYear[+x.year]||new Set()).add(x.area); });
-  const pinYears=Object.keys(byYear).map(Number).sort((a,b)=>a-b).slice(0,6)
-    .map(yr=>{ const types=[...byYear[yr]].map(a=>PIN_TYPE[a]).sort((a,b)=>a.pr-b.pr);
-      return {year:yr,types,c:types[0].c}; });
+  // Target pins: stacked per type per year, colors aligned with buckets
+  const byPinYear={};
+  (p.targets||[]).filter(x=>x.status==="Active"&&TARGET_AREAS_ALL.has(x.area)&&+x.year>years[0])
+    .forEach(x=>{const yr=+x.year;if(!byPinYear[yr])byPinYear[yr]={};byPinYear[yr][x.area]=(byPinYear[yr][x.area]||0)+1;});
+  const pinYears=Object.keys(byPinYear).map(Number).sort((a,b)=>a-b).slice(0,6)
+    .map(yr=>({year:yr,types:TARGET_TYPE_CFG.filter(cfg=>byPinYear[yr][cfg.area]).map(cfg=>({...cfg,count:byPinYear[yr][cfg.area]}))}));
   const lastYear=years[years.length-1];
   const allYears=years.slice();
   const maxPin=pinYears.length?Math.max(...pinYears.map(x=>x.year)):0;
   for(let yr=lastYear+1;yr<=maxPin;yr++) allYears.push(yr);
-
-  // Legend: colour key for pin types actually present
   const legendEl=document.getElementById("cp-pin-legend");
   if(legendEl&&pinYears.length){
-    const present=[...new Map(pinYears.flatMap(pn=>pn.types).map(x=>[x.k,x])).values()].sort((a,b)=>a.pr-b.pr);
+    const presentAreas=new Set(pinYears.flatMap(pn=>pn.types.map(t=>t.area)));
+    const present=TARGET_TYPE_CFG.filter(x=>presentAreas.has(x.area));
     legendEl.innerHTML=`<span class="cp-pin-key-title">Target years:</span> `+present.map(x=>
-      `<span class="cp-pin-key"><span class="cp-pin-swatch" style="background:${x.c}"></span>${x.k}</span>`).join("");
+      `<span class="cp-pin-key"><span class="cp-pin-swatch" style="background:${x.color}"></span>${esc(x.label)}</span>`).join("");
     legendEl.hidden=false;
   }
 
   const canvas=document.getElementById("cp-trend-chart");
   if(!canvas) return;
 
+  const _pillRects=[];
   const pinPlugin={id:"targetPins",afterDatasetsDraw(chart){
     const {ctx,chartArea,scales:{x}}=chart;
-    const PILL_H=16, PILL_Y=chartArea.top+2, PAD=6, GAP=4;
-    ctx.save();
-    ctx.font="700 10px 'Source Sans 3'";
-    // Pass 1: measure every pill and clamp inside the chart area
-    const pills=[];
-    pinYears.forEach(pin=>{
-      const i=allYears.indexOf(pin.year); if(i<0) return;
+    const PILL_H=13,PAD=5,STACK_GAP=2,COL_GAP=3;
+    ctx.save(); ctx.font="700 9px 'Source Sans 3'"; _pillRects.length=0;
+    const columns=pinYears.map(pin=>{
+      const i=allYears.indexOf(pin.year); if(i<0) return null;
       const px=x.getPixelForValue(i);
-      const label=String(pin.year);
-      const w=ctx.measureText(label).width+PAD*2;
-      let cx=Math.min(Math.max(px,chartArea.left+w/2),chartArea.right-w/2);
-      pills.push({pin,px,label,w,cx});
-    });
-    // Pass 2: resolve overlaps left→right, then bounce back off the right wall
-    for(let i=1;i<pills.length;i++){
-      const prev=pills[i-1],cur=pills[i];
-      if(cur.cx-cur.w/2<prev.cx+prev.w/2+GAP) cur.cx=prev.cx+prev.w/2+GAP+cur.w/2;
+      const w=ctx.measureText(String(pin.year)).width+PAD*2;
+      return {px,w,pills:pin.types.map(tp=>({...tp,year:pin.year,w}))};
+    }).filter(Boolean);
+    const colCxs=columns.map(c=>c.px);
+    for(let i=1;i<columns.length;i++){
+      const minCx=colCxs[i-1]+columns[i-1].w/2+COL_GAP+columns[i].w/2;
+      if(colCxs[i]<minCx) colCxs[i]=minCx;
     }
-    for(let i=pills.length-1;i>=0;i--){
-      const cur=pills[i];
-      const wall=i===pills.length-1?chartArea.right:pills[i+1].cx-pills[i+1].w/2-GAP;
-      if(cur.cx+cur.w/2>wall) cur.cx=wall-cur.w/2;
-      if(cur.cx-cur.w/2<chartArea.left) cur.cx=chartArea.left+cur.w/2;
+    for(let i=columns.length-1;i>=0;i--){
+      const wall=i===columns.length-1?chartArea.right:colCxs[i+1]-columns[i+1].w/2-COL_GAP;
+      if(colCxs[i]+columns[i].w/2>wall) colCxs[i]=wall-columns[i].w/2;
+      if(colCxs[i]-columns[i].w/2<chartArea.left) colCxs[i]=chartArea.left+columns[i].w/2;
     }
-    // Draw: dashed line at the true year, pill at its resolved position
-    pills.forEach(({pin,px,label,w,cx})=>{
-      ctx.strokeStyle=pin.c; ctx.setLineDash([4,3]); ctx.lineWidth=1.5;
-      ctx.beginPath(); ctx.moveTo(px,PILL_Y+PILL_H); ctx.lineTo(px,chartArea.bottom); ctx.stroke();
-      ctx.setLineDash([]);
-      const bx=cx-w/2;
-      ctx.fillStyle=pin.c;
-      if(ctx.roundRect){ ctx.beginPath(); ctx.roundRect(bx,PILL_Y,w,PILL_H,PILL_H/2); ctx.fill(); }
-      else ctx.fillRect(bx,PILL_Y,w,PILL_H);
-      ctx.fillStyle="#fff"; ctx.textAlign="center"; ctx.textBaseline="middle";
-      ctx.fillText(label,cx,PILL_Y+PILL_H/2+0.5);
+    columns.forEach((col,ci)=>{
+      const cx=colCxs[ci];
+      const lineTop=chartArea.top+col.pills.length*(PILL_H+STACK_GAP);
+      ctx.strokeStyle=col.pills[0]?.color||"#999"; ctx.setLineDash([4,3]); ctx.lineWidth=1.2;
+      ctx.beginPath(); ctx.moveTo(col.px,lineTop); ctx.lineTo(col.px,chartArea.bottom); ctx.stroke(); ctx.setLineDash([]);
+      col.pills.forEach((pill,si)=>{
+        const py=chartArea.top+si*(PILL_H+STACK_GAP), bx=cx-pill.w/2;
+        ctx.fillStyle=pill.color;
+        if(ctx.roundRect){ctx.beginPath();ctx.roundRect(bx,py,pill.w,PILL_H,PILL_H/2);ctx.fill();}
+        else ctx.fillRect(bx,py,pill.w,PILL_H);
+        ctx.fillStyle="#fff"; ctx.textAlign="center"; ctx.textBaseline="middle";
+        ctx.fillText(String(pill.year),cx,py+PILL_H/2+0.5);
+        _pillRects.push({x1:bx,y1:py,x2:bx+pill.w,y2:py+PILL_H,pill});
+      });
     });
     ctx.restore();
   }};
+  function setupPinInteraction(cvs){
+    const tip=(()=>{let d=document.getElementById("cp-pin-tip");if(!d){d=document.createElement("div");d.id="cp-pin-tip";d.className="cp-pin-tip";document.body.appendChild(d);}return d;})();
+    function hit(e){const r=cvs.getBoundingClientRect(),sx=cvs.width/r.width,sy=cvs.height/r.height,mx=(e.clientX-r.left)*sx,my=(e.clientY-r.top)*sy;return _pillRects.find(p=>mx>=p.x1&&mx<=p.x2&&my>=p.y1&&my<=p.y2)||null;}
+    cvs.addEventListener("mousemove",e=>{const h=hit(e);if(h){cvs.style.cursor="pointer";tip.innerHTML=`<strong>${h.pill.year}</strong> · ${esc(h.pill.label)}<br>${h.pill.count} target${h.pill.count>1?"s":""}`;tip.style.cssText=`display:block;position:fixed;left:${Math.min(e.clientX+12,innerWidth-170)}px;top:${e.clientY-46}px`;}else{cvs.style.cursor="";tip.style.display="none";}});
+    cvs.addEventListener("mouseleave",()=>{cvs.style.cursor="";tip.style.display="none";});
+    cvs.addEventListener("click",e=>{const h=hit(e);if(!h)return;const el=document.getElementById("tb-"+h.pill.year);if(el)el.scrollIntoView({behavior:"smooth",block:"start"});});
+  }
 
   const F={family:"Source Sans 3",size:11};
   function mtConfig(){
@@ -391,6 +413,7 @@ function renderTrend(p,bench){
   if(window.Chart){
     try{
       let chart=new Chart(canvas,mtConfig());
+      setupPinInteraction(canvas);
       const views=document.getElementById("cp-trend-views");
       if(views){
         views.hidden=false;
@@ -399,6 +422,7 @@ function renderTrend(p,bench){
           ch.classList.add("on");
           chart.destroy();
           chart=new Chart(canvas,ch.dataset.view==="idx"?idxConfig():mtConfig());
+          setupPinInteraction(canvas);
         }));
       }
       return;
@@ -615,35 +639,71 @@ function renderTargets(p, docUrlMap) {
   const fbar=document.getElementById("cp-target-filters");
   const listEl=document.getElementById("cp-targets");
   if(!listEl)return;
-  const active=transportTargets(p,"Active");
-  if(subEl) subEl.innerHTML=`<strong>${active.length}</strong> transport target${active.length!==1?"s":""} in <span class="hl">active documents</span>.`;
-  const areas=[...new Set(active.map(t=>t.area).filter(Boolean))];
-  const docTypes=[...new Set(active.map(t=>t.doc_type).filter(Boolean))];
+  const allActive=(p.targets||[]).filter(t=>t.status==="Active"&&TARGET_AREAS_ALL.has(t.area)&&t.year&&/\d{4}/.test(String(t.year)));
+  const total=allActive.length;
+  if(subEl) subEl.innerHTML=`<strong>${total}</strong> target${total!==1?"s":""} in <span class="hl">active documents</span>.`;
+  const docTypes=[...new Set(allActive.map(t=>t.doc_type).filter(Boolean))];
+  let curDoc="all";
   if(fbar){
-    fbar.innerHTML=`
-      <div class="cp-filter-row"><span class="cp-filter-label">By document:</span>
-        <button class="cp-filter active" data-doc="all">All (${active.length})</button>
-        ${docTypes.map(dt=>`<button class="cp-filter" data-doc="${esc(dt)}">${esc(dt)} (${active.filter(t=>t.doc_type===dt).length})</button>`).join("")}
-      </div>
-      <div class="cp-filter-row" style="margin-top:0.4rem;"><span class="cp-filter-label">By type:</span>
-        <button class="cp-filter active" data-type="all">All (${active.length})</button>
-        ${areas.map(a=>`<button class="cp-filter" data-type="${esc(a)}">${esc(a)} (${active.filter(t=>t.area===a).length})</button>`).join("")}
-      </div>`;
-  }
-  let curType="all",curDoc="all";
-  function draw(){
-    const list=active.filter(t=>(curType==="all"||t.area===curType)&&(curDoc==="all"||t.doc_type===curDoc));
-    listEl.innerHTML=list.length?list.map(t=>{
-      const docUrl=t.doc_id?(docUrlMap[t.doc_id]||null):null;
-      return `<div class="cp-measure"><div class="cp-measure-top">
-        <span class="cp-measure-instrument">${esc(t.content||t.type)}</span>
-        ${t.year?`<span class="cp-measure-asi shift">${esc(t.year)}</span>`:""}
-      </div><p class="cp-measure-meta">${esc(t.area||"")}${t.conditionality?", "+esc(t.conditionality):""}, ${docUrl?`<a href="${esc(docUrl)}" target="_blank" rel="noopener" style="color:var(--ct-teal)">${esc(t.version||t.document||"")}</a>`:esc(t.version||t.document||"")}${t.page&&t.page!=="n/a"?", p. "+esc(t.page):""}</p></div>`;
-    }).join(""):`<div class="cp-empty">No targets match.</div>`;
-  }
-  if(fbar){
-    fbar.querySelectorAll("[data-type]").forEach(b=>b.addEventListener("click",()=>{fbar.querySelectorAll("[data-type]").forEach(x=>x.classList.remove("active"));b.classList.add("active");curType=b.dataset.type;draw();}));
+    fbar.innerHTML=`<div class="cp-filter-row"><span class="cp-filter-label">By document:</span>
+      <button class="cp-filter active" data-doc="all">All (${total})</button>
+      ${docTypes.map(dt=>`<button class="cp-filter" data-doc="${esc(dt)}">${esc(dt)} (${allActive.filter(t=>t.doc_type===dt).length})</button>`).join("")}
+    </div>`;
     fbar.querySelectorAll("[data-doc]").forEach(b=>b.addEventListener("click",()=>{fbar.querySelectorAll("[data-doc]").forEach(x=>x.classList.remove("active"));b.classList.add("active");curDoc=b.dataset.doc;draw();}));
+  }
+  const typeOrder=Object.fromEntries(TARGET_TYPE_CFG.map((c,i)=>[c.area,i]));
+  function draw(){
+    const list=allActive.filter(t=>curDoc==="all"||t.doc_type===curDoc);
+    if(!list.length){listEl.innerHTML=`<div class="cp-empty">No targets match.</div>`;return;}
+    const byYear={};
+    list.forEach(t=>{const y=String(t.year).match(/(\d{4})/)[1];(byYear[y]=byYear[y]||[]).push(t);});
+    listEl.innerHTML=Object.keys(byYear).sort().map(yr=>{
+      const sorted=byYear[yr].sort((a,b)=>(typeOrder[a.area]??99)-(typeOrder[b.area]??99));
+      const byType={};sorted.forEach(t=>(byType[t.area]=byType[t.area]||[]).push(t));
+      const groups=TARGET_TYPE_CFG.filter(cfg=>byType[cfg.area]);
+      const yearTotal=sorted.length;
+      return `<div class="cp-target-bucket" id="tb-${yr}">
+        <div class="cp-target-year-head">
+          <div class="cp-target-year-badge">${esc(yr)}</div>
+          <div class="cp-target-year-count">${yearTotal} target${yearTotal>1?"s":""}</div>
+        </div>
+        ${groups.map(cfg=>{
+          const items=byType[cfg.area];
+          const cardId=`cp-tcat-${yr}-${cfg.area.replace(/\s+/g,"-").toLowerCase()}`;
+          const itemsHtml=items.map(t=>{
+            const docUrl=t.doc_id?(docUrlMap[t.doc_id]||null):null;
+            return `<div class="cp-pitem">
+              <div class="cp-pitem-head"><span class="cp-pitem-name">${esc(t.content||t.type||"")}</span></div>
+              <div class="cp-pitem-meta">${t.conditionality&&t.conditionality!=="\u2014"?`<span class="cp-target-cond">${esc(t.conditionality)}</span> `:""}${docUrl?`<a href="${esc(docUrl)}" target="_blank" rel="noopener" class="cp-target-doc">${esc(t.version||t.document||"")}</a>`:`<span>${esc(t.version||t.document||"")}</span>`}${t.page&&t.page!=="n/a"?` · p. ${esc(t.page)}`:""}</div>
+            </div>`;
+          }).join("");
+          return `<div class="cp-pcat-card collapsed" id="${esc(cardId)}">
+            <button class="cp-pcat-head" aria-expanded="false" aria-controls="${esc(cardId)}-body">
+              <div class="cp-pcat-icon" style="background:${cfg.color}1F;color:${cfg.color};">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">${cfg.icon}</svg>
+              </div>
+              <div class="cp-pcat-info">
+                <div class="cp-pcat-name">${esc(cfg.label)}</div>
+                <div class="cp-pcat-meta">${items.length} target${items.length>1?"s":""}</div>
+              </div>
+              <div class="cp-pcat-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+            </button>
+            <div class="cp-pcat-body" id="${esc(cardId)}-body" hidden>${itemsHtml}</div>
+          </div>`;
+        }).join("")}
+      </div>`;
+    }).join("");
+    // Toggle listeners
+    listEl.querySelectorAll(".cp-pcat-head").forEach(btn=>{
+      btn.addEventListener("click",()=>{
+        const card=btn.closest(".cp-pcat-card");
+        const body=card.querySelector(".cp-pcat-body");
+        const open=btn.getAttribute("aria-expanded")==="true";
+        btn.setAttribute("aria-expanded",String(!open));
+        card.classList.toggle("collapsed",open);
+        body.hidden=open;
+      });
+    });
   }
   draw();
   const cmpLink=document.getElementById("cp-targets-compare");
@@ -660,100 +720,142 @@ function renderMeasures(p, docUrlMap, bench) {
   const active=p.measures.filter(m=>m.status==="Active");
   if(subEl) subEl.innerHTML=`<strong>${active.length}</strong> transport mitigation measures in <span class="hl">active documents</span>.`;
 
-  // A-S-I: one stacked bar plus a generated sentence — the sentence is the
-  // insight, the bar is its picture (replaces the space-hungry doughnut).
-  const asiC=document.getElementById("cp-asi-chart");
-  if(asiC){
+  // ── Summary strip ─────────────────────────────────────────────────
+  // Inserted before the filterbar. Pure HTML — no Chart.js needed,
+  // works behind the GIZ proxy where the CDN is blocked.
+  if(fbar){
     const asi=p.asi_summary||{};
-    const order=["Avoid","Shift","Improve"].filter(k=>asi[k]);
-    const total=order.reduce((s,k)=>s+asi[k],0);
-    const sEl=document.getElementById("cp-asi-sentence");
-    if(sEl&&total){
-      const top=order.slice().sort((a,b)=>asi[b]-asi[a])[0];
-      const low=order.slice().sort((a,b)=>asi[a]-asi[b])[0];
-      const missing=["Avoid","Shift","Improve"].filter(k=>!asi[k]);
-      let sent=`The strategy leans on <strong>${top}</strong> (${asi[top]} of ${total} measures)`;
-      if(missing.length) sent+=`, with no ${missing.join(" or ")} content`;
-      else if(low!==top&&asi[low]/total<0.15) sent+=`, with limited ${low} content (${asi[low]})`;
-      sEl.innerHTML=sent+".";
-    }
-    safeChart(asiC,{type:"bar",
-      data:{labels:[""],datasets:order.map(k=>({label:k,data:[asi[k]],backgroundColor:ASI_COLOR[k]||MUTED,barThickness:26}))},
-      options:{indexAxis:"y",responsive:true,maintainAspectRatio:false,
-        plugins:{legend:{position:"bottom",labels:{font:{family:"Source Sans 3",size:11},boxWidth:12,padding:10}},
-          tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${c.raw} (${Math.round(c.raw/total*100)}%)`}}},
-        scales:{x:{stacked:true,display:false,max:total},y:{stacked:true,display:false}}}},
-      order.map(k=>[k,asi[k]]), k=>ASI_COLOR[k]||MUTED);
-  }
-  // Category chart with global-average emphasis markers (◆): shows whether
-  // this country's focus on a category is above or below what is typical.
-  const catC=document.getElementById("cp-cat-chart");
-  if(catC){
+    const asiOrder=["Avoid","Shift","Improve"].filter(k=>asi[k]);
+    const asiTotal=asiOrder.reduce((s,k)=>s+asi[k],0);
     const cats=p.category_summary||{};
     const catTotal=Object.values(cats).reduce((s,v)=>s+v,0);
-    const gShare=(bench&&bench.category_share)||null;
-    const labels=Object.keys(cats);
-    const datasets=[{type:"bar",data:Object.values(cats),backgroundColor:TEAL,borderRadius:4,order:2}];
-    if(gShare&&catTotal){
-      datasets.push({type:"scatter",label:"Global average emphasis",
-        data:labels.map(l=>({x:+( (gShare[l]||0)*catTotal ).toFixed(1),y:l})),
-        pointStyle:"rectRot",radius:5,backgroundColor:NAVY,borderColor:"#fff",borderWidth:1,order:1});
-    }
-    safeChart(catC,{type:"bar",
-      data:{labels,datasets},
-      options:{indexAxis:"y",responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
-          tooltip:{callbacks:{label:c=>c.dataset.type==="scatter"
-            ?`Typical emphasis: ${c.raw.x} of ${catTotal} measures`
-            :`${c.raw} measures`}}},
-        scales:{x:{ticks:{font:{family:"Source Sans 3"}},grid:{display:false}},
-                y:{ticks:{font:{family:"Source Sans 3",size:11},callback:function(v){const l=this.getLabelForValue(v);return l.length>24?l.slice(0,24)+"\u2026":l;}},grid:{display:false}}}}},
-      Object.entries(cats));
+
+    // A-S-I chips
+    const asiChips=asiOrder.length
+      ? asiOrder.map(k=>{
+          const pct=asiTotal?Math.round(asi[k]/asiTotal*100):0;
+          return `<div class="cp-asi-chip">
+            <span class="cp-asi-chip-val" style="color:${ASI_COLOR[k]}">${asi[k]}</span>
+            <span class="cp-asi-chip-label">${k}</span>
+            <div class="cp-asi-chip-bar"><div style="width:${pct}%;background:${ASI_COLOR[k]};"></div></div>
+          </div>`;
+        }).join("")
+      : `<span style="font-size:0.82rem;color:var(--ct-muted);">No A-S-I data.</span>`;
+
+    // Top 3 categories by share — simple, no global comparison.
+    const topCats=catTotal
+      ? Object.entries(cats).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([cat,n])=>{
+          const pct=Math.round(n/catTotal*100);
+          return `<div class="cp-topcat-row">
+            <span class="cp-topcat-name">${esc(cat)}</span>
+            <span class="cp-topcat-pct">${pct}%</span>
+          </div>`;
+        }).join("")
+      : "";
+
+    const strip=document.createElement("div");
+    strip.className="cp-asi-strip";
+    strip.innerHTML=`
+      <div class="cp-asi-strip-left">
+        <p class="cp-asi-strip-title">Avoid · Shift · Improve breakdown</p>
+        <div class="cp-asi-chips">${asiChips}</div>
+      </div>
+      ${topCats?`<div class="cp-asi-strip-right">
+        <p class="cp-asi-strip-title">Top categories</p>
+        <div class="cp-topcat">${topCats}</div>
+      </div>`:""}`;
+    fbar.before(strip);
   }
 
-  const categories=[...new Set(active.map(m=>m.category).filter(Boolean))];
-  const modes=[...new Set(active.flatMap(m=>m.modes||[]).filter(Boolean))].sort();
+  // ── Filters: one compact row (doc + A-S-I) + optional search ─────
   const docTypes=[...new Set(active.map(m=>m.doc_type).filter(Boolean))];
-  let curAsi="all",curCat="all",curMode="all",curDoc="all",curSearch="",showAll=false;
+  let curAsi="all",curDoc="all",curSearch="";
 
   if(fbar){
     fbar.innerHTML=`
-      <div class="cp-filter-row"><span class="cp-filter-label">By document:</span>
+      <div class="cp-filter-row">
+        <span class="cp-filter-label">By document:</span>
         <button class="cp-filter active" data-doc="all">All (${active.length})</button>
         ${docTypes.map(dt=>`<button class="cp-filter" data-doc="${esc(dt)}">${esc(dt)} (${active.filter(m=>m.doc_type===dt).length})</button>`).join("")}
-      </div>
-      <div class="cp-filter-row" style="margin-top:0.4rem;"><span class="cp-filter-label">By A-S-I:</span>
-        <button class="cp-filter active" data-asi="all">All (${active.length})</button>
+        <span class="cp-filter-label" style="margin-left:0.75rem;">By A-S-I:</span>
+        <button class="cp-filter active" data-asi="all">All</button>
         ${["Avoid","Shift","Improve"].map(a=>{const n=active.filter(m=>(m.asi||[]).includes(a)).length;return n?`<button class="cp-filter" data-asi="${a}">${a} (${n})</button>`:""}).join("")}
       </div>
-      <div class="cp-filter-row" style="margin-top:0.4rem;"><span class="cp-filter-label">By category:</span>
-        <button class="cp-filter active" data-cat="all">All (${active.length})</button>
-        ${categories.map(c=>`<button class="cp-filter" data-cat="${esc(c)}">${esc(c)} (${active.filter(m=>m.category===c).length})</button>`).join("")}
-      </div>
-      ${modes.length?`<div class="cp-filter-row" style="margin-top:0.4rem;"><span class="cp-filter-label">By mode:</span>
-        <button class="cp-filter active" data-mode="all">All (${active.length})</button>
-        ${modes.map(m=>`<button class="cp-filter" data-mode="${esc(m)}">${esc(m)} (${active.filter(x=>(x.modes||[]).includes(m)).length})</button>`).join("")}
-      </div>`:""}
-      <div class="cp-filter-row" style="margin-top:0.5rem;">
-        <input class="cp-search-input" id="cp-measures-search" placeholder="Search measures\u2026" type="text">
+      <div class="cp-filter-row" style="margin-top:0.4rem;">
+        <input class="cp-search-input" id="cp-measures-search" placeholder="Search measures\u2026" type="text" style="max-width:320px;">
       </div>`;
-    fbar.querySelectorAll("[data-doc]").forEach(b=>b.addEventListener("click",()=>{fbar.querySelectorAll("[data-doc]").forEach(x=>x.classList.remove("active"));b.classList.add("active");curDoc=b.dataset.doc;showAll=false;draw();}));
-    fbar.querySelectorAll("[data-asi]").forEach(b=>b.addEventListener("click",()=>{fbar.querySelectorAll("[data-asi]").forEach(x=>x.classList.remove("active"));b.classList.add("active");curAsi=b.dataset.asi;showAll=false;draw();}));
-    fbar.querySelectorAll("[data-cat]").forEach(b=>b.addEventListener("click",()=>{fbar.querySelectorAll("[data-cat]").forEach(x=>x.classList.remove("active"));b.classList.add("active");curCat=b.dataset.cat;showAll=false;draw();}));
-    fbar.querySelectorAll("[data-mode]").forEach(b=>b.addEventListener("click",()=>{fbar.querySelectorAll("[data-mode]").forEach(x=>x.classList.remove("active"));b.classList.add("active");curMode=b.dataset.mode;showAll=false;draw();}));
+    fbar.querySelectorAll("[data-doc]").forEach(b=>b.addEventListener("click",()=>{fbar.querySelectorAll("[data-doc]").forEach(x=>x.classList.remove("active"));b.classList.add("active");curDoc=b.dataset.doc;draw();}));
+    fbar.querySelectorAll("[data-asi]").forEach(b=>b.addEventListener("click",()=>{fbar.querySelectorAll("[data-asi]").forEach(x=>x.classList.remove("active"));b.classList.add("active");curAsi=b.dataset.asi;draw();}));
     const srch=document.getElementById("cp-measures-search");
-    if(srch) srch.addEventListener("input",()=>{curSearch=srch.value.toLowerCase().trim();showAll=false;draw();});
+    if(srch) srch.addEventListener("input",()=>{curSearch=srch.value.toLowerCase().trim();draw();});
   }
+
+  // ── Category display order ────────────────────────────────────────
+  const CAT_ORDER=["Mode shift and demand management","Transport system improvements",
+    "Electrification","Alternative fuels","Energy efficiency","Aviation and maritime"];
+
   function draw(){
-    const list=active.filter(m=>(curAsi==="all"||(m.asi||[]).includes(curAsi))&&(curCat==="all"||m.category===curCat)&&(curMode==="all"||(m.modes||[]).includes(curMode))&&(curDoc==="all"||m.doc_type===curDoc)&&(!curSearch||[m.instrument,m.purpose,m.category,m.quote].some(f=>f&&f.toLowerCase().includes(curSearch))));
-    const shown=showAll?list:list.slice(0,6);
-    listEl.innerHTML=shown.map(m=>{
-      const ac=((m.asi&&m.asi[0])||"improve").toLowerCase();
-      const du=m.doc_id?(docUrlMap[m.doc_id]||null):null;
-      return `<div class="cp-measure ${ac}"><div class="cp-measure-top"><span class="cp-measure-instrument">${esc(m.instrument||m.purpose||m.category)}</span>${m.asi&&m.asi.length?`<span class="cp-measure-asi ${ac}">${esc(m.asi.join("/"))}</span>`:""}</div>${m.quote?`<p class="cp-measure-quote">${esc(m.quote)}</p>`:""}<p class="cp-measure-meta">${esc(m.category||"")}, ${du?`<a href="${esc(du)}" target="_blank" rel="noopener" style="color:var(--ct-teal)">${esc(m.version||m.document||"")}</a>`:esc(m.version||m.document||"")}${m.page?", p. "+esc(m.page):""}</p>${m.modes&&m.modes.length?`<div class="cp-measure-tags">${m.modes.map(x=>`<span class="cp-tag">${esc(x)}</span>`).join("")}</div>`:""}</div>`;
-    }).join("")||`<div class="cp-empty">No measures match.</div>`;
-    if(moreBtn){if(list.length>6){moreBtn.hidden=false;moreBtn.textContent=showAll?"Show fewer":`Show all ${list.length} measures`;}else moreBtn.hidden=true;}
+    const list=active.filter(m=>
+      (curAsi==="all"||(m.asi||[]).includes(curAsi))&&
+      (curDoc==="all"||m.doc_type===curDoc)&&
+      (!curSearch||[m.instrument,m.purpose,m.category,m.quote].some(f=>f&&f.toLowerCase().includes(curSearch))));
+    if(!list.length){listEl.innerHTML=`<div class="cp-empty">No measures match.</div>`;if(moreBtn)moreBtn.hidden=true;return;}
+
+    const byCat={};
+    list.forEach(m=>{(byCat[m.category]=byCat[m.category]||[]).push(m);});
+    const catKeys=[...CAT_ORDER.filter(c=>byCat[c]),...Object.keys(byCat).filter(c=>!CAT_ORDER.includes(c)).sort()];
+
+    listEl.innerHTML=catKeys.map(cat=>{
+      const items=byCat[cat];
+      const clr=MITIG_ICON_COLORS[cat]||{bg:"rgba(0,61,92,0.10)",fg:"var(--ct-navy)"};
+      const iconPath=MITIG_ICONS[cat]||`<circle cx="12" cy="12" r="9"/>`;
+      // Dominant A-S-I badges for the header
+      const asiCounts={};
+      items.forEach(m=>(m.asi||[]).forEach(a=>{asiCounts[a]=(asiCounts[a]||0)+1;}));
+      const asiBadges=["Avoid","Shift","Improve"].filter(a=>asiCounts[a])
+        .map(a=>`<span class="cp-pcat-badge ${a.toLowerCase()}">${a}</span>`).join("");
+
+      const itemsHtml=items.map(m=>{
+        const du=m.doc_id?(docUrlMap[m.doc_id]||null):null;
+        const asiTag=m.asi&&m.asi.length?`<span class="cp-pitem-asi ${((m.asi[0])||"improve").toLowerCase()}">${esc(m.asi.join("/"))}</span>`:"";
+        return `<div class="cp-pitem">
+          <div class="cp-pitem-head">
+            <span class="cp-pitem-name">${esc(m.instrument||m.purpose||m.category)}</span>${asiTag}
+          </div>
+          ${m.quote?`<div class="cp-pitem-quote">${esc(m.quote)}</div>`:""}
+          <div class="cp-pitem-meta">${du?`<a href="${esc(du)}" target="_blank" rel="noopener" class="cp-target-doc">${esc(m.version||m.document||"")}</a>`:`<span>${esc(m.version||m.document||"")}</span>`}${m.page?` · p. ${esc(m.page)}`:""}${m.modes&&m.modes.length?` · `+m.modes.slice(0,3).map(x=>`<span class="cp-tag">${esc(x)}</span>`).join(""):""}</div>
+        </div>`;
+      }).join("");
+
+      const cardId=`cp-pcat-${cat.replace(/\s+/g,"-").toLowerCase()}`;
+      return `<div class="cp-pcat-card collapsed" id="${esc(cardId)}">
+        <button class="cp-pcat-head" aria-expanded="false" aria-controls="${esc(cardId)}-body">
+          <div class="cp-pcat-icon" style="background:${clr.bg};color:${clr.fg};">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">${iconPath}</svg>
+          </div>
+          <div class="cp-pcat-info">
+            <div class="cp-pcat-name">${esc(cat)}</div>
+            <div class="cp-pcat-meta">${items.length} measure${items.length>1?"s":""}${asiBadges?` <span class="cp-pcat-badges">${asiBadges}</span>`:""}</div>
+          </div>
+          <div class="cp-pcat-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        </button>
+        <div class="cp-pcat-body" id="${esc(cardId)}-body" hidden>${itemsHtml}</div>
+      </div>`;
+    }).join("");
+
+    // Attach toggle listeners
+    listEl.querySelectorAll(".cp-pcat-head").forEach(btn=>{
+      btn.addEventListener("click",()=>{
+        const card=btn.closest(".cp-pcat-card");
+        const body=card.querySelector(".cp-pcat-body");
+        const open=btn.getAttribute("aria-expanded")==="true";
+        btn.setAttribute("aria-expanded",String(!open));
+        card.classList.toggle("collapsed",open);
+        body.hidden=open;
+      });
+    });
+    if(moreBtn) moreBtn.hidden=true;
   }
-  if(moreBtn) moreBtn.addEventListener("click",()=>{showAll=!showAll;draw();});
   draw();
   const cmpLink=document.getElementById("cp-measures-compare");
   if(cmpLink){cmpLink.href=comparisonUrl("track",{c:p.code});cmpLink.hidden=false;}
@@ -817,27 +919,52 @@ function renderAdaptation(p, docUrlMap) {
   const wrap=document.getElementById("cp-adaptation"); if(!wrap)return;
   const active=p.adaptation.filter(a=>a.status==="Active");
   if(!active.length){wrap.innerHTML=`<div class="cp-empty">No transport adaptation measures in active documents.</div>`;return;}
+
+  // Uses the same cp-pcat-card component as Mitigation for visual consistency.
   const groups={};
   active.forEach(a=>{(groups[a.category]=groups[a.category]||[]).push(a);});
-  wrap.innerHTML=Object.entries(groups).sort((a,b)=>b[1].length-a[1].length).map(([cat,items])=>`
-    <div class="cp-adapt-group">
-      <div class="cp-adapt-head">
-        <div class="cp-adapt-icon"><svg viewBox="0 0 24 24">${ADAPT_ICONS[cat]||ADAPT_ICONS["Other adaptation and resilience measures"]}</svg></div>
-        <div class="cp-adapt-titles"><div class="cp-adapt-cat">${esc(cat)}</div><div class="cp-adapt-count">${items.length} measure${items.length>1?"s":""}</div></div>
-        <svg class="cp-adapt-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-      </div>
-      <div class="cp-adapt-body">
-        ${items.map(a=>{
-          const du=a.doc_id?(docUrlMap[a.doc_id]||null):null;
-          return `<div class="cp-adapt-item">
-            <div class="cp-adapt-item-name">${esc(a.measure||"Adaptation measure")}</div>
-            ${a.quote?`<div class="cp-adapt-item-quote">${esc(a.quote)}</div>`:""}
-            <div class="cp-adapt-item-meta">${du?`<a href="${esc(du)}" target="_blank" rel="noopener" style="color:var(--ct-teal)">${esc(a.version||a.document||"")}</a>`:esc(a.version||a.document||"")}${a.modes&&a.modes.length?" "+a.modes.map(m=>`<span class="cp-tag">${esc(m)}</span>`).join(""):""} ${a.page?", p. "+esc(a.page):""}</div>
-          </div>`;
-        }).join("")}
-      </div>
-    </div>`).join("");
-  wrap.querySelectorAll(".cp-adapt-head").forEach(h=>h.addEventListener("click",()=>h.parentElement.classList.toggle("open")));
+
+  wrap.innerHTML=Object.entries(groups).sort((a,b)=>b[1].length-a[1].length).map(([cat,items])=>{
+    const iconPath=ADAPT_ICONS[cat]||ADAPT_ICONS["Other adaptation and resilience measures"];
+    const itemsHtml=items.map(a=>{
+      const du=a.doc_id?(docUrlMap[a.doc_id]||null):null;
+      return `<div class="cp-pitem">
+        <div class="cp-pitem-head">
+          <span class="cp-pitem-name">${esc(a.measure||"Adaptation measure")}</span>
+        </div>
+        ${a.quote?`<div class="cp-pitem-quote">${esc(a.quote)}</div>`:""}
+        <div class="cp-pitem-meta">${du?`<a href="${esc(du)}" target="_blank" rel="noopener" class="cp-target-doc">${esc(a.version||a.document||"")}</a>`:esc(a.version||a.document||"")}${a.modes&&a.modes.length?" "+a.modes.map(m=>`<span class="cp-tag">${esc(m)}</span>`).join(""):""} ${a.page?`· p. ${esc(a.page)}`:""}</div>
+      </div>`;
+    }).join("");
+
+    const cardId=`cp-acat-${cat.replace(/\s+/g,"-").toLowerCase()}`;
+    return `<div class="cp-pcat-card collapsed" id="${esc(cardId)}">
+      <button class="cp-pcat-head" aria-expanded="false" aria-controls="${esc(cardId)}-body">
+        <div class="cp-pcat-icon" style="background:rgba(0,164,189,0.12);color:var(--ct-teal);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">${iconPath}</svg>
+        </div>
+        <div class="cp-pcat-info">
+          <div class="cp-pcat-name">${esc(cat)}</div>
+          <div class="cp-pcat-meta">${items.length} measure${items.length>1?"s":""}</div>
+        </div>
+        <div class="cp-pcat-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+      </button>
+      <div class="cp-pcat-body" id="${esc(cardId)}-body" hidden>${itemsHtml}</div>
+    </div>`;
+  }).join("");
+
+  // Toggle listeners
+  wrap.querySelectorAll(".cp-pcat-head").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const card=btn.closest(".cp-pcat-card");
+      const body=card.querySelector(".cp-pcat-body");
+      const open=btn.getAttribute("aria-expanded")==="true";
+      btn.setAttribute("aria-expanded",String(!open));
+      card.classList.toggle("collapsed",open);
+      body.hidden=open;
+    });
+  });
+
   const cmpLink=document.getElementById("cp-adaptation-compare");
   if(cmpLink){cmpLink.href=comparisonUrl("track",{c:p.code});cmpLink.hidden=false;}
 }
@@ -845,9 +972,59 @@ function renderAdaptation(p, docUrlMap) {
 /* ── Coalitions ───────────────────────────────────────────────────── */
 function renderCoalitions(p){
   const box=document.getElementById("cp-coalitions"); if(!box)return;
-  box.innerHTML=(!p.coalitions||!p.coalitions.length)
-    ?`<div class="cp-empty">${esc(p.name)} has not joined any of the tracked transport coalitions.</div>`
-    :p.coalitions.map(c=>`<div class="cp-coalition"><div class="cp-coalition-icon">\u2713</div><div class="cp-coalition-name">${esc(c)}</div></div>`).join("");
+  if(!p.coalitions||!p.coalitions.length){
+    box.innerHTML=`<div class="cp-empty">No transport coalitions registered for ${esc(p.name)}. Do you know one? <a href="mailto:transport-tracker@giz.de" class="cp-contact-link">Contact us</a></div>`;
+    return;
+  }
+  // Group by subsector; empty subsector = ungrouped (rendered flat)
+  const grouped={};
+  for(const c of p.coalitions){
+    const s=c.subsector||"";
+    if(!grouped[s]) grouped[s]=[];
+    grouped[s].push(c);
+  }
+  const hasSectors=Object.keys(grouped).some(s=>s!=="");
+  let html="";
+  if(hasSectors){
+    // Render grouped: named sectors first (alpha), ungrouped last
+    const sectors=Object.keys(grouped).filter(s=>s).sort();
+    if(grouped[""]) sectors.push("");
+    for(const s of sectors){
+      if(s) html+=`<div class="cp-coal-sector">${esc(s)}</div>`;
+      html+=grouped[s].map(c=>coalitionCard(c)).join("");
+    }
+  } else {
+    html=p.coalitions.map(c=>coalitionCard(c)).join("");
+  }
+  box.innerHTML=html;
+  // Attach toggle listeners
+  box.querySelectorAll(".cp-coalition").forEach(el=>{
+    el.addEventListener("click",()=>{
+      const body=el.querySelector(".cp-coal-body");
+      if(!body) return;
+      const open=el.classList.toggle("open");
+      body.hidden=!open;
+    });
+  });
+}
+
+function coalitionCard(c){
+  const hasDetail=c.description||c.urls.length;
+  const urlsHtml=c.urls.map(u=>`<a href="${esc(u)}" target="_blank" rel="noopener" class="cp-coal-url" onclick="event.stopPropagation()">${esc(u.replace(/^https?:\/\//,"").replace(/\/$/,""))}</a>`).join("");
+  const bodyHtml=hasDetail?`
+    <div class="cp-coal-body" hidden>
+      ${c.description?`<p class="cp-coal-desc">${esc(c.description)}</p>`:""}
+      ${urlsHtml?`<div class="cp-coal-urls">${urlsHtml}</div>`:""}
+    </div>`:"";
+  return `<div class="cp-coalition${hasDetail?" cp-coal-clickable":""}">
+    <div class="cp-coalition-icon">&#10003;</div>
+    <div class="cp-coal-main">
+      <div class="cp-coalition-name">${esc(c.key)}</div>
+      ${hasDetail?`<div class="cp-coal-hint">Click to ${hasDetail?"expand":""}</div>`:""}
+      ${bodyHtml}
+    </div>
+    ${hasDetail?`<div class="cp-coal-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>`:""}
+  </div>`;
 }
 
 /* ── Similar countries ────────────────────────────────────────────── */
@@ -871,7 +1048,7 @@ function renderSimilar(p){
           <span>${esc(c.name)}</span>
           ${c.share!=null?`<span class="share">${c.share}%</span>`:""}
           ${c.shared_focus?`<span class="share" style="font-size:0.7rem;">${esc(c.shared_focus)}</span>`:""}
-        </a><a class="cp-lens-cmp" href="${cmpHref}" target="_blank" rel="noopener" title="Compare with ${esc(p.name)}">\u21c4</a></div>`;
+        </a><a class="cp-lens-cmp" href="${cmpHref}" target="_blank" rel="noopener" aria-label="Compare with ${esc(c.name)}"><span class="cp-lens-cmp-icon">\u21c4</span></a></div>`;
       }).join("")}</div></div>`;
   }).join("");
   const link=document.getElementById("cp-compare-link");

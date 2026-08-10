@@ -1,7 +1,7 @@
 {
   "metadata": {
     "total_possible_ndcs": 169,
-    "last_updated": "2026-07-26",
+    "last_updated": "2026-08-10",
     "data_source": "GIZ-SLOCAT Transport Tracker Database",
     "gen_counts": {
       "gen1": {
@@ -9,11 +9,11 @@
         "archived": 165
       },
       "gen2": {
-        "active": 39,
+        "active": 38,
         "archived": 118
       },
       "gen3": {
-        "active": 125,
+        "active": 126,
         "archived": 6
       },
       "latest": {
@@ -113,12 +113,12 @@
       "gen3": {
         "name": "Third Generation",
         "period": "2024–ongoing",
-        "total_submitted": 125,
+        "total_submitted": 126,
         "with_transport": 70,
         "with_ghg_transport": 36,
         "regions": {
           "Asia": {
-            "total": 33,
+            "total": 34,
             "with_transport": 15,
             "with_ghg_transport": 7
           },
@@ -176,15 +176,15 @@
         "name": "Yemen",
         "region": "Asia",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -220,15 +220,15 @@
         "name": "Papua New Guinea",
         "region": "Oceania",
         "latest_active_gen": "gen2",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           }
         },
@@ -248,7 +248,7 @@
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
@@ -268,7 +268,7 @@
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -340,7 +340,7 @@
         "latest_has_ghg_transport": true,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -380,19 +380,19 @@
         "name": "Maldives",
         "region": "Asia",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -432,7 +432,7 @@
         "latest_has_ghg_transport": true,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -452,15 +452,15 @@
         "name": "Palau",
         "region": "Oceania",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -476,7 +476,7 @@
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -496,7 +496,7 @@
         "latest_has_ghg_transport": true,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -520,7 +520,7 @@
         "latest_has_ghg_transport": true,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -548,7 +548,7 @@
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
@@ -564,19 +564,19 @@
         "name": "Tuvalu",
         "region": "Oceania",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -616,7 +616,7 @@
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen3": {
@@ -624,7 +624,7 @@
             "version": "NDC 3.0"
           }
         },
-        "had_transport_previously": false,
+        "had_transport_previously": true,
         "ghg_transport": 1.15
       },
       "NOR": {
@@ -636,11 +636,11 @@
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
@@ -648,7 +648,7 @@
             "version": "NDC 3.0"
           }
         },
-        "had_transport_previously": false,
+        "had_transport_previously": true,
         "ghg_transport": 12.9
       },
       "VCT": {
@@ -660,7 +660,7 @@
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen3": {
@@ -676,11 +676,11 @@
         "name": "Peru",
         "region": "Latin America and the Caribbean",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -688,7 +688,7 @@
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -700,19 +700,19 @@
         "name": "Cameroon",
         "region": "Africa",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -724,11 +724,11 @@
         "name": "Cook Islands",
         "region": "Oceania",
         "latest_active_gen": "gen1",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           }
         },
@@ -748,7 +748,7 @@
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
@@ -764,19 +764,19 @@
         "name": "United States of America",
         "region": "Northern America",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -808,7 +808,7 @@
         "name": "Micronesia (Federated States of)",
         "region": "Oceania",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
@@ -816,11 +816,11 @@
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -944,11 +944,11 @@
         "name": "Belarus",
         "region": "Europe",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -956,7 +956,7 @@
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -972,11 +972,11 @@
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
@@ -1036,15 +1036,15 @@
         "name": "Ghana",
         "region": "Africa",
         "latest_active_gen": "gen2",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           }
         },
@@ -1060,7 +1060,7 @@
         "latest_has_ghg_transport": true,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -1104,7 +1104,7 @@
         "name": "Iceland",
         "region": "Europe",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
@@ -1116,7 +1116,7 @@
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -1128,15 +1128,15 @@
         "name": "Kiribati",
         "region": "Oceania",
         "latest_active_gen": "gen2",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           }
         },
@@ -1148,15 +1148,15 @@
         "name": "Madagascar",
         "region": "Africa",
         "latest_active_gen": "gen2",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           }
         },
@@ -1168,19 +1168,19 @@
         "name": "Mexico",
         "region": "Latin America and the Caribbean",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -1192,7 +1192,7 @@
         "name": "Mongolia",
         "region": "Asia",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
@@ -1204,11 +1204,11 @@
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
-        "had_transport_previously": true,
+        "had_transport_previously": false,
         "ghg_transport": 3.25
       },
       "NAM": {
@@ -1240,7 +1240,7 @@
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -1256,11 +1256,11 @@
         "name": "Singapore",
         "region": "Asia",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -1268,11 +1268,11 @@
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
-        "had_transport_previously": true,
+        "had_transport_previously": false,
         "ghg_transport": 6.33
       },
       "SLB": {
@@ -1288,7 +1288,7 @@
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
@@ -1308,11 +1308,11 @@
         "latest_has_ghg_transport": true,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
@@ -1332,7 +1332,7 @@
         "latest_has_ghg_transport": true,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -1424,7 +1424,7 @@
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -1440,7 +1440,7 @@
         "name": "India",
         "region": "Asia",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
@@ -1452,11 +1452,11 @@
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
-        "had_transport_previously": true,
+        "had_transport_previously": false,
         "ghg_transport": 354.23
       },
       "PRK": {
@@ -1468,7 +1468,7 @@
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -1476,7 +1476,7 @@
             "version": "NDC 2.0"
           }
         },
-        "had_transport_previously": false,
+        "had_transport_previously": true,
         "ghg_transport": 5.05
       },
       "BOL": {
@@ -1564,7 +1564,7 @@
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
@@ -1572,7 +1572,7 @@
             "version": "NDC 3.0"
           }
         },
-        "had_transport_previously": false,
+        "had_transport_previously": true,
         "ghg_transport": 15.3
       },
       "RWA": {
@@ -1584,11 +1584,11 @@
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
@@ -1604,11 +1604,11 @@
         "name": "Central African Republic",
         "region": "Africa",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -1616,7 +1616,7 @@
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -1632,7 +1632,7 @@
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -1652,19 +1652,19 @@
         "name": "Paraguay",
         "region": "Latin America and the Caribbean",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -1676,15 +1676,15 @@
         "name": "Algeria",
         "region": "Africa",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -1696,7 +1696,7 @@
         "name": "Turkmenistan",
         "region": "Asia",
         "latest_active_gen": "gen2",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
@@ -1704,7 +1704,7 @@
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           }
         },
@@ -1764,15 +1764,15 @@
         "name": "Niue",
         "region": "Oceania",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -1788,7 +1788,7 @@
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -1812,11 +1812,11 @@
         "latest_has_ghg_transport": true,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
@@ -1832,7 +1832,7 @@
         "name": "South Africa",
         "region": "Africa",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
@@ -1840,15 +1840,15 @@
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
-        "had_transport_previously": true,
+        "had_transport_previously": false,
         "ghg_transport": 45.34
       },
       "GAB": {
@@ -1856,7 +1856,7 @@
         "name": "Gabon",
         "region": "Africa",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
@@ -1864,15 +1864,15 @@
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
-        "had_transport_previously": true,
+        "had_transport_previously": false,
         "ghg_transport": 0.2
       },
       "STP": {
@@ -1888,7 +1888,7 @@
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
@@ -1908,7 +1908,7 @@
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -1928,19 +1928,19 @@
         "name": "Saudi Arabia",
         "region": "Asia",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -1952,15 +1952,15 @@
         "name": "Viet Nam",
         "region": "Asia",
         "latest_active_gen": "gen2",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           }
         },
@@ -1972,7 +1972,7 @@
         "name": "Jordan",
         "region": "Asia",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
@@ -1984,11 +1984,11 @@
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
-        "had_transport_previously": true,
+        "had_transport_previously": false,
         "ghg_transport": 8.08
       },
       "IDN": {
@@ -2000,11 +2000,11 @@
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
@@ -2088,19 +2088,19 @@
         "name": "Australia",
         "region": "Oceania",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -2116,7 +2116,7 @@
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -2180,15 +2180,15 @@
         "name": "Djibouti",
         "region": "Africa",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -2200,7 +2200,7 @@
         "name": "Malaysia",
         "region": "Asia",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
@@ -2208,11 +2208,11 @@
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -2224,7 +2224,7 @@
         "name": "Argentina",
         "region": "Latin America and the Caribbean",
         "latest_active_gen": "gen2",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
@@ -2232,7 +2232,7 @@
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           }
         },
@@ -2264,11 +2264,11 @@
         "name": "Afghanistan",
         "region": "Asia",
         "latest_active_gen": "gen1",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           }
         },
@@ -2288,7 +2288,7 @@
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
@@ -2312,7 +2312,7 @@
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
@@ -2332,7 +2332,7 @@
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -2352,19 +2352,19 @@
         "name": "Kenya",
         "region": "Africa",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -2376,7 +2376,7 @@
         "name": "Bahrain",
         "region": "Asia",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
@@ -2388,7 +2388,7 @@
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -2428,11 +2428,11 @@
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
@@ -2448,7 +2448,7 @@
         "name": "Chad",
         "region": "Africa",
         "latest_active_gen": "gen2",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
@@ -2456,7 +2456,7 @@
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           }
         },
@@ -2472,7 +2472,7 @@
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen3": {
@@ -2536,7 +2536,7 @@
         "latest_has_ghg_transport": true,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -2564,7 +2564,7 @@
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
@@ -2572,7 +2572,7 @@
             "version": "NDC 3.0"
           }
         },
-        "had_transport_previously": false,
+        "had_transport_previously": true,
         "ghg_transport": 9.27
       },
       "MRT": {
@@ -2612,7 +2612,7 @@
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
@@ -2648,15 +2648,15 @@
         "name": "Tajikistan",
         "region": "Asia",
         "latest_active_gen": "gen2",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           }
         },
@@ -2672,11 +2672,11 @@
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
@@ -2744,7 +2744,7 @@
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -2756,7 +2756,7 @@
             "version": "NDC 3.0"
           }
         },
-        "had_transport_previously": false,
+        "had_transport_previously": true,
         "ghg_transport": 2.73
       },
       "COG": {
@@ -2772,7 +2772,7 @@
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
@@ -2792,7 +2792,7 @@
         "latest_has_ghg_transport": true,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -2816,11 +2816,11 @@
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
@@ -2868,7 +2868,7 @@
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
@@ -2884,19 +2884,19 @@
         "name": "Qatar",
         "region": "Asia",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -2932,7 +2932,7 @@
         "latest_has_ghg_transport": true,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -3000,7 +3000,7 @@
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -3036,11 +3036,11 @@
         "name": "Zimbabwe",
         "region": "Africa",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -3048,11 +3048,11 @@
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
-        "had_transport_previously": true,
+        "had_transport_previously": false,
         "ghg_transport": 2.4
       },
       "TLS": {
@@ -3060,19 +3060,19 @@
         "name": "Timor-Leste",
         "region": "Asia",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -3104,19 +3104,19 @@
         "name": "Bhutan",
         "region": "Asia",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -3128,15 +3128,15 @@
         "name": "Myanmar",
         "region": "Asia",
         "latest_active_gen": "gen2",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           }
         },
@@ -3148,7 +3148,7 @@
         "name": "Liechtenstein",
         "region": "Europe",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
@@ -3156,7 +3156,7 @@
             "version": "NDC 1.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -3172,7 +3172,7 @@
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -3192,19 +3192,19 @@
         "name": "Dominican Republic",
         "region": "Latin America and the Caribbean",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -3224,7 +3224,7 @@
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
@@ -3244,11 +3244,11 @@
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
@@ -3264,11 +3264,11 @@
         "name": "Uruguay",
         "region": "Latin America and the Caribbean",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -3276,11 +3276,11 @@
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
-        "had_transport_previously": true,
+        "had_transport_previously": false,
         "ghg_transport": 4.43
       },
       "COD": {
@@ -3288,15 +3288,15 @@
         "name": "Democratic Republic of the Congo",
         "region": "Africa",
         "latest_active_gen": "gen2",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           }
         },
@@ -3308,7 +3308,7 @@
         "name": "Montenegro",
         "region": "Europe",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
@@ -3316,11 +3316,11 @@
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -3336,7 +3336,7 @@
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -3352,19 +3352,19 @@
         "name": "Burundi",
         "region": "Africa",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -3404,7 +3404,7 @@
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
@@ -3424,7 +3424,7 @@
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -3432,7 +3432,7 @@
             "version": "NDC 2.0"
           }
         },
-        "had_transport_previously": false,
+        "had_transport_previously": true,
         "ghg_transport": 19.27
       },
       "TZA": {
@@ -3440,15 +3440,15 @@
         "name": "United Republic of Tanzania",
         "region": "Africa",
         "latest_active_gen": "gen2",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           }
         },
@@ -3464,7 +3464,7 @@
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -3484,15 +3484,15 @@
         "name": "Eritrea",
         "region": "Africa",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -3508,7 +3508,7 @@
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -3552,19 +3552,19 @@
         "name": "Nicaragua",
         "region": "Latin America and the Caribbean",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -3596,7 +3596,7 @@
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -3604,7 +3604,7 @@
             "version": "NDC 2.0"
           }
         },
-        "had_transport_previously": false,
+        "had_transport_previously": true,
         "ghg_transport": 0.2
       },
       "GNQ": {
@@ -3612,15 +3612,15 @@
         "name": "Equatorial Guinea",
         "region": "Africa",
         "latest_active_gen": "gen2",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           }
         },
@@ -3632,19 +3632,19 @@
         "name": "Uzbekistan",
         "region": "Asia",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -3656,11 +3656,11 @@
         "name": "Syrian Arab Republic",
         "region": "Asia",
         "latest_active_gen": "gen1",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.1"
           }
         },
@@ -3676,11 +3676,11 @@
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
@@ -3696,15 +3696,15 @@
         "name": "Ecuador",
         "region": "Latin America and the Caribbean",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -3715,9 +3715,9 @@
         "iso3": "OMN",
         "name": "Oman",
         "region": "Asia",
-        "latest_active_gen": "gen2",
+        "latest_active_gen": "gen3",
         "latest_has_transport": true,
-        "latest_has_ghg_transport": true,
+        "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
             "has_transport": false,
@@ -3726,6 +3726,10 @@
           "gen2": {
             "has_transport": true,
             "version": "NDC 2.0"
+          },
+          "gen3": {
+            "has_transport": true,
+            "version": "NDC 3.0"
           }
         },
         "had_transport_previously": false,
@@ -3736,19 +3740,19 @@
         "name": "Lebanon",
         "region": "Asia",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -3768,7 +3772,7 @@
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
@@ -3792,7 +3796,7 @@
             "version": "NDC 1.0"
           },
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
@@ -3808,7 +3812,7 @@
         "name": "Russian Federation",
         "region": "Europe",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
@@ -3816,7 +3820,7 @@
             "version": "NDC 1.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -3832,7 +3836,7 @@
         "latest_has_ghg_transport": false,
         "generations": {
           "gen2": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 2.0"
           },
           "gen3": {
@@ -3848,11 +3852,11 @@
         "name": "Senegal",
         "region": "Africa",
         "latest_active_gen": "gen1",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           }
         },
@@ -3868,7 +3872,7 @@
         "latest_has_ghg_transport": true,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -3884,11 +3888,11 @@
         "name": "Türkiye",
         "region": "Asia",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen2": {
@@ -3896,11 +3900,11 @@
             "version": "NDC 2.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
-        "had_transport_previously": true,
+        "had_transport_previously": false,
         "ghg_transport": 100.2
       },
       "IRQ": {
@@ -3908,15 +3912,15 @@
         "name": "Iraq",
         "region": "Asia",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 1.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -3928,7 +3932,7 @@
         "name": "Vatican",
         "region": "Europe",
         "latest_active_gen": "gen3",
-        "latest_has_transport": false,
+        "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
@@ -3936,7 +3940,7 @@
             "version": "NDC 1.0"
           },
           "gen3": {
-            "has_transport": false,
+            "has_transport": true,
             "version": "NDC 3.0"
           }
         },
@@ -4623,16 +4627,16 @@
   "tab2": {
     "categories_latest": {
       "Alternative fuels": {
-        "countries_count": 90,
-        "mentions": 173
+        "countries_count": 89,
+        "mentions": 169
       },
       "Energy efficiency": {
-        "countries_count": 99,
-        "mentions": 195
+        "countries_count": 98,
+        "mentions": 194
       },
       "Mode shift and demand management": {
         "countries_count": 114,
-        "mentions": 352
+        "mentions": 351
       },
       "Transport system improvements": {
         "countries_count": 89,
@@ -4640,31 +4644,31 @@
       },
       "Electrification": {
         "countries_count": 122,
-        "mentions": 325
+        "mentions": 323
       },
       "Aviation and maritime": {
-        "countries_count": 45,
-        "mentions": 109
+        "countries_count": 44,
+        "mentions": 108
       }
     },
     "cat_latest_gen_breakdown": {
       "Alternative fuels": {
         "gen1_count": 3,
-        "gen2_count": 20,
+        "gen2_count": 19,
         "gen3_count": 67,
-        "mentions": 173
+        "mentions": 169
       },
       "Energy efficiency": {
         "gen1_count": 3,
-        "gen2_count": 21,
+        "gen2_count": 20,
         "gen3_count": 75,
-        "mentions": 195
+        "mentions": 194
       },
       "Mode shift and demand management": {
         "gen1_count": 3,
-        "gen2_count": 23,
-        "gen3_count": 88,
-        "mentions": 352
+        "gen2_count": 22,
+        "gen3_count": 89,
+        "mentions": 351
       },
       "Transport system improvements": {
         "gen1_count": 2,
@@ -4674,15 +4678,15 @@
       },
       "Electrification": {
         "gen1_count": 2,
-        "gen2_count": 21,
-        "gen3_count": 99,
-        "mentions": 325
+        "gen2_count": 20,
+        "gen3_count": 100,
+        "mentions": 323
       },
       "Aviation and maritime": {
         "gen1_count": 0,
-        "gen2_count": 6,
+        "gen2_count": 5,
         "gen3_count": 39,
-        "mentions": 109
+        "mentions": 108
       }
     },
     "cat_gen_active_archived": {
@@ -4726,10 +4730,10 @@
       },
       "gen2": {
         "Mode shift and demand management": {
-          "active_countries": 23,
+          "active_countries": 22,
           "archived_countries": 73,
-          "active_mentions": 60,
-          "archived_mentions": 230
+          "active_mentions": 58,
+          "archived_mentions": 232
         },
         "Transport system improvements": {
           "active_countries": 20,
@@ -4738,28 +4742,28 @@
           "archived_mentions": 122
         },
         "Energy efficiency": {
-          "active_countries": 21,
-          "archived_countries": 48,
-          "active_mentions": 45,
-          "archived_mentions": 102
-        },
-        "Alternative fuels": {
           "active_countries": 20,
           "archived_countries": 49,
           "active_mentions": 44,
-          "archived_mentions": 74
+          "archived_mentions": 103
+        },
+        "Alternative fuels": {
+          "active_countries": 19,
+          "archived_countries": 50,
+          "active_mentions": 40,
+          "archived_mentions": 78
         },
         "Electrification": {
-          "active_countries": 21,
-          "archived_countries": 68,
-          "active_mentions": 39,
-          "archived_mentions": 138
+          "active_countries": 20,
+          "archived_countries": 69,
+          "active_mentions": 36,
+          "archived_mentions": 141
         },
         "Aviation and maritime": {
-          "active_countries": 6,
-          "archived_countries": 19,
-          "active_mentions": 13,
-          "archived_mentions": 42
+          "active_countries": 5,
+          "archived_countries": 20,
+          "active_mentions": 12,
+          "archived_mentions": 43
         }
       },
       "gen3": {
@@ -4770,9 +4774,9 @@
           "archived_mentions": 2
         },
         "Electrification": {
-          "active_countries": 99,
+          "active_countries": 100,
           "archived_countries": 3,
-          "active_mentions": 284,
+          "active_mentions": 285,
           "archived_mentions": 3
         },
         "Energy efficiency": {
@@ -4782,9 +4786,9 @@
           "archived_mentions": 2
         },
         "Mode shift and demand management": {
-          "active_countries": 88,
+          "active_countries": 89,
           "archived_countries": 2,
-          "active_mentions": 289,
+          "active_mentions": 290,
           "archived_mentions": 3
         },
         "Transport system improvements": {
@@ -6121,6 +6125,10 @@
           "Alternative fuels": 4,
           "Energy efficiency": 1,
           "Aviation and maritime": 1
+        },
+        "gen3": {
+          "Electrification": 1,
+          "Mode shift and demand management": 1
         }
       },
       "PAK": {
@@ -7529,13 +7537,6 @@
         "Electrification": 1,
         "Mode shift and demand management": 1
       },
-      "OMN": {
-        "Mode shift and demand management": 2,
-        "Electrification": 3,
-        "Alternative fuels": 4,
-        "Energy efficiency": 1,
-        "Aviation and maritime": 1
-      },
       "NAM": {
         "Electrification": 2,
         "Alternative fuels": 5,
@@ -8195,6 +8196,10 @@
         "Alternative fuels": 1,
         "Energy efficiency": 1,
         "Aviation and maritime": 2
+      },
+      "OMN": {
+        "Electrification": 1,
+        "Mode shift and demand management": 1
       },
       "AUT": {
         "Aviation and maritime": 2,
@@ -9458,6 +9463,10 @@
           "Avoid": 1,
           "Shift": 3,
           "Improve": 10
+        },
+        "gen3": {
+          "Improve": 1,
+          "Shift": 1
         }
       },
       "PAK": {
@@ -10258,10 +10267,6 @@
         "Shift": 2,
         "Improve": 4
       },
-      "OMN": {
-        "Shift": 2,
-        "Improve": 9
-      },
       "NAM": {
         "Improve": 7,
         "Avoid": 1
@@ -10714,6 +10719,10 @@
       "DZA": {
         "Shift": 3,
         "Improve": 10
+      },
+      "OMN": {
+        "Improve": 1,
+        "Shift": 1
       }
     },
     "latest_gen_map": {
@@ -10758,7 +10767,6 @@
       "TKM": "gen2",
       "KIR": "gen2",
       "EGY": "gen2",
-      "OMN": "gen2",
       "NAM": "gen2",
       "MDG": "gen2",
       "ARE": "gen3",
@@ -10886,6 +10894,7 @@
       "MWI": "gen3",
       "GUY": "gen3",
       "DZA": "gen3",
+      "OMN": "gen3",
       "AUT": "gen3",
       "BEL": "gen3",
       "BGR": "gen3",

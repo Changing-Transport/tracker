@@ -36,8 +36,9 @@ REQUIRED_SCHEMA = {
     # sheet name: columns the pipeline reads (checked before any parsing)
     "Country":    ["Country Codes", "Country", "Region", "Income Level Group"],
     "Document":   ["Country Code", "Document ID", "Type of document",
-                   "Document name", "Version number", "Date", "Status", "URL",
-                   "Transport content", "Contains transport mitigation target",
+                   "Document name", "Version number", "Date", "Status",
+                   "URL", "Transport content",
+                   "Contains transport mitigation target",
                    "Contains transport adaptation target",
                    "Contains transport mitigation measures",
                    "Contains transport adaptation measures"],
@@ -48,7 +49,7 @@ REQUIRED_SCHEMA = {
                    "Instrument", "A-S-I", "Quote"],
     "Adaptation": ["Country Code", "Document ID"],
     "Benefits":   ["Country Code", "Document ID"],
-    "References": ["Country Code", "Document ID"],
+    # "References" sheet removed from database — not required
 }
 
 
@@ -90,15 +91,24 @@ def process_excel(excel_path):
 
     EU_STATUSES = {"Covered by EU", "Covered by EU archived"}
 
-    # Column positions (0-indexed)
+    # Build country → region lookup from Country sheet (Region no longer in Document)
+    country_region_map = {}
+    country_sheet = wb["Country"]
+    for crow in country_sheet.iter_rows(min_row=2, values_only=True):
+        ccode = str(crow[1]).strip() if crow[1] else None  # Country Codes at [1]
+        cregion = str(crow[4]).strip() if crow[4] else None  # Region at [4]
+        if ccode and cregion:
+            country_region_map[ccode] = cregion
+
+    # Column positions (0-indexed) — updated for new Document sheet layout
     D_DOCID     = 0
     D_CODE      = 1
     D_NAME      = 2
-    D_TYPE      = 4
-    D_VERSION   = 7
-    D_STATUS    = 9
-    D_TRANSPORT = 10
-    D_REGION    = 25
+    D_TYPE      = 3   # was 4; "Type of document" shifted left
+    D_VERSION   = 6   # was 7; "Version number" shifted left
+    D_STATUS    = 8   # was 9; "Status" shifted left
+    D_TRANSPORT = 17  # was 10; now "Transport content" (yes/no overall flag)
+    D_REGION    = None  # removed from Document sheet; sourced from country_region_map
 
     M_DOCID    = 0
     M_CODE     = 1
@@ -126,7 +136,6 @@ def process_excel(excel_path):
         version = row[D_VERSION]
         status  = row[D_STATUS]
         has_t   = row[D_TRANSPORT]
-        region  = row[D_REGION]
 
         if dtype != "NDC" or not code or not version: continue
         if status in EU_STATUSES: continue
@@ -136,11 +145,12 @@ def process_excel(excel_path):
 
         code   = str(code).strip()
         status = str(status).strip()
+        region = country_region_map.get(code, "Unknown")
 
         if code not in country_master:
             country_master[code] = {
                 "name":   str(name).strip() if name else code,
-                "region": str(region).strip() if region else "Unknown",
+                "region": region,
             }
 
         doc_id_info[doc_id] = {
@@ -148,7 +158,7 @@ def process_excel(excel_path):
             "gen":       gen,
             "status":    status,
             "has_t":     str(has_t).strip().lower() == "yes",
-            "region":    str(region).strip() if region else "Unknown",
+            "region":    region,
         }
 
     print(f"   ✓ {len(country_master)} countries, {len(doc_id_info)} NDC documents")
@@ -281,7 +291,6 @@ def process_excel(excel_path):
         version = row[D_VERSION]
         status  = row[D_STATUS]
         has_t   = row[D_TRANSPORT]
-        region  = row[D_REGION]
 
         if dtype != "NDC" or not code or not version: continue
         if status in EU_STATUSES: continue
@@ -291,7 +300,7 @@ def process_excel(excel_path):
 
         code    = str(code).strip()
         has_t_b = str(has_t or "").strip().lower() == "yes"
-        region  = str(region or "Unknown").strip()
+        region  = country_region_map.get(code, "Unknown")
 
         if code not in countries_tab1:
             countries_tab1[code] = {
@@ -633,6 +642,15 @@ def process_comparison_data(excel_path):
     targets_sheet = wb["Targets"]
     mitigation_sheet = wb["Mitigation"]
     adaptation_sheet = wb["Adaptation"]
+
+    # Build country → net-zero target lookup from Country sheet
+    # (net-zero and URL no longer in Document sheet)
+    country_netzero_map = {}
+    for crow in wb["Country"].iter_rows(min_row=2, values_only=True):
+        ccode = str(crow[1]).strip() if crow[1] else None  # Country Codes at [1]
+        netzero_val = str(crow[29]).strip().lower() if crow[29] else ""  # Net-zero target at [29]
+        if ccode:
+            country_netzero_map[ccode] = (netzero_val == "yes")
     
     # Get all mode column headers from Mitigation sheet (columns P to AL)
     mit_headers = [cell.value for cell in mitigation_sheet[1]]
@@ -650,17 +668,17 @@ def process_comparison_data(excel_path):
             if header:
                 adapt_mode_cols[idx] = str(header).strip()
     
-    # Column indices (0-indexed)
+    # Column indices (0-indexed) — updated for new Document sheet layout
     D_DOCID = 0
     D_CODE = 1
     D_NAME = 2
-    D_TYPE = 4
-    D_VERSION = 7
-    D_DATE = 8
-    D_STATUS = 9
-    D_TRANSPORT = 10
-    D_NETZERO = 11
-    D_URL = 23  # Column X
+    D_TYPE = 3    # was 4; "Type of document" shifted left
+    D_VERSION = 6  # was 7; "Version number" shifted left
+    D_DATE = 7    # was 8; "Date" shifted left
+    D_STATUS = 8  # was 9; "Status" shifted left
+    D_TRANSPORT = 9   # "Contains transport mitigation target" (boolean yes/no)
+    D_NETZERO = None  # removed from Document sheet; sourced from country_region_map
+    D_URL = 20    # URL appended as last column by macro export (col 21, 0-indexed)
     
     T_DOCID = 0
     T_AREA = 8
@@ -701,12 +719,10 @@ def process_comparison_data(excel_path):
         date_val = row[D_DATE]
         status = row[D_STATUS]
         has_transport = row[D_TRANSPORT]
-        has_netzero = row[D_NETZERO]
-        url = row[D_URL]
-        
+
         if dtype != "NDC" or not code or not version:
             continue
-        
+
         code = str(code).strip()
         version_str = str(version).strip()
         
@@ -743,8 +759,8 @@ def process_comparison_data(excel_path):
             "date": date_str,
             "status": str(status).strip() if status else "",
             "has_transport_target": str(has_transport).strip().lower() == "yes",
-            "has_netzero_target": str(has_netzero).strip().lower() == "yes",
-            "url": str(url).strip() if url else "",
+            "has_netzero_target": country_netzero_map.get(code, False),
+            "url": str(row[D_URL]).strip() if (D_URL is not None and len(row) > D_URL and row[D_URL]) else "",
         }
     
     # Process targets
@@ -954,6 +970,73 @@ def run_dashboards(excel_path):
 
     print(f"   Countries: {len(data['tab1']['countries'])} · "
           f"Comparison: {len(comparison_data['countries'])}")
+
+    # ── Widget summary (widget/widget-summary.json) ───────────────────
+    # Small JSON consumed by the home-page iframe widget on changing-transport.org.
+    # Numbers are derived from gen3 data already computed above — no extra
+    # parsing. "with_transport_measures" = gen3 countries with at least one
+    # mitigation measure in their latest active doc.
+    #
+    # IMPORTANT — EU bloc: the 27 EU member states each get a copy of the
+    # EU's collective NDC data (see "Adding EU member states" above), so a
+    # naive per-code count here counts the EU 27 times. total_submitted
+    # (used as the denominator) counts the EU as a single bloc (code EEU),
+    # so the numerator must match that scope or the percentage can exceed
+    # 100%. We count EU members as at most 1 unit here, same as the
+    # denominator.
+    _gen3_with_measures_codes = {
+        code for code, cd in data["tab1"]["countries"].items()
+        if cd.get("latest_active_gen") == "gen3"
+        and data["tab2"]["country_latest_cats"].get(code)
+    }
+    _eu_set = set(EU_MEMBER_ISO3)
+    _eu_in_count = _gen3_with_measures_codes & _eu_set
+    gen3_with_measures = (
+        len(_gen3_with_measures_codes - _eu_set)
+        + (1 if _eu_in_count else 0)
+    )
+
+    gen3 = data["tab1"]["generations"].get("gen3", {})
+    total_possible = data["metadata"]["total_possible_ndcs"]
+    n_submitted    = gen3.get("total_submitted", 0)
+    n_targets      = gen3.get("with_transport", 0)
+
+    from datetime import date as _date
+    _d = _date.today()
+    today_label = f"{_d.day} {_d.strftime('%B %Y')}"    # e.g. "10 April 2026"
+
+    widget_summary = {
+        "as_of": today_label,
+        "stats": [
+            {
+                "label": "NDCs 3.0 submitted",
+                "value": n_submitted,
+                "of":    f"of {total_possible} NDCs",
+                "pct":   round(n_submitted / total_possible * 100) if total_possible else 0,
+            },
+            {
+                "label": "With transport targets",
+                "value": n_targets,
+                "of":    f"of {n_submitted} NDCs",
+                "pct":   round(n_targets / n_submitted * 100) if n_submitted else 0,
+            },
+            {
+                "label": "With transport measures",
+                "value": gen3_with_measures,
+                "of":    f"of {n_submitted} NDCs",
+                "pct":   min(round(gen3_with_measures / n_submitted * 100), 100) if n_submitted else 0,
+            },
+        ],
+    }
+
+    widget_dir = Path("widget")
+    widget_dir.mkdir(exist_ok=True)
+    (widget_dir / "widget-summary.json").write_text(
+        json.dumps(widget_summary, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+    print(f"🪟  widget-summary.json saved → widget/")
+
     return data, comparison_data
 
 
@@ -1003,27 +1086,70 @@ MODE_COLUMNS = [
 ]
 GEO_COLUMNS = ["Urban", "Rural", "Inter-city"]
 
-COALITION_COLUMNS = {
-    "Declaration on accelerating the transition to 100% zero emission cars and vans":
-        "ZEV Declaration (100% zero-emission cars & vans)",
-    "Breakthrough agenda - road transport": "Breakthrough Agenda — Road Transport",
-    "International aviation climate ambition coalition":
-        "International Aviation Climate Ambition Coalition",
-    "Clydebank declaration for green shipping corridors":
-        "Clydebank Declaration (green shipping corridors)",
-    "Memorandum of understanding on zero-emission medium- and heavy-duty vehicles":
-        "Global MoU on Zero-Emission MHDVs",
-    "Beyond oil and gas alliance": "Beyond Oil & Gas Alliance",
-    "Charge forward to zero emissions transportation":
-        "Charge Forward to Zero Emissions Transportation",
-    "Transport Decarbonisation Alliance": "Transport Decarbonisation Alliance",
-    "International Zero-Emission Vehicle Alliance":
-        "International Zero-Emission Vehicle Alliance",
-    "ZEV Transition Council": "ZEV Transition Council",
-    "Clean Energy Ministerial": "Clean Energy Ministerial",
-}
+# COALITION_COLUMNS is no longer a static dict.
+# Initiative metadata is loaded from the "Initiatives" sheet at runtime
+# by load_initiatives(wb). See that function below.
+# The Country sheet columns between memberships and "Net-zero target" are
+# detected dynamically — no hardcoded list needed.
 
 EXCEL_EPOCH = date(1899, 12, 30)
+
+# Columns in Country sheet that mark group boundaries (not initiatives)
+# Everything between the last membership col and "Net-zero target" is an initiative.
+_COUNTRY_NON_INITIATIVE_COLS = {
+    # identifiers / metadata
+    "country codes", "country", "annex i or non-annex i", "region",
+    "income level group",
+    # memberships
+    "g20", "g7", "oecd", "eu27", "mena region", "mena region ",
+    # ghg summary cols at the end
+    "net-zero target", "ice phase-out target", "ice phase-out target type",
+    "ice phase-out target year", "source ice phase-out target",
+    "ghg total 2023 (mt)", "ghg transport 2023 (mt)",
+}
+
+
+def load_initiatives(wb):
+    """Read the Initiatives sheet and return a lookup dict:
+      { normalised_key: {key, description, subsector, urls} }
+    normalised_key = key.strip().lower() for fuzzy matching.
+    If the sheet is missing, returns an empty dict (graceful degradation)."""
+    if "Initiatives" not in wb.sheetnames:
+        return {}
+    meta = {}
+    for r in rows_as_dicts(wb["Initiatives"]):
+        key = r.get("Initiative key")
+        if not key:
+            continue
+        key = str(key).strip()
+        urls = [
+            str(r.get(f"URL {i}") or r.get(f"URL{i}") or "").strip()
+            for i in range(1, 6)
+            if str(r.get(f"URL {i}") or r.get(f"URL{i}") or "").strip()
+        ]
+        meta[key.lower()] = {
+            "key":         key,
+            "description": clean(r.get("Description")) or "",
+            "subsector":   clean(r.get("Subsector")) or "",
+            "urls":        urls,
+        }
+    return meta
+
+
+def get_initiative_cols(wb):
+    """Return the list of Country sheet column headers that represent initiatives.
+    Detected dynamically: all headers between the membership block and
+    'Net-zero target', excluding known non-initiative columns."""
+    ws = wb["Country"]
+    headers = [str(h).strip() if h else "" for h in next(ws.iter_rows(values_only=True))]
+    cols = []
+    for h in headers:
+        if not h:
+            continue
+        if h.lower() in _COUNTRY_NON_INITIATIVE_COLS:
+            continue
+        cols.append(h)
+    return cols
 
 
 # ============================================================================
@@ -1031,9 +1157,15 @@ EXCEL_EPOCH = date(1899, 12, 30)
 # ============================================================================
 
 def clean(v):
-    """Normalise a cell value: strip strings, None for empty."""
+    """Normalise a cell value: strip strings, None for empty.
+    datetime/date objects (openpyxl returns these for date-formatted cells)
+    are converted to ISO strings so they survive json.dumps()."""
     if v is None:
         return None
+    if isinstance(v, datetime):
+        return v.date().isoformat()
+    if isinstance(v, date):
+        return v.isoformat()
     if isinstance(v, str):
         v = v.strip()
         return v if v else None
@@ -1335,6 +1467,10 @@ def process(excel_path, ghg_by_country=None):
 
     # ------------------------------------------------------------------ Country
     print("🌍  Reading Country sheet …")
+    initiative_meta = load_initiatives(wb)
+    initiative_cols = get_initiative_cols(wb)
+    print(f"   ✓ {len(initiative_cols)} initiative columns detected, "
+          f"{len(initiative_meta)} with metadata from Initiatives sheet")
     countries = {}
     for r in rows_as_dicts(wb["Country"]):
         code = clean(r.get("Country Codes"))
@@ -1342,11 +1478,21 @@ def process(excel_path, ghg_by_country=None):
         if not code or not name:
             continue
         coalitions = []
-        for col, label in COALITION_COLUMNS.items():
-            # tolerate trailing-space variants in headers
-            val = r.get(col) or r.get(col + " ")
-            if clean(val):
-                coalitions.append(label)
+        for col in initiative_cols:
+            # tolerate trailing-space variants from Excel
+            val = r.get(col) or r.get(col.rstrip() + " ") or r.get(" " + col.lstrip())
+            if not clean(val):
+                continue
+            norm = col.strip().lower()
+            info = initiative_meta.get(norm) or initiative_meta.get(norm + " ") or {}
+            coalitions.append({
+                "key":         col.strip(),
+                "description": info.get("description", ""),
+                "subsector":   info.get("subsector", ""),
+                "urls":        info.get("urls", []),
+            })
+        # Sort alphabetically by key for consistent display
+        coalitions.sort(key=lambda c: c["key"].lower())
         # Emissions: use ghg.csv (via load_ghg_csv) as primary source;
         # fall back to Excel columns if a country is missing from EDGAR.
         _ghg = ghg_by_country.get(code, {}) if ghg_by_country else {}
@@ -1569,21 +1715,25 @@ def process(excel_path, ghg_by_country=None):
             doc_meta[b["doc_id"]][1]["counts"]["benefits"] += 1
 
     # ------------------------------------------------------------------ References
-    print("🔗  Reading References sheet …")
+    # Sheet removed from database — read gracefully if present, skip if not
     references_by_country = defaultdict(list)
-    for r in rows_as_dicts(wb["References"]):
-        code = clean(r.get("Country Code"))
-        if not code:
-            continue
-        references_by_country[code].append({
-            "doc_id": r.get("Document ID"),
-            "document": clean(r.get("Document name")),
-            "status": clean(r.get("Status")),
-            "further_type": clean(r.get("Further document type")),
-            "url": clean(r.get("URL to further document")),
-            "quote": clean(r.get("Quote")),
-            "page": clean(r.get("Page Number")),
-        })
+    if "References" in wb.sheetnames:
+        print("🔗  Reading References sheet …")
+        for r in rows_as_dicts(wb["References"]):
+            code = clean(r.get("Country Code"))
+            if not code:
+                continue
+            references_by_country[code].append({
+                "doc_id": r.get("Document ID"),
+                "document": clean(r.get("Document name")),
+                "status": clean(r.get("Status")),
+                "further_type": clean(r.get("Further document type")),
+                "url": clean(r.get("URL to further document")),
+                "quote": clean(r.get("Quote")),
+                "page": clean(r.get("Page Number")),
+            })
+    else:
+        print("🔗  References sheet not present — skipping")
 
     wb.close()
     return (countries, docs_by_country, targets_by_country, measures_by_country,
