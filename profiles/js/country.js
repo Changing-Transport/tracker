@@ -1257,3 +1257,49 @@ function downloadCSV(rows,filename){
   a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));
   a.download=filename;a.click();URL.revokeObjectURL(a.href);
 }
+
+/* =========================================================
+   WordPress iframe auto-height
+   ========================================================= */
+
+(function () {
+
+  const params = new URLSearchParams(window.location.search);
+
+  if (params.get('embed') !== '1') {
+    return;
+  }
+
+  // The outer WordPress page handles scrolling.
+  document.documentElement.style.overflow = 'hidden';
+  document.body.style.overflow = 'hidden';
+
+  function sendIframeHeight() {
+
+    const height = Math.max(
+        document.body.scrollHeight,
+        document.documentElement.scrollHeight
+    );
+
+    window.parent.postMessage(
+        {
+          type: 'ct-tracker-height',
+          height: height
+        },
+        'https://changing-transport.org'
+    );
+  }
+
+  window.addEventListener('load', sendIframeHeight);
+
+  const resizeObserver = new ResizeObserver(function () {
+    sendIframeHeight();
+  });
+
+  resizeObserver.observe(document.documentElement);
+
+  setTimeout(sendIframeHeight, 500);
+  setTimeout(sendIframeHeight, 1500);
+  setTimeout(sendIframeHeight, 3000);
+
+})();
