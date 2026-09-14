@@ -1169,7 +1169,12 @@ function renderSimilar(p){
     return `<div class="cp-lens"><div class="cp-lens-title">${esc(l.title)}</div><div class="cp-lens-note">${esc(l.note)}</div>
       <div class="cp-lens-countries">${list.map(c=>{
         const cmpHref=comparisonUrl("compare",{c1:p.code,c2:c.code,gen:"latest"});
-        return `<div class="cp-lens-row"><a class="cp-lens-country" href="${BASE}country.html?country=${esc(c.code)}">
+      const countryHref =
+          new URLSearchParams(window.location.search).get('embed') === '1'
+              ? `https://changing-transport.org/ndc_country/${clientSlugify(c.name)}/`
+              : `${BASE}country.html?country=${esc(c.code)}`;
+
+      return `<div class="cp-lens-row"><a class="cp-lens-country" href="${countryHref}" ${new URLSearchParams(window.location.search).get('embed') === '1' ? 'target="_parent"' : ''}>
           <img src="${BASE}../assets/flags/${esc(c.iso2)}.png" onerror="this.onerror=null;this.src='https://flagcdn.com/w40/${esc(c.iso2)}.png'" alt="">
           <span>${esc(c.name)}</span>
           ${c.share!=null?`<span class="share">${c.share}%</span>`:""}
