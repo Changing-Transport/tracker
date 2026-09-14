@@ -279,7 +279,18 @@ function setupCountrySwitcher(currentCode) {
       li.addEventListener("click",()=>{
         const code=li.dataset.code;
         const target=countries.find(c=>c.code===code);
-        if(target) location.href=`${BASE}countries/${clientSlugify(target.name)}/`;
+
+        if (target) {
+          const slug = clientSlugify(target.name);
+
+          if (new URLSearchParams(window.location.search).get('embed') === '1') {
+            window.parent.location.href =
+                `https://changing-transport.org/ndc_country/${slug}/`;
+          } else {
+            location.href =
+                `${BASE}countries/${slug}/`;
+          }
+        }
       });
     });
   }
