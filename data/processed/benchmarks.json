@@ -1,13 +1,13 @@
 {
- "generated": "2026-08-12",
+ "generated": "2026-09-30",
  "countries": 182,
  "category_share": {
   "Alternative fuels": 0.1431,
-  "Energy efficiency": 0.1389,
-  "Mode shift and demand management": 0.2628,
-  "Transport system improvements": 0.1772,
-  "Electrification": 0.2173,
-  "Aviation and maritime": 0.0607
+  "Energy efficiency": 0.1343,
+  "Mode shift and demand management": 0.2632,
+  "Transport system improvements": 0.1764,
+  "Electrification": 0.2216,
+  "Aviation and maritime": 0.0614
  },
  "global_transport": {
   "years": [

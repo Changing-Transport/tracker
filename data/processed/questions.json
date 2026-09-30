@@ -1,5 +1,5 @@
 {
- "generated": "2026-08-12",
+ "generated": "2026-09-30",
  "questions": [
   {
    "id": "conditional-targets",
@@ -10,7 +10,13 @@
      "code": "MWI",
      "country": "Malawi",
      "url": "profiles/countries/malawi/",
-     "n": 24
+     "n": 27
+    },
+    {
+     "code": "PSE",
+     "country": "Palestine",
+     "url": "profiles/countries/palestine/",
+     "n": 18
     },
     {
      "code": "UGA",
@@ -79,21 +85,27 @@
      "n": 8
     },
     {
-     "code": "EEU",
-     "country": "European Union",
-     "url": "profiles/countries/european-union/",
-     "n": 8
-    },
-    {
      "code": "LSO",
      "country": "Lesotho",
      "url": "profiles/countries/lesotho/",
      "n": 8
     },
     {
+     "code": "STP",
+     "country": "Sao Tome and Principe",
+     "url": "profiles/countries/sao-tome-and-principe/",
+     "n": 8
+    },
+    {
      "code": "ATG",
      "country": "Antigua and Barbuda",
      "url": "profiles/countries/antigua-and-barbuda/",
+     "n": 7
+    },
+    {
+     "code": "EEU",
+     "country": "European Union",
+     "url": "profiles/countries/european-union/",
      "n": 7
     },
     {
@@ -133,6 +145,12 @@
      "n": 6
     },
     {
+     "code": "GMB",
+     "country": "Gambia (Republic of The)",
+     "url": "profiles/countries/gambia-republic-of-the/",
+     "n": 6
+    },
+    {
      "code": "KGZ",
      "country": "Kyrgyzstan",
      "url": "profiles/countries/kyrgyzstan/",
@@ -160,12 +178,6 @@
      "code": "NGA",
      "country": "Nigeria",
      "url": "profiles/countries/nigeria/",
-     "n": 5
-    },
-    {
-     "code": "PSE",
-     "country": "Palestine",
-     "url": "profiles/countries/palestine/",
      "n": 5
     },
     {
@@ -238,12 +250,6 @@
      "code": "LAO",
      "country": "Lao People’s Democratic Republic",
      "url": "profiles/countries/lao-peoples-democratic-republic/",
-     "n": 4
-    },
-    {
-     "code": "STP",
-     "country": "Sao Tome and Principe",
-     "url": "profiles/countries/sao-tome-and-principe/",
      "n": 4
     },
     {
@@ -343,12 +349,6 @@
      "n": 2
     },
     {
-     "code": "COM",
-     "country": "Comoros",
-     "url": "profiles/countries/comoros/",
-     "n": 2
-    },
-    {
      "code": "GEO",
      "country": "Georgia",
      "url": "profiles/countries/georgia/",
@@ -421,12 +421,6 @@
      "n": 2
     },
     {
-     "code": "TTO",
-     "country": "Trinidad and Tobago",
-     "url": "profiles/countries/trinidad-and-tobago/",
-     "n": 2
-    },
-    {
      "code": "GBR",
      "country": "United Kingdom",
      "url": "profiles/countries/united-kingdom/",
@@ -481,6 +475,12 @@
      "n": 1
     },
     {
+     "code": "COM",
+     "country": "Comoros",
+     "url": "profiles/countries/comoros/",
+     "n": 1
+    },
+    {
      "code": "COG",
      "country": "Congo",
      "url": "profiles/countries/congo/",
@@ -493,21 +493,9 @@
      "n": 1
     },
     {
-     "code": "SLV",
-     "country": "El Salvador",
-     "url": "profiles/countries/el-salvador/",
-     "n": 1
-    },
-    {
      "code": "GAB",
      "country": "Gabon",
      "url": "profiles/countries/gabon/",
-     "n": 1
-    },
-    {
-     "code": "GMB",
-     "country": "Gambia (Republic of The)",
-     "url": "profiles/countries/gambia-republic-of-the/",
      "n": 1
     },
     {
@@ -643,6 +631,12 @@
      "n": 1
     },
     {
+     "code": "TTO",
+     "country": "Trinidad and Tobago",
+     "url": "profiles/countries/trinidad-and-tobago/",
+     "n": 1
+    },
+    {
      "code": "TUV",
      "country": "Tuvalu",
      "url": "profiles/countries/tuvalu/",
@@ -677,7 +671,7 @@
      "code": "MWI",
      "country": "Malawi",
      "url": "profiles/countries/malawi/",
-     "n": 24
+     "n": 27
     },
     {
      "code": "UGA",
@@ -710,6 +704,12 @@
      "n": 9
     },
     {
+     "code": "PSE",
+     "country": "Palestine",
+     "url": "profiles/countries/palestine/",
+     "n": 9
+    },
+    {
      "code": "MDA",
      "country": "Republic of Moldova",
      "url": "profiles/countries/republic-of-moldova/",
@@ -719,12 +719,6 @@
      "code": "CIV",
      "country": "Côte D'Ivoire",
      "url": "profiles/countries/cote-d-ivoire/",
-     "n": 7
-    },
-    {
-     "code": "EEU",
-     "country": "European Union",
-     "url": "profiles/countries/european-union/",
      "n": 7
     },
     {
@@ -755,6 +749,18 @@
      "code": "BFA",
      "country": "Burkina Faso",
      "url": "profiles/countries/burkina-faso/",
+     "n": 6
+    },
+    {
+     "code": "EEU",
+     "country": "European Union",
+     "url": "profiles/countries/european-union/",
+     "n": 6
+    },
+    {
+     "code": "GMB",
+     "country": "Gambia (Republic of The)",
+     "url": "profiles/countries/gambia-republic-of-the/",
      "n": 6
     },
     {
@@ -791,12 +797,6 @@
      "code": "KGZ",
      "country": "Kyrgyzstan",
      "url": "profiles/countries/kyrgyzstan/",
-     "n": 5
-    },
-    {
-     "code": "PSE",
-     "country": "Palestine",
-     "url": "profiles/countries/palestine/",
      "n": 5
     },
     {
@@ -863,6 +863,12 @@
      "code": "NGA",
      "country": "Nigeria",
      "url": "profiles/countries/nigeria/",
+     "n": 4
+    },
+    {
+     "code": "STP",
+     "country": "Sao Tome and Principe",
+     "url": "profiles/countries/sao-tome-and-principe/",
      "n": 4
     },
     {
@@ -956,12 +962,6 @@
      "n": 2
     },
     {
-     "code": "COM",
-     "country": "Comoros",
-     "url": "profiles/countries/comoros/",
-     "n": 2
-    },
-    {
      "code": "ETH",
      "country": "Ethiopia",
      "url": "profiles/countries/ethiopia/",
@@ -1016,12 +1016,6 @@
      "n": 2
     },
     {
-     "code": "STP",
-     "country": "Sao Tome and Principe",
-     "url": "profiles/countries/sao-tome-and-principe/",
-     "n": 2
-    },
-    {
      "code": "TGO",
      "country": "Togo",
      "url": "profiles/countries/togo/",
@@ -1031,12 +1025,6 @@
      "code": "TON",
      "country": "Tonga",
      "url": "profiles/countries/tonga/",
-     "n": 2
-    },
-    {
-     "code": "TTO",
-     "country": "Trinidad and Tobago",
-     "url": "profiles/countries/trinidad-and-tobago/",
      "n": 2
     },
     {
@@ -1076,6 +1064,12 @@
      "n": 1
     },
     {
+     "code": "COM",
+     "country": "Comoros",
+     "url": "profiles/countries/comoros/",
+     "n": 1
+    },
+    {
      "code": "COG",
      "country": "Congo",
      "url": "profiles/countries/congo/",
@@ -1085,18 +1079,6 @@
      "code": "EGY",
      "country": "Egypt",
      "url": "profiles/countries/egypt/",
-     "n": 1
-    },
-    {
-     "code": "SLV",
-     "country": "El Salvador",
-     "url": "profiles/countries/el-salvador/",
-     "n": 1
-    },
-    {
-     "code": "GMB",
-     "country": "Gambia (Republic of The)",
-     "url": "profiles/countries/gambia-republic-of-the/",
      "n": 1
     },
     {
@@ -1193,6 +1175,12 @@
      "code": "THA",
      "country": "Thailand",
      "url": "profiles/countries/thailand/",
+     "n": 1
+    },
+    {
+     "code": "TTO",
+     "country": "Trinidad and Tobago",
+     "url": "profiles/countries/trinidad-and-tobago/",
      "n": 1
     },
     {
@@ -1492,6 +1480,12 @@
      "n": 5
     },
     {
+     "code": "PSE",
+     "country": "Palestine",
+     "url": "profiles/countries/palestine/",
+     "n": 2
+    },
+    {
      "code": "LBN",
      "country": "Lebanon",
      "url": "profiles/countries/lebanon/",
@@ -1757,12 +1751,6 @@
      "n": 1
     },
     {
-     "code": "STP",
-     "country": "Sao Tome and Principe",
-     "url": "profiles/countries/sao-tome-and-principe/",
-     "n": 1
-    },
-    {
      "code": "TKM",
      "country": "Turkmenistan",
      "url": "profiles/countries/turkmenistan/",
@@ -1980,6 +1968,12 @@
      "n": 4
     },
     {
+     "code": "STP",
+     "country": "Sao Tome and Principe",
+     "url": "profiles/countries/sao-tome-and-principe/",
+     "n": 4
+    },
+    {
      "code": "SLB",
      "country": "Solomon Islands",
      "url": "profiles/countries/solomon-islands/",
@@ -2022,6 +2016,12 @@
      "n": 3
     },
     {
+     "code": "GMB",
+     "country": "Gambia (Republic of The)",
+     "url": "profiles/countries/gambia-republic-of-the/",
+     "n": 3
+    },
+    {
      "code": "ISR",
      "country": "Israel",
      "url": "profiles/countries/israel/",
@@ -2052,15 +2052,15 @@
      "n": 3
     },
     {
-     "code": "WSM",
-     "country": "Samoa",
-     "url": "profiles/countries/samoa/",
+     "code": "PSE",
+     "country": "Palestine",
+     "url": "profiles/countries/palestine/",
      "n": 3
     },
     {
-     "code": "STP",
-     "country": "Sao Tome and Principe",
-     "url": "profiles/countries/sao-tome-and-principe/",
+     "code": "WSM",
+     "country": "Samoa",
+     "url": "profiles/countries/samoa/",
      "n": 3
     },
     {
@@ -2163,12 +2163,6 @@
      "code": "EEU",
      "country": "European Union",
      "url": "profiles/countries/european-union/",
-     "n": 2
-    },
-    {
-     "code": "GMB",
-     "country": "Gambia (Republic of The)",
-     "url": "profiles/countries/gambia-republic-of-the/",
      "n": 2
     },
     {
@@ -2695,12 +2689,6 @@
      "n": 3
     },
     {
-     "code": "GMB",
-     "country": "Gambia (Republic of The)",
-     "url": "profiles/countries/gambia-republic-of-the/",
-     "n": 3
-    },
-    {
      "code": "LBR",
      "country": "Liberia",
      "url": "profiles/countries/liberia/",
@@ -2719,9 +2707,9 @@
      "n": 3
     },
     {
-     "code": "STP",
-     "country": "Sao Tome and Principe",
-     "url": "profiles/countries/sao-tome-and-principe/",
+     "code": "PSE",
+     "country": "Palestine",
+     "url": "profiles/countries/palestine/",
      "n": 3
     },
     {
@@ -2788,6 +2776,12 @@
      "code": "SLV",
      "country": "El Salvador",
      "url": "profiles/countries/el-salvador/",
+     "n": 2
+    },
+    {
+     "code": "GMB",
+     "country": "Gambia (Republic of The)",
+     "url": "profiles/countries/gambia-republic-of-the/",
      "n": 2
     },
     {
@@ -3019,12 +3013,6 @@
      "n": 1
     },
     {
-     "code": "PSE",
-     "country": "Palestine",
-     "url": "profiles/countries/palestine/",
-     "n": 1
-    },
-    {
      "code": "PER",
      "country": "Peru",
      "url": "profiles/countries/peru/",
@@ -3040,6 +3028,12 @@
      "code": "MDA",
      "country": "Republic of Moldova",
      "url": "profiles/countries/republic-of-moldova/",
+     "n": 1
+    },
+    {
+     "code": "STP",
+     "country": "Sao Tome and Principe",
+     "url": "profiles/countries/sao-tome-and-principe/",
      "n": 1
     },
     {
@@ -3146,6 +3140,12 @@
      "n": 9
     },
     {
+     "code": "PSE",
+     "country": "Palestine",
+     "url": "profiles/countries/palestine/",
+     "n": 9
+    },
+    {
      "code": "ETH",
      "country": "Ethiopia",
      "url": "profiles/countries/ethiopia/",
@@ -3192,6 +3192,12 @@
      "country": "South Africa",
      "url": "profiles/countries/south-africa/",
      "n": 7
+    },
+    {
+     "code": "GMB",
+     "country": "Gambia (Republic of The)",
+     "url": "profiles/countries/gambia-republic-of-the/",
+     "n": 6
     },
     {
      "code": "NGA",
@@ -3386,6 +3392,12 @@
      "n": 3
     },
     {
+     "code": "STP",
+     "country": "Sao Tome and Principe",
+     "url": "profiles/countries/sao-tome-and-principe/",
+     "n": 3
+    },
+    {
      "code": "TON",
      "country": "Tonga",
      "url": "profiles/countries/tonga/",
@@ -3473,12 +3485,6 @@
      "code": "MDA",
      "country": "Republic of Moldova",
      "url": "profiles/countries/republic-of-moldova/",
-     "n": 2
-    },
-    {
-     "code": "STP",
-     "country": "Sao Tome and Principe",
-     "url": "profiles/countries/sao-tome-and-principe/",
      "n": 2
     },
     {
@@ -3602,12 +3608,6 @@
      "n": 1
     },
     {
-     "code": "GMB",
-     "country": "Gambia (Republic of The)",
-     "url": "profiles/countries/gambia-republic-of-the/",
-     "n": 1
-    },
-    {
      "code": "GHA",
      "country": "Ghana",
      "url": "profiles/countries/ghana/",
@@ -3653,12 +3653,6 @@
      "code": "OMN",
      "country": "Oman",
      "url": "profiles/countries/oman/",
-     "n": 1
-    },
-    {
-     "code": "PSE",
-     "country": "Palestine",
-     "url": "profiles/countries/palestine/",
      "n": 1
     },
     {
@@ -4041,6 +4035,12 @@
      "n": null
     },
     {
+     "code": "GMB",
+     "country": "Gambia (Republic of The)",
+     "url": "profiles/countries/gambia-republic-of-the/",
+     "n": null
+    },
+    {
      "code": "GEO",
      "country": "Georgia",
      "url": "profiles/countries/georgia/",
@@ -4344,6 +4344,12 @@
      "code": "PLW",
      "country": "Palau",
      "url": "profiles/countries/palau/",
+     "n": null
+    },
+    {
+     "code": "PSE",
+     "country": "Palestine",
+     "url": "profiles/countries/palestine/",
      "n": null
     },
     {

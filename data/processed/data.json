@@ -1,7 +1,7 @@
 {
   "metadata": {
     "total_possible_ndcs": 169,
-    "last_updated": "2026-08-12",
+    "last_updated": "2026-09-30",
     "data_source": "GIZ-SLOCAT Transport Tracker Database",
     "gen_counts": {
       "gen1": {
@@ -9,12 +9,12 @@
         "archived": 165
       },
       "gen2": {
-        "active": 38,
-        "archived": 118
+        "active": 36,
+        "archived": 120
       },
       "gen3": {
-        "active": 126,
-        "archived": 6
+        "active": 128,
+        "archived": 7
       },
       "latest": {
         "active": 169,
@@ -113,13 +113,13 @@
       "gen3": {
         "name": "Third Generation",
         "period": "2024–ongoing",
-        "total_submitted": 126,
-        "with_transport": 70,
-        "with_ghg_transport": 36,
+        "total_submitted": 128,
+        "with_transport": 71,
+        "with_ghg_transport": 33,
         "regions": {
           "Asia": {
-            "total": 34,
-            "with_transport": 15,
+            "total": 35,
+            "with_transport": 16,
             "with_ghg_transport": 7
           },
           "Oceania": {
@@ -129,18 +129,18 @@
           },
           "Latin America and the Caribbean": {
             "total": 26,
-            "with_transport": 17,
-            "with_ghg_transport": 6
+            "with_transport": 16,
+            "with_ghg_transport": 5
           },
           "Africa": {
-            "total": 36,
-            "with_transport": 24,
-            "with_ghg_transport": 12
+            "total": 37,
+            "with_transport": 25,
+            "with_ghg_transport": 11
           },
           "Europe": {
             "total": 15,
             "with_transport": 6,
-            "with_ghg_transport": 4
+            "with_ghg_transport": 3
           },
           "Northern America": {
             "total": 2,
@@ -1509,7 +1509,7 @@
         "region": "Europe",
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
-        "latest_has_ghg_transport": true,
+        "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
             "has_transport": false,
@@ -2043,9 +2043,9 @@
         "iso3": "GMB",
         "name": "Gambia (Republic of The)",
         "region": "Africa",
-        "latest_active_gen": "gen2",
+        "latest_active_gen": "gen3",
         "latest_has_transport": true,
-        "latest_has_ghg_transport": true,
+        "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
             "has_transport": true,
@@ -2054,6 +2054,10 @@
           "gen2": {
             "has_transport": true,
             "version": "NDC 2.0"
+          },
+          "gen3": {
+            "has_transport": true,
+            "version": "NDC 3.0"
           }
         },
         "had_transport_previously": false,
@@ -2281,7 +2285,7 @@
         "region": "Africa",
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
-        "latest_has_ghg_transport": true,
+        "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
             "has_transport": false,
@@ -2717,7 +2721,7 @@
         "region": "Latin America and the Caribbean",
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
-        "latest_has_ghg_transport": true,
+        "latest_has_ghg_transport": false,
         "generations": {
           "gen1": {
             "has_transport": false,
@@ -3083,7 +3087,7 @@
         "iso3": "PSE",
         "name": "Palestine",
         "region": "Asia",
-        "latest_active_gen": "gen2",
+        "latest_active_gen": "gen3",
         "latest_has_transport": true,
         "latest_has_ghg_transport": false,
         "generations": {
@@ -3094,6 +3098,10 @@
           "gen2": {
             "has_transport": true,
             "version": "NDC 2.0"
+          },
+          "gen3": {
+            "has_transport": true,
+            "version": "NDC 3.0"
           }
         },
         "had_transport_previously": false,
@@ -3953,7 +3961,7 @@
         "region": "Europe",
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
-        "latest_has_ghg_transport": true,
+        "latest_has_ghg_transport": false,
         "had_transport_previously": false,
         "generations": {
           "gen1": {
@@ -3978,7 +3986,7 @@
         "region": "Europe",
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
-        "latest_has_ghg_transport": true,
+        "latest_has_ghg_transport": false,
         "had_transport_previously": false,
         "generations": {
           "gen1": {
@@ -4003,7 +4011,7 @@
         "region": "Europe",
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
-        "latest_has_ghg_transport": true,
+        "latest_has_ghg_transport": false,
         "had_transport_previously": false,
         "generations": {
           "gen1": {
@@ -4028,7 +4036,7 @@
         "region": "Europe",
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
-        "latest_has_ghg_transport": true,
+        "latest_has_ghg_transport": false,
         "had_transport_previously": false,
         "generations": {
           "gen1": {
@@ -4053,7 +4061,7 @@
         "region": "Europe",
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
-        "latest_has_ghg_transport": true,
+        "latest_has_ghg_transport": false,
         "had_transport_previously": false,
         "generations": {
           "gen1": {
@@ -4078,7 +4086,7 @@
         "region": "Europe",
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
-        "latest_has_ghg_transport": true,
+        "latest_has_ghg_transport": false,
         "had_transport_previously": false,
         "generations": {
           "gen1": {
@@ -4103,7 +4111,7 @@
         "region": "Europe",
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
-        "latest_has_ghg_transport": true,
+        "latest_has_ghg_transport": false,
         "had_transport_previously": false,
         "generations": {
           "gen1": {
@@ -4128,7 +4136,7 @@
         "region": "Europe",
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
-        "latest_has_ghg_transport": true,
+        "latest_has_ghg_transport": false,
         "had_transport_previously": false,
         "generations": {
           "gen1": {
@@ -4153,7 +4161,7 @@
         "region": "Europe",
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
-        "latest_has_ghg_transport": true,
+        "latest_has_ghg_transport": false,
         "had_transport_previously": false,
         "generations": {
           "gen1": {
@@ -4178,7 +4186,7 @@
         "region": "Europe",
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
-        "latest_has_ghg_transport": true,
+        "latest_has_ghg_transport": false,
         "had_transport_previously": false,
         "generations": {
           "gen1": {
@@ -4203,7 +4211,7 @@
         "region": "Europe",
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
-        "latest_has_ghg_transport": true,
+        "latest_has_ghg_transport": false,
         "had_transport_previously": false,
         "generations": {
           "gen1": {
@@ -4228,7 +4236,7 @@
         "region": "Europe",
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
-        "latest_has_ghg_transport": true,
+        "latest_has_ghg_transport": false,
         "had_transport_previously": false,
         "generations": {
           "gen1": {
@@ -4253,7 +4261,7 @@
         "region": "Europe",
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
-        "latest_has_ghg_transport": true,
+        "latest_has_ghg_transport": false,
         "had_transport_previously": false,
         "generations": {
           "gen1": {
@@ -4278,7 +4286,7 @@
         "region": "Europe",
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
-        "latest_has_ghg_transport": true,
+        "latest_has_ghg_transport": false,
         "had_transport_previously": false,
         "generations": {
           "gen1": {
@@ -4303,7 +4311,7 @@
         "region": "Europe",
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
-        "latest_has_ghg_transport": true,
+        "latest_has_ghg_transport": false,
         "had_transport_previously": false,
         "generations": {
           "gen1": {
@@ -4328,7 +4336,7 @@
         "region": "Europe",
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
-        "latest_has_ghg_transport": true,
+        "latest_has_ghg_transport": false,
         "had_transport_previously": false,
         "generations": {
           "gen1": {
@@ -4353,7 +4361,7 @@
         "region": "Europe",
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
-        "latest_has_ghg_transport": true,
+        "latest_has_ghg_transport": false,
         "had_transport_previously": false,
         "generations": {
           "gen1": {
@@ -4378,7 +4386,7 @@
         "region": "Europe",
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
-        "latest_has_ghg_transport": true,
+        "latest_has_ghg_transport": false,
         "had_transport_previously": false,
         "generations": {
           "gen1": {
@@ -4403,7 +4411,7 @@
         "region": "Europe",
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
-        "latest_has_ghg_transport": true,
+        "latest_has_ghg_transport": false,
         "had_transport_previously": false,
         "generations": {
           "gen1": {
@@ -4428,7 +4436,7 @@
         "region": "Europe",
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
-        "latest_has_ghg_transport": true,
+        "latest_has_ghg_transport": false,
         "had_transport_previously": false,
         "generations": {
           "gen1": {
@@ -4453,7 +4461,7 @@
         "region": "Europe",
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
-        "latest_has_ghg_transport": true,
+        "latest_has_ghg_transport": false,
         "had_transport_previously": false,
         "generations": {
           "gen1": {
@@ -4478,7 +4486,7 @@
         "region": "Europe",
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
-        "latest_has_ghg_transport": true,
+        "latest_has_ghg_transport": false,
         "had_transport_previously": false,
         "generations": {
           "gen1": {
@@ -4503,7 +4511,7 @@
         "region": "Europe",
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
-        "latest_has_ghg_transport": true,
+        "latest_has_ghg_transport": false,
         "had_transport_previously": false,
         "generations": {
           "gen1": {
@@ -4528,7 +4536,7 @@
         "region": "Europe",
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
-        "latest_has_ghg_transport": true,
+        "latest_has_ghg_transport": false,
         "had_transport_previously": false,
         "generations": {
           "gen1": {
@@ -4553,7 +4561,7 @@
         "region": "Europe",
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
-        "latest_has_ghg_transport": true,
+        "latest_has_ghg_transport": false,
         "had_transport_previously": false,
         "generations": {
           "gen1": {
@@ -4578,7 +4586,7 @@
         "region": "Europe",
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
-        "latest_has_ghg_transport": true,
+        "latest_has_ghg_transport": false,
         "had_transport_previously": false,
         "generations": {
           "gen1": {
@@ -4603,7 +4611,7 @@
         "region": "Europe",
         "latest_active_gen": "gen3",
         "latest_has_transport": true,
-        "latest_has_ghg_transport": true,
+        "latest_has_ghg_transport": false,
         "had_transport_previously": false,
         "generations": {
           "gen1": {
@@ -4632,61 +4640,61 @@
       },
       "Energy efficiency": {
         "countries_count": 98,
-        "mentions": 194
+        "mentions": 190
       },
       "Mode shift and demand management": {
         "countries_count": 114,
-        "mentions": 351
+        "mentions": 353
       },
       "Transport system improvements": {
         "countries_count": 89,
-        "mentions": 233
+        "mentions": 232
       },
       "Electrification": {
-        "countries_count": 122,
-        "mentions": 323
+        "countries_count": 124,
+        "mentions": 330
       },
       "Aviation and maritime": {
-        "countries_count": 44,
-        "mentions": 108
+        "countries_count": 45,
+        "mentions": 109
       }
     },
     "cat_latest_gen_breakdown": {
       "Alternative fuels": {
         "gen1_count": 3,
-        "gen2_count": 19,
-        "gen3_count": 67,
+        "gen2_count": 18,
+        "gen3_count": 68,
         "mentions": 169
       },
       "Energy efficiency": {
         "gen1_count": 3,
-        "gen2_count": 20,
-        "gen3_count": 75,
-        "mentions": 194
+        "gen2_count": 18,
+        "gen3_count": 77,
+        "mentions": 190
       },
       "Mode shift and demand management": {
         "gen1_count": 3,
-        "gen2_count": 22,
-        "gen3_count": 89,
-        "mentions": 351
+        "gen2_count": 20,
+        "gen3_count": 91,
+        "mentions": 353
       },
       "Transport system improvements": {
         "gen1_count": 2,
-        "gen2_count": 20,
-        "gen3_count": 67,
-        "mentions": 233
+        "gen2_count": 19,
+        "gen3_count": 68,
+        "mentions": 232
       },
       "Electrification": {
         "gen1_count": 2,
         "gen2_count": 20,
-        "gen3_count": 100,
-        "mentions": 323
+        "gen3_count": 102,
+        "mentions": 330
       },
       "Aviation and maritime": {
         "gen1_count": 0,
         "gen2_count": 5,
-        "gen3_count": 39,
-        "mentions": 108
+        "gen3_count": 40,
+        "mentions": 109
       }
     },
     "cat_gen_active_archived": {
@@ -4730,28 +4738,28 @@
       },
       "gen2": {
         "Mode shift and demand management": {
-          "active_countries": 22,
-          "archived_countries": 73,
-          "active_mentions": 58,
-          "archived_mentions": 232
+          "active_countries": 20,
+          "archived_countries": 75,
+          "active_mentions": 55,
+          "archived_mentions": 235
         },
         "Transport system improvements": {
-          "active_countries": 20,
-          "archived_countries": 48,
-          "active_mentions": 52,
-          "archived_mentions": 122
+          "active_countries": 19,
+          "archived_countries": 49,
+          "active_mentions": 50,
+          "archived_mentions": 124
         },
         "Energy efficiency": {
-          "active_countries": 20,
-          "archived_countries": 49,
-          "active_mentions": 44,
-          "archived_mentions": 103
+          "active_countries": 18,
+          "archived_countries": 51,
+          "active_mentions": 36,
+          "archived_mentions": 111
         },
         "Alternative fuels": {
-          "active_countries": 19,
-          "archived_countries": 50,
-          "active_mentions": 40,
-          "archived_mentions": 78
+          "active_countries": 18,
+          "archived_countries": 51,
+          "active_mentions": 39,
+          "archived_mentions": 79
         },
         "Electrification": {
           "active_countries": 20,
@@ -4768,39 +4776,39 @@
       },
       "gen3": {
         "Alternative fuels": {
-          "active_countries": 67,
+          "active_countries": 68,
           "archived_countries": 2,
-          "active_mentions": 124,
+          "active_mentions": 125,
           "archived_mentions": 2
         },
         "Electrification": {
-          "active_countries": 100,
-          "archived_countries": 3,
-          "active_mentions": 285,
-          "archived_mentions": 3
+          "active_countries": 102,
+          "archived_countries": 4,
+          "active_mentions": 292,
+          "archived_mentions": 5
         },
         "Energy efficiency": {
-          "active_countries": 75,
-          "archived_countries": 2,
-          "active_mentions": 145,
-          "archived_mentions": 2
-        },
-        "Mode shift and demand management": {
-          "active_countries": 89,
-          "archived_countries": 2,
-          "active_mentions": 290,
-          "archived_mentions": 3
-        },
-        "Transport system improvements": {
-          "active_countries": 67,
-          "archived_countries": 1,
-          "active_mentions": 179,
+          "active_countries": 77,
+          "archived_countries": 3,
+          "active_mentions": 149,
           "archived_mentions": 4
         },
+        "Mode shift and demand management": {
+          "active_countries": 91,
+          "archived_countries": 3,
+          "active_mentions": 295,
+          "archived_mentions": 6
+        },
+        "Transport system improvements": {
+          "active_countries": 68,
+          "archived_countries": 2,
+          "active_mentions": 180,
+          "archived_mentions": 6
+        },
         "Aviation and maritime": {
-          "active_countries": 39,
+          "active_countries": 40,
           "archived_countries": 0,
-          "active_mentions": 96,
+          "active_mentions": 97,
           "archived_mentions": 0
         }
       }
@@ -5521,6 +5529,12 @@
           "Mode shift and demand management": 2,
           "Alternative fuels": 1,
           "Transport system improvements": 2
+        },
+        "gen3": {
+          "Mode shift and demand management": 3,
+          "Electrification": 3,
+          "Energy efficiency": 1,
+          "Transport system improvements": 1
         }
       },
       "GEO": {
@@ -6176,6 +6190,12 @@
         "gen2": {
           "Energy efficiency": 4,
           "Mode shift and demand management": 1
+        },
+        "gen3": {
+          "Transport system improvements": 2,
+          "Electrification": 3,
+          "Energy efficiency": 3,
+          "Mode shift and demand management": 4
         }
       },
       "PAN": {
@@ -6362,10 +6382,12 @@
           "Mode shift and demand management": 1
         },
         "gen3": {
-          "Mode shift and demand management": 3,
-          "Electrification": 2,
-          "Energy efficiency": 2,
-          "Transport system improvements": 2
+          "Mode shift and demand management": 4,
+          "Electrification": 5,
+          "Energy efficiency": 4,
+          "Transport system improvements": 2,
+          "Alternative fuels": 1,
+          "Aviation and maritime": 1
         }
       },
       "SAU": {
@@ -7409,12 +7431,6 @@
         "Electrification": 2,
         "Transport system improvements": 2
       },
-      "GMB": {
-        "Energy efficiency": 4,
-        "Mode shift and demand management": 2,
-        "Alternative fuels": 1,
-        "Transport system improvements": 2
-      },
       "GHA": {
         "Transport system improvements": 1
       },
@@ -7455,10 +7471,6 @@
       },
       "NER": {
         "Energy efficiency": 2
-      },
-      "PSE": {
-        "Energy efficiency": 4,
-        "Mode shift and demand management": 1
       },
       "PNG": {
         "Energy efficiency": 3,
@@ -7856,12 +7868,6 @@
       "NIC": {
         "Electrification": 1
       },
-      "STP": {
-        "Mode shift and demand management": 3,
-        "Electrification": 2,
-        "Energy efficiency": 2,
-        "Transport system improvements": 2
-      },
       "BGD": {
         "Electrification": 7,
         "Transport system improvements": 6,
@@ -8200,6 +8206,25 @@
       "OMN": {
         "Electrification": 1,
         "Mode shift and demand management": 1
+      },
+      "STP": {
+        "Electrification": 3,
+        "Energy efficiency": 2,
+        "Alternative fuels": 1,
+        "Aviation and maritime": 1,
+        "Mode shift and demand management": 1
+      },
+      "PSE": {
+        "Transport system improvements": 2,
+        "Electrification": 3,
+        "Energy efficiency": 3,
+        "Mode shift and demand management": 4
+      },
+      "GMB": {
+        "Mode shift and demand management": 3,
+        "Electrification": 3,
+        "Energy efficiency": 1,
+        "Transport system improvements": 1
       },
       "AUT": {
         "Aviation and maritime": 2,
@@ -8954,6 +8979,11 @@
           "Improve": 5,
           "Shift": 3,
           "Avoid": 1
+        },
+        "gen3": {
+          "Shift": 4,
+          "Improve": 5,
+          "Avoid": 1
         }
       },
       "GEO": {
@@ -9505,6 +9535,11 @@
           "Improve": 3,
           "Shift": 1,
           "Avoid": 1
+        },
+        "gen3": {
+          "Avoid": 2,
+          "Shift": 5,
+          "Improve": 9
         }
       },
       "PAN": {
@@ -9657,7 +9692,8 @@
           "Improve": 1
         },
         "gen3": {
-          "Improve": 9
+          "Improve": 16,
+          "Shift": 2
         }
       },
       "SAU": {
@@ -10169,11 +10205,6 @@
         "Shift": 2,
         "Improve": 4
       },
-      "GMB": {
-        "Improve": 5,
-        "Shift": 3,
-        "Avoid": 1
-      },
       "GHA": {
         "Shift": 1
       },
@@ -10205,11 +10236,6 @@
       },
       "NER": {
         "Improve": 2
-      },
-      "PSE": {
-        "Improve": 3,
-        "Shift": 1,
-        "Avoid": 1
       },
       "PNG": {
         "Improve": 6,
@@ -10482,9 +10508,6 @@
       "NIC": {
         "Improve": 1
       },
-      "STP": {
-        "Improve": 9
-      },
       "BGD": {
         "Improve": 17,
         "Shift": 5,
@@ -10723,6 +10746,20 @@
       "OMN": {
         "Improve": 1,
         "Shift": 1
+      },
+      "STP": {
+        "Improve": 7,
+        "Shift": 2
+      },
+      "PSE": {
+        "Avoid": 2,
+        "Shift": 5,
+        "Improve": 9
+      },
+      "GMB": {
+        "Shift": 4,
+        "Improve": 5,
+        "Avoid": 1
       }
     },
     "latest_gen_map": {
@@ -10742,9 +10779,7 @@
       "TZA": "gen2",
       "MMR": "gen2",
       "LAO": "gen2",
-      "GMB": "gen2",
       "SSD": "gen2",
-      "PSE": "gen2",
       "ALB": "gen2",
       "TGO": "gen2",
       "TCD": "gen2",
@@ -10829,7 +10864,6 @@
       "LBN": "gen3",
       "MAR": "gen3",
       "VCT": "gen3",
-      "STP": "gen3",
       "SYC": "gen3",
       "KGZ": "gen3",
       "MYS": "gen3",
@@ -10895,6 +10929,9 @@
       "GUY": "gen3",
       "DZA": "gen3",
       "OMN": "gen3",
+      "STP": "gen3",
+      "PSE": "gen3",
+      "GMB": "gen3",
       "AUT": "gen3",
       "BEL": "gen3",
       "BGR": "gen3",

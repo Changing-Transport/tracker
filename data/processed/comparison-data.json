@@ -364,7 +364,7 @@
             "date": "03.2016",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/PNG_INDC%20to%20the%20UNFCCC.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -401,7 +401,7 @@
             "date": "12.2020",
             "status": "Active",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/PNG%20Second%20NDC.pdf",
             "targets": [
               {
@@ -520,7 +520,7 @@
             "date": "04.2016",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Nauru_NDC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -538,7 +538,7 @@
             "date": "10.2021",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Nauru%20Updated%20NDC%20pdf.pdf",
             "targets": [
               {
@@ -629,7 +629,7 @@
             "date": "01.2026",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2026-01/Nauru%20NDC%203.pdf",
             "targets": [
               {
@@ -649,7 +649,7 @@
                 "target_type": "GHG: Base year intensity",
                 "conditionality": "Conditional",
                 "target_year": "2050",
-                "content": "New ships must achieve a 50% reduction in CO2 per tonne/km by 2050",
+                "content": "New ships must achieve a 50% reduction in CO2 per tonne/km by 2050 [assuming 2008 levels]",
                 "page": "14"
               }
             ],
@@ -867,7 +867,7 @@
             "date": "04.2016",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/PANAMA%20NDC.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -906,7 +906,7 @@
             "date": "12.2020",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/CDN1%20Actualizada%20Rep%C3%BAblica%20de%20Panam%C3%A1.pdf",
             "targets": [
               {
@@ -982,7 +982,7 @@
             "date": "06.2024",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2024-06/Segunda%20Contribuci%C3%B3n%20Determinada%20a%20Nivel%20Nacional_CDN2.pdf",
             "targets": [
               {
@@ -1076,7 +1076,7 @@
             "date": "11.2025",
             "status": "Active",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-11/Pacto%20de%20Panam%C3%A1%20con%20la%20Naturaleza%20%28Nature%20Pledge%29.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -1112,7 +1112,7 @@
             "date": "09.2025",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-10/Declaratoria%20-%20CDN%203.0%20Panam%C3%A1.pdf",
             "targets": [
               {
@@ -1167,7 +1167,7 @@
             "date": "04.2016",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/BELIZE%27s%20%20NDC.pdf",
             "targets": [
               {
@@ -1274,7 +1274,7 @@
             "date": "01.2021",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Belize%20Updated%20NDC.pdf",
             "targets": [
               {
@@ -1385,7 +1385,7 @@
             "date": "06.2025",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-06/BELIZE%20FINAL%20NDC%203.0.pdf",
             "targets": [
               {
@@ -1595,7 +1595,7 @@
             "date": "04.2016",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Barbados%20INDC%20FINAL%20September%20%2028%2C%202015.pdf",
             "targets": [
               {
@@ -1661,7 +1661,7 @@
             "date": "07.2021",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/2021%20Barbados%20NDC%20update%20-%2021%20July%202021.pdf",
             "targets": [
               {
@@ -1788,7 +1788,7 @@
             "date": "08.2025",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-09/Barbados%20Second%20NDC.pdf",
             "targets": [
               {
@@ -1904,7 +1904,7 @@
             "date": "04.2016",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/FIJI_iNDC_Final_051115.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -1943,7 +1943,7 @@
             "date": "12.2020",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Republic%20of%20Fiji's%20Updated%20NDC%2020201.pdf",
             "targets": [
               {
@@ -1972,7 +1972,7 @@
             "date": "11.2025",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-11/Fiji%20NDC3.0_Final.pdf",
             "targets": [
               {
@@ -2327,7 +2327,7 @@
             "date": "04.2016",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Maldives%20INDC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -2362,7 +2362,7 @@
             "date": "12.2020",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Maldives%20Nationally%20Determined%20Contribution%202020.pdf",
             "targets": [
               {
@@ -2469,7 +2469,7 @@
             "date": "02.2025",
             "status": "Active",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-02/Maldives%E2%80%99%20Third%20Nationally%20Determined%20Contribution.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -2572,7 +2572,7 @@
             "date": "04.2016",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/150721%20RMI%20INDC%20JULY%202015%20FINAL%20SUBMITTED.pdf",
             "targets": [
               {
@@ -2656,7 +2656,7 @@
             "date": "11.2018",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/20181122%20Marshall%20Islands%20NDC%20to%20UNFCCC%2022%20November%202018%20FINAL.pdf",
             "targets": [
               {
@@ -2706,7 +2706,7 @@
             "date": "02.2025",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-02/Republic%20of%20the%20Marshall%20Islands%20NDC%203.0.pdf",
             "targets": [
               {
@@ -2779,7 +2779,7 @@
             "date": "04.2016",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Final%20INDC%20for%20Mauritius%2028%20Sept%202015.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -2827,7 +2827,7 @@
             "date": "05.2021",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Final%20Updated%20NDC%20for%20the%20Republic%20of%20Mauritius%2001%20October%202021.docx",
             "targets": [
               {
@@ -2893,7 +2893,7 @@
             "date": "09.2025",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-09/NDC%203.0%20%20Mauritius.pdf",
             "targets": [
               {
@@ -4483,7 +4483,7 @@
             "date": "04.2016",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/INDC%20of%20Seychelles.pdf",
             "targets": [
               {
@@ -4600,7 +4600,7 @@
             "date": "07.2021",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Seychelles%20-%20NDC_Jul30th%202021%20_Final.pdf",
             "targets": [
               {
@@ -4763,7 +4763,7 @@
             "date": "09.2025",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-09/ICTU%20Update%202025%20for%20Seychelles%20new%20NDC%203.0.pdf",
             "targets": [
               {
@@ -4783,7 +4783,7 @@
                 "target_type": "GHG: BAU",
                 "conditionality": "Unclear conditionality",
                 "target_year": "2035",
-                "content": "Target emissions in the transport sector (due to gasoline vehicles) in 2035: 272 kt CO₂e (30 % reduction = 117 kt CO₂e).",
+                "content": "Target emissions in the transport sector (due to gasoline vehicles) in 2035: 272 kt CO₂e [target level] (30% reduction = 117 kt CO₂e) [amount reduced].",
                 "page": "23"
               }
             ],
@@ -4807,7 +4807,7 @@
             "date": "05.2016",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Guyana%27s%20revised%20NDC%20-%20Final.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -4835,7 +4835,7 @@
             "date": "07.2026",
             "status": "Active",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2026-07/Guyanas%20NDC%202025-2035%20V2.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -4858,7 +4858,7 @@
             "date": "06.2016",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": false,
+            "has_netzero_target": true,
             "url": "https://unfccc.int/sites/default/files/NorwayINDC.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -4887,7 +4887,7 @@
             "date": "11.2022",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": false,
+            "has_netzero_target": true,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-11/NDC%20Norway_second%20update.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -4922,7 +4922,7 @@
             "date": "02.2020",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": false,
+            "has_netzero_target": true,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Norway_updatedNDC_2020%20(Updated%20submission).pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -4940,7 +4940,7 @@
             "date": "06.2025",
             "status": "Active",
             "has_transport_target": false,
-            "has_netzero_target": false,
+            "has_netzero_target": true,
             "url": "https://unfccc.int/sites/default/files/2025-06/Norways%20NDC%20for%202035..pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -5108,7 +5108,7 @@
             "date": "07.2016",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/iNDC%20Per%C3%BA%20english.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -5135,7 +5135,7 @@
             "date": "12.2020",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Reporte%20de%20Actualizacio%CC%81n%20de%20las%20NDC%20del%20Peru%CC%81.pdf",
             "targets": [
               {
@@ -5164,7 +5164,7 @@
             "date": "11.2025",
             "status": "Active",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-11/Documento%20NDC%203.0_UNFCCC.pdf",
             "targets": [
               {
@@ -5659,7 +5659,7 @@
             "date": "09.2016",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/China%27s%20First%20NDC%20Submission.pdf",
             "targets": [
               {
@@ -5761,7 +5761,7 @@
             "date": "10.2021",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/China%E2%80%99s%20Achievements,%20New%20Goals%20and%20New%20Measures%20for%20Nationally%20Determined%20Contributions.pdf",
             "targets": [
               {
@@ -5947,7 +5947,7 @@
             "date": "11.2025",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-11/2035%E5%B9%B4%E4%B8%AD%E5%9B%BD%E5%9B%BD%E5%AE%B6%E8%87%AA%E4%B8%BB%E8%B4%A1%E7%8C%AE%E6%8A%A5%E5%91%8A.pdf",
             "targets": [
               {
@@ -6236,7 +6236,7 @@
             "date": "09.2016",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/U.S.A.%20First%20NDC%20Submission.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -6265,7 +6265,7 @@
             "date": "04.2021",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/United%20States%20NDC%20April%2021%202021%20Final.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -6350,7 +6350,7 @@
             "date": "12.2024",
             "status": "Active",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2024-12/United%20States%202035%20NDC.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -6512,7 +6512,7 @@
             "date": "09.2016",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Lao%20People%27s%20Democratic%20Republic%20First%20NDC.pdf",
             "targets": [
               {
@@ -6589,7 +6589,7 @@
             "date": "09.2021",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/NDC%202020%20of%20Lao%20PDR%20(English),%2009%20April%202021%20(1).pdf",
             "targets": [
               {
@@ -6968,7 +6968,7 @@
             "date": "09.2016",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Morocco%20First%20NDC.pdf",
             "targets": [
               {
@@ -7107,7 +7107,7 @@
             "date": "06.2021",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Moroccan%20updated%20NDC%202021%20_Fr.pdf",
             "targets": [
               {
@@ -7249,7 +7249,7 @@
             "date": "09.2025",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-10/MOROCCO%20NDC%203.0%20_30.9.25.pdf",
             "targets": [
               {
@@ -7549,7 +7549,7 @@
             "date": "09.2016",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Ukraine%20First%20NDC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -7567,7 +7567,7 @@
             "date": "07.2021",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Ukraine%20NDC_July%2031.pdf",
             "targets": [
               {
@@ -7596,7 +7596,7 @@
             "date": "11.2025",
             "status": "Active",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-11/2%20%D0%9D%D0%92%D0%922%20%D0%BF%D1%80%D0%BE%D1%94%D0%BA%D1%82%20%28%D0%B7%D0%BC%D1%96%D0%BD%D0%B5%D0%BD%D0%B0%20%D1%86%D1%96%D0%BB%D1%8C%20_%20%D0%B7%D0%B2%D1%96%D1%82%29%20.pdf",
             "targets": [
               {
@@ -7789,7 +7789,7 @@
             "date": "09.2016",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Antigua%20and%20Barbuda%20First.pdf",
             "targets": [
               {
@@ -7838,7 +7838,7 @@
             "date": "02.2021",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/ATG%20-%20UNFCCC%20NDC%20-%202021-09-02%20-%20Final.pdf",
             "targets": [
               {
@@ -9080,7 +9080,7 @@
             "date": "09.2016",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Commonwealth%20of%20Dominica-%20Intended%20Nationally%20Determined%20Contributions%20%28INDC%29.pdf",
             "targets": [
               {
@@ -9146,7 +9146,7 @@
             "date": "07.2022",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2022-07/The%20Commonwealth%20of%20Dominica%20updated%20NDC%20July%204%20%2C.pdf",
             "targets": [
               {
@@ -9684,7 +9684,7 @@
             "date": "09.2016",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/GH_INDC_2392015.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -9732,7 +9732,7 @@
             "date": "11.2021",
             "status": "Active",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Ghana's%20Updated%20Nationally%20Determined%20Contribution%20to%20the%20UNFCCC_2021.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -9768,7 +9768,7 @@
             "date": "10.2021",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Ghana_Transmittal%20Letter_Interim%20Updated%20NDC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -10143,7 +10143,7 @@
             "date": "09.2016",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": false,
+            "has_netzero_target": true,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Honduras%20INDC_esp.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -10161,7 +10161,7 @@
             "date": "05.2021",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": false,
+            "has_netzero_target": true,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/NDC%20de%20Honduras_%20Primera%20Actualizaci%C3%B3n.pdf",
             "targets": [
               {
@@ -10201,7 +10201,7 @@
             "date": "01.2026",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": false,
+            "has_netzero_target": true,
             "url": "https://unfccc.int/sites/default/files/2026-01/HON%20NDC%203.0%202026%20Oficial.pdf",
             "targets": [
               {
@@ -10279,7 +10279,7 @@
             "date": "09.2025",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": false,
+            "has_netzero_target": true,
             "url": "https://unfccc.int/sites/default/files/2025-09/Honduras%20Segunda%20Actualizacio%CC%81n%20de%20su%20NDC%20%282021-2030%29serna_rev_final.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -10302,7 +10302,7 @@
             "date": "09.2016",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/INDC-ICELAND.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -10320,7 +10320,7 @@
             "date": "02.2021",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Iceland_updated_NDC_Submission_Feb_2021.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -10338,7 +10338,7 @@
             "date": "09.2025",
             "status": "Active",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-09/Icelands%20NDC%202030%20-%20Revision.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -11606,7 +11606,7 @@
             "date": "09.2016",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/INDC%20of%20Namibia%20Final%20pdf.pdf",
             "targets": [
               {
@@ -11692,7 +11692,7 @@
             "date": "01.2024",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2024-01/FINAL%20UPDATED%20NAMIBIA%20NDC%202023.pdf",
             "targets": [
               {
@@ -11821,7 +11821,7 @@
             "date": "07.2021",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Namibia's%20Updated%20NDC_%20FINAL%2025%20July%202021.pdf",
             "targets": [
               {
@@ -12049,7 +12049,7 @@
             "date": "09.2016",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Singapore%20INDC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -12082,7 +12082,7 @@
             "date": "11.2022",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-11/Singapore%20Second%20Update%20of%20First%20NDC.pdf",
             "targets": [
               {
@@ -12176,7 +12176,7 @@
             "date": "03.2020",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Singapore's%20Update%20of%201st%20NDC.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -12251,7 +12251,7 @@
             "date": "02.2025",
             "status": "Active",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-02/Singapore%20Second%20Nationally%20Determined%20Contribution.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -12361,7 +12361,7 @@
             "date": "09.2016",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/SOLOMON%20ISLANDS%20INDC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -12379,7 +12379,7 @@
             "date": "07.2021",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/NDC%20Report%202021%20Final%20Solomon%20Islands%20(1).pdf",
             "targets": [
               {
@@ -12428,7 +12428,7 @@
             "date": "08.2025",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-08/Solomon%20Islands%20NDC3.0_0.pdf",
             "targets": [
               {
@@ -12694,7 +12694,7 @@
             "date": "09.2016",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Thailand_INDC.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -12749,7 +12749,7 @@
             "date": "10.2020",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Thailand%20Updated%20NDC.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -12786,7 +12786,7 @@
             "date": "11.2022",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-11/Thailand%202nd%20Updated%20NDC.pdf",
             "targets": [
               {
@@ -12852,7 +12852,7 @@
             "date": "11.2025",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-11/TH%20NDC%203.0.pdf",
             "targets": [
               {
@@ -13154,7 +13154,7 @@
                 "target_type": "GHG: Base year",
                 "conditionality": "Conditional",
                 "target_year": "2030",
-                "content": "Reduce transport emissions in the energy sector by 26 GgCO2e by 2030 compared to the baseline emissions of 2006.",
+                "content": "Reduce transport emissions by 26 GgCO2e by 2030 compared to the baseline emissions of 2006.",
                 "page": "40"
               },
               {
@@ -13164,7 +13164,7 @@
                 "target_type": "GHG: Base year",
                 "conditionality": "Conditional",
                 "target_year": "2035",
-                "content": "Reduce transport emissions in the energy sector by 45 GgCO2e by 2035 compared to the baseline emissions of 2006.",
+                "content": "Reduce transport emissions by 45 GgCO2e by 2035 compared to the baseline emissions of 2006.",
                 "page": "40"
               }
             ],
@@ -13791,7 +13791,7 @@
             "date": "09.2016",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/UAE%20INDC%20-%2022%20October.pdf",
             "targets": [
               {
@@ -13879,7 +13879,7 @@
             "date": "07.2023",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2023-07/Third%20Update%20of%20Second%20NDC%20for%20the%20UAE_v15.pdf",
             "targets": [
               {
@@ -14154,7 +14154,7 @@
             "date": "09.2022",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-09/UpdateNDC-EN-2022.pdf",
             "targets": [
               {
@@ -14339,7 +14339,7 @@
             "date": "12.2020",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/UAE%20Second%20NDC%20-%20UNFCCC%20Submission%20-%20English%20-%20FINAL.pdf",
             "targets": [
               {
@@ -14475,7 +14475,7 @@
             "date": "11.2024",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2024-11/UAE-NDC3.0.pdf",
             "targets": [
               {
@@ -14751,7 +14751,7 @@
             "date": "09.2016",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/VANUATU%20%20INDC%20UNFCCC%20Submission.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -14769,7 +14769,7 @@
             "date": "08.2022",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-08/Vanuatu%20NDC%20Revised%20and%20Enhanced.pdf",
             "targets": [
               {
@@ -14922,7 +14922,7 @@
             "date": "03.2021",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Vanuatu%E2%80%99s%20First%20Nationally%20Determined%20Contribution%20(NDC)%20(Updated%20Submission%202020).pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -14940,7 +14940,7 @@
             "date": "09.2025",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-09/Vanuatu%20NDC%203.0.pdf",
             "targets": [
               {
@@ -15193,7 +15193,7 @@
             "date": "10.2016",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/INDIA%20INDC%20TO%20UNFCCC.pdf",
             "targets": [
               {
@@ -15339,7 +15339,7 @@
             "date": "08.2022",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-08/India%20Updated%20First%20Nationally%20Determined%20Contrib.pdf",
             "targets": [
               {
@@ -15368,7 +15368,7 @@
             "date": "04.2026",
             "status": "Active",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2026-04/INDIA%20NDC%202031-35.pdf",
             "targets": [
               {
@@ -15552,7 +15552,7 @@
             "date": "10.2016",
             "status": "Covered by EU archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/LV-03-06-EU%20INDC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -15570,7 +15570,7 @@
             "date": "10.2023",
             "status": "Covered by EU",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2023-10/ES-2023-10-17%20EU%20submission%20NDC%20update.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -15833,7 +15833,7 @@
             "date": "10.2016",
             "status": "Covered by EU archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/LV-03-06-EU%20INDC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -15851,7 +15851,7 @@
             "date": "10.2023",
             "status": "Covered by EU",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2023-10/ES-2023-10-17%20EU%20submission%20NDC%20update.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -15875,7 +15875,7 @@
             "date": "10.2016",
             "status": "Covered by EU archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/LV-03-06-EU%20INDC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -15893,7 +15893,7 @@
             "date": "10.2023",
             "status": "Covered by EU",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2023-10/ES-2023-10-17%20EU%20submission%20NDC%20update.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -15917,7 +15917,7 @@
             "date": "10.2016",
             "status": "Covered by EU archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/LV-03-06-EU%20INDC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -15935,7 +15935,7 @@
             "date": "10.2023",
             "status": "Covered by EU",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2023-10/ES-2023-10-17%20EU%20submission%20NDC%20update.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -15959,7 +15959,7 @@
             "date": "10.2016",
             "status": "Covered by EU archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/LV-03-06-EU%20INDC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -15977,7 +15977,7 @@
             "date": "10.2023",
             "status": "Covered by EU",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2023-10/ES-2023-10-17%20EU%20submission%20NDC%20update.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -16001,7 +16001,7 @@
             "date": "10.2016",
             "status": "Covered by EU",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/LV-03-06-EU%20INDC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -16026,7 +16026,7 @@
             "date": "10.2016",
             "status": "Covered by EU archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/LV-03-06-EU%20INDC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -16044,7 +16044,7 @@
             "date": "10.2023",
             "status": "Covered by EU",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2023-10/ES-2023-10-17%20EU%20submission%20NDC%20update.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -16068,7 +16068,7 @@
             "date": "10.2016",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/LV-03-06-EU%20INDC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -16086,7 +16086,7 @@
             "date": "10.2023",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2023-10/ES-2023-10-17%20EU%20submission%20NDC%20update.pdf",
             "targets": [
               {
@@ -16180,7 +16180,7 @@
             "date": "12.2020",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/EU_NDC_Submission_December%202020.pdf",
             "targets": [
               {
@@ -16246,7 +16246,7 @@
             "date": "11.2025",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-11/DK-2025-11-05%20EU%20NDC.pdf",
             "targets": [
               {
@@ -16278,16 +16278,6 @@
                 "target_year": "2025",
                 "content": "ReFuelEU Aviation: requirements for aviation fuel suppliers to increase SAF share blended into conventional aviation fuel at EU airports to 2% from 2025",
                 "page": "8"
-              },
-              {
-                "target_area": "Transport sector mitigation target",
-                "target_scope": "Subsector targets",
-                "ghg_target": "GHG",
-                "target_type": "GHG: Base year",
-                "conditionality": "Unconditional",
-                "target_year": "2040",
-                "content": "The EU adopted legislation to reduce CO2 emissions by 55% for new cars and by 50% for new vans from 2030 (baseline 2021), and to reduce CO2 emissions from 2035 for new cars and vans by 100%. In addition, the EU also adopted legislation to reduce CO2 emissions from new heavy-duty vehicles by 45% from 2030, 65% from 2035, 90% from 2040, with a specific sub-target of 90% reduction by 2030 and 100% reduction by 2035 for urban buses (baseline 2019).",
-                "page": "11"
               },
               {
                 "target_area": "Net zero target",
@@ -16458,7 +16448,7 @@
             "date": "10.2016",
             "status": "Covered by EU archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/LV-03-06-EU%20INDC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -16476,7 +16466,7 @@
             "date": "10.2023",
             "status": "Covered by EU",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2023-10/ES-2023-10-17%20EU%20submission%20NDC%20update.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -16500,7 +16490,7 @@
             "date": "10.2016",
             "status": "Covered by EU archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/LV-03-06-EU%20INDC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -16518,7 +16508,7 @@
             "date": "10.2023",
             "status": "Covered by EU",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2023-10/ES-2023-10-17%20EU%20submission%20NDC%20update.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -16542,7 +16532,7 @@
             "date": "10.2016",
             "status": "Covered by EU archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/LV-03-06-EU%20INDC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -16560,7 +16550,7 @@
             "date": "10.2023",
             "status": "Covered by EU",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2023-10/ES-2023-10-17%20EU%20submission%20NDC%20update.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -16584,7 +16574,7 @@
             "date": "10.2016",
             "status": "Covered by EU archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/LV-03-06-EU%20INDC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -16602,7 +16592,7 @@
             "date": "10.2023",
             "status": "Covered by EU",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2023-10/ES-2023-10-17%20EU%20submission%20NDC%20update.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -16626,7 +16616,7 @@
             "date": "10.2016",
             "status": "Covered by EU archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/LV-03-06-EU%20INDC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -16644,7 +16634,7 @@
             "date": "10.2023",
             "status": "Covered by EU",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2023-10/ES-2023-10-17%20EU%20submission%20NDC%20update.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -16668,7 +16658,7 @@
             "date": "10.2016",
             "status": "Covered by EU archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/LV-03-06-EU%20INDC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -16686,7 +16676,7 @@
             "date": "10.2023",
             "status": "Covered by EU",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2023-10/ES-2023-10-17%20EU%20submission%20NDC%20update.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -16710,7 +16700,7 @@
             "date": "10.2016",
             "status": "Covered by EU archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/LV-03-06-EU%20INDC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -16728,7 +16718,7 @@
             "date": "10.2023",
             "status": "Covered by EU",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2023-10/ES-2023-10-17%20EU%20submission%20NDC%20update.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -16752,7 +16742,7 @@
             "date": "10.2016",
             "status": "Covered by EU archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/LV-03-06-EU%20INDC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -16770,7 +16760,7 @@
             "date": "10.2023",
             "status": "Covered by EU",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2023-10/ES-2023-10-17%20EU%20submission%20NDC%20update.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -16794,7 +16784,7 @@
             "date": "10.2016",
             "status": "Covered by EU archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/LV-03-06-EU%20INDC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -16812,7 +16802,7 @@
             "date": "10.2023",
             "status": "Covered by EU",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2023-10/ES-2023-10-17%20EU%20submission%20NDC%20update.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -16836,7 +16826,7 @@
             "date": "10.2016",
             "status": "Covered by EU archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/LV-03-06-EU%20INDC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -16854,7 +16844,7 @@
             "date": "10.2023",
             "status": "Covered by EU",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2023-10/ES-2023-10-17%20EU%20submission%20NDC%20update.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -16878,7 +16868,7 @@
             "date": "10.2016",
             "status": "Covered by EU archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/LV-03-06-EU%20INDC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -16896,7 +16886,7 @@
             "date": "10.2023",
             "status": "Covered by EU",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2023-10/ES-2023-10-17%20EU%20submission%20NDC%20update.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -16920,7 +16910,7 @@
             "date": "10.2016",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Nepal%20First%20NDC.pdf",
             "targets": [
               {
@@ -17080,7 +17070,7 @@
             "date": "08.2020",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Second%20Nationally%20Determined%20Contribution%20(NDC)%20-%202020.pdf",
             "targets": [
               {
@@ -17196,7 +17186,7 @@
             "date": "05.2025",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-05/Nepal%20NDC3.pdf",
             "targets": [
               {
@@ -17424,7 +17414,7 @@
             "date": "10.2016",
             "status": "Covered by EU archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/LV-03-06-EU%20INDC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -17442,7 +17432,7 @@
             "date": "10.2023",
             "status": "Covered by EU",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2023-10/ES-2023-10-17%20EU%20submission%20NDC%20update.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -17466,7 +17456,7 @@
             "date": "10.2016",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/New%20Zealand%20first%20NDC%20%28Archived%29.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -17484,7 +17474,7 @@
             "date": "11.2021",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/New%20Zealand%20NDC%20November%202021.pdf",
             "targets": [
               {
@@ -17542,7 +17532,7 @@
             "date": "04.2020",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/NEW%20ZEALAND%20NDC%20update%2022%2004%202020.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -17560,7 +17550,7 @@
             "date": "01.2025",
             "status": "Active",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-01/New%20Zealand%27s%20second%20Nationally%20Determined%20Contribution.pdf",
             "targets": [
               {
@@ -17594,7 +17584,7 @@
             "date": "10.2016",
             "status": "Covered by EU archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/LV-03-06-EU%20INDC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -17612,7 +17602,7 @@
             "date": "10.2023",
             "status": "Covered by EU",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2023-10/ES-2023-10-17%20EU%20submission%20NDC%20update.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -17678,7 +17668,7 @@
             "date": "10.2016",
             "status": "Covered by EU archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/LV-03-06-EU%20INDC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -17696,7 +17686,7 @@
             "date": "10.2023",
             "status": "Covered by EU",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2023-10/ES-2023-10-17%20EU%20submission%20NDC%20update.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -17720,7 +17710,7 @@
             "date": "10.2016",
             "status": "Covered by EU archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/LV-03-06-EU%20INDC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -17738,7 +17728,7 @@
             "date": "10.2023",
             "status": "Covered by EU",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2023-10/ES-2023-10-17%20EU%20submission%20NDC%20update.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -17846,7 +17836,7 @@
             "date": "10.2016",
             "status": "Covered by EU archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/LV-03-06-EU%20INDC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -17864,7 +17854,7 @@
             "date": "10.2023",
             "status": "Covered by EU",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2023-10/ES-2023-10-17%20EU%20submission%20NDC%20update.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -17888,7 +17878,7 @@
             "date": "10.2016",
             "status": "Covered by EU archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/LV-03-06-EU%20INDC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -17906,7 +17896,7 @@
             "date": "09.2022",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-09/UK%20NDC%20ICTU%202022.pdf",
             "targets": [
               {
@@ -17944,7 +17934,7 @@
             "date": "12.2020",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/UK%20Nationally%20Determined%20Contribution.pdf",
             "targets": [
               {
@@ -17973,7 +17963,7 @@
             "date": "01.2025",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-01/UK%27s%202035%20NDC%20ICTU.pdf",
             "targets": [
               {
@@ -18132,7 +18122,7 @@
             "date": "10.2016",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/INDC_Rwanda_Nov.2015.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -18372,7 +18362,7 @@
             "date": "05.2020",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Rwanda_Updated_NDC_May_2020.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -18518,7 +18508,7 @@
             "date": "12.2025",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-11/Rwanda%20NDC3.0.pdf",
             "targets": [
               {
@@ -20608,7 +20598,7 @@
             "date": "10.2016",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Monaco_INDC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -20626,7 +20616,7 @@
             "date": "12.2020",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Monaco_NDC_2020.pdf",
             "targets": [
               {
@@ -20770,7 +20760,7 @@
             "date": "07.2025",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-07/NDC_2025_Monaco.pdf",
             "targets": [
               {
@@ -21861,7 +21851,7 @@
             "date": "11.2016",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/South%20Africa.pdf",
             "targets": [
               {
@@ -21901,7 +21891,7 @@
             "date": "09.2021",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/South%20Africa%20updated%20first%20NDC%20September%202021.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -21963,7 +21953,7 @@
             "date": "10.2025",
             "status": "Active",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-10/South%20Africa%27s%20second%20Nationally%20Determined%20Contribution_2025.pdf",
             "targets": [
               {
@@ -22055,7 +22045,7 @@
             "date": "11.2016",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/20150331%20INDC%20Gabon.pdf",
             "targets": [
               {
@@ -22115,7 +22105,7 @@
             "date": "07.2022",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-07/20220706_Gabon_Updated%20NDC.pdf",
             "targets": [
               {
@@ -22165,7 +22155,7 @@
             "date": "12.2025",
             "status": "Active",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-12/NDC3.0_Gabon_5_11_2025-final%20version.pdf",
             "targets": [
               {
@@ -22326,6 +22316,199 @@
         ],
         "gen3": [
           {
+            "doc_id": 85430,
+            "country_code": "STP",
+            "country_name": "Sao Tome and Principe",
+            "doc_type": "NDC",
+            "version": "NDC 3.1",
+            "generation": "gen3",
+            "date": "08.2026",
+            "status": "Active",
+            "has_transport_target": true,
+            "has_netzero_target": false,
+            "url": "https://unfccc.int/sites/default/files/2026-08/NDC3_0_Updated_%20Sao%20Tome%20and%20Principe.pdf",
+            "targets": [
+              {
+                "target_area": "Transport sector adaptation target",
+                "target_scope": "Subsector targets",
+                "ghg_target": "Non GHG",
+                "target_type": "General adaptation targets",
+                "conditionality": "Conditional",
+                "target_year": "2035",
+                "content": "Replace 75% of wooden boats with fiberglass boats, ensuring greater safety and durability in adverse weather conditions, while also contributing to a reduction in the use of wood for boat construction. Equip and train 100% of artisanal fishermen in the use of maritime safety equipment, such as life jackets and communication radios.",
+                "page": "30"
+              },
+              {
+                "target_area": "Transport sector adaptation target",
+                "target_scope": "Subsector targets",
+                "ghg_target": "Non GHG",
+                "target_type": "General adaptation targets",
+                "conditionality": "Conditional",
+                "target_year": "2035",
+                "content": "Rehabilitate the Ribeira Peixe pier and build a new pier/facilities in Ponta Mina (ST), or at least 3 resilient fish landing facilities by 2030.",
+                "page": "119"
+              },
+              {
+                "target_area": "Transport sector adaptation target",
+                "target_scope": "Subsector targets",
+                "ghg_target": "Non GHG",
+                "target_type": "General adaptation targets",
+                "conditionality": "Conditional",
+                "target_year": "2035",
+                "content": "Reduce the frequency of urban flooding at critical points along major roads and in population centers by at least 50% by 2035.",
+                "page": "64"
+              },
+              {
+                "target_area": "Transport sector adaptation target",
+                "target_scope": "Subsector targets",
+                "ghg_target": "Non GHG",
+                "target_type": "General adaptation targets",
+                "conditionality": "Conditional",
+                "target_year": "2035",
+                "content": "Rehabilitate 50% of roads and bridges in high-risk areas using \"climate-proof\" designs and materials.",
+                "page": "60"
+              },
+              {
+                "target_area": "Transport sector mitigation target",
+                "target_scope": "Subsector targets",
+                "ghg_target": "Non GHG",
+                "target_type": "Zero emission vehicle targets",
+                "conditionality": "Conditional",
+                "target_year": "2035",
+                "content": "5,000 light-duty Evs",
+                "page": "35"
+              },
+              {
+                "target_area": "Transport sector mitigation target",
+                "target_scope": "Subsector targets",
+                "ghg_target": "Non GHG",
+                "target_type": "Zero emission vehicle targets",
+                "conditionality": "Conditional",
+                "target_year": "2035",
+                "content": "1,000 electric motorcycles",
+                "page": "35"
+              },
+              {
+                "target_area": "Transport sector mitigation target",
+                "target_scope": "Subsector targets",
+                "ghg_target": "Non GHG",
+                "target_type": "Zero emission vehicle targets",
+                "conditionality": "Conditional",
+                "target_year": "2035",
+                "content": "100 electric buses",
+                "page": "36"
+              },
+              {
+                "target_area": "Transport sector mitigation target",
+                "target_scope": "Subsector targets",
+                "ghg_target": "Non GHG",
+                "target_type": "Vehicle efficiency targets",
+                "conditionality": "Conditional",
+                "target_year": "2035",
+                "content": "reduction in carbon intensity in the mobility sector, with consumption falling from 8.4L/100km to 5.5L/100km",
+                "page": "64"
+              }
+            ],
+            "mitigation_measures": {
+              "Electrification": [
+                {
+                  "quote": "the installation of charging stations.",
+                  "purpose": "Promote electric mobility",
+                  "instrument": "EV charging infrastructure measures",
+                  "asi": "Improve",
+                  "modes": "Road",
+                  "page": "35"
+                },
+                {
+                  "quote": "The national electric mobility strategy aims to introduce 5,000 light electric vehicles, 1,000 electric motorcycles, and 100 electric buses for public transportation by 2035, supported by the installation of charging stations. The starting point is challenging: the national fleet is very old, with an average age of 25 years10 at the time of first registration. Therefore, the strategy provides for regulatory and fiscal measures to create favorable conditions for the adoption of electric vehicles, including import incentives and accessible financing solutions.",
+                  "purpose": "Promote electric mobility",
+                  "instrument": "General e-mobility measures",
+                  "asi": "Improve",
+                  "modes": "Road",
+                  "page": "35"
+                },
+                {
+                  "quote": "A measure has been included that stems from a successful pilot project on Principe Island, which is intended to be expanded nationwide with the goal of reducing carbon intensity in the transportation sector through the development of a soft electric mobility solution, promoting the use of electric \"two- or three-wheeled\" motorcycles.\n\nThis measure involves the partial replacement of gasoline-powered motorcycles with electric bicycles, combining the introduction of bicycles in communities with a component related to the Sao Tome bike path.",
+                  "purpose": "Promote electric mobility",
+                  "instrument": "General e-mobility measures",
+                  "asi": "Shift, Improve",
+                  "modes": "Two-/Three-wheelers",
+                  "page": "43"
+                }
+              ],
+              "Energy efficiency": [
+                {
+                  "quote": "import incentives",
+                  "purpose": "Promote vehicle improvements",
+                  "instrument": "Vehicle restrictions (import, age, access, sale, taxation)",
+                  "asi": "Improve",
+                  "modes": "Road",
+                  "page": "35"
+                },
+                {
+                  "quote": "It is worth noting that the fleet's age indicates that the vehicles predate the entry into force of the European emissions standard (Euro 4). This standard became mandatory for all new cars registered in the European Union as of January 1, 2006, and imposed drastic cuts in the limits for exhaust emissions, spreading to the automotive industry globally.",
+                  "purpose": "Promote vehicle improvements",
+                  "instrument": "Vehicle air pollution emission standards",
+                  "asi": "Improve",
+                  "modes": "Road",
+                  "page": "35"
+                }
+              ],
+              "Alternative fuels": [
+                {
+                  "quote": "The positive effects observed with the introduction of electric mobility should be viewed as dependent on the significant integration of renewable energy into the national electricity grid mix. When evaluated in isolation, with the current grid, which relies primarily on diesel, the measure is classified as limited from a cost-effectiveness standpoint.",
+                  "purpose": "Promote alternative fuels",
+                  "instrument": "General renewable energy support measures",
+                  "asi": "Improve",
+                  "modes": "Road",
+                  "page": "35"
+                }
+              ],
+              "Aviation and maritime": [
+                {
+                  "quote": "The construction of a solar-powered charging station for interchangeable batteries in electric boats is a pioneering measure for the electrification of small-scale maritime transport; while its impact on emissions will still be negligible in 2035, it lays the groundwork for a broader transition in the fisheries sector.",
+                  "purpose": "Promote improvements in shipping",
+                  "instrument": "Support on-shore power and electric charging facilities in ports",
+                  "asi": "Improve",
+                  "modes": "Water",
+                  "page": "35"
+                }
+              ],
+              "Mode shift and demand management": [
+                {
+                  "quote": "combining the introduction of bicycles in communities with a component related to the Sao Tome bike path.",
+                  "purpose": "Promote active mobility",
+                  "instrument": "Cycling measures",
+                  "asi": "Shift",
+                  "modes": "Cycling",
+                  "page": "43"
+                }
+              ]
+            },
+            "adaptation_measures": {
+              "Structural and Technical": [
+                {
+                  "quote": "Invest in the rehabilitation and construction of roads and bridges to make them more resilient to climate change.",
+                  "measure": "Transport Infrastructure Resilience",
+                  "modes": "Road",
+                  "page": "119"
+                },
+                {
+                  "quote": "Construction of climate-resilient fish landing facilities.",
+                  "measure": "Transport Infrastructure Resilience",
+                  "modes": "Water",
+                  "page": "119"
+                },
+                {
+                  "quote": "Replacement of wooden boats fiberglass boats and strengthening of the maritime safety system for artisanal fishermen.",
+                  "measure": "Resilient transport technologies",
+                  "modes": "Water",
+                  "page": "119"
+                }
+              ]
+            }
+          },
+          {
             "doc_id": 80868,
             "country_code": "STP",
             "country_name": "Sao Tome and Principe",
@@ -22333,7 +22516,7 @@
             "version": "NDC 3.0",
             "generation": "gen3",
             "date": "09.2025",
-            "status": "Active",
+            "status": "Archived",
             "has_transport_target": true,
             "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-09/NDC3.0_Sao_Tome_Principe_F.pdf",
@@ -22497,7 +22680,7 @@
             "date": "11.2016",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/INDC%20Submission%20by%20the%20Republic%20of%20Korea%20on%20June%2030.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -22556,7 +22739,7 @@
             "date": "12.2021",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/211223_The%20Republic%20of%20Korea's%20Enhanced%20Update%20of%20its%20First%20Nationally%20Determined%20Contribution_211227_editorial%20change.pdf",
             "targets": [
               {
@@ -22622,7 +22805,7 @@
             "date": "12.2020",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/201230_ROK's%20Update%20of%20its%20First%20NDC_editorial%20change.pdf",
             "targets": [
               {
@@ -22700,7 +22883,7 @@
             "date": "12.2025",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-12/The%20Republic%20of%20Koreas%202035%20NDC.pdf",
             "targets": [
               {
@@ -22828,7 +23011,7 @@
             "date": "11.2016",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/KSA-INDCs%20English.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -22876,7 +23059,7 @@
             "date": "10.2021",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/resource/202203111154---KSA%20NDC%202021.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -22939,7 +23122,7 @@
             "date": "12.2025",
             "status": "Active",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2026-01/2nd%20KSA%20NDC%20Document%20Final%20Document%20%2828122025%29_DNA.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -23000,7 +23183,7 @@
             "date": "11.2016",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/VIETNAM%27S%20INDC.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -23075,7 +23258,7 @@
             "date": "11.2022",
             "status": "Active",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-11/Viet%20Nam%20NDC%202022%20Update.pdf",
             "targets": [
               {
@@ -23200,7 +23383,7 @@
             "date": "11.2020",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Viet%20Nam_NDC_2020_Eng.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -23610,7 +23793,7 @@
             "date": "11.2016",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/First%20NDC%20Indonesia_submitted%20to%20UNFCCC%20Set_November%20%202016.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -23639,7 +23822,7 @@
             "date": "09.2022",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-09/ENDC%20Indonesia.pdf",
             "targets": [
               {
@@ -23728,7 +23911,7 @@
             "date": "07.2021",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Updated%20NDC%20Indonesia%202021%20-%20corrected%20version.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -23765,7 +23948,7 @@
             "date": "10.2025",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-10/Indonesia_Second%20NDC_2025.10.24.pdf",
             "targets": [
               {
@@ -23874,7 +24057,7 @@
             "date": "11.2016",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/NDCs%20of%20Sri%20Lanka.pdf",
             "targets": [
               {
@@ -24056,7 +24239,7 @@
             "date": "07.2021",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/NDCs%20of%20Sri%20Lanka-2021.pdf",
             "targets": [
               {
@@ -24396,7 +24579,7 @@
             "date": "09.2025",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-09/Sri%20Lankas%20Nationally%20Determined%20Contributions%203.0%20%282026-2035%29%20submitted%2022.09.2025%20%281%29.pdf",
             "targets": [
               {
@@ -24406,7 +24589,7 @@
                 "target_type": "GHG: BAU",
                 "conditionality": "Unconditional",
                 "target_year": "2035",
-                "content": "Transport GHG emissions reduce 4.8% compared to 2035 BAU, out of which 1.5% are unconditional (2,332.4 million tonnes CO2e between 2026-2035)",
+                "content": "Transport GHG emissions reduce 4.8% compared to 2035 BAU, out of which 1.5% are unconditional (2,332.4 thousand tonnes CO2e between 2026-2035)",
                 "page": "15"
               },
               {
@@ -24416,7 +24599,7 @@
                 "target_type": "GHG: BAU",
                 "conditionality": "Conditional",
                 "target_year": "2035",
-                "content": "Transport GHG emissions reduce 4.8% compared to 2035 BAU, out of which 3.3% are conditional (2,332.4 million tonnes CO2e between 2026-2035) (4,944.2 million tonnes CO2e between 2026-2035)",
+                "content": "Transport GHG emissions reduce 4.8% compared to 2035 BAU, out of which 3.3% are conditional (4,944.2 thousand tonnes CO2e between 2026-2035)",
                 "page": "15"
               },
               {
@@ -24628,7 +24811,7 @@
             "date": "11.2016",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/The%20INDC%20OF%20THE%20GAMBIA.pdf",
             "targets": [
               {
@@ -24664,9 +24847,9 @@
             "version": "NDC 2.0",
             "generation": "gen2",
             "date": "09.2021",
-            "status": "Active",
+            "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Second%20NDC%20of%20The%20Republic%20of%20The%20Gambia-16-12-2021.pdf",
             "targets": [
               {
@@ -24774,7 +24957,203 @@
             }
           }
         ],
-        "gen3": []
+        "gen3": [
+          {
+            "doc_id": 85435,
+            "country_code": "GMB",
+            "country_name": "Gambia (Republic of The)",
+            "doc_type": "NDC",
+            "version": "NDC 3.0",
+            "generation": "gen3",
+            "date": "08.2026",
+            "status": "Active",
+            "has_transport_target": true,
+            "has_netzero_target": false,
+            "url": "https://unfccc.int/sites/default/files/2026-08/The%20Gambia%20NDC%203.0%20-30%20AUG%202026.pdf",
+            "targets": [
+              {
+                "target_area": "Transport sector mitigation target",
+                "target_scope": "Subsector targets",
+                "ghg_target": "Non GHG",
+                "target_type": "Infrastructure targets",
+                "conditionality": "Conditional",
+                "target_year": "2035",
+                "content": "Install approximately 25,000 solar street lights by 2035.",
+                "page": "41"
+              },
+              {
+                "target_area": "Transport sector mitigation target",
+                "target_scope": "Subsector targets",
+                "ghg_target": "Non GHG",
+                "target_type": "Infrastructure targets",
+                "conditionality": "Conditional",
+                "target_year": "2035",
+                "content": "Develop approximately 80 km of operational BRT corridors by 2035.",
+                "page": "41"
+              },
+              {
+                "target_area": "Transport sector mitigation target",
+                "target_scope": "Subsector targets",
+                "ghg_target": "Non GHG",
+                "target_type": "Zero emission vehicle targets",
+                "conditionality": "Conditional",
+                "target_year": "2035",
+                "content": "Deploy approximately 10,000 electric passenger cars by 2035.",
+                "page": "41"
+              },
+              {
+                "target_area": "Transport sector mitigation target",
+                "target_scope": "Subsector targets",
+                "ghg_target": "Non GHG",
+                "target_type": "Zero emission vehicle targets",
+                "conditionality": "Conditional",
+                "target_year": "2035",
+                "content": "Deploy approximately 100 electric 12-metre buses by 2035",
+                "page": "42"
+              },
+              {
+                "target_area": "Transport sector mitigation target",
+                "target_scope": "Subsector targets",
+                "ghg_target": "Non GHG",
+                "target_type": "Avoid targets",
+                "conditionality": "Unconditional",
+                "target_year": "2035",
+                "content": "Apply strengthened import requirements affecting approximately 55,000 vehicles by 2035.",
+                "page": "42"
+              },
+              {
+                "target_area": "Transport sector mitigation target",
+                "target_scope": "Subsector targets",
+                "ghg_target": "Non GHG",
+                "target_type": "Infrastructure targets",
+                "conditionality": "Conditional",
+                "target_year": "2035",
+                "content": "Construct approximately 200 km of safe and connected bicycle lanes by 2035.",
+                "page": "42"
+              }
+            ],
+            "mitigation_measures": {
+              "Mode shift and demand management": [
+                {
+                  "quote": "Bus Rapid Transit \nShift passenger travel towards efficient high-capacity public transport.\n1. Develop approximately 80 km of operational BRT corridors by 2035.\n2. Establish stations, dedicated infrastructure and interchanges.\n3. Procure appropriate bus fleets.\n4. Establish operating and ticketing arrangements.\n5. Track ridership, passenger-kilometres and modal shift",
+                  "purpose": "Public transport improvement",
+                  "instrument": "BRT",
+                  "asi": "Shift",
+                  "modes": "Bus",
+                  "page": "41"
+                },
+                {
+                  "quote": "Electric 12-metre buses\nReduce diesel-bus emissions through public-transport electrification.\n1. Deploy approximately 100 electric 12-metre buses by 2035.\n2. Develop depot and charging infrastructure.\n3. Procure vehicles and establish maintenance capability.\n4. Train operators and technicians.\n5. Track vehicle kilometres and diesel displaced.",
+                  "purpose": "Public transport improvement",
+                  "instrument": "General public transport improvement",
+                  "asi": "Shift, Improve",
+                  "modes": "Bus",
+                  "page": "42"
+                },
+                {
+                  "quote": "New bicycle lanes \nShift short-distance urban trips from motorised transport to cycling.\n1. Construct approximately 200 km of safe and connected bicycle lanes by 2035.\n2. Integrate cycling into urban plans.\n3. Provide crossings and bicycle parking.\n4. Implement road-safety and cycling-promotion programmes.\n5. Track cycling trips and motorised travel displaced",
+                  "purpose": "Promote active mobility",
+                  "instrument": "Cycling measures",
+                  "asi": "Shift",
+                  "modes": "Cycling",
+                  "page": "42/43"
+                }
+              ],
+              "Electrification": [
+                {
+                  "quote": "Electric cars\nReduce fossil-fuel consumption in passenger transport through vehicle electrification.\n1. Deploy approximately 10,000 electric passenger cars by 2035.\n2. Establish EV standards and incentives.\n3. Expand charging infrastructure.\n4. Establish charging tariffs and grid-management arrangements.\n5. Implement battery lifecycle management.\n6. Track registered EVs and fuel displacement.",
+                  "purpose": "Promote electric mobility",
+                  "instrument": "General e-mobility measures",
+                  "asi": "Improve",
+                  "modes": "Cars",
+                  "page": "41/42"
+                },
+                {
+                  "quote": "Electric cars\nReduce fossil-fuel consumption in passenger transport through vehicle electrification.\n1. Deploy approximately 10,000 electric passenger cars by 2035.\n2. Establish EV standards and incentives.\n3. Expand charging infrastructure.\n4. Establish charging tariffs and grid-management arrangements.\n5. Implement battery lifecycle management.\n6. Track registered EVs and fuel displacement.",
+                  "purpose": "Promote electric mobility",
+                  "instrument": "EV charging infrastructure measures",
+                  "asi": "Improve",
+                  "modes": "Cars",
+                  "page": "41/42"
+                },
+                {
+                  "quote": "Electric 12-metre buses\nReduce diesel-bus emissions through public-transport electrification.\n1. Deploy approximately 100 electric 12-metre buses by 2035.\n2. Develop depot and charging infrastructure.\n3. Procure vehicles and establish maintenance capability.\n4. Train operators and technicians.\n5. Track vehicle kilometres and diesel displaced.",
+                  "purpose": "Promote electric mobility",
+                  "instrument": "General e-mobility measures",
+                  "asi": "Shift, Improve",
+                  "modes": "Bus",
+                  "page": "42"
+                }
+              ],
+              "Energy efficiency": [
+                {
+                  "quote": "Restriction on import of used cars\nImprove average fleet efficiency and reduce lock-in from old imported vehicles.\n1. Apply strengthened import requirements affecting approximately 55,000 vehicles by 2035.\n2. Establish maximum age and efficiency/emissions criteria.\n3. Integrate requirements into customs and registration procedures. \n4. Strengthen inspection and enforcement.\n5. Track vehicle imports and fleet characteristics.",
+                  "purpose": "Promote vehicle improvements",
+                  "instrument": "Vehicle restrictions (import, age, access, sale, taxation)",
+                  "asi": "Avoid",
+                  "modes": "Cars",
+                  "page": "42"
+                }
+              ],
+              "Transport system improvements": [
+                {
+                  "quote": "Solar street lights\nReduce conventional energy use for public lighting.\n1. Install approximately 25,000 solar street lights by 2035.\n2. Develop technical procurement specifications.\n3. Prioritise deployment through local-government lighting plans.\n4. Establish maintenance arrangements.\n5. Track installed and operational units.",
+                  "purpose": "Improve infrastructure",
+                  "instrument": "Infrastructure improvements",
+                  "asi": "Improve",
+                  "modes": "Mode: Not defined",
+                  "page": "41"
+                }
+              ]
+            },
+            "adaptation_measures": {
+              "Structural and Technical": [
+                {
+                  "quote": "apply multi-hazard climate-risk screening, appropriate future climate parameters and lifecycle resilience considerations to public investment, procurement and asset management;",
+                  "measure": "Risk assessment",
+                  "modes": "Mode: Not defined",
+                  "page": "65"
+                },
+                {
+                  "quote": "upgrade priority roads, bridges, schools, health facilities, water systems, power infrastructure and drainage based on transparent risk and service-criticality criteria;",
+                  "measure": "Transport Infrastructure Resilience",
+                  "modes": "Mode: Not defined",
+                  "page": "65"
+                }
+              ],
+              "Institutional and Regulatory": [
+                {
+                  "quote": "integrate flood zones, heat, drainage, coastal risk and nature-based solutions into urban and settlement planning;",
+                  "measure": "Transport Planning",
+                  "modes": "Mode: Not defined",
+                  "page": "65"
+                }
+              ],
+              "Informational and Educational": [
+                {
+                  "quote": "strengthen observation networks, forecasting, impact-based warnings, accessible risk communication and community-response protocols;",
+                  "measure": "Monitoring",
+                  "modes": "Mode: Not defined",
+                  "page": "65"
+                },
+                {
+                  "quote": "track service continuity, warning coverage, early action and recovery outcomes, including impacts on persons with disabilities and informal settlements.",
+                  "measure": "Monitoring",
+                  "modes": "Mode: Not defined",
+                  "page": "65"
+                }
+              ],
+              "Other adaptation and resilience measures": [
+                {
+                  "quote": "develop anticipatory finance, disaster-risk financing, affordable and appropriate risk-transfer mechanisms where feasible, and shock-responsive social protection;",
+                  "measure": "Other adaptation measures",
+                  "modes": "Mode: Not defined",
+                  "page": "65"
+                }
+              ]
+            }
+          }
+        ]
       }
     },
     "JPN": {
@@ -24791,7 +25170,7 @@
             "date": "11.2016",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/20150717_Japan%27s%20INDC.pdf",
             "targets": [
               {
@@ -24981,7 +25360,7 @@
             "date": "10.2021",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/JAPAN_FIRST%20NDC%20(UPDATED%20SUBMISSION).pdf",
             "targets": [
               {
@@ -25018,7 +25397,7 @@
             "date": "10.2021",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/JAPAN_FIRST%20NDC%20(INTERIM-UPDATED%20SUBMISSION).pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -25034,7 +25413,7 @@
             "date": "03.2020",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/SUBMISSION%20OF%20JAPAN'S%20NATIONALLY%20DETERMINED%20CONTRIBUTION%20(NDC).PDF",
             "targets": [
               {
@@ -25122,7 +25501,7 @@
             "date": "02.2025",
             "status": "Active",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-02/Japans%202035-2040%20NDC.pdf",
             "targets": [
               {
@@ -25156,7 +25535,7 @@
             "date": "11.2016",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Australias%20Intended%20Nationally%20Determined%20Contribution%20to%20a%20new%20Climate%20Change%20Agreement%20-%20August%202015.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -25185,7 +25564,7 @@
             "date": "06.2022",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Australias%20NDC%20June%202022%20Update%20%283%29.pdf",
             "targets": [
               {
@@ -25241,7 +25620,7 @@
             "date": "10.2021",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Australia%20Nationally%20Determined%20Contribution%20Update%20October%202021%20WEB.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -25257,7 +25636,7 @@
             "date": "12.2020",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Australia%20NDC%20recommunication%20FINAL.PDF",
             "targets": [],
             "mitigation_measures": {
@@ -25296,7 +25675,7 @@
             "date": "09.2025",
             "status": "Active",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-09/Australias%20Second%20NDC.pdf",
             "targets": [
               {
@@ -26552,7 +26931,7 @@
             "date": "11.2016",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/INDC%20Malaysia%20Final%2027%20November%202015%20Revised%20Final%20UNFCCC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -26570,7 +26949,7 @@
             "date": "07.2021",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Malaysia%20NDC%20Updated%20Submission%20to%20UNFCCC%20July%202021%20final.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -26597,7 +26976,7 @@
             "date": "10.2025",
             "status": "Active",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-10/Malaysia%20NDC%203.0%20to%20UNFCCC%202025%20final.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -26678,7 +27057,7 @@
             "date": "11.2016",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/17112016%20NDC%20Revisada%202016.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -26696,7 +27075,7 @@
             "date": "11.2021",
             "status": "Active",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-05/Actualizacio%CC%81n%20meta%20de%20emisiones%202030.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -26888,7 +27267,7 @@
             "date": "12.2020",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Argentina_Segunda%20Contribuci%C3%B3n%20Nacional.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -26912,7 +27291,7 @@
             "date": "11.2016",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Israel%20INDC.pdf",
             "targets": [
               {
@@ -26960,7 +27339,7 @@
             "date": "07.2021",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/NDC%20update%20as%20submitted%20to%20the%20UNFCCC.docx",
             "targets": [
               {
@@ -27098,7 +27477,7 @@
             "date": "11.2016",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/INDC_Comores_Version_Francaise.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -27116,7 +27495,7 @@
             "date": "11.2021",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/CDN_r%C3%A9vis%C3%A9e_Comores_vf.pdf",
             "targets": [
               {
@@ -27154,7 +27533,7 @@
             "date": "03.2026",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2026-03/CDN3.0%20Comores..pdf",
             "targets": [
               {
@@ -27165,16 +27544,6 @@
                 "conditionality": "Conditional",
                 "target_year": "2035",
                 "content": "Introduction de véhicules électriques et hybrides (10-15% du parc en 2035).",
-                "page": "38"
-              },
-              {
-                "target_area": "Transport sector mitigation target",
-                "target_scope": "Sector-wide",
-                "ghg_target": "GHG",
-                "target_type": "GHG: BAU",
-                "conditionality": "Conditional",
-                "target_year": "2035",
-                "content": "Réduction de 25% des émissions du transport terrestre",
                 "page": "38"
               }
             ],
@@ -27254,7 +27623,7 @@
             "date": "12.2016",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/INDC%20Kz_eng.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -27272,7 +27641,7 @@
             "date": "06.2023",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2023-06/12updated%20NDC%20KAZ_Gov%20Decree313_19042023_en_cover%20page.pdf",
             "targets": [
               {
@@ -27349,7 +27718,7 @@
             "date": "11.2025",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-11/NDC_Kazakhstan%203.0%20eng.pdf",
             "targets": [
               {
@@ -27968,7 +28337,7 @@
             "date": "12.2016",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/INDC_Kingdom_of_Bahrain.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -27986,7 +28355,7 @@
             "date": "10.2021",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/NDC%20of%20the%20Kingdom%20of%20Bahrain%20under%20UNFCCC.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -28004,7 +28373,7 @@
             "date": "12.2025",
             "status": "Active",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-12/30112025_Bahrain_2025NDC3.0_vSubmitted.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -29135,7 +29504,7 @@
             "date": "02.2017",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Cambodia%27s%20INDC%20to%20the%20UNFCCC.pdf",
             "targets": [
               {
@@ -29222,7 +29591,7 @@
             "date": "12.2020",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/20201231_NDC_Update_Cambodia.pdf",
             "targets": [
               {
@@ -29327,7 +29696,7 @@
             "date": "08.2025",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-08/Cambodia-NDC%203.0_0.pdf",
             "targets": [
               {
@@ -29890,7 +30259,7 @@
             "date": "02.2017",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/INDC-Tunisia-English%20Version.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -29908,7 +30277,7 @@
             "date": "10.2021",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Tunisia%20Update%20NDC-french.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -29956,7 +30325,7 @@
             "date": "09.2025",
             "status": "Active",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-09/Republic%20Of%20Tunisia-Draft%20preleminary%20elements%20of%20the%20NDC%203.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -29979,7 +30348,7 @@
             "date": "02.2017",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/INDC%20MAURITANIA.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -29997,7 +30366,7 @@
             "date": "12.2021",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/CDN-actualis%C3%A9%202021_%20Mauritania.pdf",
             "targets": [
               {
@@ -30095,7 +30464,7 @@
             "date": "10.2025",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-10/CDN3.0_Mauritanie_Signed.pdf",
             "targets": [
               {
@@ -30287,7 +30656,7 @@
             "date": "03.2017",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/INDC-Ethiopia-100615.pdf",
             "targets": [
               {
@@ -30363,7 +30732,7 @@
             "date": "07.2021",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Ethiopia's%20updated%20NDC%20JULY%202021%20Submission_.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -30427,7 +30796,7 @@
             "date": "09.2025",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-09/Ethiopia%20NDC%203.0%20Final.pdf",
             "targets": [
               {
@@ -31096,7 +31465,7 @@
             "date": "03.2017",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Andorra%20INDC-CPDN.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -31114,7 +31483,7 @@
             "date": "11.2022",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-11/20222410_Actualitzacio%20NDC.pdf",
             "targets": [
               {
@@ -31258,7 +31627,7 @@
             "date": "05.2020",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/20200514-%20Actualitzaci%C3%B3%20NDC.pdf",
             "targets": [
               {
@@ -31336,14 +31705,14 @@
             "date": "02.2025",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-02/NDC%203.0%20ANDORRA.pdf",
             "targets": [
               {
                 "target_area": "Transport sector mitigation target",
                 "target_scope": "Sector-wide",
                 "ghg_target": "GHG",
-                "target_type": "GHG: Fixed level",
+                "target_type": "GHG: BAU",
                 "conditionality": "Unclear conditionality",
                 "target_year": "2030",
                 "content": "disminuir en un 50% las emisiones procedentes de la movilidad interna para 2030",
@@ -31517,21 +31886,10 @@
             "generation": "gen3",
             "date": "12.2025",
             "status": "Active",
-            "has_transport_target": true,
+            "has_transport_target": false,
             "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-12/NDC%20EL%20SALVADOR%202025-%20VF.pdf",
-            "targets": [
-              {
-                "target_area": "Transport sector mitigation target",
-                "target_scope": "Sector-wide",
-                "ghg_target": "GHG",
-                "target_type": "GHG: BAU",
-                "conditionality": "Unclear conditionality",
-                "target_year": "2035",
-                "content": "Para 2035 -las PAMs del sector transporte- en un Escenario WM permitirán reducir, aproximadamente, 313 kt CO₂eq respecto al Escenario sin medidas, y 618 kt CO₂eq considerando la adicionalidad del Escenario WAM.",
-                "page": "37"
-              }
-            ],
+            "targets": [],
             "mitigation_measures": {
               "Mode shift and demand management": [
                 {
@@ -31630,7 +31988,7 @@
             "date": "04.2017",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Jamaica%27s%20INDC_2015-11-25.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -31659,7 +32017,7 @@
             "date": "07.2020",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Updated%20NDC%20Jamaica%20-%20ICTU%20Guidance.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -31677,7 +32035,7 @@
             "date": "09.2025",
             "status": "Active",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-09/Jamaica%20ICTU%20Final%20Report%20Sep19.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -31900,7 +32258,7 @@
             "date": "05.2017",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/INDC_of_Georgia.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -31929,7 +32287,7 @@
             "date": "05.2021",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/NDC%20Georgia_ENG%20WEB-approved.pdf",
             "targets": [
               {
@@ -31958,7 +32316,7 @@
             "date": "03.2026",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2026-03/NDC_3.0_Georgia_EN.pdf",
             "targets": [
               {
@@ -32099,7 +32457,7 @@
             "date": "05.2017",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/INDC%20-%20Canada%20-%20English.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -32138,7 +32496,7 @@
             "date": "07.2021",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/resource/Canada's%20Mid-Century%20Long-Term%20Low-GHG%20Strategy.pdf",
             "targets": [
               {
@@ -32232,7 +32590,7 @@
             "date": "02.2025",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-02/Canada%27s%202035%20Nationally%20Determined%20Contribution_ENc.pdf",
             "targets": [
               {
@@ -32662,7 +33020,7 @@
             "date": "05.2017",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Approved%20Nigeria%27s%20INDC_271115.pdf",
             "targets": [
               {
@@ -32849,7 +33207,7 @@
             "date": "07.2021",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/NDC_File%20Amended%20_11222.pdf",
             "targets": [
               {
@@ -32943,7 +33301,7 @@
             "date": "05.2021",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/NDC%20INTERIM%20REPORT%20SUBMISSION%20-%20NIGERIA.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -32961,7 +33319,7 @@
             "date": "09.2025",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-09/Nigeria%20NDC%203.0%20-%20Transimission%20Version%202.pdf",
             "targets": [
               {
@@ -34545,7 +34903,7 @@
             "date": "06.2017",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/MALAWI%20INDC%20SUBMITTED%20TO%20UNFCCC%20REV.pdf",
             "targets": [
               {
@@ -34604,7 +34962,7 @@
             "date": "07.2021",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Malawi%20Updated%20NDC%20July%202021%20submitted.pdf",
             "targets": [
               {
@@ -34699,7 +35057,7 @@
             "date": "07.2026",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2026-07/NDC3.0%20Malawi_17June2026_Final%20Version.pdf",
             "targets": [
               {
@@ -34886,7 +35244,7 @@
                 "target_area": "Transport sector mitigation target",
                 "target_scope": "Sector-wide",
                 "ghg_target": "Non GHG",
-                "target_type": "Vehicle efficiency targets",
+                "target_type": "Zero emission vehicle targets",
                 "conditionality": "Unclear conditionality",
                 "target_year": "2030",
                 "content": "Increase electric two-wheelers by 4%",
@@ -34896,7 +35254,7 @@
                 "target_area": "Transport sector mitigation target",
                 "target_scope": "Sector-wide",
                 "ghg_target": "Non GHG",
-                "target_type": "Vehicle efficiency targets",
+                "target_type": "Zero emission vehicle targets",
                 "conditionality": "Unclear conditionality",
                 "target_year": "2035",
                 "content": "Increase electric two-wheelers by 13%",
@@ -34906,7 +35264,7 @@
                 "target_area": "Transport sector mitigation target",
                 "target_scope": "Sector-wide",
                 "ghg_target": "Non GHG",
-                "target_type": "Vehicle efficiency targets",
+                "target_type": "Zero emission vehicle targets",
                 "conditionality": "Unclear conditionality",
                 "target_year": "2040",
                 "content": "Increase electric two-wheelers by 14%",
@@ -34916,7 +35274,7 @@
                 "target_area": "Transport sector mitigation target",
                 "target_scope": "Sector-wide",
                 "ghg_target": "Non GHG",
-                "target_type": "Vehicle efficiency targets",
+                "target_type": "Zero emission vehicle targets",
                 "conditionality": "Unclear conditionality",
                 "target_year": "2030",
                 "content": "Increase electric three-wheelers by 1%",
@@ -34926,7 +35284,7 @@
                 "target_area": "Transport sector mitigation target",
                 "target_scope": "Sector-wide",
                 "ghg_target": "Non GHG",
-                "target_type": "Vehicle efficiency targets",
+                "target_type": "Zero emission vehicle targets",
                 "conditionality": "Unclear conditionality",
                 "target_year": "2035",
                 "content": "Increase electric three-wheelers by 4%",
@@ -34936,10 +35294,40 @@
                 "target_area": "Transport sector mitigation target",
                 "target_scope": "Sector-wide",
                 "ghg_target": "Non GHG",
-                "target_type": "Vehicle efficiency targets",
+                "target_type": "Zero emission vehicle targets",
                 "conditionality": "Unclear conditionality",
                 "target_year": "2040",
                 "content": "Increase electric three-wheelers by 5%",
+                "page": "34"
+              },
+              {
+                "target_area": "Transport sector mitigation target",
+                "target_scope": "Sector-wide",
+                "ghg_target": "Non GHG",
+                "target_type": "Zero emission vehicle targets",
+                "conditionality": "Unclear conditionality",
+                "target_year": "2030",
+                "content": "Introduce electric minibuses - 1%",
+                "page": "34"
+              },
+              {
+                "target_area": "Transport sector mitigation target",
+                "target_scope": "Sector-wide",
+                "ghg_target": "Non GHG",
+                "target_type": "Zero emission vehicle targets",
+                "conditionality": "Unclear conditionality",
+                "target_year": "2035",
+                "content": "Introduce electric minibuses - 2%",
+                "page": "34"
+              },
+              {
+                "target_area": "Transport sector mitigation target",
+                "target_scope": "Sector-wide",
+                "ghg_target": "Non GHG",
+                "target_type": "Zero emission vehicle targets",
+                "conditionality": "Unclear conditionality",
+                "target_year": "2040",
+                "content": "Introduce electric minibuses - 2%",
                 "page": "34"
               }
             ],
@@ -35830,7 +36218,7 @@
             "version": "NDC 2.0",
             "generation": "gen2",
             "date": "10.2021",
-            "status": "Active",
+            "status": "Archived",
             "has_transport_target": true,
             "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/State%20of%20Palestine%20First%20NDC.pdf",
@@ -35944,7 +36332,371 @@
             }
           }
         ],
-        "gen3": []
+        "gen3": [
+          {
+            "doc_id": 85431,
+            "country_code": "PSE",
+            "country_name": "Palestine",
+            "doc_type": "NDC",
+            "version": "NDC 3.0",
+            "generation": "gen3",
+            "date": "08.2026",
+            "status": "Active",
+            "has_transport_target": true,
+            "has_netzero_target": false,
+            "url": "https://unfccc.int/sites/default/files/2026-08/State%20of%20Palestine%20NDC%203.pdf",
+            "targets": [
+              {
+                "target_area": "Transport sector adaptation target",
+                "target_scope": "Subsector targets",
+                "ghg_target": "Non GHG",
+                "target_type": "General adaptation targets",
+                "conditionality": "Conditional",
+                "target_year": "2035",
+                "content": "Early Warning System for Extreme Weather Events",
+                "page": "40"
+              },
+              {
+                "target_area": "Transport sector adaptation target",
+                "target_scope": "Subsector targets",
+                "ghg_target": "Non GHG",
+                "target_type": "General adaptation targets",
+                "conditionality": "Conditional",
+                "target_year": "2035",
+                "content": "Resilient Road Infrastructure, Flood Drainage and Culverts",
+                "page": "40"
+              },
+              {
+                "target_area": "Transport sector adaptation target",
+                "target_scope": "Subsector targets",
+                "ghg_target": "Non GHG",
+                "target_type": "General adaptation targets",
+                "conditionality": "Conditional",
+                "target_year": "2035",
+                "content": "Gender-Safe and Accessible Transport Design",
+                "page": "40"
+              },
+              {
+                "target_area": "Transport sector adaptation target",
+                "target_scope": "Subsector targets",
+                "ghg_target": "Non GHG",
+                "target_type": "General adaptation targets",
+                "conditionality": "Conditional",
+                "target_year": "2035",
+                "content": "Transport Climate Policy and MRV Framework System",
+                "page": "40"
+              },
+              {
+                "target_area": "Transport sector adaptation target",
+                "target_scope": "Subsector targets",
+                "ghg_target": "Non GHG",
+                "target_type": "General adaptation targets",
+                "conditionality": "Conditional",
+                "target_year": "2035",
+                "content": "Climate-Informed Transport Master Plan Plan",
+                "page": "40"
+              },
+              {
+                "target_area": "Transport sector adaptation target",
+                "target_scope": "Subsector targets",
+                "ghg_target": "Non GHG",
+                "target_type": "General adaptation targets",
+                "conditionality": "Conditional",
+                "target_year": "2035",
+                "content": "Gaza Transport Network Emergency Recovery",
+                "page": "41"
+              },
+              {
+                "target_area": "Transport sector adaptation target",
+                "target_scope": "Subsector targets",
+                "ghg_target": "Non GHG",
+                "target_type": "General adaptation targets",
+                "conditionality": "Conditional",
+                "target_year": "2035",
+                "content": "Gaza: Green and Climate-Resilient Reconstruction Roads",
+                "page": "41"
+              },
+              {
+                "target_area": "Transport sector adaptation target",
+                "target_scope": "Subsector targets",
+                "ghg_target": "Non GHG",
+                "target_type": "General adaptation targets",
+                "conditionality": "Conditional",
+                "target_year": "2035",
+                "content": "Gaza Transport MRV and Registry Restoration Vehicle registry",
+                "page": "41"
+              },
+              {
+                "target_area": "Transport sector adaptation target",
+                "target_scope": "Subsector targets",
+                "ghg_target": "Non GHG",
+                "target_type": "General adaptation targets",
+                "conditionality": "Conditional",
+                "target_year": "2035",
+                "content": "Sustainable Urban Mobility Plan for Gaza: 6 municipalities with mobility plans",
+                "page": "41"
+              },
+              {
+                "target_area": "Transport sector mitigation target",
+                "target_scope": "Subsector targets",
+                "ghg_target": "Non GHG",
+                "target_type": "Zero emission vehicle targets",
+                "conditionality": "Conditional",
+                "target_year": "2035",
+                "content": "Electric and hybrid vehicle fleet penetration: 19% of the private car fleet electric or hybrid",
+                "page": "54"
+              },
+              {
+                "target_area": "Transport sector mitigation target",
+                "target_scope": "Subsector targets",
+                "ghg_target": "Non GHG",
+                "target_type": "Vehicle efficiency targets",
+                "conditionality": "Conditional",
+                "target_year": "2035",
+                "content": "Scrappage and replacement program for trucks and buses over 18 years of age: 1,200 vehicles scrapped annually",
+                "page": "54"
+              },
+              {
+                "target_area": "Transport sector mitigation target",
+                "target_scope": "Subsector targets",
+                "ghg_target": "Non GHG",
+                "target_type": "Vehicle efficiency targets",
+                "conditionality": "Conditional",
+                "target_year": "2035",
+                "content": "Statutory vehicle emissions inspection and testing program: 45% of on-road vehicles tested",
+                "page": "54"
+              },
+              {
+                "target_area": "Transport sector mitigation target",
+                "target_scope": "Subsector targets",
+                "ghg_target": "Non GHG",
+                "target_type": "Vehicle efficiency targets",
+                "conditionality": "Conditional",
+                "target_year": "2035",
+                "content": "Transport sector MRV system and fleet data registry: System operational",
+                "page": "54"
+              },
+              {
+                "target_area": "Transport sector mitigation target",
+                "target_scope": "Subsector targets",
+                "ghg_target": "Non GHG",
+                "target_type": "Vehicle efficiency targets",
+                "conditionality": "Conditional",
+                "target_year": "2035",
+                "content": "Illegal vehicle seizure and destruction: 18,000 vehicles seized and destroyed, cumulative",
+                "page": "54"
+              },
+              {
+                "target_area": "Transport sector mitigation target",
+                "target_scope": "Subsector targets",
+                "ghg_target": "Non GHG",
+                "target_type": "Zero emission vehicle targets",
+                "conditionality": "Conditional",
+                "target_year": "2035",
+                "content": "EV charging infrastructure network: 25 charging stations installed",
+                "page": "54"
+              },
+              {
+                "target_area": "Transport sector mitigation target",
+                "target_scope": "Subsector targets",
+                "ghg_target": "Non GHG",
+                "target_type": "Vehicle efficiency targets",
+                "conditionality": "Conditional",
+                "target_year": "2035",
+                "content": "Public bus fleet upgrade from minibus to large-capacity vehicles: 32% of the minibus fleet replaced",
+                "page": "54"
+              },
+              {
+                "target_area": "Transport sector mitigation target",
+                "target_scope": "Subsector targets",
+                "ghg_target": "Non GHG",
+                "target_type": "Infrastructure targets",
+                "conditionality": "Conditional",
+                "target_year": "2035",
+                "content": "Bus rapid transit corridor development: 25 km of operational BRT corridor, cumulative",
+                "page": "54"
+              },
+              {
+                "target_area": "Transport sector mitigation target",
+                "target_scope": "Subsector targets",
+                "ghg_target": "Non GHG",
+                "target_type": "Vehicle efficiency targets",
+                "conditionality": "Conditional",
+                "target_year": "2035",
+                "content": "Eco-driving and fleet efficiency programs: 11,000 drivers trained, cumulative",
+                "page": "54"
+              }
+            ],
+            "mitigation_measures": {
+              "Transport system improvements": [
+                {
+                  "quote": "Sustainable Urban Mobility Plan for Gaza",
+                  "purpose": "Enhance comprehensive transport planning",
+                  "instrument": "Sustainable urban mobility plans",
+                  "asi": "Avoid, Shift, Improve",
+                  "modes": "Mode: Not defined",
+                  "page": "41"
+                },
+                {
+                  "quote": "Eco-driving and fleet efficiency programs",
+                  "purpose": "Education and behavioral change",
+                  "instrument": "Ecodriving",
+                  "asi": "Improve",
+                  "modes": "Mode: Not defined",
+                  "page": "54"
+                }
+              ],
+              "Electrification": [
+                {
+                  "quote": "Electric and hybrid vehicle fleet penetration",
+                  "purpose": "Promote electric mobility",
+                  "instrument": "General e-mobility measures",
+                  "asi": "Improve",
+                  "modes": "Mode: Not defined",
+                  "page": "54"
+                },
+                {
+                  "quote": "EV charging infrastructure network",
+                  "purpose": "Promote electric mobility",
+                  "instrument": "EV charging infrastructure measures",
+                  "asi": "Improve",
+                  "modes": "Mode: Not defined",
+                  "page": "54"
+                },
+                {
+                  "quote": "Electric bus pilot for post-aggression in Gaza",
+                  "purpose": "Promote electric mobility",
+                  "instrument": "General e-mobility measures",
+                  "asi": "Shift, Improve",
+                  "modes": "Bus",
+                  "page": "54"
+                }
+              ],
+              "Energy efficiency": [
+                {
+                  "quote": "Scrappage and replacement program for trucks and buses over 18 years of age",
+                  "purpose": "Promote vehicle improvements",
+                  "instrument": "Vehicle restrictions (import, age, access, sale, taxation)",
+                  "asi": "Improve",
+                  "modes": "Truck, Bus",
+                  "page": "54"
+                },
+                {
+                  "quote": "Statutory vehicle emissions inspection and testing program",
+                  "purpose": "Promote vehicle improvements",
+                  "instrument": "Inspection and maintenance",
+                  "asi": "Improve",
+                  "modes": "Mode: Not defined",
+                  "page": "54"
+                },
+                {
+                  "quote": "Illegal vehicle seizure and destruction",
+                  "purpose": "Promote vehicle improvements",
+                  "instrument": "Vehicle restrictions (import, age, access, sale, taxation)",
+                  "asi": "Avoid",
+                  "modes": "Mode: Not defined",
+                  "page": "54"
+                }
+              ],
+              "Mode shift and demand management": [
+                {
+                  "quote": "Transport sector MRV system and fleet data registry",
+                  "purpose": "Digital solutions",
+                  "instrument": "Data and modelling improvements",
+                  "asi": "Improve",
+                  "modes": "Mode: Not defined",
+                  "page": "54"
+                },
+                {
+                  "quote": "Public bus fleet upgrade from minibus to large-capacity vehicles",
+                  "purpose": "Public transport improvement",
+                  "instrument": "General public transport improvement",
+                  "asi": "Shift",
+                  "modes": "Bus",
+                  "page": "54"
+                },
+                {
+                  "quote": "Bus rapid transit corridor development",
+                  "purpose": "Public transport improvement",
+                  "instrument": "BRT",
+                  "asi": "Shift",
+                  "modes": "Bus",
+                  "page": "54"
+                },
+                {
+                  "quote": "Electric bus pilot for post-aggression in Gaza",
+                  "purpose": "Public transport improvement",
+                  "instrument": "Public transport integration and expansion",
+                  "asi": "Shift, Improve",
+                  "modes": "Bus",
+                  "page": "54"
+                }
+              ]
+            },
+            "adaptation_measures": {
+              "Informational and Educational": [
+                {
+                  "quote": "Early Warning System for Extreme Weather Events: 70 sensing stations",
+                  "measure": "Early warning & emergency planning",
+                  "modes": "Mode: Not defined",
+                  "page": "40"
+                },
+                {
+                  "quote": "Transport Climate Policy and MRV Framework System: operational",
+                  "measure": "Monitoring",
+                  "modes": "Mode: Not defined",
+                  "page": "40"
+                },
+                {
+                  "quote": "Gaza Transport MRV and Registry Restoration Vehicle registry restored and operational",
+                  "measure": "Monitoring",
+                  "modes": "Road",
+                  "page": "41"
+                }
+              ],
+              "Structural and Technical": [
+                {
+                  "quote": "Resilient Road Infrastructure, Flood Drainage and Culverts: 1,100 roads incorporating resilient infrastructure elements",
+                  "measure": "Transport Infrastructure Resilience",
+                  "modes": "Road",
+                  "page": "40"
+                },
+                {
+                  "quote": "Gender-Safe and Accessible Transport Design: 5% of public transport routes with gender-safety features",
+                  "measure": "Transport System Adaptation",
+                  "modes": "Bus",
+                  "page": "40"
+                },
+                {
+                  "quote": "Gaza Transport Network Emergency Recovery: 82% of road network restored to functional level",
+                  "measure": "Transport Infrastructure Resilience",
+                  "modes": "Road",
+                  "page": "41"
+                }
+              ],
+              "Institutional and Regulatory": [
+                {
+                  "quote": "Climate-Informed Transport Master Plan Plan: updated",
+                  "measure": "Transport Planning",
+                  "modes": "Mode: Not defined",
+                  "page": "40"
+                },
+                {
+                  "quote": "Gaza: Green and Climate-Resilient Reconstruction Roads: 495 km of roads rebuilt to a resilient standard",
+                  "measure": "Design standards and updates",
+                  "modes": "Road",
+                  "page": "41"
+                },
+                {
+                  "quote": "Sustainable Urban Mobility Plan for Gaza",
+                  "measure": "Transport Planning",
+                  "modes": "Mode: Not defined",
+                  "page": "41"
+                }
+              ]
+            }
+          }
+        ]
       }
     },
     "BTN": {
@@ -35961,7 +36713,7 @@
             "date": "09.2017",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Bhutan-INDC-20150930.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -36071,7 +36823,7 @@
             "date": "06.2021",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Second%20NDC%20Bhutan.pdf",
             "targets": [
               {
@@ -36189,7 +36941,7 @@
             "date": "11.2025",
             "status": "Active",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-11/Third%20NDC%20%28Provisional%29_10%20November%202025.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -36603,7 +37355,7 @@
             "date": "09.2017",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Cabo_Verde_INDC_.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -36642,7 +37394,7 @@
             "date": "02.2021",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Cabo%20Verde_NDC%20Update%202021.pdf",
             "targets": [
               {
@@ -36878,7 +37630,7 @@
             "date": "11.2025",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-11/NDC%203.0%20Cabo%20Verde.pdf",
             "targets": [
               {
@@ -37258,7 +38010,7 @@
             "date": "10.2017",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/15%2002%2027_INDC%20Contribution%20of%20Switzerland.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -37276,7 +38028,7 @@
             "date": "12.2021",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Swiss%20NDC%202021-2030%20incl%20ICTU_December%202021.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -37292,7 +38044,7 @@
             "date": "09.2020",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Switzerland_Full%20NDC%20Communication%202021-2030%20incl%20ICTU.pdf",
             "targets": [
               {
@@ -37341,7 +38093,7 @@
             "date": "01.2025",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-01/Switzerland%20second%20NDC%202031-2035.pdf",
             "targets": [
               {
@@ -37361,7 +38113,7 @@
                 "target_type": "GHG: Base year",
                 "conditionality": "Unconditional",
                 "target_year": "2035",
-                "content": "in the transport sector (excluding international aviation):\nBy 2035: minus 41 percent [compared to 1990 levels].",
+                "content": "in the transport sector (excluding international aviation): By 2035 minus 41 percent [compared to 1990 levels].",
                 "page": "7"
               },
               {
@@ -37371,17 +38123,17 @@
                 "target_type": "GHG: Base year",
                 "conditionality": "Unconditional",
                 "target_year": "2040",
-                "content": "in the transport sector (excluding international aviation):\nBy 2040: minus 57 percent [compared to 1990 levels]",
+                "content": "in the transport sector (excluding international aviation): By 2040 minus 57 percent [compared to 1990 levels]",
                 "page": "7"
               },
               {
                 "target_area": "Transport sector mitigation target",
                 "target_scope": "Sector-wide",
                 "ghg_target": "GHG",
-                "target_type": "GHG: Fixed level",
+                "target_type": "GHG: Base year",
                 "conditionality": "Unconditional",
                 "target_year": "2050",
-                "content": "in the transport sector (excluding international aviation): \nUntil 2050: minus 100 percent [compared to 1990 levels].",
+                "content": "in the transport sector (excluding international aviation): Until 2050 minus 100 percent [compared to 1990 levels].",
                 "page": "7"
               }
             ],
@@ -37409,7 +38161,7 @@
             "date": "11.2024",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2024-11/Switzerlands%20First%20NDC_2021_2030_Update%202024_including%20ICTUs.pdf",
             "targets": [
               {
@@ -37631,7 +38383,7 @@
             "date": "11.2017",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Uruguay_First%20Nationally%20Determined%20Contribution.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -37708,7 +38460,7 @@
             "date": "12.2022",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-12/Uruguay%20Segunda%20CDN.pdf",
             "targets": [
               {
@@ -37857,7 +38609,7 @@
             "date": "12.2024",
             "status": "Active",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-01/20241220_Uruguay_NDC3.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -38143,7 +38895,7 @@
             "date": "12.2017",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/INDCSubmission_%20Montenegro.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -38161,7 +38913,7 @@
             "date": "06.2021",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Updated%20NDC%20for%20Montenegro.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -38215,7 +38967,7 @@
             "date": "02.2025",
             "status": "Active",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-02/001_eng_NDC_Montenegro.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -38754,22 +39506,12 @@
             "targets": [
               {
                 "target_area": "Transport sector mitigation target",
-                "target_scope": "Sector-wide",
+                "target_scope": "Subsector targets",
                 "ghg_target": "GHG",
                 "target_type": "GHG: Base year",
                 "conditionality": "Unconditional",
                 "target_year": "2030",
                 "content": "Trinidad and Tobago commits to reduce public transportation emissions by 30% compared to 2013 levels by 2030",
-                "page": "3"
-              },
-              {
-                "target_area": "Transport sector mitigation target",
-                "target_scope": "Sector-wide",
-                "ghg_target": "GHG",
-                "target_type": "GHG: Base year",
-                "conditionality": "Unconditional",
-                "target_year": "2035",
-                "content": "Trinidad and Tobago commits to reduce public transportation emissions 50% total transportation emissions by 2035 compared to 2013 levels.",
                 "page": "3"
               }
             ],
@@ -38989,7 +39731,7 @@
                 "target_type": "GHG: BAU",
                 "conditionality": "Unclear conditionality",
                 "target_year": "2030",
-                "content": "Fortalecimiento de capacidades para la reducción de emisiones GEI ocasionada por los buques: Reducción de emisiones GEI del 25% (2025-2030)",
+                "content": "Fortalecimiento de capacidades para la reducción de emisiones GEI ocasionada por los buques: Reducción de emisiones GEI del 25% (2025-2030) en los buques.",
                 "page": "56"
               },
               {
@@ -39182,7 +39924,7 @@
             "date": "04.2018",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Kuwait%20First%20NDC_English.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -39211,7 +39953,7 @@
             "date": "12.2021",
             "status": "Active",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Kuwait%20updating%20the%20first%20NDC-English.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -40522,7 +41264,7 @@
             "date": "08.2018",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/INDC%20Final%20Submission%20Sept%2030%202015%20Liberia.pdf",
             "targets": [
               {
@@ -40671,7 +41413,7 @@
             "date": "08.2021",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Liberia's%20Updated%20NDC_RL_FINAL%20(002).pdf",
             "targets": [
               {
@@ -40828,7 +41570,7 @@
             "date": "09.2025",
             "status": "Active",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-09/Liberias_2035_NDC_3.0_Final.pdf",
             "targets": [
               {
@@ -42324,7 +43066,7 @@
             "date": "05.2019",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/OMAN%20INDCs.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -42342,7 +43084,7 @@
             "date": "11.2023",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2023-11/Oman%201st%20Update%20of%20the%202nd%20NDC%20-%20Optimized%20Size%20%281%29.pdf",
             "targets": [
               {
@@ -42531,7 +43273,7 @@
             "date": "07.2021",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Second%20NDC%20Report%20Oman.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -42560,7 +43302,7 @@
             "date": "07.2026",
             "status": "Active",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2026-07/The%20Sultanate%20of%20Omans%20Third%20Nationally%20Determined%20Contributions%20%20%28NDC%203.0%29.pdf",
             "targets": [
               {
@@ -43426,7 +44168,7 @@
             "date": "11.2020",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/NDC_RF_eng.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -43442,7 +44184,7 @@
             "date": "11.2020",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/NDC_RF_eng.pdf",
             "targets": [],
             "mitigation_measures": {},
@@ -43461,7 +44203,7 @@
             "date": "09.2025",
             "status": "Active",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-09/%D0%A0%D0%A4%20%D0%B2%D1%82%D0%BE%D1%80%D0%BE%D0%B9%20%D0%9E%D0%9D%D0%A3%D0%92.pdf",
             "targets": [
               {
@@ -43906,7 +44648,7 @@
             "date": "10.2021",
             "status": "Archived",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2022-06/The_INDC_of_TURKEY_v.15.19.30.pdf",
             "targets": [],
             "mitigation_measures": {
@@ -44031,7 +44773,7 @@
             "date": "04.2023",
             "status": "Archived",
             "has_transport_target": true,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/NDC/2023-04/T%C3%9CRK%C4%B0YE_UPDATED%201st%20NDC_EN.pdf",
             "targets": [
               {
@@ -44207,7 +44949,7 @@
             "date": "11.2025",
             "status": "Active",
             "has_transport_target": false,
-            "has_netzero_target": true,
+            "has_netzero_target": false,
             "url": "https://unfccc.int/sites/default/files/2025-11/The%20Second%20NDC%20of%20T%C3%BCrkiye.pdf",
             "targets": [
               {
@@ -44555,5 +45297,5 @@
       }
     }
   },
-  "last_updated": "2026-08-12"
+  "last_updated": "2026-09-30"
 }
